@@ -17,7 +17,7 @@ Project Organization
     │   ├── interim        <- Intermediate data that has been transformed.
     │   ├── processed      <- The final, canonical data sets for modeling.
     │   └── raw            <- The original, immutable data dump.
-    ├── docs               <- Documentation, e.g., doxygen or scientific papers (not tracked by git)
+    ├── docs               <- Poster presentation and home of the github pages data
     ├── notebooks          <- Jupyter notebooks
     ├── reports            <- Manuscript source, e.g., LaTeX, Markdown, etc., or any project reports
     │   └── figures        <- Figures for the manuscript or reports
