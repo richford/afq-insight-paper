@@ -1,10 +1,12 @@
-introducing-afq-insight
-==============================
+# Introducing AFQ-Insight
 
-Multidimensional analysis and detection of informative features in diffusion MRI measurements of human white matter
+This is the technical description of AFQ-Insight, a tool for
+multidimensional analysis and detection of informative features
+in diffusion MRI measurements of human white matter. It includes
+applications in the study of amyotrophic lateral sclerosis (ALS) and
+dyslexia.
 
-Project Organization
---------------------
+## Project Organization
 
     .
     ├── AUTHORS.md
@@ -27,3 +29,27 @@ Project Organization
         ├── models         <- Source code for your own model
         ├── tools          <- Any helper scripts go here
         └── visualization  <- Scripts for visualisation of your results, e.g., matplotlib, related.
+
+## Prerequisites
+
+To reproduce the results in this repository, you must have Python (>=
+3.6) installed. If you don't already have Python installed, we recommend
+the free [Anaconda Python](https://www.anaconda.com/download/).
+
+We rely on the following Python packages:
+
+* [`numpy`](http://www.numpy.org/)
+* [`matplotlib`](https://matplotlib.org/)
+* [`AFQ-Insight`](https://github.com/richford/afq-insight) (which has
+  it's own dependencies)
+
+We recommend you install these dependencies using
+```
+make install
+```
+You can also install these libraries on your own (e.g. `pip install
+<package>` or `conda install <package>`).
+
+## Data
+
+To download
