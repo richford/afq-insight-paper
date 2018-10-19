@@ -1,0 +1,51 @@
+\documentclass[11pt,twoside,a4paper]{article}
+\usepackage{authblk}  % For author affiliations with the basic article class
+\usepackage{booktabs}  % For formal tables
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}  % for \shortintertext{} and PairedDelimiter
+\usepackage{xcolor}
+
+\graphicspath{ {../figures/} }
+
+\DeclarePairedDelimiter\p{(}{)}
+\DeclarePairedDelimiter\brkt{[}{]}
+
+\newcommand{\ariel}[1]{{\color{blue} Ariel: [{#1}]}}
+\newcommand{\adam}[1]{{\color{green} Adam: [{#1}]}}
+\newcommand{\strike}[1]{{\color{red} Strikeout: [{#1}]}}
+\newcommand{\authoremail}[1]{\href{mailto:{#1}}{\textnormal{\texttt{{#1}}}}}
+
+% Set the affiliation font and the affiliation separation
+\renewcommand\Affilfont{\itshape\small}
+\setlength{\affilsep}{1em}
+\setcounter{Maxaffil}{3}
+
+\begin{document}
+
+\title{AFQ-Insight}
+\title{Multidimensional analysis and detection of informative features in diffusion MRI measurements of human white matter}
+\date{\today}
+
+\author[1]{Adam Richie-Halford\thanks{Corresponding author: \authoremail{richford@uw.edu}}}
+\author[2]{Jason Yeatman}
+\author[3]{Noah Simon}
+\author[4]{Ariel Rokem}
+
+\affil[1]{University of Washington Department of Physics, Seattle, WA 98105}
+\affil[2]{University of Washington Department of Speech and Hearing Sciences, Seattle, WA 98105}
+\affil[3]{University of Washington Department of Biostatistics, Seattle, WA 98105}
+\affil[4]{University of Washington e{S}cience Institute, Seattle, WA 98105}
+
+\input{abstract}
+
+\maketitle
+\tableofcontents
+
+\input{sections}
+
+\bibliographystyle{abbrv}
+\bibliography{paper}
+
+\end{document}
