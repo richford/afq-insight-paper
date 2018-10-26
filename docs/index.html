@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Presentation metadata -->
+    <title>WRF Talk</title>
+    <meta name="description" content="A summary of proposed research for the Washington Research Foundation Postdoctoral Fellowship">
+    <meta name="author" content="Adam Richie-Halford">
+    <!-- reveal.js CSS -->
+    <link rel="stylesheet" href="css/reveal.css">
+    <!-- The id attribute must be defined for the reveal.js-menu themes panel -->
+    <link rel="stylesheet" href="css/theme/league.css" id="theme">
+    <!-- Devicons CSS -->
+    <link rel="stylesheet" href="css/devicons.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="css/fa-solid.css">
+    <link rel="stylesheet" href="css/fa-regular.css">
+    <link rel="stylesheet" href="css/fa-brands.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <script>
+      function canvas_arrow_two_heads(context, fromx, fromy, tox, toy){
+        let headlen = 10;   // length of head in pixels
+        let angle = Math.atan2(toy-fromy,tox-fromx);
+        context.moveTo(fromx, fromy);
+        context.lineTo(fromx+headlen*Math.cos(angle+Math.PI/6),fromy+headlen*Math.sin(angle+Math.PI/6));
+        context.moveTo(fromx, fromy);
+        context.lineTo(fromx+headlen*Math.cos(angle-Math.PI/6),fromy+headlen*Math.sin(angle-Math.PI/6));
+        context.moveTo(fromx, fromy);
+        context.lineTo(tox, toy);
+        context.lineTo(tox-headlen*Math.cos(angle-Math.PI/6),toy-headlen*Math.sin(angle-Math.PI/6));
+        context.moveTo(tox, toy);
+        context.lineTo(tox-headlen*Math.cos(angle+Math.PI/6),toy-headlen*Math.sin(angle+Math.PI/6));
+      }
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <img align="center" style="border: none;" src="img/pyafq-segmentation-all-tracts-transparent.gif" alt="AFQ segmentation" width="350">
+          <h3>Leveraging Massive, Open Data in Neuroscience</h3>
+          <p>Adam Richie-Halford, University of Washington,<br>Department of Physics</p>
+          <p><small>Follow along at <a href="http://richford.github.io/wrf-talk-2018-09-20/">http://richford.github.io/wrf-talk-2018-09-20/</a></small></p>
+          <aside class="notes" data-markdown>
+            - Hi, I'm Adam
+            - Thank the selection committee for opportunity
+            - Follow along link
+          </aside>
+        </section>
+
+        <section id="aims" data-external="sections/aims.html"></section>
+        <section id="white-matter" data-external="sections/white-matter.html"></section>
+        <section id="learning" data-external="sections/learning.html"></section>
+        <section id="classification" data-external="sections/classification.html"></section>
+        <section id="regression" data-external="sections/regression.html"></section>
+        <section id="conclusion" data-external="sections/conclusion.html"></section>
+
+        <section>
+          <h2>Thank you!</h2>
+          <div class="row">
+            <div class="imgpenta imgcite">
+              <img style="margin: 0px;" class="logo" src="img/people/ariel.jpg" height="150">
+              <cite>
+                Ariel Rokem
+                <br>
+                UW eScience
+              </cite>
+            </div >
+            <div class="imgpenta imgcite">
+              <img style="margin: 0px;" class="logo" src="img/people/jason.jpg" height="150">
+              <cite>
+                Jason Yeatman
+                <br>
+                UW ILABS
+              </cite>
+            </div>
+            <div class="imgpenta imgcite">
+              <img style="margin: 0px;" class="logo" src="img/people/noah.jpg" height="150">
+              <cite>
+                Noah Simon
+                <br>
+                UW Biostatistics
+              </cite>
+            </div>
+          </div>
+          <p>
+            <a href="mailto:richiehalford@gmail.com">
+              <i class="fas fa-envelope"></i>richiehalford@gmail.com
+            </a>
+          </p>
+          <p>
+            <a href="https://github.com/richford">
+              <i class="fab fa-github"></i>richford
+            </a>
+          </p>
+          <p class="creativecommons">
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+              <i class="fab fa-creative-commons"></i>
+              <i class="fab fa-creative-commons-by"></i>
+            </a>
+          </p>
+          <p class="smaller">
+            This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+          </p>
+          <p class="smaller">
+            Built with <a href="https://github.com/keimlink/cookiecutter-reveal.js">cookiecutter-reveal.js</a>,
+            <a href="https://github.com/hakimel/reveal.js">reveal.js</a>,
+            <a href="https://github.com/denehyg/reveal.js-menu">reveal.js-menu</a>,
+            <a href="https://fontawesome.com/">Font Awesome</a> and
+            <a href="https://github.com/vorillaz/devicons">devicons</a>.
+          </p>
+        </section>
+      </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        history: true,
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full'
+        },
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/math/math.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          // Zoom in and out with Alt+click
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'third_party_plugins/menu.js' },
+          { src: 'third_party_plugins/external.js', condition: function() { return !!document.querySelector( '[data-external]' ); } },
+        ],
+        menu: {
+          themes: true,
+          transitions: true,
+          openButton: false,
+          loadIcons: false
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,169 @@
+<section>
+  <h2>White Matter Tractometry</h2>
+  <aside class="notes" data-markdown>
+    - Diffusion metrics from CMU #39
+    - With that framing in mind
+    - I need to give you more context
+    - and tell you about the white matter in the human brain
+  </aside>
+</section>
+<section>
+  <h3>Connectivity is important to normal brain function</h3>
+  <div class="row">
+    <div class="imgcite col-13">
+      <img src="img/meynerts_tracts.gif" width="250" align="middle" alt="Meynert's White Matter Tracts">
+      <cite>
+        from <a href="https://www.ncbi.nlm.nih.gov/pubmed/16141282">Catani and ffytche (2015)</a>
+      </cite>
+    </div>
+    <div class="textcol">
+      <ul style="line-height: 1.5em;">
+        <li>Brain is composed of localized specialized areas</li>
+        <li>Connected by white matter (conducting fibers)</li>
+        <li>Theodore Maynert first classified white matter into tracts in late 19th century</li>
+        <li>Derived from human post-mortem dissections</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes" data-markdown>
+    - Conceived of the brain as composed of localized specialized areas
+    - Connected by conducting fibers (white matter)
+    - Image is of Theodore Maynert's 1870s classification of white matter tracts
+    - All derived from human post mortem dissections
+  </aside>
+</section>
+<!--<section data-transition="none-out">
+  <h3>Diffusion weighted imaging (DWI)</h3>
+  <ul>
+    <li>But we can examine white matter <em>in vivo</em>.</li>
+  </ul>
+  <div class="fragment">
+    <p>A short digression on diffusion</p>
+  </div>
+  <div class="row fragment">
+    <div class="two-col">
+      <p>Isotropic diffusion</p>
+      <div style="flex-grow: 1;">
+        <img src="img/diffusion-isotropic.gif" width="300" alt="Isotropic diffusion">
+      </div>
+    </div>
+    <div class="two-col">
+      <p>Anisotropic diffusion</p>
+      <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center;">
+        <img src="img/diffusion-anisotropic.gif" width="300" alt="Anisotropic diffusion">
+      </div>
+    </div>
+  </div>
+  <aside class="notes" data-markdown>
+    - Water molecules in our body undergo random motion
+    - In physics, we call this "Brownian motion" or simply "diffusion"
+    - MR images can be made sensitive to this motion
+    - Left side: isotropic (bathtub)
+    - Right side: anisotropic (straw)
+    - Imagine the inverse problem:
+    - Don't know if you're looking at a bathtub or a straw
+    - By looking at several images with various directions and diffusion scales
+    - We can reconstruct white matter tracts
+    - Typical DWI resolution: 2mm. Axom diameter 1-30 microns. Celery stick analogy.
+  </aside>
+</section>-->
+
+<section>
+  <h3>Tractometry</h3>
+  <ul>
+    <li>But we can measure white matter <em>in vivo</em>.</li>
+    <li>These are tracts from one individual's living brain!</li>
+    <li>Tractometry identifies long-range connections in white matter</li>
+    <li>Not just a series of tubes</li>
+    <li>White matter is a dynamic network that adapts to experiences</li>
+  </ul>
+  Jason's pipeline figure 8
+  <div class="row">
+    <div class="two-col" style="align-items: center;">
+      <img align="center" src="img/pyafq-segmentation-all-tracts-1.gif" alt="AFQ segmentation" width="350">
+    </div>
+    <div class="two-col" style="align-items: center;">
+      <img align="center" src="img/pyafq-segmentation-cst.gif" alt="AFQ segmentation highlighting the corticospinal tract" width="350">
+    </div>
+  </div>
+  <aside class="notes" data-markdown>
+    - Maynert had to build an atlas from many post-mortem dissections
+    - But we can measure in living subjects
+    - Big difference: in vivo, in one individual
+    - Tractometry takes to results of DWI
+    - ID long-range connections
+    - We now know WM is dynamic network
+    - First gif: Segmentation of fibers into 20 canonical tracts using pyAFQ
+    - Second gif: Highlighting the CST
+  </aside>
+</section>
+<section>
+  <h3>AFQ-Browser</h3>
+  <ul>
+    <li>Tractometry data is complex.</li>
+    <li>So we built a tool to make it scrutable:<br>
+      <a href="https://www.nature.com/articles/s41467-018-03297-7">
+        Yeatman, <b>Richie-Halford</b>, Smith, Keshavan, Rokem;
+        Nature Communications 9:940 (2018)
+      </a>
+    </li>
+  </ul>
+  <div class="imgcite">
+    <a target="_blank" href="https://yeatmanlab.github.io/Sarica_2017/?table[prevSort][count]=2&table[prevSort][order]=ascending&table[prevSort][key]=&table[sort][count]=2&table[sort][order]=ascending&table[sort][key]=&plots[plotKey]=fa&plots[zoom][fa][scale]=1&plots[zoom][fa][translate][0]=0&plots[zoom][fa][translate][1]=0&plots[errorType]=stderr&plots[brushTract]=false&plots[lineOpacity]=0.18375129533678755&plots[checkboxes][left-corticospinal]=false&three[cameraPosition][x]=-11.985478344961196&three[cameraPosition][y]=6.845310406048485&three[cameraPosition][z]=5.872821663162473&three[mouseoverHighlight]=false">
+      <img src="img/afq-browser-static.png" width="600" align="middle" alt="AFQ-Browser Screenshot">
+    </a>
+    <br>
+    <cite>
+      Click for demo
+    </cite>
+  </div>
+  <aside class="notes" data-markdown>
+    - Demo
+    - Anatomy panel
+    - Bundles list
+    - Select CST
+    - Tract profiles
+    - Sort on ALS
+    - Brush
+  </aside>
+</section>
+
+<!--<section data-background-video="img/afq-browser-demo.mp4" data-background-muted data-background-size="contain"></section>-->
+
+<!--<section>
+  <h3>White matter is a dynamic network</h3>
+  <div class="row">
+    <div class="textcol col-23">
+      <ul style="line-height: 1.5em;">
+        <li>Not just a series of tubes</li>
+        <li>White matter adapts to learning</li>
+        <li class="fragment" data-fragment-index="1">Teachers are brain engineers</li>
+        <li class="fragment" data-fragment-index="2">So too are parents, social workers, etc.</li>
+      </ul>
+    </div>
+    <div class="imgcite col-13 fragment" data-fragment-index="1">
+      <img src="img/reading_intervention.png" width="900" align="middle" alt="White matter response to reading intervention">
+      <br>
+      <cite>
+        from <a href="https://rdcu.be/UFXd">Huber, Donnelly, Rokem, Yeatman (2018)</a>
+      </cite>
+    </div>
+  </div>
+  <aside class="notes" data-markdown>
+    - In vivo techniques ~17 years old. We know now that
+    - Not just a series of tubes
+    - Fibers develop with age
+    - Individual differences account for differences in behavior
+    - Adapt to learning
+    - Libby Huber in Jason's lab published rapid white matter changes
+    - Reading intervention program for children with dyslexia.
+    - Aged 8-12
+    - 8 week intervention
+    - White matter changes after only a few weeks
+    - MD changes (not FA)
+    - Teachers are brain engineers
+    - Left arcuate fasciculus: language and speech processing
+    - Left ILF: visual inputs like letters on page
+    - ILF: Inferior Longitudinal Fasciculus
+  </aside>
+</section>-->
