@@ -33,12 +33,12 @@ def download_url_to_file(url, output_fn, encoding='utf-8'):
 def main():
     description = 'Download datasets to test AFQ-Insight.'
     parser = argparse.ArgumentParser(description=description)
-    parser.add_argument('-d', '--dataset', required=True, type=str, choices={'all', 'als', 'reading'})
+    parser.add_argument('-d', '--dataset', required=True, type=str, choices={'all', 'als'})
     results = parser.parse_args() # collect cmd line args
 
     datasets = results.dataset
     if datasets == 'all':
-        datasets = ['als', 'reading']
+        datasets = ['als']
     else:
         datasets = [datasets]
 
@@ -53,7 +53,6 @@ def main():
                 'file': './data/raw/als_data/subjects.csv'
             },
         ],
-        'reading': []
     }
 
     for dset_key in datasets:
