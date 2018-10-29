@@ -3,21 +3,76 @@
   <aside class="notes" data-markdown>
   </aside>
 </section>
+
 <section>
-  <h3>Figure of classification probabilities</h3>
+  <h3>Structure detection</h3>
   <ul>
-    <li>With overall classification and AUC report</li>
+    <li>SGL reveals binary structure.</li>
   </ul>
+  <div>
+    <iframe style="width: 1200px; height: 525px;" data-src="img/bokeh_plots/classification_pca_both.html"></iframe>
+  </div>
   <aside class="notes" data-markdown>
   </aside>
 </section>
+
 <section>
-  <h3>Confusion in AFQ-Browser</h3>
+  <h3>Classification Results</h3>
+  <ul>
+    <li>Accuracy: 87.5%, ROC-AUC: 89.7%, Avg. Precision: 92.3%</li>
+  </ul>
+  <div>
+    <iframe style="width: 800px; height: 550px;" data-src="img/bokeh_plots/classification_pca_sgl_only.html"></iframe>
+  </div>
   <aside class="notes" data-markdown>
   </aside>
 </section>
+
 <section>
-  <h3>Feature sparsity figure</h3>
+  <h3>Class Confusion</h3>
+  <div class="row" data-fragment-index="1">
+    <div class="imgcite two-col">
+      <div class="imghead">False Negatives</div>
+      <a href="https://yeatmanlab.github.io/Sarica_2017/?table[prevSort][count]=2&table[prevSort][order]=ascending&table[prevSort][key]=&table[sort][count]=2&table[sort][order]=ascending&table[sort][key]=class&table[selectedRows][subject_005]=true&table[selectedRows][subject_009]=true&table[selectedRows][subject_016]=true&table[selectedRows][subject_030]=false&table[selectedRows][subject_032]=false&table[selectedRows][subject_035]=false&table[selectedRows][subject_036]=false&plots[checkboxes][right-corticospinal]=true&plots[zoom][rd][scale]=1&plots[zoom][rd][translate][0]=-3&plots[zoom][rd][translate][1]=-21&plots[zoom][fa][scale]=2.1140360811227614&plots[zoom][fa][translate][0]=-27.244995845837778&plots[zoom][fa][translate][1]=-106.10468474511174&plots[plotKey]=fa&plots[errorType]=stderr&plots[lineOpacity]=0.0">
+        <img src="img/false_negatives.png" height="300" align="middle" alt="False negatives viewed in AFQ-Browser">
+      </a>
+      <cite>
+        Click to launch AFQ-Browser
+      </cite>
+    </div>
+    <div class="imgcite two-col">
+      <div class="imghead">False Positives</div>
+      <a href="https://yeatmanlab.github.io/Sarica_2017/?table[prevSort][count]=2&table[prevSort][order]=ascending&table[prevSort][key]=&table[sort][count]=2&table[sort][order]=ascending&table[sort][key]=class&table[selectedRows][subject_005]=false&table[selectedRows][subject_007]=false&table[selectedRows][subject_016]=false&table[selectedRows][subject_019]=false&table[selectedRows][subject_030]=true&table[selectedRows][subject_032]=true&table[selectedRows][subject_035]=true&table[selectedRows][subject_036]=true&plots[checkboxes][right-corticospinal]=true&plots[zoom][rd][scale]=1&plots[zoom][rd][translate][0]=-3&plots[zoom][rd][translate][1]=-21&plots[zoom][fa][scale]=2.1140360811227614&plots[zoom][fa][translate][0]=-27.244995845837778&plots[zoom][fa][translate][1]=-106.10468474511174&plots[plotKey]=fa&plots[errorType]=stderr&plots[lineOpacity]=0.0">
+        <img src="img/false_positives.png" height="300" align="middle" alt="False positives viewed in AFQ-Browser">
+      </a>
+      <cite>
+        Click to launch AFQ-Browser
+      </cite>
+    </div>
+  </div>
   <aside class="notes" data-markdown>
   </aside>
 </section>
+
+<section>
+  <h3>Feature Importance</h3>
+  <ul>
+    <li>SGL yields sparse feature space.</li>
+    <li>Corresponds to known white matter correlates of ALS.</li>
+  </ul>
+  <div>
+    <iframe style="width: 1200px; height: 500px;" data-src="img/bokeh_plots/classification_unfolded_beta.html"></iframe>
+  </div>
+  <aside class="notes" data-markdown>
+  </aside>
+</section>
+
+<section>
+  <h3>Classification probabilities</h3>
+  <div>
+    <iframe style="width: 900; height: 600;" data-src="img/bokeh_plots/classification_probs_acc.html"></iframe>
+  </div>
+  <aside class="notes" data-markdown>
+  </aside>
+</section>
+
