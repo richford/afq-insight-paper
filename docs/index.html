@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- Presentation metadata -->
-    <title>WRF Talk</title>
-    <meta name="description" content="A summary of proposed research for the Washington Research Foundation Postdoctoral Fellowship">
+    <title>Introducing AFQ-Insight</title>
+    <meta name="description" content="An introduction to AFQ-Insight, a tool for multidimensional analysis and detection of informative features in diffusion MRI measurements of human white matter">
     <meta name="author" content="Adam Richie-Halford">
     <!-- reveal.js CSS -->
     <link rel="stylesheet" href="css/reveal.css">
@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="css/fa-regular.css">
     <link rel="stylesheet" href="css/fa-brands.css">
     <link rel="stylesheet" href="css/fontawesome.css">
+    <!-- Title-footer plugin CSS -->
+    <link rel="stylesheet" href="plugin/title-footer/title-footer.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
     <!-- Theme used for syntax highlighting of code -->
@@ -44,20 +46,133 @@
         context.moveTo(tox, toy);
         context.lineTo(tox-headlen*Math.cos(angle+Math.PI/6),toy-headlen*Math.sin(angle+Math.PI/6));
       }
+
+      // degrees to radians, because most people think in degrees
+      function degToRad(angle_degrees) {
+        return angle_degrees/180*Math.PI;
+      }
+
+      // draw a horizontal arc
+      //   ctx: canvas context;
+      //   inax: first x point
+      //   inbx: second x point
+      //   y: y value of start and end
+      //   alpha_degrees: (tangential) angle of start and end
+      //   upside: true for arc above y, false for arc below y.
+      function drawHorizArc(ctx, inax, inbx, y, alpha_degrees, upside)
+      {
+        var alpha = degToRad(alpha_degrees);
+        var startangle = (upside ? ((3.0/2.0)*Math.PI + alpha) : ((1.0/2.0)*Math.PI - alpha));
+        var endangle = (upside ? ((3.0/2.0)*Math.PI - alpha) : ((1.0/2.0)*Math.PI + alpha));
+
+        var ax=Math.min(inax,inbx);
+        var bx=Math.max(inax,inbx);
+
+        // tan(alpha) = o/a = ((bx-ax)/2) / o
+        // o = ((bx-ax)/2/tan(alpha))
+        // centre of circle is (bx+ax)/2, y-o
+        var circleyoffset = ((bx-ax)/2)/Math.tan(alpha);
+        var circlex = (ax+bx)/2.0;
+        var circley = y + (upside ? 1 : -1) * circleyoffset;
+        var radius = Math.sqrt(Math.pow(circlex-ax,2) + Math.pow(circley-y,2));
+
+        ctx.beginPath();
+        if(upside) {
+          ctx.moveTo(bx,y);
+          ctx.arc(circlex,circley,radius,startangle,endangle,1);
+        } else {
+          ctx.moveTo(bx,y);
+          ctx.arc(circlex,circley,radius,startangle,endangle,0);
+        }
+        ctx.stroke();
+      }
+
+      // draw the head of an arrow (not the main line)
+      //  ctx: canvas context
+      //  x,y: coords of arrow point
+      //  angle_from_north_clockwise: angle of the line of the arrow from horizontal
+      //  upside: true=above the horizontal, false=below
+      //  barb_angle: angle between barb and line of the arrow
+      //  filled: fill the triangle? (true or false)
+      function drawArrowHead(ctx, x, y, angle_from_horizontal_degrees, upside, //mandatory
+        barb_length, barb_angle_degrees, filled) {        //optional
+        (barb_length==undefined) && (barb_length=13);
+        (barb_angle_degrees==undefined) && (barb_angle_degrees = 20);
+        (filled==undefined) && (filled=true);
+        var alpha_degrees = (upside ? -1 : 1) * angle_from_horizontal_degrees; 
+
+        //first point is end of one barb
+        var plus = degToRad(alpha_degrees - barb_angle_degrees);
+        a = x + (barb_length * Math.cos(plus));
+        b = y + (barb_length * Math.sin(plus));
+
+        //final point is end of the second barb
+        var minus = degToRad(alpha_degrees + barb_angle_degrees);
+        c = x + (barb_length * Math.cos(minus));
+        d = y + (barb_length * Math.sin(minus));
+
+        ctx.beginPath();
+        ctx.moveTo(a,b);
+        ctx.lineTo(x,y);
+        ctx.lineTo(c,d);
+        if(filled) {
+          ctx.fill();
+        } else {
+          ctx.stroke();
+        }
+        return true;
+      }
+
+      // draw a horizontal arcing arrow
+      //  ctx: canvas context
+      //  inax: start x value
+      //  inbx: end x value
+      //  y: y value
+      //  alpha_degrees: angle of ends to horizontal (30=shallow, >90=silly)
+      function drawHorizArcArrow(ctx, inax, inbx, y,                 //mandatory
+        alpha_degrees, upside, barb_length) { //optional
+        (alpha_degrees==undefined) && (alpha_degrees=45);
+        (upside==undefined) && (upside=true);
+        drawHorizArc(ctx, inax, inbx, y, alpha_degrees, upside);
+        if(inax>inbx) { 
+          drawArrowHead(ctx, inbx, y, alpha_degrees*0.9, upside, barb_length); 
+        } else { 
+          drawArrowHead(ctx, inbx, y, (180-alpha_degrees*0.9), upside, barb_length); 
+        }
+        return true;
+      }
+
+      function drawArrow(ctx,fromelem,toelem,    //mandatory
+        above, angle) {        //optional
+        (above==undefined) && (above = true);
+        (angle==undefined) && (angle = 45); //degrees 
+        midfrom = fromelem.offsetLeft + (fromelem.offsetWidth / 2) - left - tofromseparation/2; 
+        midto   =   toelem.offsetLeft + (  toelem.offsetWidth / 2) - left + tofromseparation/2;
+        //var y = above ? (fromelem.offsetTop - top) : (fromelem.offsetTop + fromelem.offsetHeight - top);
+        var y = fromelem.offsetTop + (above ? 0 : fromelem.offsetHeight) - canvasTop;
+        drawHorizArcArrow(ctx, midfrom, midto, y, angle, above);
+      }
     </script>
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
         <section>
-          <img align="center" style="border: none;" src="img/pyafq-segmentation-all-tracts-transparent.gif" alt="AFQ segmentation" width="350">
-          <h3>Leveraging Massive, Open Data in Neuroscience</h3>
-          <p>Adam Richie-Halford, University of Washington,<br>Department of Physics</p>
-          <p><small>Follow along at <a href="http://richford.github.io/wrf-talk-2018-09-20/">http://richford.github.io/wrf-talk-2018-09-20/</a></small></p>
+          <img align="center" style="border: none;" width="350"
+            src="img/pyafq-segmentation-all-tracts-transparent.gif"
+            alt="AFQ segmentation">
+          <h1>AFQ-Insight</h1>
+          <h3>A tool for multidimensional analysis and detection of informative features in diffusion MRI measurements of human white matter</h3>
+          <p><small>Follow along at <a href="http://richford.github.io/afq-insight-paper/">http://richford.github.io/afq-insight-paper/</a></small></p>
+          <p class="creativecommons">
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+              <i class="fab fa-creative-commons"></i>
+              <i class="fab fa-creative-commons-by"></i>
+            <small>
+              This work is licensed under a <a style="padding-left: 0.3em;" rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+            </small>
+          </p>
           <aside class="notes" data-markdown>
-            - Hi, I'm Adam
-            - Thank the selection committee for opportunity
-            - Follow along link
           </aside>
         </section>
 
@@ -65,14 +180,13 @@
         <section id="white-matter" data-external="sections/white-matter.html"></section>
         <section id="learning" data-external="sections/learning.html"></section>
         <section id="classification" data-external="sections/classification.html"></section>
-        <section id="regression" data-external="sections/regression.html"></section>
         <section id="conclusion" data-external="sections/conclusion.html"></section>
 
         <section>
           <h2>Thank you!</h2>
           <div class="row">
             <div class="imgpenta imgcite">
-              <img style="margin: 0px;" class="logo" src="img/people/ariel.jpg" height="150">
+              <img style="margin: 0px;" class="logo" src="img/people/ariel.jpg" height="350">
               <cite>
                 Ariel Rokem
                 <br>
@@ -80,7 +194,7 @@
               </cite>
             </div >
             <div class="imgpenta imgcite">
-              <img style="margin: 0px;" class="logo" src="img/people/jason.jpg" height="150">
+              <img style="margin: 0px;" class="logo" src="img/people/jason.jpg" height="350">
               <cite>
                 Jason Yeatman
                 <br>
@@ -88,7 +202,7 @@
               </cite>
             </div>
             <div class="imgpenta imgcite">
-              <img style="margin: 0px;" class="logo" src="img/people/noah.jpg" height="150">
+              <img style="margin: 0px;" class="logo" src="img/people/noah.jpg" height="350">
               <cite>
                 Noah Simon
                 <br>
@@ -132,6 +246,9 @@
       // - https://github.com/hakimel/reveal.js#configuration
       // - https://github.com/hakimel/reveal.js#dependencies
       Reveal.initialize({
+        width: 1920,
+        height: 1080,
+        margin: 0.1,
         history: true,
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
@@ -145,6 +262,13 @@
           { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
           // Zoom in and out with Alt+click
           { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/title-footer/title-footer.js', async: true, callback: function() {
+            title_footer.initialize(
+              title="Multidimensional analysis and detection of informative features in diffusion MRI measurements of human white matter",
+              authors="Adam Richie-Halford, Jason Yeatman, Ariel Rokem, Noah Simon",
+              img="img/Signature_Stacked_White.png"
+            );
+          } },
           { src: 'third_party_plugins/menu.js' },
           { src: 'third_party_plugins/external.js', condition: function() { return !!document.querySelector( '[data-external]' ); } },
         ],

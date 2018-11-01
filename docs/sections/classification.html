@@ -1,55 +1,24 @@
 <section>
-  <h2>Classification of ALS patients</h2>
+  <h2>Results: Classifying ALS patients</h2>
+  <img class="logo" style="padding: 30px;" src="img/classification_flowchart.svg" width="1600" align="middle" alt="Classificationflowchart">
   <aside class="notes" data-markdown>
   </aside>
 </section>
 
 <section>
-  <h3>Structure detection</h3>
+  <h3>Classification probabilities</h3>
   <ul>
-    <li>SGL reveals binary structure.</li>
+    <li>
+      Classification metrics averaged over all CV splits:<br>
+      Accuracy: 87.5%, ROC-AUC: 89.7%, Avgerage Precision: 92.3%
+    </li>
   </ul>
   <div>
-    <iframe style="width: 1200px; height: 525px;" data-src="img/bokeh_plots/classification_pca_both.html"></iframe>
+    <iframe style="width: 820px; height: 720px;" data-src="img/bokeh_plots/classification_probs_acc.html"></iframe>
   </div>
-  <aside class="notes" data-markdown>
-  </aside>
-</section>
-
-<section>
-  <h3>Classification Results</h3>
   <ul>
-    <li>Accuracy: 87.5%, ROC-AUC: 89.7%, Avg. Precision: 92.3%</li>
+    <li>Classification probabilities extracted from each test set in each CV split.</li>
   </ul>
-  <div>
-    <iframe style="width: 800px; height: 550px;" data-src="img/bokeh_plots/classification_pca_sgl_only.html"></iframe>
-  </div>
-  <aside class="notes" data-markdown>
-  </aside>
-</section>
-
-<section>
-  <h3>Class Confusion</h3>
-  <div class="row" data-fragment-index="1">
-    <div class="imgcite two-col">
-      <div class="imghead">False Negatives</div>
-      <a href="https://yeatmanlab.github.io/Sarica_2017/?table[prevSort][count]=2&table[prevSort][order]=ascending&table[prevSort][key]=&table[sort][count]=2&table[sort][order]=ascending&table[sort][key]=class&table[selectedRows][subject_005]=true&table[selectedRows][subject_009]=true&table[selectedRows][subject_016]=true&table[selectedRows][subject_030]=false&table[selectedRows][subject_032]=false&table[selectedRows][subject_035]=false&table[selectedRows][subject_036]=false&plots[checkboxes][right-corticospinal]=true&plots[zoom][rd][scale]=1&plots[zoom][rd][translate][0]=-3&plots[zoom][rd][translate][1]=-21&plots[zoom][fa][scale]=2.1140360811227614&plots[zoom][fa][translate][0]=-27.244995845837778&plots[zoom][fa][translate][1]=-106.10468474511174&plots[plotKey]=fa&plots[errorType]=stderr&plots[lineOpacity]=0.0">
-        <img src="img/false_negatives.png" height="300" align="middle" alt="False negatives viewed in AFQ-Browser">
-      </a>
-      <cite>
-        Click to launch AFQ-Browser
-      </cite>
-    </div>
-    <div class="imgcite two-col">
-      <div class="imghead">False Positives</div>
-      <a href="https://yeatmanlab.github.io/Sarica_2017/?table[prevSort][count]=2&table[prevSort][order]=ascending&table[prevSort][key]=&table[sort][count]=2&table[sort][order]=ascending&table[sort][key]=class&table[selectedRows][subject_005]=false&table[selectedRows][subject_007]=false&table[selectedRows][subject_016]=false&table[selectedRows][subject_019]=false&table[selectedRows][subject_030]=true&table[selectedRows][subject_032]=true&table[selectedRows][subject_035]=true&table[selectedRows][subject_036]=true&plots[checkboxes][right-corticospinal]=true&plots[zoom][rd][scale]=1&plots[zoom][rd][translate][0]=-3&plots[zoom][rd][translate][1]=-21&plots[zoom][fa][scale]=2.1140360811227614&plots[zoom][fa][translate][0]=-27.244995845837778&plots[zoom][fa][translate][1]=-106.10468474511174&plots[plotKey]=fa&plots[errorType]=stderr&plots[lineOpacity]=0.0">
-        <img src="img/false_positives.png" height="300" align="middle" alt="False positives viewed in AFQ-Browser">
-      </a>
-      <cite>
-        Click to launch AFQ-Browser
-      </cite>
-    </div>
-  </div>
   <aside class="notes" data-markdown>
   </aside>
 </section>
@@ -59,20 +28,84 @@
   <ul>
     <li>SGL yields sparse feature space.</li>
     <li>Corresponds to known white matter correlates of ALS.</li>
+    <li>Primarily selects fractional anisotropy metric in the right corticospinal tract.</li>
   </ul>
   <div>
-    <iframe style="width: 1200px; height: 500px;" data-src="img/bokeh_plots/classification_unfolded_beta.html"></iframe>
+    <iframe style="width: 1800px; height: 700px;" data-src="img/bokeh_plots/classification_unfolded_beta.html"></iframe>
   </div>
   <aside class="notes" data-markdown>
   </aside>
 </section>
 
 <section>
-  <h3>Classification probabilities</h3>
-  <div>
-    <iframe style="width: 900; height: 600;" data-src="img/bokeh_plots/classification_probs_acc.html"></iframe>
+  <h3>Class Confusion</h3>
+  <ul>
+    <li>Some subjects confused the model in a majority of CV splits</li>
+  </ul>
+  <div class="row" data-fragment-index="1">
+    <div class="imgcite two-col">
+      <div class="imghead">False Negatives</div>
+      <a href="https://yeatmanlab.github.io/Sarica_2017/?table[prevSort][count]=2&table[prevSort][order]=ascending&table[prevSort][key]=&table[sort][count]=2&table[sort][order]=ascending&table[sort][key]=class&table[selectedRows][subject_005]=true&table[selectedRows][subject_016]=true&table[selectedRows][subject_019]=true&table[selectedRows][subject_030]=false&table[selectedRows][subject_032]=false&table[selectedRows][subject_035]=false&table[selectedRows][subject_036]=false&plots[checkboxes][right-corticospinal]=true&plots[zoom][rd][scale]=1&plots[zoom][rd][translate][0]=-3&plots[zoom][rd][translate][1]=-21&plots[zoom][fa][scale]=2.1140360811227614&plots[zoom][fa][translate][0]=-27.244995845837778&plots[zoom][fa][translate][1]=-106.10468474511174&plots[plotKey]=fa&plots[errorType]=stderr&plots[lineOpacity]=0.0">
+        <img src="img/false_negatives.png" height="600" align="middle" alt="False negatives viewed in AFQ-Browser">
+      </a>
+      <cite>
+        Click to launch AFQ-Browser
+      </cite>
+    </div>
+    <div class="imgcite two-col">
+      <div class="imghead">False Positives</div>
+      <a href="https://yeatmanlab.github.io/Sarica_2017/?table[prevSort][count]=2&table[prevSort][order]=ascending&table[prevSort][key]=&table[sort][count]=2&table[sort][order]=ascending&table[sort][key]=class&table[selectedRows][subject_005]=false&table[selectedRows][subject_007]=false&table[selectedRows][subject_016]=false&table[selectedRows][subject_019]=false&table[selectedRows][subject_032]=true&table[selectedRows][subject_035]=true&table[selectedRows][subject_036]=true&plots[checkboxes][right-corticospinal]=true&plots[zoom][rd][scale]=1&plots[zoom][rd][translate][0]=-3&plots[zoom][rd][translate][1]=-21&plots[zoom][fa][scale]=2.1140360811227614&plots[zoom][fa][translate][0]=-27.244995845837778&plots[zoom][fa][translate][1]=-106.10468474511174&plots[plotKey]=fa&plots[errorType]=stderr&plots[lineOpacity]=0.0">
+        <img src="img/false_positives.png" height="600" align="middle" alt="False positives viewed in AFQ-Browser">
+      </a>
+      <cite>
+        Click to launch AFQ-Browser
+      </cite>
+    </div>
   </div>
   <aside class="notes" data-markdown>
   </aside>
 </section>
 
+<!--
+<section>
+  <h3>Structure detection</h3>
+  <ul>
+    <li>SGL discovers binary structure.</li>
+    <li>Left: First two principal components of raw feature matrix</li>
+    <li>Right: First two principal components of feature matrix projected onto the coeficient vector <script type="math/tex; mode=inline">\beta</script></li>
+  </ul>
+  <div>
+    <iframe style="width: 1600px; height: 800px;" data-src="img/bokeh_plots/classification_pca_both.html"></iframe>
+  </div>
+  <aside class="notes" data-markdown>
+  </aside>
+</section>
+
+<section>
+  <h3>Classification Results</h3>
+  <div class="row">
+    <div class="two-col">
+      <ul>
+        <li>Classification metrics averaged over all CV splits</li>
+        <ul>
+          <li>Accuracy: 87.5%</li>
+          <li>ROC-AUC: 89.7%</li>
+          <li>Avgerage Precision: 92.3%</li>
+        </ul>
+        <li>Averaging <script type="math/tex; mode=inline">\beta</script>
+          values over all CV splits results in perfect class separation.</li>
+        <li>Caveat inquisitor: average <script type="math/tex; mode=inline">\beta</script> is trained on all data.</li>
+        <ul>
+          <li>Valuable for structure discovery and feature extraction</li>
+          <li>May not generalize for prediction</li>
+        </ul>
+      </ul>
+    </div>
+    <div class="two-col">
+      <iframe style="width: 800px; height: 800px;" data-src="img/bokeh_plots/classification_pca_sgl_only.html"></iframe>
+    </div>
+  </div>
+  <aside class="notes" data-markdown>
+  </aside>
+</section>
+-->

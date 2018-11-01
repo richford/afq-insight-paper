@@ -1,0 +1,96 @@
+/*************************************************
+*                                                *
+* CSS for the Title-Footer plugin for Reveal.js  *
+*                                                *
+* Author: Igor Leturia                           *
+*                                                *
+* License: GPL v3                                *
+* http://www.gnu.org/copyleft/gpl.html           *
+*                                                *
+*************************************************/
+
+/* Style for the Title-Footer footer */
+
+#title-footer
+{
+	opacity: 1;
+	transition: opacity 800ms ease-in-out;
+	position: fixed;
+	height: calc(7.25vh + 10px);
+	z-index: 20;
+	width: 100%;
+	text-align: left;
+	letter-spacing: 0em;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
+  padding-left: 1vh;
+  border-bottom: solid 2px white;
+}
+/* <img style="position: absolute; top: 0px; right: 0px; height: calc(6vh + 10px); padding: 1vh; padding-top: 2vh" */
+
+#title-footer h4 {
+	font-size: 4vh;
+  margin-bottom: 4px !important;
+}
+
+#title-footer p {
+  font-size: 2.5vh !important;
+}
+
+#title-footer img {
+  height: calc(6vh + 10px);
+  padding: 2vh 2vh 1vh 1vh;
+}
+
+/* Bottom position for the Title-Footer footer when both progress bar and TOC-Progress are visible */
+div.progress[style="display: block;"] ~ #title-footer
+{
+	bottom: calc(3px + 10.5vh);
+}
+
+/* Bottom position for the Title-Footer footer when TOC-Progress is visible */
+#title-footer
+{
+	top: 0px;
+}
+
+/* This is to fix the positioning of the title which goes off screen due to a new reveal.js CSS property. */
+#title-footer p{
+	margin: 0;
+}
+
+/* Bottom position for the Title-Footer footer when progress bar is visible */
+
+div.progress[style="display: block;"] ~ footer:last-of-type#title-footer
+{
+	bottom: 3px;
+}
+
+/* Bottom position for the Title-Footer footer when neither progress bar nor TOC-Progress are visible */
+
+footer:last-of-type#title-footer
+{
+	top: 0px;
+}
+
+/* Make Title-Footer invisible if explicitly indicated */
+
+.no-title-footer #title-footer
+{
+	opacity: 0;
+	transition: opacity 800ms ease-in-out;
+}
+
+.no-toc-progress #title-footer
+{
+	opacity: 0;
+	transition: opacity 800ms ease-in-out;
+}
+
+/* Make Title-Footer invisible in overview mode */
+
+.overview #title-footer
+{
+	opacity: 0;
+	transition: opacity 800ms ease-in-out;
+}

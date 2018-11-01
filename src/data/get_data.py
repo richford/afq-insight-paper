@@ -33,12 +33,12 @@ def download_url_to_file(url, output_fn, encoding='utf-8'):
 def main():
     description = 'Download datasets to test AFQ-Insight.'
     parser = argparse.ArgumentParser(description=description)
-    parser.add_argument('-d', '--dataset', required=True, type=str, choices={'all', 'als'})
+    parser.add_argument('-d', '--dataset', required=True, type=str, choices={'all', 'als', 'age'})
     results = parser.parse_args() # collect cmd line args
 
     datasets = results.dataset
     if datasets == 'all':
-        datasets = ['als']
+        datasets = ['als', 'age']
     else:
         datasets = [datasets]
 
@@ -52,6 +52,16 @@ def main():
                 'url': 'https://github.com/yeatmanlab/Sarica_2017/raw/gh-pages/data/subjects.csv',
                 'file': './data/raw/als_data/subjects.csv'
             },
+        ],
+        'age': [
+            {
+                'url': 'https://yeatmanlab.github.io/AFQBrowser-demo/data/nodes.csv',
+                'file': './data/raw/age_data/nodes.csv'
+            },
+            {
+                'url': 'https://yeatmanlab.github.io/AFQBrowser-demo/data/subjects.csv',
+                'file': './data/raw/age_data/subjects.csv'
+            }
         ],
     }
 
