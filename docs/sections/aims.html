@@ -1,33 +1,78 @@
-<section>
+<section data-menu-title="Introduction">
   <h2>Statistical methods in tractometry</h2>
-  <div>
-    <img class="logo" src="img/tractometry_approach_1.svg" width="500" align="middle" alt="Old approach #1: machine learning for clinical diagnosis">
-    <img class="logo" src="img/tractometry_approach_2.svg" width="500" align="middle" alt="Old approach #2: mass univariate statistics to learn white matter correlates">
-    <img class="logo" src="img/tractometry_approach_3.svg" width="1000" align="middle" alt="Our proposal: make predictions AND discover informative features">
+  <div class="row">
+    <div class="two-col">
+      <img class="logo" style="margin-left: auto; margin-right: auto; margin-bottom: 50px;"
+        src="img/tractometry_approach_1.svg" width="500" align="middle"
+        alt="Old approach #1: machine learning for clinical diagnosis">
+      <img class="logo" style="margin-left: auto; margin-right: auto;"
+        src="img/tractometry_approach_2.svg" width="500" align="middle"
+        alt="Old approach #2: mass univariate statistics to learn white matter correlates">
+    </div>
+    <div class="two-col">
+      <div class="imgcite">
+        <img class="logo" style="margin-left: auto; margin-right: auto;"
+          src="img/sarica_p_vals.png" width="500" align="middle" alt="Sarica's approach #1">
+        <cite>
+          <a href="https://doi.org/10.1002/hbm.23412">Sarica et al. (2017), Human Brain Mapping</a>
+        </cite>
+      </div>
+      <img class="logo" style="padding: 15px 0px; margin-left: auto; margin-right: auto;"
+        src="img/sarica-flowchart.svg" width="500" align="middle" alt="Sarica's approach #2">
+    </div>
   </div>
+  <img class="logo" style="margin-left: auto; margin-right: auto;"
+    src="img/tractometry_approach_3.svg" width="500" align="middle"
+    alt="Our proposal: make predictions AND discover informative features">
 </section>
 <section>
   <h3>The three approaches</h3>
   <p style="text-align: left;">Domain agnostic view of tractometry research landscape:</p>
   <div class="fragment current-visible" data-fragment-index="1">
-    <img class="logo" src="img/tractometry_approach_1.svg" width="940" align="middle" alt="Old approach #1: machine learning for clinical diagnosis">
+    <div class="row">
+      <img class="two-col logo" src="img/tractometry_approach_1.svg"
+        height="400" align="middle"
+        alt="Old approach #1: machine learning for clinical diagnosis">
+      <div class="two-col imgcite">
+        <img class="logo" style="margin-left: auto; margin-right: auto;"
+          src="img/sarica_p_vals.png" height="400" align="middle" alt="Sarica's approach #1">
+        <cite>
+          <a href="https://doi.org/10.1002/hbm.23412">Sarica et al. (2017), Human Brain Mapping</a>
+        </cite>
+      </div>
+    </div>
     <p style="text-align: left;">
-      In the first approach, researchers use machine learning techniques to
+      In the first approach, researchers make group comparisons between
+      patients and controls in order to understand the relationship between
+      a disease or disorder and the underlying anatomy. Typically, researchers
+      adopt a mass univariate approach, which can lack the predictive power
+      of other machine learning approaches.<br>
+      <br>
+      e.g. T-test comparison of ALS patients and controls of each nodal
+      measurement in the corticospinal tract (CST).
+    </p>
+  </div>
+  <div class="fragment current-visible" data-fragment-index="2">
+    <div class="row">
+      <img class="two-col logo" src="img/tractometry_approach_2.svg"
+        style="marging: auto;" height="400" align="middle"
+        alt="Old approach #2: mass univariate statistics to learn white matter correlates">
+      <div class="two-col imgcite">
+        <img class="logo" style="padding: 5px 0px; margin: auto;"
+          src="img/sarica-flowchart.svg" height="400" align="middle" alt="Sarica's approach #2">
+        <cite>
+          <a href="https://doi.org/10.1002/hbm.23412">Sarica et al. (2017), Human Brain Mapping</a>
+        </cite>
+      </div>
+    </div>
+    <p style="text-align: left;">
+      In the second approach, researchers use machine learning techniques to
       predict clinical diagnoses from brain measures, such as the white matter
       integrity at all points along an anatomical tract. This approach can
       achieve high accuracy, but may require extensive feature engineering.
       It may additionally obscure the importance of particular brain features.
-    </p>
-  </div>
-  <div class="fragment current-visible" data-fragment-index="2">
-    <img class="logo" src="img/tractometry_approach_1.svg" width="470" align="middle" alt="Old approach #1: machine learning for clinical diagnosis">
-    <img class="logo" src="img/tractometry_approach_2.svg" width="940" align="middle" alt="Old approach #2: mass univariate statistics to learn white matter correlates">
-    <p style="text-align: left;">
-      In the second approach, researchers make group comparisons between
-      patients and controls in order to understand the relationship between
-      a disease or disorder and the underlying anatomy. Typically, researchers
-      adopt a mass univariate approach, which lacks the predictive power of
-      approach #1 and can fail to account for feature colinearity.
+      <br><br>
+      e.g. Random forest trained on a priori selected measurements from the CST.
     </p>
   </div>
   <div class="fragment" data-fragment-index="3">

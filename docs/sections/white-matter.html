@@ -1,5 +1,5 @@
 <section>
-  <h2>White Matter Tractometry</h2>
+  <h2 class='menu-title'>White Matter Tractometry</h2>
   <aside class="notes" data-markdown>
     - With that framing in mind
     - I need to give you more context
@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="col-23 imgcite">
-          <img src="img/dMRI-signal-movie.gif" width="500" alt="Anisotropic diffusion">
+          <img src="img/dMRI-signal-movie.gif" width="500" alt="Diffusion MRI with varying B vectors">
           <cite>
             <a href="http://jov.arvojournals.org/article.aspx?articleid=2603187">Rokem et al. (2017), Journal of Vision</a>
             <br>
@@ -120,15 +120,24 @@
       </div>
     </div>
     <div class="col-13">
-      <img align="center" src="img/pyafq-segmentation-all-tracts-1.gif" alt="AFQ segmentation" width="300">
-      <img align="center" src="img/pyafq-segmentation-cst.gif" alt="AFQ segmentation highlighting the corticospinal tract" width="300">
+      <img align="center" src="img/pyafq-segmentation-all-tracts-1.gif" alt="AFQ segmentation" width="250">
+      <img align="center" src="img/pyafq-segmentation-cst.gif" alt="AFQ segmentation highlighting the corticospinal tract" width="250">
+      <div class="imgcite">
+        <img class="logo" style="margin-left: auto; margin-right: auto;"
+          src="img/sarica_p_vals.png" width="600" align="middle" alt="Sarica's approach #1">
+        <cite>
+          <a href="https://doi.org/10.1002/hbm.23412">Sarica et al. (2017), Human Brain Mapping</a>
+        </cite>
+      </div>
     </div>
   </div>
   <p style="text-align: left;">
     Automated Fiber Quantification (AFQ) identifies fiber tracts in a living
     individual's brain. It creates tract profiles of diffusion metrics
     along canonical white matter tracts. This is the input to our statistical
-    model.
+    model. We use tract profiles from a study of ALS
+    (<a href="https://doi.org/10.1002/hbm.23412">Sarica et al. (2017)</a>)
+    released on <a href="http://data.afqvault.org">AFQVault</a>.
   </p>
   <aside class="notes" data-markdown>
     - (1) Whole brain tractography is initiated from each white matter voxel with fractional anisotropy (FA) > 0.3.
