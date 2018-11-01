@@ -1,6 +1,21 @@
 <section>
   <h2 class='menu-title'>Results: Classifying ALS patients</h2>
-  <img class="logo" style="padding: 30px;" src="img/classification_flowchart.svg" width="1600" align="middle" alt="Classificationflowchart">
+  <div class="row">
+    <img class="logo col-60" style="margin: auto;"
+      src="img/classification_flowchart.svg" height="400" align="middle"
+      alt="Classificationflowchart">
+    <div class="col-40" style="margin: auto;">
+      <iframe style="width: 520px; height: 420px;"
+        data-src="img/bokeh_plots/classification_probs_acc_small.html">
+      </iframe>
+    </div>
+  </div>
+  Accuracy: 85.8%, ROC-AUC: 92.2%, Avgerage Precision: 93.9%
+  <div>
+    <iframe style="width: 1800px; height: 420px;"
+      data-src="img/bokeh_plots/classification_unfolded_beta_small.html">
+    </iframe>
+  </div>
   <aside class="notes" data-markdown>
   </aside>
 </section>

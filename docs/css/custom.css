@@ -54,6 +54,16 @@ i {
   padding: 5px;
 }
 
+.reveal .col-60{
+  flex: 60%;
+  padding: 5px;
+}
+
+.reveal .col-40{
+  flex: 60%;
+  padding: 5px;
+}
+
 .reveal .col-85{
   flex: 85%;
   padding: 5px;
