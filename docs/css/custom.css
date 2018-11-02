@@ -18,14 +18,14 @@ i {
 
 .reveal .imgcite cite{
   display: block;
-  font-size: 0.6em;
+  font-size: 0.65em;
   text-align: center;
   line-height: 1.25em;
 }
 
 .reveal .eqcite cite{
   display: block;
-  font-size: 0.6em;
+  font-size: 0.65em;
   text-align: right;
   line-height: 1.25em;
 }
