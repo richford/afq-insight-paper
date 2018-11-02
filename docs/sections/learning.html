@@ -2,14 +2,30 @@
   <h2>Methods: Statistical Learning and Group Structure</h2>
   <div class="row">
     <div class="col-23">
-      <img class="logo" style="padding: 30px;" height="400" align="middle"
-        src="img/dmri-group-structure.svg"
-        alt="Group structure of dMRI data">
-      <img class="logo" style="padding: 30px;" height="400" align="middle"
-        src="img/afq-insight-nested-cross-validation.svg"
-        alt="Hyperparameter optimization through nested cross-validation">
-      <script type="math/tex; mode=display">
-        \widehat{y} = \mathbf{X} \cdot \widehat{\beta}, \\
+      <img class="logo"
+           style="padding: 30px;"
+           height="400"
+           align="middle"
+           src="img/dmri-group-structure.svg"
+           alt="Group structure of dMRI data">
+      <img class="logo"
+           style="padding: 30px;"
+           height="400"
+           align="middle"
+           src="img/afq-insight-nested-cross-validation.svg"
+           alt="Hyperparameter optimization through nested cross-validation">
+      <img height="75"
+           style="border: none; margin-right: 150px; background-color:rgba(0, 0, 0, 0);"
+           src="img/arrow_down.svg"
+           alt="Down arrow from group structure to SGL equation">
+      <script type="math/tex; mode=inline">
+        \widehat{y} = \mathbf{X} \cdot \widehat{\beta}
+      </script>
+      <img height="75"
+           style="border: none; margin-left: 150px; background-color:rgba(0, 0, 0, 0);"
+           src="img/arrow_up.svg"
+           alt="Up arrow from SGL equation to cross-validation scheme">
+      <script type="math/tex; mode=inline">
             \widehat{\beta} = \min_\beta
             \left[ \left\lVert \widehat{y} - \mathbf{X} \cdot \beta \right\lVert_2^2
             + \lambda_1 \displaystyle \sum_\ell \sqrt{p_\ell}
