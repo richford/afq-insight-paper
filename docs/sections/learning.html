@@ -1,19 +1,31 @@
 <section data-menu-title="Methods: Statistical Learning and Group Structure">
   <h2>Methods: Statistical Learning and Group Structure</h2>
-  <img class="logo" style="padding: 30px;" height="400" align="middle"
-    src="img/dmri-group-structure.svg"
-    alt="Group structure of dMRI data">
-  <img class="logo" style="padding: 30px;" height="400" align="middle"
-    src="img/afq-insight-nested-cross-validation.svg"
-    alt="Hyperparameter optimization through nested cross-validation">
-  <script type="math/tex; mode=display">
-    \widehat{y} = \mathbf{X} \cdot \widehat{\beta}, \\
-        \widehat{\beta} = \min_\beta
-        \left[ \left\lVert \widehat{y} - \mathbf{X} \cdot \beta \right\lVert_2^2
-        + \lambda_1 \displaystyle \sum_\ell \sqrt{p_\ell}
-        \left\lVert \beta^{(\ell)} \right\lVert_2
-        + \lambda_2 \left\lVert \beta \right\lVert_1 \right]
-  </script>
+  <div class="row">
+    <div class="col-23">
+      <img class="logo" style="padding: 30px;" height="400" align="middle"
+        src="img/dmri-group-structure.svg"
+        alt="Group structure of dMRI data">
+      <img class="logo" style="padding: 30px;" height="400" align="middle"
+        src="img/afq-insight-nested-cross-validation.svg"
+        alt="Hyperparameter optimization through nested cross-validation">
+      <script type="math/tex; mode=display">
+        \widehat{y} = \mathbf{X} \cdot \widehat{\beta}, \\
+            \widehat{\beta} = \min_\beta
+            \left[ \left\lVert \widehat{y} - \mathbf{X} \cdot \beta \right\lVert_2^2
+            + \lambda_1 \displaystyle \sum_\ell \sqrt{p_\ell}
+            \left\lVert \beta^{(\ell)} \right\lVert_2
+            + \lambda_2 \left\lVert \beta \right\lVert_1 \right]
+      </script>
+    </div>
+    <div class="col-13">
+      <ul>
+        <li>Diffusion MRI data has inherent group structure</li>
+        <li>Sparse group lasso (SGL) exploits this structure.</li>
+        <li>Hyperparameters are chosen through nested cross-validation.</li>
+        <li>Results are sparse and identify important white matter features</li>
+      </ul>
+    </div>
+  </div>
   <aside class="notes" data-markdown>
     - Having described WM
     - I can explain this new approach that I mentioned in the beginning
