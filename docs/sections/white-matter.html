@@ -1,5 +1,66 @@
 <section>
   <h2 class='menu-title'>White Matter Tractometry</h2>
+  <div class="row">
+    <div class="two-col">
+      <div class="row">
+        <div class="imgcite two-col">
+          <img src="img/olden_days.png"
+               height="350"
+               align="middle"
+               style="display: block; margin: auto;"
+               alt="The olden days of white matter classification">
+          <cite>
+            <a href="https://www.ncbi.nlm.nih.gov/pubmed/16141282">Catani and ffytche (2015)</a>
+          </cite>
+        </div>
+        <div class="imgcite two-col">
+          <img src="img/dMRI-signal-movie.gif"
+               height="350"
+               style="margin: auto;"
+               alt="Diffusion MRI with varying B vectors">
+          <cite>
+            <a href="http://jov.arvojournals.org/article.aspx?articleid=2603187">Rokem et al. (2017), Journal of Vision</a>
+            <br>
+            <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0123272">Rokem et al. (2015), PLoS One</a>
+          </cite>
+        </div>
+      </div>
+      <div class="imgcite">
+        <img src="img/afq_pipeline.png"
+             height="450"
+             style="display: block; margin: auto;"
+             align="middle"
+             alt="AFQ Pipeline">
+        <cite>
+          <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0049790">Yeatman et al. PLoS ONE 7(11)</a>
+        </cite>
+      </div>
+    </div>
+    <div class="two-col">
+      <ul>
+        <li>White matter structure is important to normal brain function.</li>
+        <li>Diffusion tensor imaging (DTI) measures white matter
+          in vivo.</li>
+        <li>Tractometry identifies long range tracts,
+          quantifies diffusion metrics along tract profiles</li>
+        <li>This is the input to our model,
+          tract profiles from a study of ALS and the corticospinal
+          tract (CST), made publically available on
+          <a href="http://data.afqvault.org">AFQVault</a>.</li>
+      </ul>
+      <div class="imgcite">
+        <img class="logo"
+             style="margin-left: auto; margin-right: auto;"
+             src="img/sarica_p_vals.png"
+             height="300"
+             align="middle"
+             alt="Sarica's approach #1">
+        <cite>
+          <a href="https://doi.org/10.1002/hbm.23412">Sarica et al. (2017), Human Brain Mapping</a>
+        </cite>
+      </div>
+    </div>
+  </div>
   <aside class="notes" data-markdown>
     - With that framing in mind
     - I need to give you more context
@@ -13,15 +74,19 @@
       <p>Post-mortem</p>
       <div class="row">
         <div class="imgcite two-col">
-          <img src="img/olden_days.png" width="700" style="display: block; margin-left: auto; margin-right: auto;"
-            align="middle" alt="The olden days of white matter classification">
+          <img src="img/olden_days.png"
+               width="700" align="middle"
+               style="display: block; margin-left: auto; margin-right: auto;"
+               alt="The olden days of white matter classification">
           <cite>
             <a href="https://www.ncbi.nlm.nih.gov/pubmed/16141282">Catani and ffytche (2015)</a>
           </cite>
         </div>
         <div class="imgcite two-col">
-          <img src="img/meynerts_tracts.gif" width="300" style="display: block; margin-left: auto; margin-right: auto;"
-            align="middle" alt="Meynert's White Matter Tracts">
+          <img src="img/meynerts_tracts.gif"
+               width="300" align="middle"
+               style="display: block; margin-left: auto; margin-right: auto;"
+               alt="Meynert's White Matter Tracts">
           <cite>
             <a href="https://www.ncbi.nlm.nih.gov/pubmed/16141282">Catani and ffytche (2015)</a>
           </cite>
@@ -39,15 +104,21 @@
         <div class="col-13">
           <p style="font-size: 0.7em;">Isotropic diffusion</p>
           <div style="flex-grow: 1;">
-            <img src="img/diffusion-isotropic.gif" width="300" alt="Isotropic diffusion">
+            <img src="img/diffusion-isotropic.gif"
+                 width="300"
+                 alt="Isotropic diffusion">
           </div>
           <p style="font-size: 0.7em;">Anisotropic diffusion</p>
           <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center;">
-            <img src="img/diffusion-anisotropic.gif" width="300" alt="Anisotropic diffusion">
+            <img src="img/diffusion-anisotropic.gif"
+                 width="300"
+                 alt="Anisotropic diffusion">
           </div>
         </div>
         <div class="col-23 imgcite">
-          <img src="img/dMRI-signal-movie.gif" width="500" alt="Diffusion MRI with varying B vectors">
+          <img src="img/dMRI-signal-movie.gif"
+               width="500"
+               alt="Diffusion MRI with varying B vectors">
           <cite>
             <a href="http://jov.arvojournals.org/article.aspx?articleid=2603187">Rokem et al. (2017), Journal of Vision</a>
             <br>
@@ -80,30 +151,46 @@
 
 <section>
   <h3>Diffusion Metrics</h3>
-  <div class="imgcite">
-    <img src="img/tensor-stats3.png" width="1200">
-    <div class="row" style="width: 1200px; margin: auto;">
-      <div class="col-13">
-        Mean diffusivity<br>
-        <img src="img/md-scale.png" height="40">
-        <script type="math/tex; mode=inline">
-          \frac{\mu m^2}{msec}
-        </script>
+  <div class="row">
+    <div class="imgcite col-23">
+      <img src="img/tensor-stats3.png" width="1200">
+      <div class="row" style="width: 1200px; margin: auto;">
+        <div class="col-13">
+          Mean diffusivity<br>
+          <img src="img/md-scale.png" height="40">
+          <script type="math/tex; mode=inline">
+            \frac{\mu m^2}{msec}
+          </script>
+        </div>
+        <div class="col-13">
+          Fractional anisotropy<br>
+          <img align="center"
+               src="img/diffusion-fa.gif"
+               alt="Fractional Anisotropy"
+               width="200">
+        </div>
+        <div class="col-13">
+          Principal diffusion direction<br>
+          <img src="img/pdd_axes.png" height="100" >
+        </div>
       </div>
-      <div class="col-13">
-        Fractional anisotropy<br>
-        <img align="center" src="img/diffusion-fa.gif" alt="Fractional Anisotropy" width="200">
-      </div>
-      <div class="col-13">
-        Principal diffusion direction<br>
-        <img src="img/pdd_axes.png" height="100" >
-      </div>
+      <cite>
+        <a href="http://jov.arvojournals.org/article.aspx?articleid=2603187">Rokem et al. (2017), Journal of Vision</a>
+        <br>
+        <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0123272">Rokem et al. (2015), PLoS One</a>
+      </cite>
     </div>
-    <cite>
-      <a href="http://jov.arvojournals.org/article.aspx?articleid=2603187">Rokem et al. (2017), Journal of Vision</a>
-			<br>
-			<a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0123272">Rokem et al. (2015), PLoS One</a>
-    </cite>
+    <div class="col-13" style="margin: auto;">
+      <p style="text-align: left;">
+        Three estimates of white matter structure from diffusion tensor
+        imaging (DTI):
+      </p>
+      <ul>
+        <li>Mean diffusivity:<br>average over all directions</li>
+        <li>Fractional anisotropy:<br>variability in directions</li>
+        <li>Principal diffusion direction<br>direction of max diffusion</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -112,19 +199,32 @@
   <div class="row">
     <div class="col-23">
       <div class="imgcite">
-        <img src="img/afq_pipeline.png" width="1100" style="display: block; margin-left: auto; margin-right: auto;"
-          align="middle" alt="AFQ Pipeline">
+        <img src="img/afq_pipeline.png"
+             width="1100"
+             style="display: block; margin-left: auto; margin-right: auto;"
+             align="middle"
+             alt="AFQ Pipeline">
         <cite>
           <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0049790">Yeatman et al. PLoS ONE 7(11)</a>
         </cite>
       </div>
     </div>
     <div class="col-13">
-      <img align="center" src="img/pyafq-segmentation-all-tracts-1.gif" alt="AFQ segmentation" width="250">
-      <img align="center" src="img/pyafq-segmentation-cst.gif" alt="AFQ segmentation highlighting the corticospinal tract" width="250">
+      <img align="center"
+           src="img/pyafq-segmentation-all-tracts-1.gif"
+           alt="AFQ segmentation"
+           width="250">
+      <img align="center"
+           src="img/pyafq-segmentation-cst.gif"
+           alt="AFQ segmentation highlighting the corticospinal tract"
+           width="250">
       <div class="imgcite">
-        <img class="logo" style="margin-left: auto; margin-right: auto;"
-          src="img/sarica_p_vals.png" width="600" align="middle" alt="Sarica's approach #1">
+        <img class="logo"
+             style="margin-left: auto; margin-right: auto;"
+             src="img/sarica_p_vals.png"
+             width="600"
+             align="middle"
+             alt="Sarica's approach #1">
         <cite>
           <a href="https://doi.org/10.1002/hbm.23412">Sarica et al. (2017), Human Brain Mapping</a>
         </cite>
