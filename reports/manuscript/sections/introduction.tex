@@ -1,7 +1,5 @@
 \section*{Introduction}
 
-\begin{itemize}
-
 Diffusion-weighted Magnetic Resonance Imaging (dMRI) provides a unique view into
 the physical properties of the connections that comprise the brain white matter
 \cite{wandell2016clarifying}. Among the benefits of the method are the fact that
@@ -64,6 +62,7 @@ tractometry, researchers may choose to compare different individuals to each
 other. This is usually done following one of the following approaches:
 
 \begin{enumerate}
+
 \item Mass univariate approaches: In this approach comparisons between groups or
 across individuals are done at each node of each tract, for each one of the
 diffusion metrics available at that point. This approach is exhaustive, but the
@@ -73,16 +72,19 @@ approaches can be taken to resolving this challenge. For example, Colby and
 colleagues \cite{colby2012} used a non-parametric resmapling approach to correct
 for family-wise error across the universe of different comparisons available in
 the mass univariate approach \cite{Nichols2002-zu, Nichols2003-yy}.
+
 \item ROI-based approach: An alternative is using an ROI based approach. In this
 approach, the multiple comparison problem is circumvented by selecting just a
 few tracts to compare in each individual, or even focusing on particular
 segments of these tracts. This approach is very powerful when the biological
 basis of the process of interest is relatively well understood (for a recent
 example, see \cite{huber2018rapid}).
+
 \item ROI-based selection, followed by multivariate analysis. Here, an ROI is
 selected based on \emph{a priori} knowledge, and all the nodes or voxels in the
 ROI are used together to fit a model that can predict differences between
 individuals.
+
 \end{enumerate}
 
 In the present work, we present a novel framework for analysis of tractometry
