@@ -90,11 +90,29 @@ individuals.
 In the present work, we present a novel framework for analysis of tractometry
 that simultaneously selects the features for analysis, and fits a model to these
 features. Rather than a comparative approach, this framework takes a predictive
-approach to analysis \cite{Yarkoni2017-bi}. Using this approach, we need to
-first deal with the large and asymmetric dimensionality of the data: tractometry
-data usually has many more features (i.e., number of measurements per
-individual) than samples (number of subjects). This regime is the target of
-several statistical learning techniques, and is often solved by various forms of
-regularization. For example, Tikhonov regularization shrinks the solution such that
-each feature. The Lasso. One of the enabling
+approach to analysis \cite{Yarkoni2017-bi}. We use a linear modeling approach,
+which aims to predict phenotypical variance in a group of subjects, based on a
+linear combination of the features estimated with tractometry. Using this
+approach, we need to first deal with the large and asymmetric dimensionality of
+the data: tractometry data usually has many more features (i.e., number of
+measurements per individual) than samples (number of subjects), which makes
+inferences from the data about phenotypical differences between individuals
+ill-posed. This regime is the target of several statistical learning techniques,
+and is often solved by various forms of regularization. For example, Tikhonov
+regularization shrinks the solution such that the sum of squared contributions
+from the individual features are minimized \cite{Hoerl2000-ij}. Another solution
+to the problem is provided by the Lasso algorithm, which instead minimizes the
+sum of the absolute values of contributions of each feature
+\cite{Tibshirani1996-qs}. This tends to shrink to zero the contributions of many
+of the features, providing results that are both accurate and interpretable.
+When additional structure is available in the organization of the data,
+regularization algorithms can take advantage of this structure. For example, if
+the features lend themselves to a natural division into different groups, the
+group lasso (GL) can be used to select groups of features, rather than
+individual features \cite{Yuan2006-ky}. The Sparse Group Lasso (SGL) elaborates
+on this idea by providing control both of group sparsity, as well as overall
+sparsity of the solutions \cite{simon2013sgl}. Because the features measured
+with tractomery lend themselves to grouping based on the tracts from which each
+measurement is taken, GL and SGL provide a useful tool linear model fitting in
+problems of this form.
 
