@@ -1,0 +1,27 @@
+name: afq-insight
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python>=3.6
+  - numpy
+  - scipy
+  - matplotlib
+  - bokeh
+  - nb_conda
+  - numba
+  - pytest
+  - pytest-cov
+  - flake8
+  - scikit-learn
+  - ipywidgets
+  - tqdm
+  - ipython
+  - jupyterlab
+  - hyperopt
+  - pip
+  - pip:
+    - pybeeswarm
+    - git+git://github.com/openopt/copt.git
+    - "--editable=git+git://github.com/richford/AFQ-Insight.git#egg=afqinsight"

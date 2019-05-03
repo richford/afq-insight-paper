@@ -6,7 +6,7 @@ Target journal [PLoS Computational Biology](https://journals.plos.org/ploscompbi
 
 ## Existing methods
 - https://onlinelibrary.wiley.com/doi/full/10.1002/hbm.23082 (mancova)
-- sarica et al 2017
+- Sarica et al 2017
 - https://www.nature.com/articles/ncomms5932 (for mass univariate approach)
 
 # Results
@@ -17,7 +17,7 @@ Setting up the problem and solving it
 
 ## Classification (Sarica)
 (Figure showing classification results) <= Done
-(Figure showing sparsity pattern) <= Done
+(Figure showing sparsity pattern) Plot streamlines using DIPY
 
 Link to an AFQ-Browser instance.
 
@@ -26,8 +26,15 @@ Link to an AFQ-Browser instance.
 
 ## Regression (Age regression on Yeatman 2014 dataset)
 (Figure showing regression results) <= Done
-(Figure showing sparsity pattern) <= Done
+(Figure showing sparsity pattern) Plot streamlines using DIPY
 (Figure summarizing the pattern as bars/boxplots per tract)
+
+Discuss target transformation function and rationale
+
+Discuss hyperoptimization choices
+- Discuss sensitivity to choice
+- Recommend hyperopt with rmse for consistency with sgl loss func
+- Also anecdotally seems to be a compromise between med AE and r2
 
 Link to an AFQ-Browser instance.
 
