@@ -1,5 +1,6 @@
 import argparse
 import hashlib
+import json
 import os.path as op
 import requests
 
@@ -65,9 +66,29 @@ def main():
         ],
     }
 
+    for key in urls_files.keys():
+        urls_files[key].append(
+            {
+                'url': 'https://github.com/yeatmanlab/Sarica_2017/raw/gh-pages/data/streamlines.json',
+                'file': './data/raw/streamlines.json'
+            }
+        )
+
     for dset_key in datasets:
         for dict_ in urls_files[dset_key]:
             download_url_to_file(dict_['url'], dict_['file'])
+
+    with open('./data/raw/streamlines.json') as fp:
+        stream_data = json.load(fp)
+
+    core_fibers = {}
+    for key in stream_data.keys():
+        core_fibers[key] = {
+            'coreFiber': stream_data[key]['coreFiber']
+        }
+
+    with open('./data/raw/core_streamlines.json', 'w') as fp:
+        json.dump(core_fibers, fp)
 
 
 if __name__ == '__main__':
