@@ -1,2 +1,10 @@
--e git://github.com/richford/AFQ-Insight.git
+jupyterlab
+ipywidgets
+numpy
 matplotlib
+palettable
+bokeh
+dipy
+fury
+deepdish
+git+git://github.com/richford/AFQ-Insight.git
