@@ -8,9 +8,9 @@ WORKDIR /tmp
 RUN [ "conda", "env", "create" ]
 
 ADD . /afq-insight-paper
-WORKDIR /afq-insight-paper/notebooks
+WORKDIR /afq-insight-paper
 
 # Set the ENTRYPOINT to use bash
 ENTRYPOINT [ "/bin/bash", "-c" ]
-CMD [ "source activate afq-insight-paper && jupyter lab --ip 0.0.0.0 --port 8899 --no-browser --allow-root" ]
+CMD [ "source activate afq-insight-paper && jupyter lab --ip 0.0.0.0 --port 8899 --no-browser --allow-root notebooks" ]
 
