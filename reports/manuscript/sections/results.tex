@@ -1,16 +1,18 @@
 \section*{Results and discussion}
 
 \subsection*{Regression for age prediction}
+
 The WH dataset used for continuous regression contains data from 76 healthy
 subjects, ranging between 6 years and 50 years of age
 \cite{yeatman2014lifespan}. SGL fit to tractometry-extracted features in these
 subjects accurately predicts the age of the subjects. The model reaches a mean
 absolute error of 3.6 years (Figure \ref{fig:regress-results}), which is lower
 than the results of a recent study that predicted age in a large sample, based
-on TBSS-extracted diffusion features \cite{Richard2018-ux}. The model weights
-in this case are distributed over many different tracts and dMRI tissue
-properties (Figure \ref{}) This demonstrates that SGL is not coerced to produce overly sparse
-results when a more accurate model requires a dense selection of features.
+on TBSS-extracted diffusion features \cite{Richard2018-ux}. The model weights in
+this case are distributed over many different tracts and dMRI tissue properties
+(Figure \ref{fig:regress-beta}) This demonstrates that SGL is not coerced to
+produce overly sparse results when a more accurate model requires a dense
+selection of features.
 
 
 \begin{figure}[!h]
