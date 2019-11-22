@@ -1,13 +1,13 @@
 %%
-%% 
 %%
 %%
-%% This `plos2015.bst' file is intended for use in PLOS submissions to 
-%% correctly compile the bibliography according to the PLOS manuscript 
+%%
+%% This `plos2015.bst' file is intended for use in PLOS submissions to
+%% correctly compile the bibliography according to the PLOS manuscript
 %% guidelines updated January 2015.
-%% 
 %%
-%% This is derived from the `vancouver.bst' bibliographic style file (for 
+%%
+%% This is derived from the `vancouver.bst' bibliographic style file (for
 %% LaTeX/BibTeX), generated with the docstrip utility and modified manually
 %% to meet the
 %% ``Uniform Requirements for Manuscripts Submitted to Biomedical Journals''
@@ -31,7 +31,7 @@
 %% version 2005/12/01 or later.
 %%
 %% This work has the LPPL maintenance status `maintained'.
-%% 
+%%
 %% The Current Maintainer of this work is Folkert van der Beek.
 %%
 %% Complaints, suggestions and comments may be sent to
@@ -100,18 +100,21 @@ ENTRY
   { label }
 %% Declaration of integer variables
 INTEGERS { output.state before.all mid.sentence after.sentence after.block }
-STRINGS { urlintro doiprefix } % urlbst...
+STRINGS { urlintro eprinturl eprintprefix doiprefix doiurl } % urlbst...
 INTEGERS { hrefform addeprints adddoiresolver }
 % Following constants may be adjusted by hand, if desired
 FUNCTION {init.config.constants}
 {
   "Available from: " 'urlintro := % prefix before URL
+  "http://arxiv.org/abs/" 'eprinturl := % prefix to make URL from eprint ref
+  "arXiv:" 'eprintprefix := % text prefix printed before eprint ref
+  "http://dx.doi.org/" 'doiurl := % prefix to make URL from DOI
   "doi:" 'doiprefix := % text prefix printed before DOI ref
   #0 'addeprints := % 0=no eprints; 1=include eprints
   #0 'adddoiresolver := % 0=no DOI resolver; 1=include it
   #0 'hrefform := % 0=no crossrefs; 1=hypertex xrefs; 2=hyperref refs
 }
-INTEGERS { 
+INTEGERS {
   bracket.state
   outside.brackets
   open.brackets
@@ -182,14 +185,14 @@ FUNCTION {output.nonnull}
       bracket.state open.brackets =
         { " [" * }
         { ", " * } % bracket.state will be within.brackets
-      if$ 
-      s * 
+      if$
+      s *
       close.brackets 'bracket.state :=
     }
   if$
 }
 
-% Call this function just before adding something which should be presented in 
+% Call this function just before adding something which should be presented in
 % brackets.  bracket.state is handled specially within output.nonnull.
 FUNCTION {inbrackets}
 { bracket.state close.brackets =
@@ -226,7 +229,7 @@ FUNCTION {output.check}
 }
 
 FUNCTION {fin.entry}
-{ 
+{
   bracket.state close.brackets = % urlbst
     { "]" * }
     'skip$
@@ -440,7 +443,7 @@ FUNCTION {remove.dots}
       * % concatenates the last 2 literals, i.e. every character, even a dot, following a "\" will be printed
     }
     { duplicate$ "." = % pushes 1 if the last character is ".", otherwise 0
-      'pop$ %  pushes the pop$ function 
+      'pop$ %  pushes the pop$ function
       { * } % concatenates the last 2 literals
     if$ % pops the last character if it is a dot, otherwise concatenates it with the string on top of the stack
     }
@@ -462,7 +465,7 @@ FUNCTION{string.length}
 STRINGS {replace find text}
 INTEGERS {find_length}
 FUNCTION {find.replace}
-{ 
+{
   'replace :=
   'find :=
   'text :=
@@ -594,10 +597,10 @@ FUNCTION {bbl.in}
 { "in" }
 
 FUNCTION {bbl.pages}
-{ " p." }
+{ "p." }
 
 FUNCTION {bbl.page}
-{ " p." }
+{ "p." }
 
 FUNCTION {bbl.chapter}
 { "chap." }
@@ -823,7 +826,7 @@ FUNCTION {format.names.ed}
 }
 
 FUNCTION {format.authors}
-{ 
+{
   author "author" format.names
   %%"." " " "author" find.replace format.names
 }
@@ -923,7 +926,6 @@ FUNCTION {format.type}
   if$
 }
 
-
 FUNCTION {output.bibitem}
 { outside.brackets 'bracket.state := % urlbst
    newline$
@@ -968,7 +970,7 @@ FUNCTION {word.in}
 
 FUNCTION {format.journal.date}
 {
-  ""
+  month "month" bibinfo.check
   duplicate$ empty$
   year  "year"  bibinfo.check duplicate$ empty$
     {
@@ -998,7 +1000,7 @@ FUNCTION {format.journal.date}
 FUNCTION {format.date}
 {
   no.blank.or.punct
-  ";" 
+  ";"
   duplicate$ empty$
   year  "year"  bibinfo.check duplicate$ empty$
     { swap$ 'skip$
@@ -1362,14 +1364,14 @@ FUNCTION {make.href.null}
 }
 % make hypertex specials
 FUNCTION {make.href.hypertex}
-{ 
+{
   "\special {html:<a href=" quote$ *
   swap$ * quote$ * "> }" * swap$ *
   "\special {html:</a>}" *
 }
 % make hyperref specials
 FUNCTION {make.href.hyperref}
-{ 
+{
   "\href {" swap$ * "} {" * swap$ * "}" *
 }
 FUNCTION {make.href}
@@ -1395,20 +1397,17 @@ FUNCTION {format.url}
   if$
 }
 
-%FUNCTION {format.eprint}
-%{ eprint empty$
-%    { "" }
-%    { eprintprefix eprint * eprinturl eprint * make.href }
-%  if$
-%}
+FUNCTION {format.eprint}
+{ eprint empty$
+    { "" }
+    { eprintprefix eprint * eprinturl eprint * make.href }
+  if$
+}
 
 FUNCTION {format.doi}
 { doi empty$
     { "" }
-    {
-      new.block
-      "doi:{" doi * "}" *
-    }
+    { doiprefix doi * doiurl doi * make.href }
   if$
 }
 
@@ -1419,26 +1418,26 @@ FUNCTION {format.doi}
 % the URL and the lastchecked in brackets.
 FUNCTION {output.url}
 { url empty$
-    'skip$ 
-      { new.block 
+    'skip$
+    { new.block
       format.url output
-      format.lastchecked output 
-      }
+      format.lastchecked output
+    }
   if$
 }
 
-%FUNCTION {output.web.refs}
-%{
-%  new.block
-%  output.url
-%  addeprints eprint empty$ not and
-%    { format.eprint output.nonnull }
-%    'skip$
-%  if$
-%  adddoiresolver doi empty$ not and
-%    { format.doi output.nonnull }
-%    'skip$
-%  if$
+FUNCTION {output.web.refs}
+{
+  new.block
+  output.url
+  addeprints eprint empty$ not and
+    { format.eprint output.nonnull }
+    'skip$
+  if$
+  adddoiresolver doi empty$ not and
+    { format.doi output.nonnull }
+    'skip$
+  if$
 %  addeprints
 %    { eprint empty$
 %        'skip$
@@ -1447,9 +1446,7 @@ FUNCTION {output.url}
 %    }
 %    'skip$
 %  if$
-%}
-
-
+}
 
 % Webpage entry type.
 % Title and url fields required;
@@ -1477,7 +1474,7 @@ FUNCTION {webpage}
   format.title "title" output.check
   journal empty$
     {
-      format.type "type"
+      format.type "type" output.check
       publisher empty$
         'skip$
         { format.publisher.address output }
@@ -1505,7 +1502,7 @@ FUNCTION {webpage}
       remove.dots
       "journal" bibinfo.check
       "journal" output.check
-      format.type "type"
+      format.type "type" output.check
       format.journal.date "year" output.check
       lastchecked empty$
         'skip$
@@ -1533,22 +1530,22 @@ FUNCTION {webpage}
 FUNCTION {misc}
 { output.bibitem
   format.authors "author" output.check
-%  format.editors "author and editor" output.check
+  format.editors "author and editor" output.check
   format.title "title" output.check
   type missing$
     { skip$ }
-    { format.type "type" }
+    { format.type "type" output.check }
     %%{ inbrackets type output }
   if$
   new.block
-%  format.publisher.address output
+  format.publisher.address output
   format.date "year" output.check
   new.block
-%  format.note output
+  format.note output
   new.block
   howpublished new.block.checka
   howpublished "howpublished" bibinfo.check output
-  output.url % urlbst
+  output.web.refs  % urlbst
   fin.entry
   empty.misc.check
 }
@@ -1572,6 +1569,10 @@ FUNCTION {article}
   if$
   new.block
   format.title "title" output.check
+  type missing$
+    { skip$ }
+    { format.type "type" output.check }
+  if$
   new.block
   journal
   remove.dots
@@ -1581,10 +1582,8 @@ FUNCTION {article}
   add.semicolon
   format.vol.num.pages output
   new.block
-  format.doi output
-  new.block
-%  format.note output
-%  output.url  % urlbst
+  format.note output
+  output.web.refs  % urlbst
   fin.entry
 }
 
@@ -1595,7 +1594,7 @@ FUNCTION {book}
         { format.organizations "organization" output.check }
         { format.editors "author and editor" output.check }
       if$
-    } 
+    }
     { format.authors output.nonnull
       "author and editor" editor either.or.check
     }
@@ -1616,8 +1615,8 @@ FUNCTION {book}
   format.publisher.address output
   format.date "year" output.check
   new.block
-%  format.note output
-  output.url  % urlbst
+  format.note output
+  output.web.refs  % urlbst
   fin.entry
 }
 
@@ -1635,11 +1634,11 @@ FUNCTION {dictionary}
   format.date "year" output.check
   format.btitle "title" output.check
   add.semicolon
-%  add.blank
+  add.blank
   format.pages "pages" output.check
   new.block
-%  format.note output
-  output.url  % urlbst
+  format.note output
+  output.web.refs  % urlbst
   fin.entry
 }
 
@@ -1657,11 +1656,11 @@ FUNCTION {inbook}
   format.publisher.address output
   format.date "year" output.check
   date.block
-%  add.blank
+  add.blank
   format.pages "pages" output.check
   new.block
-%  format.note output
-  output.url  % urlbst
+  format.note output
+  output.web.refs  % urlbst
   fin.entry
 }
 
@@ -1679,11 +1678,11 @@ FUNCTION {incollection}
   format.publisher.address output
   format.date "year" output.check
   date.block
-%  add.blank
+  add.blank
   format.pages "pages" output.check
   new.block
-%  format.note output
-  output.url  % urlbst
+  format.note output
+  output.web.refs  % urlbst
   fin.entry
 }
 
@@ -1705,11 +1704,11 @@ FUNCTION {inproceedings}
   if$
   format.date "year" output.check
   date.block
-%  add.blank
+  add.blank
   format.pages "pages" output.check
   new.block
-%  format.note output
-  output.url  % urlbst
+  format.note output
+  output.web.refs  % urlbst
   fin.entry
 }
 
@@ -1725,14 +1724,14 @@ FUNCTION {phdthesis}
   new.block
   format.btitle
   "title" output.check
-  format.type "type" bibinfo.check output
+  format.type "type" output.check
   new.block
   school "school" bibinfo.warn output
   address "address" bibinfo.check output
   format.date "year" output.check
   new.block
-%  format.note output
-  output.url  % urlbst
+  format.note output
+  output.web.refs  % urlbst
   fin.entry
 }
 
@@ -1773,8 +1772,8 @@ FUNCTION {proceedings}
   if$
       format.date "year" output.check
   new.block
-%  format.note output
-  output.url  % urlbst
+  format.note output
+  output.web.refs  % urlbst
   fin.entry
 }
 
@@ -1789,8 +1788,8 @@ FUNCTION {techreport}
   format.date "year" output.check
   format.tr.number output.nonnull
   new.block
-%  format.note output
-  output.url  % urlbst
+  format.note output
+  output.web.refs  % urlbst
   fin.entry
 }
 
@@ -1800,13 +1799,13 @@ FUNCTION {map}
   new.block
   format.title
   "title" output.check
-  format.type "type"
+  format.type "type" output.check
   new.block
   format.publisher.address output
   format.date "year" output.check
   new.block
-%  format.note output
-  output.url  % urlbst
+  format.note output
+  output.web.refs  % urlbst
   fin.entry
 }
 
@@ -1823,8 +1822,8 @@ FUNCTION {patent}
   format.tr.number output.nonnull
   format.date "year" output.check
   new.block
-%  format.note output
-  output.url  % urlbst
+  format.note output
+  output.web.refs  % urlbst
   fin.entry
 }
 
@@ -1835,8 +1834,8 @@ FUNCTION {unpublished}
   format.title "title" output.check
   format.date output
   new.block
-%  format.note "note" output.check
-  output.url  % urlbst
+  format.note "note" output.check
+  output.web.refs  % urlbst
   fin.entry
 }
 

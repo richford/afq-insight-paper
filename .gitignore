@@ -108,3 +108,6 @@ bin/
 /src/external/
 
 .DS_Store
+
+# Ignore the generate paper PDF:
+/reports/manuscript/paper.pdf
