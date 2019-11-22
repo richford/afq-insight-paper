@@ -4,15 +4,24 @@
 
 The WH dataset used for continuous regression contains data from 76 healthy
 subjects, ranging between 6 years and 50 years of age
-\cite{yeatman2014lifespan}. SGL fit to tractometry-extracted features in these
-subjects accurately predicts the age of the subjects. The model reaches a mean
-absolute error of 3.6 years (Figure \ref{fig:regress-results}), which is lower
-than the results of a recent study that predicted age in a large sample, based
-on TBSS-extracted diffusion features \cite{Richard2018-ux}. The model weights in
-this case are distributed over many different tracts and dMRI tissue properties
-(Figure \ref{fig:regress-beta}) This demonstrates that SGL is not coerced to
-produce overly sparse results when a more accurate model requires a dense
-selection of features.
+\cite{yeatman2014lifespan}. SGL was fit to tractometry-extracted features: FA
+and MD in 20 major brain tracts, with each tract divided into 100 nodes. To
+evaluate the fit of the model, we used a nested cross-validation procedure. In
+this procedure, batches of subjects are held out. For each batch (or fold), the
+model is fully fit without this data. Then, once the parameters are fixed, the
+model is inverted to predict the ages of held out subjects based on the linear
+coeffiecients and the static non-linearity. data is held out, and a model age
+was predicted using a model that was fit without that subject. This scheme
+automatically finds the right level of regularization and fits the coefficients
+to the ill-posed linear model, while guarding against overfitting. SGL
+accurately predicts the age of the subjects in this procedure, with procedure,
+with a mean absolute error of 3.6 years (Figure \ref{fig:regress-results}),
+which is lower than the results of a recent study that predicted age in a large
+sample, based on TBSS-extracted diffusion features \cite{Richard2018-ux}. The
+model weights in this case are distributed over many different tracts and dMRI
+tissue properties (Figure \ref{fig:regress-beta}) This demonstrates that SGL is
+not coerced to produce overly sparse results when a more accurate model requires
+a dense selection of features.
 
 
 \begin{figure}[!h]

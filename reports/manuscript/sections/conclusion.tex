@@ -46,6 +46,24 @@ tractometry data from raw dMRI, as well as AFQ-Browser, which visualizes
 tractometry data and facilitates sharing of the results of dMRI studies
 \cite{yeatman2018browser}.
 
+SGL has many other potential applications in neuroscience, because of the
+hierarchical and grouped nature of many of the data -- that are collected in
+multiple sample points within anatomically-defined areas. For example, this
+method may be useful to understand the relationship between fMRI recordings and
+behavior, where activity in each voxel may co-vary with voxels within the same
+anatomical region and form features and groups of features. Similarly,
+large-scale multi-electrode recordings of neural activity in awake behaving
+animals are becoming increasingly feasible \cite{steinmetz2018distributed,
+Jun2017-gv} and these recordings can form features (neurons) and groups (neurons
+within an anatomical region). More ambitiously perhaps, this approach may be
+used to understand the role of correlations in so-called resting-state fMRI
+time-series and behavior, where pairwise correlations between voxels in
+different anatomical regions are features in the matrix and features may be
+grouped by pairs of anatomical regions. Given the large number of voxels in the
+surface of the gray matter, and given that correlations increase the number of
+features by a factor of $n^2$ this would be a challenging problem to solve using
+SGL.
+
 \begin{itemize}
   \item Feature selection + prediction
   \item Part of the AFQ ecosystem
