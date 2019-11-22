@@ -1,5 +1,21 @@
 \section*{Materials and methods}
 
+TODO:
+
+\begin{itemize}
+  \item Computational implementation
+    \begin{itemize}
+      \item Insert Figure for pipeline
+      \item Proximal gradient methods
+      \item Meta-parameter optimization
+      \item Cross-validation scheme
+        \begin{itemize}
+          \item Insert Figure for cross-validation scheme
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+
 \subsection*{Data}
 
 Two different previously-published datasets were used here:
@@ -85,46 +101,58 @@ within each cross-validation set's training or testing data to prevent leakage
 of information between the testing and training sets\cite{kaufman2012leakage}.
 
 After scaling and imputation, the tractometry data and target phenotypical data
-can be organized in a linear model, $y = \mathbf{X} \cdot \beta$, where $y$ is
-the phenotype -- categorical, such as a clinical diagnosis, or numerical, such
-as the subject's age. The tractometry data is represented in the feature matrix
-$\mathbf{X}$, with rows corresponding to different subjects, and columns
-corresponding to diffusion measures at different nodes within each tract. The
-relationship between tractometric features and the phenotypic target is
-characterized by the coefficients in $\beta$. The feature matrix $\mathbf{X}$
-has dimensions $N_s \times (N_t \cdot N_n \cdot N_m)$, where $N_s$ is the number
-of subjects, $N_t$ is the number of white matter tracts, $N_n$ is the number of
-nodes in each tract, and $N_m$ is the number of diffusion metrics calculated at
-each node. Typically, $N_t = 20$, $N_n = 100$, and $2 \le N_m \le 8$, resulting
-in $\mathcal{O}(10^4)$ features. Conversely, most dMRI studies have
-$\mathcal{O}(10^2)$ participants, yielding a feature matrix that is wide and
-short. The high dimensionality of this data requires regularization to avoid
-overfitting and generate interpretable results.
+can be organized in a linear model:
 
-In addition to regularizing the coefficients in $\beta$, we also wish to
-capitalize on our knowledge of the group structure of the tract profile features
-in $\mathbf{X}$. The tract-metric combinations form a natural grouping. For
-example, we expect that MD features within the left arcuate fasciculus will be
-correlated. Likewise for FA values within the right corticospinal tract (CST)
-and so on. This group structure is represented in Fig~\ref{fig:group-structure},
-which depicts the linear model $y = \mathbf{X} \cdot \beta$. Thus, we seek a
-regularization approach that will fit a linear model with anatomically-grouped
-covariates, where we expect to observe sparse coefficients at both the group
-level and the within-group level. The sparse group lasso (SGL) is a penalized
-regression technique that satisfies exactly these
+\begin{equation}
+y = \mathbf{X} \cdot \beta,
+\label{eq:lm}
+\end{equation}
+
+where $y$ is the phenotype -- categorical, such as a clinical diagnosis, or
+continuous numerical, such as the subject's age. The tractometry data is
+represented in the feature matrix $\mathbf{X}$, with rows corresponding to
+different subjects, and columns corresponding to diffusion measures at different
+nodes within each tract. The relationship between tractometric features and the
+phenotypic target is characterized by the coefficients in $\beta$. In general,
+the feature matrix $\mathbf{X}$ has dimensions $S \times (T \cdot N \cdot M)$,
+where $S$ is the number of subjects, $T$ is the number of white matter tracts,
+$N$ is the number of nodes in each tract, and $M$ is the number of diffusion
+metrics calculated at each node. Typically, $T = 20$, $N = 100$, and $2 \le M
+\le 8$, resulting in $\sim 4,000 - 16,000$  features. Conversely, many dMRI
+studies have between a few dozen and a few hundred subjects, yielding a feature
+matrix that is wide and short. Even in cases where more than a thousand subjects
+are measured (e.g., in the Human Connectome Project, where 1,200 subjects were
+measured \cite{VanEssen2012}), the problem is ill-posed: The high dimensionality
+of this data requires regularization to avoid overfitting and generate
+interpretable results.
+
+Here, we propose that in addition to regularizing the coefficients in $\beta$,
+we can also capitalize on our knowledge of the group structure of the tract
+profile features in $\mathbf{X}$. The tract-metric combinations form a natural
+grouping. For example, we expect that MD features within the left arcuate
+fasciculus to co-vary across individuals. Likewise for FA values within the
+right corticospinal tract (CST) and so on. This group structure is represented
+in Fig~\ref{fig:group-structure}, which depicts the linear model $y = \mathbf{X}
+\cdot \beta$. Thus, we seek a regularization approach that will fit a linear
+model with anatomically-grouped covariates, where we expect to observe both
+groupwise sparsity: the number of groups (tract/metric combinations) with at
+least one non-zero coefficients as well as within-group sparsity: the number of
+non-zero coefficients within each non-zero groups. The sparse group lasso (SGL)
+is a penalized regression technique that satisfies exactly these
 criteria\cite{simon2013sparse}. It solves for a coefficient vector
 $\widehat{\beta}$ that satisfies
 \begin{equation}
     \widehat{\beta} = \min_\beta \frac{1}{2}
-    \norm*{y - \displaystyle \sum_{\ell = 1}^{m} \mathbf{X}^{(\ell)} \cdot \beta^{(\ell)}}_2^2
-    + \lambda_1 \displaystyle \sum_{\ell = 1}^{m} \sqrt{p_\ell} \norm*{\beta^{(\ell)}}_2
+    \norm*{y - \displaystyle \sum_{\ell = 1}^{G} \mathbf{X}^{(\ell)} \cdot \beta^{(\ell)}}_2^2
+    + \lambda_1 \displaystyle \sum_{\ell = 1}^{G} \sqrt{p_\ell} \norm*{\beta^{(\ell)}}_2
     + \lambda_2 \norm*{\beta}_1,
     \label{eq:sgl}
 \end{equation}
 
-where $m$ is the number of groups, $\mathbf{X}^{(\ell)}$ is the submatrix of
+where $G$ is the number of groups $\mathbf{X}^{(\ell)}$ is the submatrix of
 $\mathbf{X}$ corresponding to group $\ell$, $\beta^{(\ell)}$ is the coefficient
-vector for group $\ell$ and $p_\ell$ is the length of $\beta^{(\ell)}$. The
+vector for group $\ell$ and $p_\ell$ is the length of $\beta^{(\ell)}$. In the
+tractomtetry setting, $G = T \cdot M$ and $\forall \ell: p_\ell = 100$. The
 first term is the mean square error loss, $L_{mse}$, as in the standard linear
 regression framework. The second and third terms encourage groupwise sparsity
 and overall sparsity, respectively. If $\lambda_1 = 0$ and $\lambda_2 = 1$, the
@@ -132,11 +160,46 @@ SGL reduces to the traditional lasso\cite{tibshirani1996regression}. Conversely,
 if $\lambda_1 = 1$ and $\lambda_2 = 0$, the SGL reduces to the group
 lasso\cite{yuan2006model}.
 
-When the phenotypical target variable are categorical, as in the case of
-predicting a clinical diagnosis, the SGL is readily adapted to logistic
-regression, where the probability of a target variable belonging to an arbitrary
-defined ``true'' class is the logistic function of the result of the linear
-model,
+\subsection*{Implementation, cross-validation and metaparameter optimization}
+
+For given values of $\lambda_1$ and $\lambda_2$, the cost function in equation
+\ref{eq:sgl} can be optimized using proximal gradient descent methods
+\cite{parikh2014proximal} here implemented as a custom proximal operator that is
+then optimized using the COPT library \cite{fabian_pedregosa_2018_1473584}. To
+find the values of the metaparameters $\lambda_1$ and $\lambda_2$, we used a
+hyperoptimization procedure, implemented using the hyperopt software
+\cite{Bergstra_2015}. XXX We need more details here.
+
+To objectively evaluate the model and guard against over-fitting, we used
+cross-validation. XXX More here.
+
+\subsubsection*{Incorporating transformations on $y$}
+
+Often, the target variable $y$ is not in the domain in which the linear model
+can be best fit to it. Equation \ref{eq:lm} can be slightly modified as:
+
+\begin{equation}
+y = f^-1(\mathbf{X} \cdot \beta),
+\label{eq:lm}
+\end{equation}
+
+where the transformation function $f^-1$ characterizes the transform applied to
+the data before fitting the linear coefficients. For example, an often-used
+transform is the logarithmic transform:
+
+\begin{equation}
+f(y) = log_n(y)
+\label{eq:log_nonlinearity}
+\end{equation}
+
+In this case, the model is parametrized by one additional fit parameter, $n$.
+
+\subsubsection*{Categorical $y$}
+When the phenotypical target variable is categorical, as in the case of
+explaining or predicting the presence of a clinical diagnosis, the SGL is
+readily adapted to logistic regression, where the probability of a target
+variable belonging to an arbitrary defined ``true'' class is the logistic
+function of the result of the linear model,
 
 \begin{equation}
     p(y = 1) = \frac{1}{1 + \exp(\mathbf{X}\cdot \beta)},
@@ -164,28 +227,10 @@ negative log likelihood of the SGL classifier giving the ``true'' label:
     fascicle (IFOF), the middle (green) group contains $k$ features from the
     corpus callosum, and the right (blue) group contains $k$ features from the
     uncinate. The coefficients in $\beta$ follow the same natural grouping.
-    Fascicle images taken from Ref~\cite{yeatman2012tract}.}
+    Fascicle image reproduced with permission from Ref~\cite{yeatman2012tract}
+    Figure 1.}
     \label{fig:group-structure}
 \end{figure}
-
-
-\subsection*{Metaparameter optimization}
-
-To select the values of the metaparameters $\lambda$
-
-\begin{itemize}
-  \item Computational implementation
-    \begin{itemize}
-      \item Insert Figure for pipeline
-      \item Proximal gradient methods
-      \item Meta-parameter optimization
-      \item Cross-validation scheme
-        \begin{itemize}
-          \item Insert Figure for cross-validation scheme
-        \end{itemize}
-    \end{itemize}
-\end{itemize}
-
 
 \subsection*{Software implementation}
 
