@@ -23,30 +23,29 @@ decrease both because of demyelination, but also because of decreased density,
 or because of partial volume with other tissue types or between crossing fiber
 populations \cite{Beaulieu1996-fn, Beaulieu2002-tl}. Even so, these descriptions
 have proven useful in characterizing individual differences or differences
-between populations \cite{}.
+between populations \ariel{citation needed}.
 
-To relate the diffusion in each voxel to the underlying macro-structure of
-long-range connections between different brain regions, methods for
-computational tract-tracing from diffusion MRI, or tractography combine the
-estimates of fiber orientations in each voxel to form streamlines that traverse
-the volume of the white matter \cite{Conturo1999-je, Mori2002-qi}. These methods
-have been under increased scrutiny and several lines of investigation have
-raised critiques of their validity \cite{Maier-Hein2017-vb, Thomas2014-ki}. On
-the other hand, there have been efforts to shore up the inferences made with
-these methods \cite{Pestilli2014NatMeth, Takemura2016-sh, Smith2013-nc,
-Smith2015-cx, Smith2015-zt, Rheault2018-wk}. Importantly, though discovering
-novel fiber bundles requires extraordinary evidence, and delineating the exact
-location of the termination of the streamlines in the gray matter, there is
-little dispute that tractography can accurately delineate major white matter
-bundles that are known to exist within the core of the white matter
-\ariel{citation needed}.
+To relate the diffusion in each voxel to the macro-structure of long-range
+connections between different brain regions, methods for computational
+tract-tracing from diffusion MRI, or tractography, combine the estimates of
+fiber orientations in each voxel to form streamlines that traverse the volume of
+the white matter \cite{Conturo1999-je, Mori2002-qi}. These methods have been
+under increased scrutiny and several lines of investigation have raised
+critiques of their validity \cite{Maier-Hein2017-vb, Thomas2014-ki}. On the
+other hand, there have been efforts to shore up the inferences made with these
+methods \cite{Pestilli2014NatMeth, Takemura2016-sh, Smith2013-nc, Smith2015-cx,
+Smith2015-zt, Rheault2018-wk}. Importantly, though discovering novel fiber
+bundles requires extraordinary evidence, and delineating the exact location of
+the termination of the streamlines in the gray matter, there is little dispute
+that tractography can accurately delineate major white matter bundles that are
+known to exist within the core of the white matter \cite{Maier-Hein2017-vb}.
 
 Using this fact, one of the most powerful methods currently available to put
 macro- and micro-structure together is \emph{tractometry} (also known as
 tract-based morphometry): assessment of the physical properties of the white
 matter along specific tracts \cite{Bells2011-cf}. Though there are several
 different available implementations of this overall idea, the principles are
-similar \cite{yeatman2012, Yendiki2011-ay, Wassermann2016-iv, ODonnell2009-uu}:
+similar \cite{yeatman2012tract, Yendiki2011-ay, Wassermann2016-iv, ODonnell2009-uu}:
 tractometry begins by delineating the parts of the white matter that belong to
 different major tracts and axonal fiber bundles, such as the corticospinal tract
 or arcuate fasciculus, and samples the biophysical properties (such as
@@ -55,7 +54,7 @@ some cases, tissue properties along the length of each bundle are summarized by
 taking the mean along each bundle, but there is a large body of evidence showing
 that there is systematic variability within each bundle. This justifies
 retaining the individual samples along the length of each fiber
-\cite{yeatman2012, colby2012, ODonnell2009-uu}. However, while this retains
+\cite{yeatman2012tract, colby2012, ODonnell2009-uu}. However, while this retains
 important information about each individual's white matter, it also presents
 statistical challenges due to the dimensionality of the data. Based on
 tractometry, researchers may choose to compare different individuals to each
@@ -95,7 +94,7 @@ matched controls \cite{sarica2017corticospinal}
 In the present work, we present a novel framework for analysis of tractometry
 that simultaneously selects the features for analysis, and fits a model to these
 features. Rather than a comparative approach, this framework takes a predictive
-approach to analysis \cite{Yarkoni2017-bi}. We use a linear modeling approach,
+approach to inference \cite{Breiman2001-uz}. We use a linear modeling approach,
 which aims to predict phenotypical variance in a group of subjects, based on a
 linear combination of the features estimated with tractometry. Using this
 approach, we need to first deal with the large and asymmetric dimensionality of
@@ -119,5 +118,15 @@ on this idea by providing control both of group sparsity, as well as overall
 sparsity of the solutions \cite{simon2013sgl}. Because the features measured
 with tractomery lend themselves to grouping based on the tracts from which each
 measurement is taken, GL and SGL provide a useful tool linear model fitting in
-problems of this form.
-
+problems of this form. Using linear regression as the basis for analysis is
+useful for both regression tasks, in which a continuous measure (e.g., age) is
+modeled, as well as for classification tasks, where a discrete property is
+modeled (e.g., ). Moreover, use of SGL in particular helps derive informative
+properties of the human white matter, both in cases where the underlying causes
+of variance are sparsely concentrated (e.g., in one particular white matter
+tract) and in cases where biological substrates of differences between
+individuals are more widespread. This is because SGL is controlled by
+meta-parameters that set the degree to  which and that can be set empirically,
+based on the data, in a process of nested cross-validation. We demonstrate these
+properties of the algorithm in data from previously published studies
+\cite{sarica2017corticospinal, yeatman2014lifespan}.
