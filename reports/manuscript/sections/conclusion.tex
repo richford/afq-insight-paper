@@ -2,49 +2,48 @@
 
 We present here a novel method for analysis of dMRI tractometry data. This
 method relies on the Sparse Group Lasso \cite{simon2013sparse} to provide both
-acurate prediction of the phenotypic properties of individual subjects based on
+accurate prediction of the phenotypic properties of individual subjects based on
 their dMRI data, but also provides interpretable results by identifying the
 features that are important across subjects to make these predictions. The
 method is broadly applicable: it performs well in predicting both continuous
 variables, such as biological age, as well as discrete variable, such as whether
 a person is a patient or a healthy control. In both of these cases, SGL
-out-performs previous algorithms that have been developed for these tasks. In
-addition, the nested cross-validation approach that we have developed tunes the
-degree of sparseness required by the algorithm, such that both very local
-phenomena, as well as widely distributed phenomena are accurately captured.
+out-performs previous algorithms that have been developed for these tasks
+\cite{sarica2017corticospinal, Richard2018-ux}. The nested cross-validation
+approach used to fit the model and make both predictioons and inferences from it
+guards against overfitting and tunes the degree of sparseness required by the
+algorithm, such that both phenomena that are locally focused in a particular
+anatomical location and a particular property of diffusion (e.g., FA in the
+CST), as well as widely distributed phenomena can be accurately captured.
 
 Specifically, we demonstrated that the algorithm correctly detects the fact that
- ALS, which is a disease of lower motor neurons, is localized to the
- cortico-spinal tract. This recapitulates the results of previous analysis of
- these same data, using a targetted ROI-based approach. In contrast, in analysis
- of biological age, the coefficients identified by the algorithm are very widely
- distributed.
+ALS, which is a disease of lower motor neurons, is localized to the
+cortico-spinal tract. This recapitulates the results of previous analysis of
+these same data, using a targetted ROI-based approach
+\cite{sarica2017corticospinal}. In contrast, in analysis of biological age, the
+coefficients identified by the algorithm are very widely distributed in many
+parts of the white matter, mirroring previous results with this dataset that
+show a large and continuous distribution of life-span changes in white matter
+properties \cite{yeatman2014lifespan}.
 
-Taken together, these results demonstrate the promise of a group regularized
+Taken together, these results demonstrate the promise of the group-regularized
 regression approach. Even at the scale of dozens of subjects, the results
-provided by SGL are both accurate and interpretable. We expect that additional
-data will improve the performance of these algorithms. Neuroscience has entered
-an era in which large consortium efforts are putting together large datasets
-that can be analyzed using this approach. Future work will apply this method to
-these datasets. For example, to the Human Connectome Project dataset
-\cite{VanEssen2012}
+provided by SGL are both accurate and interpretable. Thus, this multivariate
+analysis approach both (a) achieves high cross-validated accuracy for precision
+medicine applications of dMRI data and (b) identifies relevant features of brain
+anatomy that can further our neuroscientific understanding of clinical
+disorders.
 
-These results also motivate extensions of the method using more sophisticated
-cost functions. For example, the fused sparse group lasso (FSGL)
-\cite{zhou2012} extends SGL to enforce additional spatial structure: smoothness
-in the variation of diffusion metrics along the tracts. As brain measurements
-include additional structure (for example, bilateral symmetry), future work
-could also incorporate overlapping group membership for each entry in the tract
-profiles. For example, a measurement could come from the corpus callosum, but
-also from the right hemipshere. This would also require extending the cost
-function used here to incorporate these constraints.
-
-The method is packaged as open-source software called AFQ-Insight that is openly
-available. The sofware integrates within a broader automated fiber
-quantification software ecosystem: AFQ \cite{yeatman2012tract}, which extracts
-tractometry data from raw dMRI, as well as AFQ-Browser, which visualizes
-tractometry data and facilitates sharing of the results of dMRI studies
-\cite{yeatman2018browser}.
+Meanwhile, neuroscience has entered an era in which consortium efforts are
+putting together large datasets of high-quality dMRI data to address a variety
+of scientific questions \cite{jernigan2016ping, jernigan2018abcd,
+alexander2017open, Miller2016-hw, VanEssen2012}. The volume and complexity of
+these data pose a substantial challenge. Dimensionality reduction with
+tractometry, followed by analysis with the approach we present here promises to
+capitalize on the wealth of data and on the co-measurement of interesting and
+important phenotypical data about brain health and about the participants'
+cognitive abilities. We also expect the group-regularized approach to improve
+with larger datasets.
 
 SGL has many other potential applications in neuroscience, because of the
 hierarchical and grouped nature of many of the data -- that are collected in
@@ -64,8 +63,25 @@ surface of the gray matter, and given that correlations increase the number of
 features by a factor of $n^2$ this would be a challenging problem to solve using
 SGL.
 
-\begin{itemize}
-  \item Feature selection + prediction
-  \item Part of the AFQ ecosystem
-  \item Open source, reproducibility
-\end{itemize}
+The results we present here also motivate extensions of the method using more
+sophisticated cost functions. For example, the fused sparse group lasso (FSGL)
+\cite{zhou2012} extends SGL to enforce additional spatial structure: smoothness
+in the variation of diffusion metrics along the tracts. As brain measurements
+include additional structure (for example, bilateral symmetry), future work
+could also incorporate overlapping group membership for each entry in the tract
+profiles \ariel{citation needed}. For example, a measurement could come from the
+corpus callosum, but also from the right hemipshere. This would also require
+extending the cost function used here to incorporate these constraints.
+
+The method is packaged as open-source software called AFQ-Insight that is openly
+available, and this also where extensions of the method will be developed. The
+sofware integrates within a broader automated fiber quantification software
+ecosystem: AFQ \cite{yeatman2012tract}, which extracts tractometry data from raw
+and processed dMRI datasets, as well as AFQ-Browser, which visualizes
+tractometry data and facilitates sharing of the results of dMRI studies
+\cite{yeatman2018browser}. To facilitate reproducibility and ease use of the
+software, the results presented in this paper are also provided in
+\url{https://github.com/richford/afq-insight-paper} as a series of Jupyter
+notebooks
+\cite{kluyver2016jupyter}
+
