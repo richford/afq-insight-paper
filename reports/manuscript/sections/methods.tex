@@ -168,10 +168,10 @@ For given values of $\lambda_1$ and $\lambda_2$, the cost function in equation
 then optimized using the COPT library \ariel{citation needed here}. To
 find the values of the metaparameters $\lambda_1$ and $\lambda_2$, we used a
 hyperoptimization procedure, implemented using the hyperopt software
-\cite{Bergstra_2015}. XXX We need more details here.
+\cite{Bergstra_2015}. \ariel{We need more details here.}
 
 To objectively evaluate the model and guard against over-fitting, we used
-cross-validation. XXX More here.
+cross-validation. \ariel{More here}.
 
 \subsubsection*{Incorporating transformations on $y$}
 
@@ -237,9 +237,9 @@ negative log likelihood of the SGL classifier giving the ``true'' label:
 The full software implementation of the SGL approach presented here is available
 in a Python software package called AFQ-Insight, which is developed publicly in
 \url{https://github.com/richford/afq-insight}. The version of the code used to
-produce the results herein is also available in XXX Zenodo DOI. AFQ-Insight
-reads the target and feature data that has been processed by AFQ from comma
-separated value (CSV) files conforming to the AFQ-Browser data
+produce the results herein is also available in \ariel{Need to add Zenodo DOI}.
+AFQ-Insight reads the target and feature data that has been processed by AFQ
+from comma separated value (CSV) files conforming to the AFQ-Browser data
 format\cite{yeatman2018browser} and represents them internally as
 \lstinline{DataFrame} objects from the pandas Python
 library\cite{mckinney2010data}. The software provides different options for

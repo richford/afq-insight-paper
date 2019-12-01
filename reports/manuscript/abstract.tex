@@ -2,29 +2,27 @@
 
 The white matter contains long-range connections between different brain
 regions. Tractometry uses diffusion-weighted magnetic resonance imaging (dMRI)
-data to quantify tissue properties along the trajectories of these connections
-in the human brain in vivo\cite{yeatman2012tract}. In previous work, the results
-of tractometry were usually analyzed using mass univariate approaches: group
-comparisons or regression models computed separately for each point along every
-one of the tracts.  Alternatively, tissue properties such as fractional
-anisotropy (FA) and mean diffusivity (MD) were computed for a specific tract of
-interest based on an a priori hypothesis. In the present work, we developed a
-method based on the sparse group lasso\cite{simon2013sparse} that takes into
-account tissue properties measured in all of the tracts, and selects informative
-features by enforcing sparsity, both at the level of individual tracts and
-tissue properties, but also across the entire set of tracts and all of the
-measured tissue properties. The sparsity penalties for each of these constraints
-is identified using a nested cross-validation scheme. Using data from a previous
-study that measured dMRI in patients with amyotrophic lateral sclerosis (ALS)
-and matched controls\cite{sarica2017corticospinal}, we demonstrate that this
-method is accurate, exceeding the previous results, that were based on a priori
-feature selection, in classifying patients and controls, with ~84\% accuracy, an
-area under the receiver operating characteristic curve of 0.93, and an average
-precision of 0.95. Moreover, our method automatically identifies as important
-for this classification the parts of the white matter known to be affected by
-ALS within the corticospinal tract. In a regression setting, data from another
-previous study\cite{yeatman2014lifespan} can be used to accurately predict
-``brain age''. Thus, this multivariate analysis approach both (a) achieves high
-cross-validated accuracy for precision medicine applications of dMRI data and
-(b) identifies relevant features of brain anatomy to further our neuroscientific
-understanding of clinical disorders.
+data to quantify tissue properties, such as fractional anisotropy (FA) and mean
+diffusivity (MD), along the trajectories of these connections in the human brain
+\emph{in vivo}\cite{yeatman2012tract}. Statistical inference from tractometry
+data usually either averages these quantities along the length of the tract in
+each individual, or performs analysis point-by-point along each tract, with
+group comparisons or regression models computed separately for each point along
+every one of the tracts. Alternatively, tissue properties are computed for a
+specific tract of interest based on an a priori hypothesis. In the present work,
+we developed a method based on the sparse group lasso (SGL)
+\cite{simon2013sparse} that takes into account tissue properties measured along
+the tracts, and selects informative features by enforcing sparsity, both at the
+level of individual tracts and tissue properties, but also across the entire set
+of tracts and all of the measured tissue properties. The sparsity penalties for
+each of these constraints is identified using a nested cross-validation scheme
+that guards against over-fitting and simultaneously identifies the correct level
+of sparsity, both at the group level and overall. We demonstrate the accuracy of
+the method in two settings: In a regression setting, dMRI is used to accurately
+predict ``brain age'' \cite{yeatman2014lifespan, Brown2012-so}. In a
+classification setting, patients with amyotrophic lateral sclerosis (ALS) are
+accurately distinguished from matched controls\cite{sarica2017corticospinal}. In
+addition, SGL automatically identifies FA in the corticospinal tract as
+important for this classification -- correctly finding the parts of the white
+matter known to be affected by ALS. \ariel{Still need a punchy ending sentence
+here}
