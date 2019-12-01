@@ -1,6 +1,6 @@
 \section*{Results and discussion}
 
-\subsection*{SGL of tractometry data in a regression setting}
+\subsection*{SGL accurately predicts age from tractometry data in a regression setting}
 
 To test the performance of SGL in tractometry data in a continuous regression
 task, we focus here on the prediction of biological age from the tractometry
@@ -49,7 +49,7 @@ these higher coefficients are found (Figure \ref{regress-beta} right).
     \centering
     \includegraphics[width=0.3\textwidth]{regression_beta_annotated.pdf}
     \includegraphics[width=0.67\textwidth]{regression_tract_profiles.pdf}
-    \caption{{\bf Feature importance for predicting age from tractometry.} Left: A skeletonized display of the main brain tracts analyzed, with anterior facing up, and right hemisphere on the right. The $\hat{\beta}$ coefficients displayed in blue (negative) to red (positive) are for measurements of FA along the tracts. The left cingulum cingulate (A) and forceps minor (B) are highlighted. Right: the FA (in shades of blue and green) and the $beta$ coefficients (dashed) in (A) left cingulum and (B) forceps minor.
+    \caption{{\bf Feature importance for predicting age from tractometry.} Left: A skeletonized display of the main brain tracts analyzed, with anterior facing up, and right hemisphere on the right. The $\hat{\beta}$ coefficients displayed in blue (negative) to red (positive) are for measurements of FA along the length of the tracts. The left cingulum cingulate (A) and forceps minor (B) are highlighted. Right: the FA (in shades of blue and green) and the $beta$ coefficients (dashed) in (A) left cingulum and (B) forceps minor.
     }
     \label{fig:regress-beta}
 \end{figure}
@@ -73,7 +73,7 @@ these higher coefficients are found (Figure \ref{regress-beta} right).
     \end{itemize}
 \end{itemize}
 
-\subsection*{Classification for ALS detection}
+\subsection*{SGL accurately detects ALS in tractometry data in a classification setting}
 
 Using data from a previous study of the corticospinal tract profile and
 ALS\cite{sarica2017corticospinal}, we tested the performance of SGL in a
@@ -103,7 +103,7 @@ data\cite{sarica2017corticospinal}.
     \includegraphics[width=0.45\textwidth]{classification_probs.png}
     \includegraphics[width=0.45\textwidth]{classification_beta_bupu.png}
 
-    \caption{{\bf Prediction of ALS status.}
+    \caption{{\bf SGL accurately predicts ALS.}
         Left: Classification probabilities for each subject's ALS diagnosis.
         Controls are on the left while patients are on the right. Predicted
         controls are in blue and predicted patients are in red. Thus, false
@@ -121,8 +121,11 @@ data\cite{sarica2017corticospinal}.
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.95\textwidth]{classification_tract_profiles.pdf}
-    \caption{{\bf Coefficients with FA tract profiles}
-       }
+    \caption{{\bf Model coefficients mirror FA differences}. The places along the
+       length of the corticospinal tract where $\hat{\beta}$ coefficients for FA
+       (dashed line, right axis) have large negative values correspond to the
+       locations of substantial differences between the ALS (green) and control
+       (orange) FA (shaded area indicates standard error of the mean).}
     \label{fig:class-profiles}
 \end{figure}
 
@@ -130,7 +133,7 @@ data\cite{sarica2017corticospinal}.
 \begin{figure}[!h]
     \centering
         \includegraphics[width=0.95\textwidth]{classification_subjects_profiles.pdf}
-    \caption{{\bf Mis-classifications}
+    \caption{{\bf Model mis-classifications correspond to features identified by the model}.
        They make sense}
     \label{fig:class-errors}
 \end{figure}
