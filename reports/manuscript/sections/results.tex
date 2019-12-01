@@ -1,53 +1,45 @@
 \section*{Results and discussion}
 
-\subsection*{Regression for age prediction}
+\subsection*{SGL of tractometry data in a regression setting}
 
 The WH dataset used for continuous regression contains data from 76 healthy
 subjects, ranging between 6 years and 50 years of age
-\cite{yeatman2014lifespan}. SGL was fit to tractometry-extracted features: FA
-and MD in 20 major brain tracts, with each tract divided into 100 nodes. To
-evaluate the fit of the model, we used a nested cross-validation procedure. In
-this procedure, batches of subjects are held out. For each batch (or fold), the
-model is fully fit without this data. Then, once the parameters are fixed, the
-model is inverted to predict the ages of held out subjects based on the linear
-coeffiecients and the static non-linearity. data is held out, and a model age
-was predicted using a model that was fit without that subject. This scheme
-automatically finds the right level of regularization and fits the coefficients
-to the ill-posed linear model, while guarding against overfitting. SGL
-accurately predicts the age of the subjects in this procedure, with procedure,
-with a mean absolute error of 3.6 years (Figure \ref{fig:regress-results}),
-which is lower than the results of a recent study that predicted age in a large
-sample, based on TBSS-extracted diffusion features \cite{Richard2018-ux}. The
-model weights in this case are distributed over many different tracts and dMRI
-tissue properties (Figure \ref{fig:regress-beta}) This demonstrates that SGL is
-not coerced to produce overly sparse results when a more accurate model requires
-a dense selection of features.
+\cite{yeatman2014lifespan}. In this case, biological age was used as the
+predicted variable ($y$ in equation \ref{eq:lm}). SGL was fit to
+tractometry-extracted features: FA and MD in 20 major brain tracts, with each
+tract divided into 100 nodes. To evaluate the fit of the model, we used a nested
+cross-validation procedure. In this procedure, batches of subjects are held out.
+For each batch (or fold), the model is fully fit without this data. Then, once
+the parameters are fixed, the model is inverted to predict the ages of held out
+subjects based on the linear coeffiecients and the static non-linearity. data is
+held out, and a model age was predicted using a model that was fit without that
+subject. This scheme automatically finds the right level of regularization and
+fits the coefficients to the ill-posed linear model, while guarding against
+overfitting. SGL accurately predicts the age of the subjects in this procedure,
+with a mean absolute error of 3.6 years (Figure \ref{fig:regress-results}). This
+is lower than the results of a recent study that predicted age in a large
+sample, based on diffusion MRI features \cite{Richard2018-ux}. The model weights
+in this case are distributed over many different tracts and dMRI tissue
+properties (Figure \ref{fig:regress-beta}). This demonstrates that SGL is not
+coerced to produce overly sparse results when a more accurate model requires a
+dense selection of features.
 
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=1\textwidth]{regression_residuals.png}
-    \caption{{\bf Prediction of brain age.}
+    \includegraphics[width=0.8\textwidth]{regression_residuals.png}
+    \caption{{\bf Predicting age with tractometry and SGL.} Left: The predicted age of each individual (on the abscissa) and true age (on the ordinate), an accurate prediction falls close to the $y=x$ line (dashed). The mean absolute error in this case  is 3.6 years and, the coefficient of determination $R^2=0.3$. Right: Standardized residuals (on the abscissa) as a function of the true age (on the ordinate). Predictions are generally more accurate for younger individuals.
     }
     \label{fig:regress-results}
 \end{figure}
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.5\textwidth]{regression_beta_annotated.pdf}
-    \caption{{\bf Feature importance for brain age.}
+    \includegraphics[width=0.3\textwidth]{regression_beta_annotated.pdf}
+    \includegraphics[width=0.67\textwidth]{regression_tract_profiles.pdf}
+    \caption{{\bf Feature importance for predicting age from tractometry.} Left: A skeletonized display of the main brain tracts analyzed, with the anterior up. The left cingulum cingulate (A) and forceps minor (B) are highlighted. Right: the FA (in shades of blue and green) and the $beta$ coefficients (dashed) in (A) left cingulum and (B) forceps minor.
     }
     \label{fig:regress-beta}
-\end{figure}
-
-
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=1\textwidth]{regression_tract_profiles.pdf}
-    \caption{{\bf Coefficients in context}
-    It makes sense
-    }
-    \label{fig:regress-profiles}
 \end{figure}
 
 
