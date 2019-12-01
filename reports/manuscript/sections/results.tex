@@ -75,7 +75,7 @@ these higher coefficients are found (Figure \ref{regress-beta} right).
 
 \subsection*{SGL accurately detects ALS in tractometry data in a classification setting}
 
-Using data from a previous study of the corticospinal tract profile and
+Using data from a previous study of the corticospinal tract (CST) profile and
 ALS\cite{sarica2017corticospinal}, we tested the performance of SGL in a
 classification setting. The previous study predicted ALS status with a mean
 accuracy of 80\% using a random forest algorithm based on a priori selection of
@@ -113,7 +113,7 @@ data\cite{sarica2017corticospinal}.
         coefficients are presented on a skeleton of the major tracts. The brain
         is oriented with the right hemisphere to our left and anterior out of
         the page. As expected large negative coefficients are in the FA of the
-        corticospinal tract (and particularly right CST, here to the left)}
+        CST (and particularly in the right hemisphere, here to the left)}
     \label{fig:class-results}
 \end{figure}
 
@@ -122,7 +122,7 @@ data\cite{sarica2017corticospinal}.
     \centering
     \includegraphics[width=0.95\textwidth]{classification_tract_profiles.pdf}
     \caption{{\bf Model coefficients mirror FA differences}. The places along the
-       length of the corticospinal tract where $\hat{\beta}$ coefficients for FA
+       length of the CST  where $\hat{\beta}$ coefficients for FA
        (dashed line, right axis) have large negative values correspond to the
        locations of substantial differences between the ALS (green) and control
        (orange) FA (shaded area indicates standard error of the mean).}
@@ -133,7 +133,11 @@ data\cite{sarica2017corticospinal}.
 \begin{figure}[!h]
     \centering
         \includegraphics[width=0.95\textwidth]{classification_subjects_profiles.pdf}
-    \caption{{\bf Model mis-classifications correspond to features identified by the model}.
-       They make sense}
+    \caption{{\bf Model mis-classifications correspond to features identified by
+       the model}. The FA in CST of individuals that are mis-classified by the
+       model is compared the group FA (with shaded are indicating standard error
+       of the mean). False negative classifications (individuals that have ALS,
+       but are classified as patients have) correspond to high FA either in the
+       more inferior part of the CST}
     \label{fig:class-errors}
 \end{figure}
