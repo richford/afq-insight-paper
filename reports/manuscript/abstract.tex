@@ -9,20 +9,20 @@ data usually either averages these quantities along the length of the tract in
 each individual, or performs analysis point-by-point along each tract, with
 group comparisons or regression models computed separately for each point along
 every one of the tracts. Alternatively, tissue properties are computed for a
-specific tract of interest based on an a priori hypothesis. In the present work,
-we developed a method based on the sparse group lasso (SGL)
+specific tract of interest based on an \emph{a priori} hypothesis. In the
+present work, we developed a method based on the sparse group lasso (SGL)
 \cite{simon2013sparse} that takes into account tissue properties measured along
-the tracts, and selects informative features by enforcing sparsity, both at the
-level of individual tracts and tissue properties, but also across the entire set
-of tracts and all of the measured tissue properties. The sparsity penalties for
-each of these constraints is identified using a nested cross-validation scheme
-that guards against over-fitting and simultaneously identifies the correct level
-of sparsity, both at the group level and overall. We demonstrate the accuracy of
-the method in two settings: in a regression setting, dMRI is used to accurately
+all of the tracts, and selects informative features by enforcing sparsity, both
+at the level of individual tracts and tissue properties, but also across the
+entire set of tracts and all of the measured tissue properties. The sparsity
+penalties for each of these constraints is identified using a nested
+cross-validation scheme that guards against over-fitting and simultaneously
+identifies the correct levels of sparsity. We demonstrate the accuracy of the
+method in two settings: in a regression setting, dMRI is used to accurately
 predict ``brain age'' \cite{yeatman2014lifespan, Brown2012-so}. In a
 classification setting, patients with amyotrophic lateral sclerosis (ALS) are
 accurately distinguished from matched controls\cite{sarica2017corticospinal}. In
 addition, SGL automatically identifies FA in the corticospinal tract as
 important for this classification -- correctly finding the parts of the white
-matter known to be affected by ALS. \ariel{Still need a punchy ending sentence
-here}
+matter known to be affected by ALS.
+\ariel{Still need a punchy ending sentence here}
