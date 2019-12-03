@@ -1,21 +1,5 @@
 \section*{Materials and methods}
 
-TODO:
-
-\begin{itemize}
-  \item Computational implementation
-    \begin{itemize}
-      \item Insert Figure for pipeline
-      \item Proximal gradient methods
-      \item Meta-parameter optimization
-      \item Cross-validation scheme
-        \begin{itemize}
-          \item Insert Figure for cross-validation scheme
-        \end{itemize}
-    \end{itemize}
-\end{itemize}
-
-
 \subsection*{Data}
 
 Two different previously-published datasets were used here:
@@ -28,10 +12,11 @@ subjects with ages 6-50. These data were measured in a GE Discovery 750 3T MRI
 scanner at the Stanford Center for Cognitive and Neurobiological Imaging. The
 Stanford University IRB approved the procedures of this study. Informed consent
 was obtained from each adult participant, and assent for participation was
-provided by by parents/guardians for children. Voxel resolution was 2x2x2 $mm^3$
-96 non-colinear directions of measurement were measured with a b=2,000 $s/mm^2$
-and 30 non-colinear directions of measurement were measured with a b=1,000
-$s/mm^2$. Data was preprocessed to correct for subject motion and the diffusion
+provided by parents/guardians for children. Voxel resolution was
+\num{2x2x2}\si{\milli\meter^3} with 96 non-colinear directions measured with a
+$b= \SI{2000}{\second\per\milli\meter^2}$ and 30 non-colinear directions
+measured with a $b=\SI{1000}{\second\per\milli\meter^2}$.
+Data was preprocessed to correct for subject motion and the diffusion
 tensor model \cite{basser1994mr} was fit in every voxel, using a robust fit
 \cite{chang2005restore}. These data were acquired using a dual spin echo
 sequence, in which there is sufficient time for eddy currents to subside between
@@ -45,8 +30,9 @@ demographically matched healthy controls. These data were measured in a GE
 Discovery 750 3T MRI scanner at the Institute of Bioimaging and Molecular
 Physiology in Catanzaro. Informed consent was provided as approved by the
 Ethical Committee of the University ``Magna Graecia'' of Catanzaro. Voxel
-resolution was 2x2x2 $mm^3$ and 27 non-colinear directions were measured with a
-b=1,000 $s/mm^2$. Here, both motion correction and eddy current correction were
+resolution was \num{2x2x2}\si{\milli\meter^3} and 27 non-colinear directions
+were measured with a $b=\SI{1000}{\second\per\milli\meter^2}$.
+Here, both motion correction and eddy current correction were
 applied before modeling the diffusioon tensor in each voxel. We will refer to
 this dataset as ALS.
 
@@ -122,7 +108,7 @@ metrics calculated at each node. Typically, $T = 20$, $N = 100$, and $2 \le M
 studies have between a few dozen and a few hundred subjects, yielding a feature
 matrix that is wide and short. Even in cases where more than a thousand subjects
 are measured (e.g., in the Human Connectome Project, where 1,200 subjects were
-measured \cite{VanEssen2012}), the problem is ill-posed: The high dimensionality
+measured \cite{VanEssen2012}), the problem is ill-posed: the high dimensionality
 of this data requires regularization to avoid overfitting and generate
 interpretable results.
 
@@ -130,68 +116,127 @@ Here, we propose that in addition to regularizing the coefficients in $\beta$,
 we can also capitalize on our knowledge of the group structure of the tract
 profile features in $\mathbf{X}$. The tract-metric combinations form a natural
 grouping. For example, we expect that MD features within the left arcuate
-fasciculus to co-vary across individuals. Likewise for FA values within the
+fasciculus will co-vary across individuals. Likewise for FA values within the
 right corticospinal tract (CST) and so on. This group structure is represented
 in Fig~\ref{fig:group-structure}, which depicts the linear model $y = \mathbf{X}
 \cdot \beta$. Thus, we seek a regularization approach that will fit a linear
 model with anatomically-grouped covariates, where we expect to observe both
-groupwise sparsity: the number of groups (tract/metric combinations) with at
-least one non-zero coefficients as well as within-group sparsity: the number of
-non-zero coefficients within each non-zero groups. The sparse group lasso (SGL)
+groupwise sparsity, where the number of groups (tract/metric combinations) with
+at least one non-zero coefficients is small, as well as within-group sparsity,
+where the number of non-zero coefficients within each non-zero group is small.
+The sparse group lasso (SGL)
 is a penalized regression technique that satisfies exactly these
 criteria\cite{simon2013sparse}. It solves for a coefficient vector
 $\widehat{\beta}$ that satisfies
 \begin{equation}
     \widehat{\beta} = \min_\beta \frac{1}{2}
-    \norm*{y - \displaystyle \sum_{\ell = 1}^{G} \mathbf{X}^{(\ell)} \cdot \beta^{(\ell)}}_2^2
-    + \lambda_1 \displaystyle \sum_{\ell = 1}^{G} \sqrt{p_\ell} \norm*{\beta^{(\ell)}}_2
+    \norm*{y - \displaystyle \sum_{\ell = 1}^{G}
+    \mathbf{X}^{(\ell)} \cdot \beta^{(\ell)}}_2^2
+    + \lambda_1 \displaystyle \sum_{\ell = 1}^{G}
+    \sqrt{p_\ell} \norm*{\beta^{(\ell)}}_2
     + \lambda_2 \norm*{\beta}_1,
     \label{eq:sgl}
 \end{equation}
 
-where $G$ is the number of groups $\mathbf{X}^{(\ell)}$ is the submatrix of
-$\mathbf{X}$ corresponding to group $\ell$, $\beta^{(\ell)}$ is the coefficient
-vector for group $\ell$ and $p_\ell$ is the length of $\beta^{(\ell)}$. In the
-tractomtetry setting, $G = T \cdot M$ and $\forall \ell: p_\ell = 100$. The
-first term is the mean square error loss, $L_{mse}$, as in the standard linear
-regression framework. The second and third terms encourage groupwise sparsity
-and overall sparsity, respectively. If $\lambda_1 = 0$ and $\lambda_2 = 1$, the
-SGL reduces to the traditional lasso\cite{tibshirani1996regression}. Conversely,
-if $\lambda_1 = 1$ and $\lambda_2 = 0$, the SGL reduces to the group
-lasso\cite{yuan2006model}.
+where $G$ is the number of groups $\mathbf{X}^{(\ell)}$ is the submatrix
+of $\mathbf{X}$ corresponding to group $\ell$, $\beta^{(\ell)}$ is
+the coefficient vector for group $\ell$ and $p_\ell$ is the length of
+$\beta^{(\ell)}$. In the tractomtetry setting, $G = T \cdot M$ and
+$\forall \ell: p_\ell = 100$. The first term is the mean square error
+loss, $L_{\text{mse}}$, as in the standard linear regression framework.
+The second and third terms encourage groupwise sparsity and overall
+sparsity, respectively. If $\lambda_1 = 0$ and $\lambda_2 = 1$, the
+SGL reduces to the traditional lasso\cite{tibshirani1996regression}.
+Conversely, if $\lambda_1 = 1$ and $\lambda_2 = 0$, the SGL reduces to
+the group lasso\cite{yuan2006model}.
 
 \subsection*{Implementation, cross-validation and metaparameter optimization}
 
 For given values of $\lambda_1$ and $\lambda_2$, the cost function in equation
 \ref{eq:sgl} can be optimized using proximal gradient descent methods
 \cite{parikh2014proximal} here implemented as a custom proximal operator that is
-then optimized using the COPT library \ariel{citation needed here}. To
-find the values of the metaparameters $\lambda_1$ and $\lambda_2$, we used a
-hyperoptimization procedure, implemented using the hyperopt software
-\cite{Bergstra_2015}. \ariel{We need more details here.}
+then optimized using the C-OPT library\cite{copt}. This supplies an estimate
+of the optimal $\widehat{\beta}$ given a particular set of values for the
+regulation parameters $\lambda_1$ and $\lambda_2$. We then find the optimal
+values for $\lambda_1$ and $\lambda_2$ using the hyperopt library's \verb|fmin|
+function\cite{Bergstra_2015} with a tree of Parzen estimators search
+algorithm\cite{bergstra2011algorithms}. For the WH dataset, where the target
+variable is continuous numerical, \verb|fmin| searches for metaparameters that
+minimize the median absolute error, though in general a user may also
+choose to minimize the root-mean-square-error or to maximize the
+coefficient of determination ($R^2$). For the ALS dataset, where the
+target variable is binary categorical, \verb|fmin| seeks to maximize the
+classification accuracy, though in general the user may also choose to
+maximize the area under the receiver operating curve (ROC AUC) or the
+average precision. \adam{Enough detail provided?}
 
-To objectively evaluate the model and guard against over-fitting, we used
-cross-validation. \ariel{More here}.
+To objectively evaluate the model and guard against over-fitting,
+we used a nested cross-validation scheme, depicted in
+Fig~\ref{fig:cross-val} for the categorical classification case. The
+input data is shuffled and then decomposed into $k$ batches, hereafter
+referred to as folds. For the ALS dataset, $k=10$, while for the WH
+dataset, $k=5$. For each unique fold, we hold that fold out as the
+test\textsubscript{outer} set and let the remaining data comprise
+the train\textsubscript{outer} set, with the subscript indicating
+the depth of the nested decomposition. We further decompose each
+train\textsubscript{outer} set into three folds, and again for each
+unique fold, we hold out that fold as the test\textsubscript{inner}
+set and let the remaining data comprise the train\textsubscript{inner}
+set. At level-1 of the decomposition, we fit an SGL model using
+arbitrary fixed regularization parameters $\lambda_1$ and $\lambda_2$,
+training the model using train\textsubscript{inner} and evaluating
+the fit using the appropriate metric on test\textsubscript{inner}.
+The optimal regularization parameters are determined using the
+aforementioned hyperopt library at level-0 of the decomposition. We
+find optimal regularization parameters and $\widehat{\beta}$ for each
+train\textsubscript{outer} set and then use those to predict values for
+data in test\textsubscript{outer}. Thus each subject in the dataset has
+a predicted phenotype derived from a model that never saw its particular
+subject's data.
+
+The above procedure describes $k$-fold cross validation. In fact,
+we use repeated $k$-fold cross validation on the outer level of the
+decomposition, so that the input data is decomposed into $k$ folds,
+three times. Thus, each subject has three predicted phenotypes. We then
+take the mean predicted value to summarize the skill of the model.
+In the classification case, the shuffling into folds is stratified such
+that each fold has a population that preserves the percentage of each
+class found in the larger input data.
+\adam{Clear as mud?}.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.55\textwidth]{nested-cross-validation.pdf}
+    \caption{{\bf Nested $k$-fold cross-validation scheme.}
+        We evaluate model quality using a nested $k$-fold cross
+        validation scheme. At level-0, the input data is decomposed
+        three times into $k$ shuffled groups and optimal hyperparameters
+        are found for the level-0 training set. Optimization of these
+        hyperparameters requires the use of the hyperopt library and
+        many repeated evaluations of an SGL model over a search space
+        of possible regularization parameters. These evaluations take
+        place at level-1 of the decomposition, where the level-0 training
+        set is further decomposed into three shuffled groups.
+        For the ALS data, $k=10$. For the WH data, $k=5$.
+    }
+    \label{fig:cross-val}
+\end{figure}
 
 \subsubsection*{Incorporating transformations on $y$}
 
 Often, the target variable $y$ is not in the domain in which the linear model
 can be best fit to it. Equation \ref{eq:lm} can be slightly modified as:
-
 \begin{equation}
 y = f^-1(\mathbf{X} \cdot \beta),
 \label{eq:lm}
 \end{equation}
-
-where the transformation function $f^-1$ characterizes the transform applied to
-the data before fitting the linear coefficients. For example, an often-used
+where the transformation function $f^{-1}$ characterizes the transform applied
+to the data before fitting the linear coefficients. For example, an often-used
 transform is the logarithmic transform:
-
 \begin{equation}
-f(y) = log_n(y)
+f(y) = \log_n(y)
 \label{eq:log_nonlinearity}
 \end{equation}
-
 In this case, the model is parametrized by one additional fit parameter, $n$.
 
 \subsubsection*{Classification of categorical $y$}
@@ -200,21 +245,18 @@ explaining or predicting the presence of a clinical diagnosis, the SGL is
 readily adapted to logistic regression, where the probability of a target
 variable belonging to an arbitrary defined ``true'' class is the logistic
 function of the result of the linear model,
-
 \begin{equation}
     p(y = 1) = \frac{1}{1 + \exp(\mathbf{X}\cdot \beta)},
     \label{eq:logit}
 \end{equation}
-
 or equivalently, the mean squared error loss function in Eq~\eqref{eq:sgl} is
 replaced with the cross-entropy loss, which for binary classification is the
 negative log likelihood of the SGL classifier giving the ``true'' label:
-
 \begin{equation}
-    L_{mse} \rightarrow L_{\log} = -\left(y \log(p) + (1 - y) \log(1 - p)\right).
+    L_{\text{mse}} \rightarrow L_{\log} =
+    -\left(y \log(p) + (1 - y) \log(1 - p)\right).
     \label{eq:logloss}
 \end{equation}
-
 
 \begin{figure}[!h]
     \centering
@@ -247,4 +289,12 @@ imputing missing data in the feature matrix. Missing interior nodes are imputed
 using linear interpolation. For missing exterior nodes, the user may choose
 between linear extrapolation and constant forward(back)-fill. Imputation uses
 only values from adjacent nodes in the same white matter tract in the same
-subject so there is no danger of data leakage from other subjects.
+subject so there is no danger of data leakage from other subjects. It uses the
+scikit-learn\cite{scikit-learn} library to decompose input data into separate
+test and train datasets, to scale each feature to have zero mean and
+unit variance, and to evaluate each fit in the hyperparameter search using
+appropriate classification and regression metrics such as accuracy, area
+under the receiver operating curve (AUC ROC), and coefficient of determination
+($R^2$). For each set of hyperparameters, we solve the SGL using a custom
+proximal operator supplied to the C-OPT library\cite{copt}. Appropriate
+hyperparameters are found using the hyperopt library\cite{Bergstra_2015}.

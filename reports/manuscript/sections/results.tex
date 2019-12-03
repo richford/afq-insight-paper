@@ -17,9 +17,8 @@ tract divided into 100 nodes. To evaluate the fit of the model, we used a nested
 cross-validation procedure. In this procedure, batches of subjects are held out.
 For each batch (or fold), the model is fully fit without this data. Then, once
 the parameters are fixed, the model is inverted to predict the ages of held out
-subjects based on the linear coeffiecients and the static non-linearity. data is
-held out, and a model age was predicted using a model that was fit without that
-subject. This scheme automatically finds the right level of regularization and
+subjects based on the linear coeffiecients and the static non-linearity.
+This scheme automatically finds the right level of regularization and
 fits the coefficients to the ill-posed linear model, while guarding against
 overfitting. SGL accurately predicts the age of the subjects in this procedure,
 with a mean absolute error of 3.6 years (Figure \ref{fig:regress-results}, left
@@ -38,7 +37,7 @@ parts of the tracts where these higher coefficients are found (Figure
 \ref{fig:regress-beta} right).
 
 
-\begin{figure}[!h]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{regression_residuals.png}
     \caption{{\bf Predicting age with tractometry and SGL.} Left: The predicted
@@ -52,7 +51,7 @@ parts of the tracts where these higher coefficients are found (Figure
     \label{fig:regress-results}
 \end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.3\textwidth]{regression_beta_annotated.pdf}
     \includegraphics[width=0.67\textwidth]{regression_tract_profiles.pdf}
@@ -76,13 +75,14 @@ accuracy of 80\% using a random forest algorithm based on a priori selection of
 features within the corticospinal tract. SGL delivers competitive predictive
 performance (mean 93\% $\pm$ 2\% accuracy, 0.978 $\pm$ 0.006 ROC AUC) without
 the need for a priori feature engineering. The results of the classification
-prediction are shown in Fig~\ref{fig:class-results}, with ``ground-truth'' ALS
+prediction are shown in Fig~\ref{fig:class-results} with ``ground-truth'' ALS
 status separated into columns, and predicted ALS status encoded by color. In
 addition to this classification performance, SGL also identifies the white
 matter tracts most important for ALS classification. The relative importance of
 white matter features is captured in the $\beta$ coefficients from
-Eq~\eqref{eq:sgl}. Fig~\ref{fig:class-beta} depicts these coefficients across
-the brain, laid out on a skeleton of the major tracts. We find that SGL selects
+Eq~\eqref{eq:sgl}. Fig~\ref{fig:class-profiles} depicts these coefficients along
+the right CST, plotted over the FA values for the control and ALS subject
+groups. We find that SGL selects
 FA metrics in the corticospinal tract and particualrly in the right
 corticospinal tract as most important to ALS classification, confirming previous
 findings\cite{van2011upper, toosy2003diffusion, sarica2014tractography,
@@ -92,7 +92,15 @@ abe2010voxel} and identifying exactly the portions of the brain that were
 selected \emph{a priori} in the previous study from which we collected our
 data\cite{sarica2017corticospinal}.
 
-\begin{figure}[!h]
+We also find that mislabelled subjects correspond to outlying features in the
+CST. Fig~\ref{fig:class-errors} depicts the group FA values along with
+FA values of mislabelled subjects, two false negatives and one false-positive.
+The false negative classifications have high FA in one of the two sections of
+the CST where $\norm{\widehat{\beta}} > 0$ in Fig~\ref{fig:class-profiles}.
+The false positive subject has an FA that oscillates between the two group
+means. Thus, the SGL method fails comprehensibly.
+
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.45\textwidth]{classification_probs.png}
     \includegraphics[width=0.45\textwidth]{classification_beta_bupu.png}
@@ -111,8 +119,7 @@ data\cite{sarica2017corticospinal}.
     \label{fig:class-results}
 \end{figure}
 
-
-\begin{figure}[!h]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.95\textwidth]{classification_tract_profiles.pdf}
     \caption{{\bf Model coefficients mirror FA differences}. The places along the
@@ -123,15 +130,17 @@ data\cite{sarica2017corticospinal}.
     \label{fig:class-profiles}
 \end{figure}
 
-
-\begin{figure}[!h]
+\begin{figure}[h]
     \centering
         \includegraphics[width=0.95\textwidth]{classification_subjects_profiles.pdf}
     \caption{{\bf Model mis-classifications correspond to features identified by
        the model}. The FA in CST of individuals that are mis-classified by the
        model is compared the group FA (with shaded are indicating standard error
        of the mean). False negative classifications (individuals that have ALS,
-       but are classified as patients have) correspond to high FA either in the
-       more inferior part of the CST}
+       but are classified as patients) correspond to high FA either in one of
+       the two regions of large $\norm{\widehat{\beta}}$ in
+       Fig~\ref{fig:class-profiles}. The false positive classification has
+       an FA profile that oscillates between the two group means.
+   }
     \label{fig:class-errors}
 \end{figure}
