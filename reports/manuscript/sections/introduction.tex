@@ -36,9 +36,10 @@ other hand, there have been efforts to shore up the inferences made with these
 methods \cite{Pestilli2014NatMeth, Takemura2016-sh, Smith2013-nc, Smith2015-cx,
 Smith2015-zt, Rheault2018-wk}. Importantly, though discovering novel fiber
 bundles requires extraordinary evidence, and delineating the exact location of
-the termination of the streamlines in the gray matter, there is little dispute
-that tractography can accurately delineate major white matter bundles that are
-known to exist within the core of the white matter \cite{Maier-Hein2017-vb}.
+the termination of the streamlines in the gray matter is still prone to error,
+there is little dispute that tractography can accurately delineate major white
+matter bundles that are known to exist within the core of the white matter
+\cite{Maier-Hein2017-vb}.
 
 Using this fact, one of the most powerful methods currently available to put
 macro- and micro-structure together is \emph{tractometry} (also known as
@@ -54,7 +55,7 @@ some cases, tissue properties along the length of each bundle are summarized by
 taking the mean along each bundle, but there is a large body of evidence showing
 that there is systematic variability within each bundle. This justifies
 retaining the individual samples along the length of each fiber
-\cite{yeatman2012tract, colby2012, ODonnell2009-uu}. However, while this retains
+\cite{yeatman2012tract, colby2012, ODonnell2009-uu}. While this retains
 important information about each individual's white matter, it also presents
 statistical challenges due to the dimensionality of the data. Based on
 tractometry, researchers may choose to compare different individuals to each
@@ -85,13 +86,11 @@ ROI are used together to fit a model that can predict differences between
 individuals. An example of that is the ``profilometry'' framework, in which
 different diffusion metrics from a single tract are combined together to provide
 input to a multivariate analysis of covariance, and linear discriminant analysis
-\cite{dayan2016profilometry}. Other work has used random forests algorithms
-applied to the corticospinal tract to discriminate between patients with ALS and
-matched controls \cite{sarica2017corticospinal}
+\cite{dayan2016profilometry}.
 
 \end{enumerate}
 
-In the present work, we present a novel framework for analysis of tractometry
+In the present work, we developed a novel framework for analysis of tractometry
 that simultaneously selects the features for analysis, and fits a model to these
 features. Rather than a comparative approach, this framework takes a predictive
 approach to inference \cite{Breiman2001-uz}. We use a linear modeling approach,
@@ -122,12 +121,12 @@ problems of this form. Using linear regression as the basis for analysis is
 useful for both regression tasks, in which a continuous measure (e.g., age) is
 modeled, as well as for classification tasks, where a discrete property is
 modeled (e.g., whether an individual has a particular disease). Moreover, use of
-SGL in particular helps derive informative properties of the human white matter,
-both in cases where the underlying causes of variance are sparsely concentrated
-(e.g., in one particular white matter tract) and in cases where biological
-substrates of differences between individuals are more widespread. This is
-because SGL is controlled by meta-parameters that set the degree to  which and
-that can be set empirically, based on the data, in a process of nested
-cross-validation. We demonstrate these properties of the algorithm in data from
-previously published studies \cite{sarica2017corticospinal,
-yeatman2014lifespan}.
+SGL helps derive informative properties of the human white matter, both in cases
+where the underlying causes of variance are sparsely concentrated (e.g., in one
+particular white matter tract) and in cases where biological substrates of
+differences between individuals are more widespread. This is because SGL is
+controlled by meta-parameters that set the degree to which group sparsity and
+overall sparsity are applied. These metaparameters can be set empirically, based
+on the data, through a process of nested cross-validation. We demonstrate these
+properties of the algorithm in data from previously published studies
+\cite{sarica2017corticospinal, yeatman2014lifespan}.

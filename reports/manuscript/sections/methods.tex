@@ -150,77 +150,22 @@ SGL reduces to the traditional lasso\cite{tibshirani1996regression}.
 Conversely, if $\lambda_1 = 1$ and $\lambda_2 = 0$, the SGL reduces to
 the group lasso\cite{yuan2006model}.
 
-\subsection*{Implementation, cross-validation and metaparameter optimization}
-
-For given values of $\lambda_1$ and $\lambda_2$, the cost function in equation
-\ref{eq:sgl} can be optimized using proximal gradient descent methods
-\cite{parikh2014proximal} here implemented as a custom proximal operator that is
-then optimized using the C-OPT library\cite{copt}. This supplies an estimate
-of the optimal $\widehat{\beta}$ given a particular set of values for the
-regulation parameters $\lambda_1$ and $\lambda_2$. We then find the optimal
-values for $\lambda_1$ and $\lambda_2$ using the hyperopt library's \verb|fmin|
-function\cite{Bergstra_2015} with a tree of Parzen estimators search
-algorithm\cite{bergstra2011algorithms}. For the WH dataset, where the target
-variable is continuous numerical, \verb|fmin| searches for metaparameters that
-minimize the median absolute error, though in general a user may also
-choose to minimize the root-mean-square-error or to maximize the
-coefficient of determination ($R^2$). For the ALS dataset, where the
-target variable is binary categorical, \verb|fmin| seeks to maximize the
-classification accuracy, though in general the user may also choose to
-maximize the area under the receiver operating curve (ROC AUC) or the
-average precision. \adam{Enough detail provided?}
-
-To objectively evaluate the model and guard against over-fitting,
-we used a nested cross-validation scheme, depicted in
-Fig~\ref{fig:cross-val} for the categorical classification case. The
-input data is shuffled and then decomposed into $k$ batches, hereafter
-referred to as folds. For the ALS dataset, $k=10$, while for the WH
-dataset, $k=5$. For each unique fold, we hold that fold out as the
-test\textsubscript{outer} set and let the remaining data comprise
-the train\textsubscript{outer} set, with the subscript indicating
-the depth of the nested decomposition. We further decompose each
-train\textsubscript{outer} set into three folds, and again for each
-unique fold, we hold out that fold as the test\textsubscript{inner}
-set and let the remaining data comprise the train\textsubscript{inner}
-set. At level-1 of the decomposition, we fit an SGL model using
-arbitrary fixed regularization parameters $\lambda_1$ and $\lambda_2$,
-training the model using train\textsubscript{inner} and evaluating
-the fit using the appropriate metric on test\textsubscript{inner}.
-The optimal regularization parameters are determined using the
-aforementioned hyperopt library at level-0 of the decomposition. We
-find optimal regularization parameters and $\widehat{\beta}$ for each
-train\textsubscript{outer} set and then use those to predict values for
-data in test\textsubscript{outer}. Thus each subject in the dataset has
-a predicted phenotype derived from a model that never saw its particular
-subject's data.
-
-The above procedure describes $k$-fold cross validation. In fact,
-we use repeated $k$-fold cross validation on the outer level of the
-decomposition, so that the input data is decomposed into $k$ folds,
-three times. Thus, each subject has three predicted phenotypes. We then
-take the mean predicted value to summarize the skill of the model.
-In the classification case, the shuffling into folds is stratified such
-that each fold has a population that preserves the percentage of each
-class found in the larger input data.
-\adam{Clear as mud?}.
-
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.55\textwidth]{nested-cross-validation.pdf}
-    \caption{{\bf Nested $k$-fold cross-validation scheme.}
-        We evaluate model quality using a nested $k$-fold cross
-        validation scheme. At level-0, the input data is decomposed
-        three times into $k$ shuffled groups and optimal hyperparameters
-        are found for the level-0 training set. Optimization of these
-        hyperparameters requires the use of the hyperopt library and
-        many repeated evaluations of an SGL model over a search space
-        of possible regularization parameters. These evaluations take
-        place at level-1 of the decomposition, where the level-0 training
-        set is further decomposed into three shuffled groups.
-        For the ALS data, $k=10$. For the WH data, $k=5$.
-    }
-    \label{fig:cross-val}
+    \includegraphics[width=0.65\textwidth]{dMRI_group_structure.png}
+    \caption{{\bf dMRI group structure.}
+        The phenotypical target data and tractometric features can be organized
+    into a linear model, $y = \mathbf{X} \cdot \beta$. The feature matrix
+    $\mathbf{X}$ is color-coded to reveal a natural group structure: the left
+    (orange) group contains $k$ features from the inferior fronto-occipital
+    fascicle (IFOF), the middle (green) group contains $k$ features from the
+    corpus callosum, and the right (blue) group contains $k$ features from the
+    uncinate. The coefficients in $\beta$ follow the same natural grouping.
+    Fascicle image reproduced with permission from Ref~\cite{yeatman2012tract}
+    Figure 1.}
+    \label{fig:group-structure}
 \end{figure}
+
 
 \subsubsection*{Incorporating transformations on $y$}
 
@@ -258,20 +203,67 @@ negative log likelihood of the SGL classifier giving the ``true'' label:
     \label{eq:logloss}
 \end{equation}
 
+\subsection*{Implementation, cross-validation and metaparameter optimization}
+
+For given values of $\lambda_1$ and $\lambda_2$, the cost function in equation
+\ref{eq:sgl} can be optimized using proximal gradient descent methods
+\cite{parikh2014proximal} here implemented as a custom proximal operator that is
+then optimized using the C-OPT library\cite{copt}. This supplies an estimate of
+the optimal $\widehat{\beta}$ given a particular set of values for the
+meta-parameters $\lambda_1$ and $\lambda_2$.
+
+To objectively evaluate the model and guard against over-fitting, we used a
+nested cross-validation scheme, depicted in Fig~\ref{fig:cross-val} for the
+categorical classification case. The input data is shuffled and then decomposed
+into $k$ batches, hereafter referred to as folds. For the ALS dataset we used
+$k=10$ and for the WH dataset $k=5$. For each unique fold, we hold that fold out
+as the test\textsubscript{outer} set and let the remaining data comprise the
+train\textsubscript{outer} set, with the subscript indicating the depth of the
+nested decomposition. We further decompose each train\textsubscript{outer} set
+into three folds, and again for each unique fold, we hold out that fold as the
+test\textsubscript{inner} set and let the remaining data comprise the
+train\textsubscript{inner} set. At level-1 of the decomposition, we fit an SGL
+model using fixed regularization meta-parameters $\lambda_1$ and $\lambda_2$,
+training the model using train\textsubscript{inner} and evaluating the fit on
+test\textsubscript{inner}. We find the optimal values for $\lambda_1$ and
+$\lambda_2$ using hyperoptimizatin. This is implemented using the hyperopt
+library's \verb|fmin| function\cite{Bergstra_2015} with a tree of Parzen
+estimators search algorithm\cite{bergstra2011algorithms}. For continuous
+numerical $y$, \verb|fmin| searches for meta-parameter values that minimize the
+median absolute error. This can also be done minimizing the root of the mean
+squared error (RMSE) or to maximizing the coefficient of determination ($R^2$).
+For binary categorical $y$ \verb|fmin| seeks to maximize the classification
+accuracy. This can also be done maximizing the area under the receiver operating
+curve (ROC AUC) or the average precision. Using hyperoptimization, we find
+optimal regularization parameters and $\widehat{\beta}$ for each
+train\textsubscript{outer} set and then use those to predict values for data in
+test\textsubscript{outer}. Thus each subject in the dataset has a predicted
+phenotype derived from a model that never saw its particular subject's data.
+
+The above procedure describes $k$-fold cross validation. In fact, we use
+repeated $k$-fold cross validation on the outer level of the decomposition, so
+that the input data is decomposed into $k$ folds, three times. Thus, each
+subject has three predicted phenotypes. We then take the mean predicted value to
+summarize the performance of the model. In the classification case, the
+shuffling into folds is stratified such that each fold has a population that
+preserves the percentage of each class found in the larger input data.
+
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.65\textwidth]{dMRI_group_structure.png}
-    \caption{{\bf dMRI group structure.}
-        The phenotypical target data and tractometric features can be organized
-    into a linear model, $y = \mathbf{X} \cdot \beta$. The feature matrix
-    $\mathbf{X}$ is color-coded to reveal a natural group structure: the left
-    (orange) group contains $k$ features from the inferior fronto-occipital
-    fascicle (IFOF), the middle (green) group contains $k$ features from the
-    corpus callosum, and the right (blue) group contains $k$ features from the
-    uncinate. The coefficients in $\beta$ follow the same natural grouping.
-    Fascicle image reproduced with permission from Ref~\cite{yeatman2012tract}
-    Figure 1.}
-    \label{fig:group-structure}
+    \includegraphics[width=0.55\textwidth]{nested-cross-validation.pdf}
+    \caption{{\bf Nested $k$-fold cross-validation scheme.}
+        We evaluate model quality using a nested $k$-fold cross
+        validation scheme. At level-0, the input data is decomposed
+        three times into $k$ shuffled groups and optimal hyperparameters
+        are found for the level-0 training set. Optimization of these
+        hyperparameters requires the use of the hyperopt library and
+        many repeated evaluations of an SGL model over a search space
+        of possible regularization parameters. These evaluations take
+        place at level-1 of the decomposition, where the level-0 training
+        set is further decomposed into three shuffled groups.
+        For the ALS data, $k=10$. For the WH data, $k=5$.
+    }
+    \label{fig:cross-val}
 \end{figure}
 
 \subsection*{Software implementation}
