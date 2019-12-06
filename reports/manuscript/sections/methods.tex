@@ -13,15 +13,14 @@ scanner at the Stanford Center for Cognitive and Neurobiological Imaging. The
 Stanford University IRB approved the procedures of this study. Informed consent
 was obtained from each adult participant, and assent for participation was
 provided by parents/guardians for children. Voxel resolution was
-\num{2x2x2}\si{\milli\meter^3} with 96 non-colinear directions measured with a
-$b= \SI{2000}{\second\per\milli\meter^2}$ and 30 non-colinear directions
-measured with a $b=\SI{1000}{\second\per\milli\meter^2}$.
-Data was preprocessed to correct for subject motion and the diffusion
-tensor model \cite{basser1994mr} was fit in every voxel, using a robust fit
-\cite{chang2005restore}. These data were acquired using a dual spin echo
-sequence, in which there is sufficient time for eddy currents to subside between
-the application of the gradients and the image acquisition, so no eddy current
-correction was appliced. We will refer to this dataset as WH.
+\num{2x2x2}$mm^3$ with 96 non-colinear directions measured with a $b=2000$
+$\frac{sec}{mm^2}$ and 30 non-colinear directions measured with a $b=1000$
+$\frac{sec}{mm^2}$. Data was preprocessed to correct for subject motion and the
+diffusion tensor model \cite{basser1994mr} was fit in every voxel, using a
+robust fit \cite{chang2005restore}. These data were acquired using a dual spin
+echo sequence, in which there is sufficient time for eddy currents to subside
+between the application of the gradients and the image acquisition, so no eddy
+current correction was appliced. We will refer to this dataset as WH.
 
 \item Diffusion MRI from from a previous study of the corticospinal tract
 profile in patients with amyotrophic lateral sclerosis
@@ -30,11 +29,10 @@ demographically matched healthy controls. These data were measured in a GE
 Discovery 750 3T MRI scanner at the Institute of Bioimaging and Molecular
 Physiology in Catanzaro. Informed consent was provided as approved by the
 Ethical Committee of the University ``Magna Graecia'' of Catanzaro. Voxel
-resolution was \num{2x2x2}\si{\milli\meter^3} and 27 non-colinear directions
-were measured with a $b=\SI{1000}{\second\per\milli\meter^2}$.
-Here, both motion correction and eddy current correction were
-applied before modeling the diffusioon tensor in each voxel. We will refer to
-this dataset as ALS.
+resolution was \num{2x2x2} $mm^3$ and 27 non-colinear directions were
+measured with a $b=1000$ $\frac{sec}{mm^2}$. Here, both motion correction and
+eddy current correction were applied before modeling the diffusioon tensor in
+each voxel. We will refer to this dataset as ALS.
 
 \end{enumerate}
 
@@ -127,14 +125,14 @@ where the number of non-zero coefficients within each non-zero group is small.
 The sparse group lasso (SGL)
 is a penalized regression technique that satisfies exactly these
 criteria\cite{simon2013sparse}. It solves for a coefficient vector
-$\widehat{\beta}$ that satisfies
+$\hat{\beta}$ that satisfies
 \begin{equation}
-    \widehat{\beta} = \min_\beta \frac{1}{2}
-    \norm*{y - \displaystyle \sum_{\ell = 1}^{G}
-    \mathbf{X}^{(\ell)} \cdot \beta^{(\ell)}}_2^2
+    \hat{\beta} = \min_\beta \frac{1}{2}
+    ||y - \displaystyle \sum_{\ell = 1}^{G}
+    \mathbf{X}^{(\ell)} \cdot \beta^{(\ell)}||_2^2
     + \lambda_1 \displaystyle \sum_{\ell = 1}^{G}
-    \sqrt{p_\ell} \norm*{\beta^{(\ell)}}_2
-    + \lambda_2 \norm*{\beta}_1,
+    \sqrt{p_\ell} ||\beta^{(\ell)}||_2
+    + \lambda_2 ||\beta||_1,
     \label{eq:sgl}
 \end{equation}
 
@@ -209,7 +207,7 @@ For given values of $\lambda_1$ and $\lambda_2$, the cost function in equation
 \ref{eq:sgl} can be optimized using proximal gradient descent methods
 \cite{parikh2014proximal} here implemented as a custom proximal operator that is
 then optimized using the C-OPT library\cite{copt}. This supplies an estimate of
-the optimal $\widehat{\beta}$ given a particular set of values for the
+the optimal $\hat{\beta}$ given a particular set of values for the
 meta-parameters $\lambda_1$ and $\lambda_2$.
 
 To objectively evaluate the model and guard against over-fitting, we used a
@@ -235,7 +233,7 @@ squared error (RMSE) or to maximizing the coefficient of determination ($R^2$).
 For binary categorical $y$ \verb|fmin| seeks to maximize the classification
 accuracy. This can also be done maximizing the area under the receiver operating
 curve (ROC AUC) or the average precision. Using hyperoptimization, we find
-optimal regularization parameters and $\widehat{\beta}$ for each
+optimal regularization parameters and $\hat{\beta}$ for each
 train\textsubscript{outer} set and then use those to predict values for data in
 test\textsubscript{outer}. Thus each subject in the dataset has a predicted
 phenotype derived from a model that never saw its particular subject's data.
