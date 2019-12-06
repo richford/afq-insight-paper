@@ -14,3 +14,6 @@ all: $(SRCS) $(REFS) $(FIGS)
 
 clean:
 	rm -f *~ *.dvi *.aux *.out *.log *.blg *.bbl $(REPORT).ps $(REPORT).pdf sections/*.aux comment.cut
+
+docx:
+	pandoc -s --biblio $(REPORT).bib $(REPORT).tex -o paper.docx
