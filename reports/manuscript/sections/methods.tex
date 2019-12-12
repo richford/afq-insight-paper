@@ -38,7 +38,7 @@ each voxel. We will refer to this dataset as ALS.
 
 Data from both of these studies was processed in a similar manner, using the
 Matlab Automated Fiber Quantification toolbox (AFQ) \cite{yeatman2012tract}:
-streamlines representing fascicles of white matter nerve fibers were generated
+streamlines representing fascicles of white matter tracts were generated
 using a determinstic tractography algorithm that follows the prinicpal diffusion
 direction of the diffusion tensor in each voxel (STT \cite{basser2000vivo}).
 Major tracts were identified using multiple criteria: streamlines are selected
@@ -78,11 +78,12 @@ metrics will have naturally larger variance than others and may therefore
 dominate the objective function and make the SGL estimator unable to learn from
 the lower variance metrics. For example, fractional anisotropy (FA) is bounded
 between zero and one and could be overwhelmed by an unscaled higher-variance
-metric like the mean diffusivity (MD). To prevent this, we use the
-\lstinline{StandardScaler} from scikit-learn\cite{scikit-learn}, to remove each
-feature's mean and scale it to unit variance. Scaling is performed separately
-within each cross-validation set's training or testing data to prevent leakage
-of information between the testing and training sets\cite{kaufman2012leakage}.
+metric like the mean diffusivity (MD). To prevent this we remove each feature's
+mean and scale it to unit variance (z-score) using the
+\lstinline{StandardScaler} from scikit-learn \cite{scikit-learn}. Scaling is
+performed separately within each cross-validation set's training or testing data
+to prevent leakage of information between the testing and training
+sets\cite{kaufman2012leakage}.
 
 After scaling and imputation, the tractometry data and target
 phenotypical data can be organized in a linear model:
