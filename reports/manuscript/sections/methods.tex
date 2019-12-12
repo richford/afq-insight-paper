@@ -80,7 +80,7 @@ the lower variance metrics. For example, fractional anisotropy (FA) is bounded
 between zero and one and could be overwhelmed by an unscaled higher-variance
 metric like the mean diffusivity (MD). To prevent this we remove each feature's
 mean and scale it to unit variance (z-score) using the
-\lstinline{StandardScaler} from scikit-learn\cite{scikit-learn}. Scaling is
+\lstinline{StandardScaler} from scikit-learn \cite{scikit-learn}. Scaling is
 performed separately within each cross-validation set's training or testing data
 to prevent leakage of information between the testing and training
 sets\cite{kaufman2012leakage}.

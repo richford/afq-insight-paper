@@ -1,50 +1,50 @@
 \section*{Introduction}
 
-
 Diffusion-weighted Magnetic Resonance Imaging (dMRI) provides a unique view into
 the physical properties of the connections that comprise the brain white matter.
 While the measurements are usually conducted with voxels at the millimeter
 scale, water molecules within each voxel probe the structure of white matter at
 the micrometer scale providing important information about the physical
-structure of the white matter, including  the distribution of fiber orientations
-and density of axons within each voxel \cite{wandell2016clarifying}. Even though
-metrics derived from diffusion measurements are ambiguous in terms of their
-underlying biological interpretation, analyzing the variance in these properties
-has proven useful in characterizing individual differences in cognitive
-function, characterizing differences between populations and detecting
-abnormalities associated with disease \cite{Thomason2011-qn}
+structure of the white matter, including the density of axons and distribution
+of nerve fascicle orientations within each voxel \cite{wandell2016clarifying}.
+Even though metrics derived from diffusion measurements are ambiguous in terms
+of their underlying biological interpretation \cite{Jones2013-xv}, analyzing the
+variance in these properties has proven useful in characterizing individual
+differences in cognitive function, characterizing differences between
+populations and detecting brain abnormalities associated with disease
+\cite{Thomason2011-qn}.
 
 To relate the diffusion in each voxel to the macro-structure of long-range
 connections between different brain regions, methods for computational
 tract-tracing from diffusion MRI, or tractography, combine the estimates of
-fiber orientations in each voxel to form streamlines that traverse the volume of
-the white matter \cite{Conturo1999-je, Mori2002-qi}. These methods have been
+fascicle orientations in each voxel to form streamlines that traverse the volume
+of the white matter \cite{Conturo1999-je, Mori2002-qi}. These methods have been
 under increased scrutiny and several lines of investigation have raised
 critiques of their validity \cite{Maier-Hein2017-vb, Thomas2014-ki}. On the
 other hand, there have been efforts to shore up the inferences made with these
 methods \cite{Pestilli2014NatMeth, Takemura2016-sh, Smith2013-nc, Smith2015-cx,
-Smith2015-zt, Rheault2018-wk}. Importantly, though discovering novel fiber
+Smith2015-zt, Rheault2018-wk}. Importantly, though discovering novel nerve fiber
 bundles requires extraordinary evidence, and delineating the exact cortical
 termination of the streamlines in the gray matter is still prone to error, there
-is little dispute that tractography can accurately define the location of major
-white matter bundles that are known to exist within the core of the white matter
-\cite{Maier-Hein2017-vb}.
+is little dispute that tractography can accurately define the location of
+several major white matter bundles that are known to exist within the core of
+the white matter \cite{Maier-Hein2017-vb}.
 
 Using this fact, one of the most powerful methods currently available to put
 macro- and micro-structure together is \emph{tractometry} (also known as
 tract-based morphometry): assessment of the physical properties of the white
 matter along specific tracts \cite{Bells2011-cf}. Though there are several
 different available implementations of this overall idea, the principles are
-similar \cite{yeatman2012tract, Yendiki2011-ay, Wassermann2016-iv, ODonnell2009-uu}:
-tractometry begins by delineating the parts of the white matter that belong to
-different major tracts or axonal fiber bundles, such as the corticospinal tract
-or arcuate fasciculus, and samples the biophysical properties (such as
-fractional anisotropy or mean diffusivity) along the length of these bundles. In
-some cases, tissue properties along the length of each bundle are summarized by
-taking the mean along each bundle, but there is a large body of evidence showing
-that there is systematic variability within each bundle. This justifies
-retaining the individual samples along the length of each fiber
-\cite{yeatman2012tract, colby2012, ODonnell2009-uu}. While this retains
+similar \cite{yeatman2012tract, Yendiki2011-ay, Wassermann2016-iv,
+ODonnell2009-uu}: tractometry begins by delineating the parts of the white
+matter that belong to different major tracts or axonal nerve fiber bundles, such
+as the corticospinal tract or arcuate fasciculus, and samples the biophysical
+properties (such as fractional anisotropy or mean diffusivity) along the length
+of these bundles. In some cases, tissue properties along the length of each
+bundle are summarized by taking the mean along each bundle, but there is a large
+body of evidence showing that there is systematic variability within each
+bundle. This justifies retaining the individual samples along the length of each
+bundle \cite{yeatman2012tract, colby2012, ODonnell2009-uu}. While this retains
 important information about each individual's white matter, it also presents
 statistical challenges due to the dimensionality of the data. Based on
 tractometry, researchers may choose to compare different individuals to each
@@ -54,22 +54,21 @@ other. This is usually done following one of the following approaches:
 
 \item Mass univariate approaches: In this approach comparisons between groups or
 across individuals are done at each node of each tract, for each one of the
-diffusion metrics available at that point. This approach is exhaustive, but the
-challenge with this approach is that the are multiple points to compare, and
+diffusion metrics available at that point. This approach is exhaustive, but
 statistical power is compromised by a multiple comparison problem. Different
 approaches can be taken to resolving this challenge. For example, Colby and
 colleagues \cite{colby2012} used a non-parametric resmapling approach to correct
-for family-wise error across the universe of different comparisons available in
-the mass univariate approach \cite{Nichols2002-zu, Nichols2003-yy}.
+for family-wise error across the different possible comparisons
+\cite{Nichols2002-zu, Nichols2003-yy}.
 
-\item ROI-based approach: An alternative is using an ROI based approach. In this
-approach, the multiple comparison problem is circumvented by selecting just a
-few tracts to compare in each individual, or even focusing on particular
-segments of these tracts based on \emph{a priori} hypotheses. This approach is
-very powerful when the biological basis of the process of interest is relatively
-well understood (for a recent example, see \cite{huber2018rapid}).
+\item Region of interest(ROI)-based approaches: An alternative that circumvents
+the multiple comparison problem is to select just a few tracts to compare in
+each individual, or even focusing on particular segments of these tracts based
+on \emph{a priori} hypotheses. This approach is very powerful when the
+biological basis of the process of interest is relatively well understood (for a
+recent example, see \cite{huber2018rapid}).
 
-\item ROI-based selection, followed by multivariate analysis. Here, an ROI is
+\item ROI-based selection, followed by multivariate analysis: Here, an ROI is
 selected based on \emph{a priori} knowledge, and all the nodes or voxels in the
 ROI are used together to fit a model that can predict differences between
 individuals. An example of that is the ``profilometry'' framework, in which
@@ -79,47 +78,47 @@ input to a multivariate analysis of covariance, and linear discriminant analysis
 
 \end{enumerate}
 
-Ideally, we would like a method that simultaneously capitalizes on all the data
-across all tracts to make the best possible prediction, while also retaining and
-surfacing spatial information about the locations that are most informative for
-a prediction. In the present work, we developed a novel framework for analysis
-of tractometry that simultaneously selects the features for analysis, and fits a
-model to these features. Rather than a comparative approach, this framework
-takes a predictive approach to inference \cite{Breiman2001-uz}. We use a linear
-modeling approach, which aims to predict phenotypical variance in a group of
-subjects, based on a linear combination of the features estimated with
-tractometry. Using this approach, we need to first deal with the large and
-asymmetric dimensionality of the data: tractometry data usually has many more
-features (i.e., number of measurements per individual) than samples (number of
-subjects), which makes inferences from the data about phenotypical differences
-between individuals ill-posed. This regime is the target of several statistical
-learning techniques, and is often solved by various forms of regularization. For
-example, Tikhonov regularization shrinks the solution such that the sum of
-squared contributions from the individual features are minimized
-\cite{Hoerl2000-ij}. Another solution to the problem is provided by the Lasso
-algorithm, which instead minimizes the sum of the absolute values of
-contributions of each feature \cite{Tibshirani1996-qs}. This tends to shrink to
-zero the contributions of many of the features, providing results that are both
-accurate and interpretable. When additional structure is available in the
-organization of the data, regularization algorithms can take advantage of this
-structure. For example, if the features lend themselves to a natural division
-into different groups, the group lasso (GL) can be used to select groups of
-features, rather than individual features \cite{Yuan2006-ky}. The Sparse Group
-Lasso (SGL) elaborates on this idea by providing control both of group sparsity,
-as well as overall sparsity of the solutions \cite{simon2013sgl}. Because the
-features measured with tractomery lend themselves to grouping based on the
-tracts from which each measurement is taken, GL and SGL provide a useful tool
-linear model fitting in problems of this form. Using linear regression as the
-basis for analysis is useful for both regression tasks, in which a continuous
-measure (e.g., age) is modeled, as well as for classification tasks, where a
-discrete property is modeled (e.g., whether an individual has a particular
-disease). Moreover, use of SGL helps derive informative properties of the human
-white matter, both in cases where the underlying causes of variance are sparsely
-concentrated (e.g., in one particular white matter tract) and in cases where
-biological substrates of differences between individuals are more widespread.
-This is because SGL is controlled by meta-parameters that set the degree to
-which group sparsity and overall sparsity are applied. These metaparameters can
-be set empirically, based on the data, through a process of nested
-cross-validation. We demonstrate these properties of the algorithm in data from
-previously published studies \cite{sarica2017corticospinal,
-yeatman2014lifespan}.
+Generally speaking analysis methods should balance predictive accuracy with
+descriptive power \cite{Murdoch2019-ax, Breiman2001-uz}. Accordingly,
+tractometry analysis should simultaneously capitalize on all the data across all
+tracts to make the best possible prediction, while also retaining and surfacing
+spatial information about the locations that are most informative for a
+prediction. In the present work, we developed a novel framework for analysis of
+tractometry that simultaneously selects the features for analysis, and fits a
+model to these features. We use a linear modeling approach, which aims to
+predict phenotypical variance in a group of subjects, based on a linear
+combination of the features estimated with tractometry. Using this approach, we
+need to first deal with the large and asymmetric dimensionality of the data:
+tractometry data usually has many more features (i.e., number of measurements
+per individual) than samples (number of subjects), which makes inferences from
+the data about phenotypical differences between individuals ill-posed. This
+regime is the target of several statistical learning techniques, and is often
+solved by various forms of regularization. For example, Tikhonov regularization
+shrinks the solution such that the sum of squared contributions from the
+individual features are minimized \cite{Hoerl2000-ij}. Another solution to the
+problem is provided by the Lasso algorithm, which instead minimizes the sum of
+the absolute values of contributions of each feature \cite{Tibshirani1996-qs}.
+This tends to shrink to zero the contributions of many of the features,
+providing results that are both accurate and interpretable. When additional
+structure is available in the organization of the data, regularization
+algorithms can take advantage of this structure. For example, if the features
+lend themselves to a natural division into different groups, the group lasso
+(GL) can be used to select groups of features, rather than individual features
+\cite{Yuan2006-ky}. The Sparse Group Lasso (SGL) elaborates on this idea by
+providing control both of group sparsity, as well as overall sparsity of the
+solutions \cite{simon2013sgl}. Because the features measured with tractomery
+lend themselves to grouping based on the tracts from which each measurement is
+taken, GL and SGL provide a useful tool linear model fitting in problems of this
+form. Using linear regression as the basis for analysis is useful for both
+regression tasks, in which a continuous measure (e.g., age) is modeled, as well
+as for classification tasks, where a discrete property is modeled (e.g., whether
+an individual has a particular disease). Moreover, use of SGL helps derive
+informative properties of the human white matter, both in cases where the
+underlying causes of variance are sparsely concentrated (e.g., in one particular
+white matter tract) and in cases where biological substrates of differences
+between individuals are more widespread. This is because SGL is controlled by
+meta-parameters that set the degree to which group sparsity and overall sparsity
+are applied. These metaparameters can be set empirically, based on the data,
+through a process of nested cross-validation. We demonstrate these properties of
+the algorithm in data from previously published studies
+\cite{sarica2017corticospinal, yeatman2014lifespan}.

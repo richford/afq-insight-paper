@@ -1,5 +1,89 @@
 \section*{Results and discussion}
 
+We developed a method for analyzing dMRI tractometry data with SGL. We
+demonstrate the use of this method on two previously published datasets in both
+a classification setting and a regression setting.
+
+\subsection*{SGL accurately detects ALS in tractometry data in a classification setting}
+
+Using data from a previous study of the corticospinal tract (CST) profile and
+ALS\cite{sarica2017corticospinal}, we tested the performance of SGL in a
+classification setting. The previous study predicted ALS status with a mean
+accuracy of 80\% using a random forest algorithm based on a priori selection of
+features within the corticospinal tract. SGL delivers competitive predictive
+performance (mean 93\% $\pm$ 2\% accuracy, 0.978 $\pm$ 0.006 ROC AUC) without
+the need for a priori feature engineering. The results of the classification
+prediction are shown in Figure \ref{fig:class-results} with ``ground-truth'' ALS
+status separated into columns, and predicted ALS status encoded by color. In
+addition to this classification performance, SGL also identifies the white
+matter tracts most important for ALS classification. The relative importance of
+white matter features is captured in the $\beta$ coefficients from
+Eq~\eqref{eq:sgl}. Figure \ref{fig:class-profiles} depicts these coefficients along
+the right CST, plotted over the FA values for the control and ALS subject
+groups. We find that SGL selects FA metrics in the corticospinal tract and
+particularly in the right corticospinal tract as most important to ALS
+classification, confirming previous findings\cite{van2011upper,
+toosy2003diffusion, sarica2014tractography, sage2007quantitative,
+sage2009quantitative, karlsborg2004corticospinal, ellis1999diffusion,
+cosottini2005diffusion, ciccarelli2009investigation, abe2010voxel} and
+identifying the portions of the brain that were selected \emph{a priori} in the
+previous study from which we collected our data\cite{sarica2017corticospinal}.
+
+Analyzing the ways in which the model mislabels individuals may also provide
+insight. We found that mislabelled subjects are outliers relative to their group
+with respect to diffusion features of the CST. Figure \ref{fig:class-errors}
+depicts the group FA values along with FA values of mislabelled subjects, two
+false negatives and one false-positive. The false negative classifications have
+high FA in one of the two sections of the CST where $||\hat{\beta}|| > 0$ in
+Figure \ref{fig:class-profiles}. The false positive subject has an FA that
+oscillates between the two group means. Thus, the SGL method fails
+comprehensibly.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{classification_probs.png}
+    \includegraphics[width=0.45\textwidth]{classification_beta_bupu.png}
+
+    \caption{{\bf SGL accurately predicts ALS.}
+        Left: Classification probabilities for each subject's ALS diagnosis.
+        Controls are on the left while patients are on the right. Predicted
+        controls are in blue and predicted patients are in red. Thus, false
+        positive are represented as red dots on the left, while false negatives
+        are represented as blue dots on the right. The SGL algorithm achieves
+        93\% $\pm$ 2\% accuracy,with 0.978 $\pm$ 0.006 ROC AUC. Right: SGL
+        coefficients are presented on a skeleton of the major tracts. The brain
+        is oriented with the right hemisphere to our left and anterior out of
+        the page. As expected large negative coefficients are in the FA of the
+        CST (and particularly in the right hemisphere, here to the left)}
+    \label{fig:class-results}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{classification_tract_profiles.pdf}
+    \caption{{\bf Model coefficients mirror FA differences}. The places along the
+       length of the CST  where $\hat{\beta}$ coefficients for FA
+       (dashed line, right axis) have large negative values correspond to the
+       locations of substantial differences between the ALS (green) and control
+       (orange) FA (shaded area indicates standard error of the mean).}
+    \label{fig:class-profiles}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+        \includegraphics[width=0.95\textwidth]{classification_subjects_profiles.pdf}
+    \caption{{\bf Model mis-classifications correspond to features identified by
+       the model}. The FA in CST of individuals that are mis-classified by the
+       model is compared the group FA (with shaded are indicating standard error
+       of the mean). False negative classifications (individuals that have ALS,
+       but are classified as patients) correspond to high FA either in one of
+       the two regions of large $||\hat{\beta}||$ in
+       Figure \ref{fig:class-profiles}. The false positive classification has
+       an FA profile that oscillates between the two group means.
+   }
+    \label{fig:class-errors}
+\end{figure}
+
 \subsection*{SGL accurately predicts age from tractometry data in a regression setting}
 
 To test the performance of SGL with tractometry data in a continuous regression
@@ -66,81 +150,3 @@ parts of the tracts where these higher coefficients are found (Figure
     \label{fig:regress-beta}
 \end{figure}
 
-\subsection*{SGL accurately detects ALS in tractometry data in a classification setting}
-
-Using data from a previous study of the corticospinal tract (CST) profile and
-ALS\cite{sarica2017corticospinal}, we tested the performance of SGL in a
-classification setting. The previous study predicted ALS status with a mean
-accuracy of 80\% using a random forest algorithm based on a priori selection of
-features within the corticospinal tract. SGL delivers competitive predictive
-performance (mean 93\% $\pm$ 2\% accuracy, 0.978 $\pm$ 0.006 ROC AUC) without
-the need for a priori feature engineering. The results of the classification
-prediction are shown in Fig~\ref{fig:class-results} with ``ground-truth'' ALS
-status separated into columns, and predicted ALS status encoded by color. In
-addition to this classification performance, SGL also identifies the white
-matter tracts most important for ALS classification. The relative importance of
-white matter features is captured in the $\beta$ coefficients from
-Eq~\eqref{eq:sgl}. Fig~\ref{fig:class-profiles} depicts these coefficients along
-the right CST, plotted over the FA values for the control and ALS subject
-groups. We find that SGL selects
-FA metrics in the corticospinal tract and particualrly in the right
-corticospinal tract as most important to ALS classification, confirming previous
-findings\cite{van2011upper, toosy2003diffusion, sarica2014tractography,
-sage2007quantitative, sage2009quantitative, karlsborg2004corticospinal,
-ellis1999diffusion, cosottini2005diffusion, ciccarelli2009investigation,
-abe2010voxel} and identifying exactly the portions of the brain that were
-selected \emph{a priori} in the previous study from which we collected our
-data\cite{sarica2017corticospinal}.
-
-We also find that mislabelled subjects correspond to outlying features in the
-CST. Fig~\ref{fig:class-errors} depicts the group FA values along with
-FA values of mislabelled subjects, two false negatives and one false-positive.
-The false negative classifications have high FA in one of the two sections of
-the CST where $||\hat{\beta}|| > 0$ in Fig~\ref{fig:class-profiles}.
-The false positive subject has an FA that oscillates between the two group
-means. Thus, the SGL method fails comprehensibly.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{classification_probs.png}
-    \includegraphics[width=0.45\textwidth]{classification_beta_bupu.png}
-
-    \caption{{\bf SGL accurately predicts ALS.}
-        Left: Classification probabilities for each subject's ALS diagnosis.
-        Controls are on the left while patients are on the right. Predicted
-        controls are in blue and predicted patients are in red. Thus, false
-        positive are represented as red dots on the left, while false negatives
-        are represented as blue dots on the right. The SGL algorithm achieves
-        93\% $\pm$ 2\% accuracy,with 0.978 $\pm$ 0.006 ROC AUC. Right: SGL
-        coefficients are presented on a skeleton of the major tracts. The brain
-        is oriented with the right hemisphere to our left and anterior out of
-        the page. As expected large negative coefficients are in the FA of the
-        CST (and particularly in the right hemisphere, here to the left)}
-    \label{fig:class-results}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.95\textwidth]{classification_tract_profiles.pdf}
-    \caption{{\bf Model coefficients mirror FA differences}. The places along the
-       length of the CST  where $\hat{\beta}$ coefficients for FA
-       (dashed line, right axis) have large negative values correspond to the
-       locations of substantial differences between the ALS (green) and control
-       (orange) FA (shaded area indicates standard error of the mean).}
-    \label{fig:class-profiles}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-        \includegraphics[width=0.95\textwidth]{classification_subjects_profiles.pdf}
-    \caption{{\bf Model mis-classifications correspond to features identified by
-       the model}. The FA in CST of individuals that are mis-classified by the
-       model is compared the group FA (with shaded are indicating standard error
-       of the mean). False negative classifications (individuals that have ALS,
-       but are classified as patients) correspond to high FA either in one of
-       the two regions of large $||\hat{\beta}||$ in
-       Fig~\ref{fig:class-profiles}. The false positive classification has
-       an FA profile that oscillates between the two group means.
-   }
-    \label{fig:class-errors}
-\end{figure}
