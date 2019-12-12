@@ -18,15 +18,16 @@ anatomical location or diffusion property (e.g., FA in the CST) as well as
 phenomena that are widely distributed amongst brain regions and measured
 diffusion properties.
 
-Specifically, we demonstrated that the algorithm correctly detects the fact that
-ALS, which is a disease of lower motor neurons, is localized to the
-cortico-spinal tract. This recapitulates the results of previous analysis of
-these same data, using a targeted ROI-based approach
-\cite{sarica2017corticospinal}. In contrast, in analysis of biological age, the
-coefficients identified by the algorithm are very widely distributed across many
-parts of the white matter, mirroring previous results with this dataset that
-show a large and continuous distribution of life-span changes in white matter
-properties \cite{yeatman2014lifespan}.
+Specifically, we demonstrated that the algorithm correctly detects
+the fact that ALS, which is a disease of lower motor neurons, is
+localized to the cortico-spinal tract. This recapitulates the results
+of previous analysis of these same data, using a targeted ROI-based
+approach \cite{sarica2017corticospinal}. In contrast, for the analysis
+of biological age, the coefficients identified by the algorithm are very
+widely distributed across many parts of the white matter, mirroring
+previous results with this dataset (and others) that show a large and
+continuous distribution of life-span changes in white matter properties
+\cite{yeatman2014lifespan}.
 
 Taken together, these results demonstrate the promise of the group-regularized
 regression approach. Even at the scale of dozens of subjects, the results
@@ -52,23 +53,24 @@ important phenotypical data about brain health and about the participants'
 cognitive abilities. We also expect the group-regularized approach to improve
 with larger datasets.
 
-SGL has many other potential applications in neuroscience, because of the
-hierarchical and grouped nature of many of the data -- that are collected in
-multiple sample points within anatomically-defined areas. For example, this
-method may be useful to understand the relationship between fMRI recordings and
-behavior, where activity in each voxel may co-vary with voxels within the same
-anatomical region and form features and groups of features. Similarly,
-large-scale multi-electrode recordings of neural activity in awake behaving
-animals are becoming increasingly feasible \cite{steinmetz2018distributed,
-Jun2017-gv} and these recordings can form features (neurons) and groups (neurons
-within an anatomical region). More ambitiously perhaps, this approach may be
-used to understand the role of correlations in so-called resting-state fMRI
-time-series and behavior, where pairwise correlations between voxels in
-different anatomical regions are features in the matrix and features may be
-grouped by pairs of anatomical regions. Given the large number of voxels in the
-surface of the gray matter, and given that correlations increase the number of
-features by a factor of $n^2$ this would be a challenging problem to solve using
-SGL.
+SGL has many other potential applications in neuroscience, because
+of the hierarchical and grouped nature of many data types that are
+collected in multiple sample points within anatomically-defined areas.
+For example, this method may be useful to understand the relationship
+between fMRI recordings and behavior, where activity in each voxel
+may co-vary with voxels within the same anatomical region and form
+features and groups of features. Similarly, large-scale multi-electrode
+recordings of neural activity in awake behaving animals are becoming
+increasingly feasible \cite{steinmetz2018distributed, Jun2017-gv} and
+these recordings can form features (neurons) and groups (neurons within
+an anatomical region). More ambitiously perhaps, this approach may be
+used to understand the role of correlations in so-called resting-state
+fMRI time-series and behavior, where pairwise correlations between
+voxels in different anatomical regions are features in the matrix and
+features may be grouped by pairs of anatomical regions. Given the large
+number of voxels in the surface of the gray matter and given that
+correlations increase the number of features by a factor of $n^2$, this
+would pose a challenging problem to solve using SGL.
 
 The results we present here also motivate extensions of the method using more
 sophisticated cost functions. For example, the fused sparse group lasso (FSGL)
@@ -83,14 +85,15 @@ Similarly, unsupervised dimensionality reduction of tractometry data (e.g.,
 \cite{Chamberland2019-mu}) could also benefit from constraints based on
 grouping.
 
-The method is packaged as open-source software called AFQ-Insight that is openly
-available, and provides a clear API to allow for extensions of the method. The
-sofware integrates within a broader automated fiber quantification software
-ecosystem: AFQ \cite{yeatman2012tract}, which extracts tractometry data from raw
-and processed dMRI datasets, as well as AFQ-Browser, which visualizes
+The method is packaged as open-source software called AFQ-Insight
+that is openly available, and provides a clear API to allow
+for extensions of the method. The sofware integrates within a
+broader automated fiber quantification software ecosystem: AFQ
+\cite{yeatman2012tract}, which extracts tractometry data from raw and
+processed dMRI datasets, as well as AFQ-Browser, which visualizes
 tractometry data and facilitates sharing of the results of dMRI studies
-\cite{yeatman2018browser}. To facilitate reproducibility and ease use of the
-software, the results presented in this paper are also provided in
-\url{https://github.com/richford/afq-insight-paper} as a series of Jupyter
-notebooks \cite{kluyver2016jupyter}.
+\cite{yeatman2018browser}. To facilitate reproducibility and ease use
+of the software, the results presented in this paper are also provided
+in \url{https://github.com/richford/afq-insight-paper} as a series of
+Jupyter notebooks \cite{kluyver2016jupyter}.
 
