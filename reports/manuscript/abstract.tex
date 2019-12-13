@@ -20,17 +20,18 @@ tissue properties. The sparsity penalties for each of these constraints
 is identified using a nested cross-validation scheme that guards
 against over-fitting and simultaneously identifies the correct
 level of sparsity. We demonstrate the accuracy of the method in two
-settings: in a classification setting, patients with amyotrophic
+settings: i) In a classification setting, patients with amyotrophic
 lateral sclerosis (ALS) are accurately distinguished from matched
-controls\cite{sarica2017corticospinal} and SGL automatically identifies
-FA in the corticospinal tract as important for this classification --
-correctly finding the parts of the white matter known to be affected
-by the disease. In a regression setting, dMRI is used to accurately
-predict ``brain age'' \cite{yeatman2014lifespan, Brown2012-so}. In this
-case, the weights are distributed throughout the white matter indicating
-that many different regions of the white matter change with development
-and contribute to the prediction of age. Thus, SGL makes it possible
-to leverage the multivariate relationship between diffusion properties
-measured along multiple tracts to make accurate predictions of subject
-characteristics while simultaneously discovering the most relevant
-features of the white matter for the characteristic of interest.
+controls \cite{sarica2017corticospinal}. Furthermore, SGL automatically
+identifies FA in the corticospinal tract as important for this
+classification -- correctly finding the parts of the white matter known
+to be affected by the disease. ii) In a regression setting, dMRI is
+used to accurately predict ``brain age'' \cite{yeatman2014lifespan,
+Brown2012-so}. In this case, the weights are distributed throughout the
+white matter indicating that many different regions of the white matter
+change with development and contribute to the prediction of age. Thus,
+SGL makes it possible to leverage the multivariate relationship between
+diffusion properties measured along multiple tracts to make accurate
+predictions of subject characteristics while simultaneously discovering
+the most relevant features of the white matter for the characteristic of
+interest.
