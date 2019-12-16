@@ -15,21 +15,23 @@ characterizing individual differences in cognitive function,
 characterizing differences between populations and detecting brain
 abnormalities associated with disease \cite{Thomason2011-qn}.
 
-To relate the diffusion in each voxel to the macro-structure of long-range
-connections between different brain regions, methods for computational
-tract-tracing from diffusion MRI, or tractography, combine the estimates of
-fascicle orientations in each voxel to form streamlines that traverse the volume
-of the white matter \cite{Conturo1999-je, Mori2002-qi}. These methods have been
-under increased scrutiny and several lines of investigation have raised
-critiques of their validity \cite{Maier-Hein2017-vb, Thomas2014-ki}. On the
-other hand, there have been efforts to shore up the inferences made with these
-methods \cite{Pestilli2014NatMeth, Takemura2016-sh, Smith2013-nc, Smith2015-cx,
-Smith2015-zt, Rheault2018-wk}. Importantly, though discovering novel nerve fiber
-bundles requires extraordinary evidence, and delineating the exact cortical
-termination of the streamlines in the gray matter is still prone to error, there
-is little dispute that tractography can accurately define the location of
-several major white matter bundles that are known to exist within the core of
-the white matter \cite{Maier-Hein2017-vb}.
+To relate the diffusion in each voxel to the macro-structure of
+long-range connections between different brain regions, methods for
+computational tract-tracing from diffusion MRI, or tractography, combine
+the estimates of fascicle orientations in each voxel to form streamlines
+that traverse the volume of the white matter \cite{Conturo1999-je,
+Mori2002-qi}. These methods have been under increased scrutiny and
+several lines of investigation have raised critiques of their validity
+\cite{Maier-Hein2017-vb, Thomas2014-ki}. On the other hand, there
+have been efforts to shore up the inferences made with these methods
+\cite{Pestilli2014NatMeth, Takemura2016-sh, Smith2013-nc, Smith2015-cx,
+Smith2015-zt, Rheault2018-wk}. Importantly, though discovering novel
+nerve fiber tracts requires extraordinary evidence, and delineating
+the exact cortical termination of the streamlines in the gray matter
+is still prone to error, there is little dispute that tractography
+can accurately define the location of several major white matter
+tracts that are known to exist within the core of the white matter
+\cite{Maier-Hein2017-vb}.
 
 Leveraging this fact, one of the most powerful methods currently
 available to put macro- and micro-structure together is
@@ -38,21 +40,30 @@ matter along specific tracts \cite{Bells2011-cf}. Though there are
 several different available implementations of this overall idea,
 the principles are similar \cite{yeatman2012tract, Yendiki2011-ay,
 Wassermann2016-iv, ODonnell2009-uu}: tractometry begins by delineating
-the parts of the white matter that belong to different major tracts
-(i.e. bundles of streamlines), such as the corticospinal tract or arcuate
-fasciculus, and samples the biophysical properties (such as fractional
-anisotropy or mean diffusivity) along the length of these bundles.
-In some cases, tissue properties along the length of each bundle are
-summarized by taking the mean along each bundle, but there is a large
-body of evidence showing that there is systematic variability along
-the trajectory of each bundle. This justifies retaining the individual
-samples along the length of each bundle \cite{yeatman2012tract,
-colby2012, ODonnell2009-uu}. However, while this retains important
-information about each individual's white matter, it also presents
-statistical challenges due to the dimensionality of the data. Based on
-tractometry, researchers may choose to compare different individuals
-to each other. This is usually done following one of the following
-approaches:
+the parts of the white matter that belong to different major ``tracts''
+(i.e. anatomical or functional groups of white matter fibers),
+such as the corticospinal tract or arcuate fasciculus, assigning
+tractography generated streamlines to ``bundles,'' which approximate
+the anatomical tracts, and sampling biophysical properties (such
+as fractional anisotropy or mean diffusivity) along the length
+of these bundles. Whereas the identification of the anatomical
+correlates of tractography-generated streamlines is an open problem,
+the correspondence between tractometry's bundles and anatomical tracts
+is well supported. Tract-based diffusion metrics are therefore
+appropriate degrees of freedom with which to understand the
+white-matter correlates of cognitive function or disease.
+
+In some previous tractometry-based studies, tissue properties along
+the length of each tract were summarized by taking the mean along
+each bundle, but there is a large body of evidence showing that there
+is systematic variability along the trajectory of each bundle. This
+justifies retaining the individual samples along the length of each
+bundle \cite{yeatman2012tract, colby2012, ODonnell2009-uu}. While this
+retains important information about each individual's white matter, it
+also presents statistical challenges due to the dimensionality of the
+data. Based on tractometry, researchers may choose to compare different
+individuals to each other. This is usually done according to one of the
+following approaches:
 
 \begin{enumerate}
 
