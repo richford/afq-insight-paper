@@ -8,14 +8,14 @@ to quantify tissue properties (e.g. fractional anisotropy (FA),
 mean diffusivity (MD), etc.), along the trajectories of these
 connections\cite{yeatman2012tract}. Statistical inference from
 tractometry data usually either (a) averages these quantities along
-the length of the tract in each individual, or (b) performs analysis
-point-by-point along each tract, with group comparisons or regression
-models computed separately for each point along every one of the tracts.
+the length of the bundle in each individual, or (b) performs analysis
+point-by-point along each bundle, with group comparisons or regression
+models computed separately for each point along every one of the bundles.
 In the present work, we developed a method based on the sparse group
 lasso (SGL) \cite{simon2013sparse} that takes into account tissue
-properties measured along all of the tracts, and selects informative
+properties measured along all of the bundles, and selects informative
 features by enforcing sparsity, not only at the level of individual
-tracts, but also across the entire set of tracts and all of the measured
+bundles, but also across the entire set of bundles and all of the measured
 tissue properties. The sparsity penalties for each of these constraints
 is identified using a nested cross-validation scheme that guards
 against over-fitting and simultaneously identifies the correct
@@ -31,7 +31,7 @@ Brown2012-so}. In this case, the weights are distributed throughout the
 white matter indicating that many different regions of the white matter
 change with development and contribute to the prediction of age. Thus,
 SGL makes it possible to leverage the multivariate relationship between
-diffusion properties measured along multiple tracts to make accurate
+diffusion properties measured along multiple bundles to make accurate
 predictions of subject characteristics while simultaneously discovering
 the most relevant features of the white matter for the characteristic of
 interest.
