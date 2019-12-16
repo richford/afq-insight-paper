@@ -6,6 +6,18 @@ Two different previously-published datasets were used here:
 
 \begin{enumerate}
 
+\item Diffusion MRI from from a previous study of the corticospinal tract
+profile in patients with amyotrophic lateral sclerosis
+(ALS)\cite{sarica2017corticospinal}, containing data from 24 ALS patients and 24
+demographically matched healthy controls. These data were measured in a GE
+Discovery 750 3T MRI scanner at the Institute of Bioimaging and Molecular
+Physiology in Catanzaro. Informed consent was provided as approved by the
+Ethical Committee of the University ``Magna Graecia'' of Catanzaro. Voxel
+resolution was \num{2x2x2} $mm^3$ and 27 non-colinear directions were
+measured with a $b=1000$ $\frac{sec}{mm^2}$. Here, both motion correction and
+eddy current correction were applied before modeling the diffusioon tensor in
+each voxel. We will refer to this dataset as ALS.
+
 \item Diffusion MRI data from a previous study of properties of the white matter
 across the lifespan\cite{yeatman2014lifespan}, containing dMRI data from 76
 subjects with ages 6-50. These data were measured in a GE Discovery 750 3T MRI
@@ -21,18 +33,6 @@ robust fit \cite{chang2005restore}. These data were acquired using a dual spin
 echo sequence, in which there is sufficient time for eddy currents to subside
 between the application of the gradients and the image acquisition, so no eddy
 current correction was appliced. We will refer to this dataset as WH.
-
-\item Diffusion MRI from from a previous study of the corticospinal tract
-profile in patients with amyotrophic lateral sclerosis
-(ALS)\cite{sarica2017corticospinal}, containing data from 24 ALS patients and 24
-demographically matched healthy controls. These data were measured in a GE
-Discovery 750 3T MRI scanner at the Institute of Bioimaging and Molecular
-Physiology in Catanzaro. Informed consent was provided as approved by the
-Ethical Committee of the University ``Magna Graecia'' of Catanzaro. Voxel
-resolution was \num{2x2x2} $mm^3$ and 27 non-colinear directions were
-measured with a $b=1000$ $\frac{sec}{mm^2}$. Here, both motion correction and
-eddy current correction were applied before modeling the diffusioon tensor in
-each voxel. We will refer to this dataset as ALS.
 
 \end{enumerate}
 
