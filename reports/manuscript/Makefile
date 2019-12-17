@@ -9,7 +9,7 @@ CONTINUOUS=-pvc
 MAIN=paper
 
 SOURCES=$(MAIN).tex Makefile $(shell find sections/* -type f)
-FIGURES := $(shell find figures/* -type f)
+FIGURES := $(shell find ../figures/* -type f)
 
 all:    $(MAIN).pdf
 
@@ -45,6 +45,6 @@ spell: $(addsuffix .spchk,$(basename $(SOURCES)))
 	@aspell --lang=en --home-dir=. --personal=dictionary.txt -t -c $< 
 
 docx:
-	pandoc -s --biblio $(REPORT).bib $(REPORT).tex -o paper.docx
+	pandoc -s --biblio $(MAIN).bib $(MAIN).tex -o paper.docx
 
 .PHONY: clean force once all spell docx
