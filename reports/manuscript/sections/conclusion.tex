@@ -1,4 +1,4 @@
-\section*{Conclusion}
+\subsection*{Discussion}
 
 We present here a novel method for analysis of dMRI tractometry data that relies
 on the Sparse Group Lasso \cite{simon2013sparse} to (a) make accurate
@@ -29,18 +29,30 @@ previous results with this dataset (and others) that show a large and
 continuous distribution of life-span changes in white matter properties
 \cite{yeatman2014lifespan}.
 
-Taken together, these results demonstrate the promise of the group-regularized
-regression approach. Even at the scale of dozens of subjects, the results
-provided by SGL are both accurate, as well as interpretable
-\cite{Murdoch2019-ax}: tractometry capitalizes on domain knowledge to engineer
-meaningful features; SGL scores these features based on their relative
-importance; enables a visualization of these feature importance scores in the
-anatomical coordinate frame of the bundles (e.g., Figures \ref{fig:class-results}
-and fig:regress-beta) and provides a means to understand model errors (e.g.,
-Figure \ref{fig:class-errors}) . Thus, this multivariate analysis approach both
-(a) achieves high cross-validated accuracy for precision medicine applications
-of dMRI data and (b) identifies relevant features of brain anatomy that can
-further our neuroscientific understanding of clinical disorders.
+One drawback of our approach is also evident in the age regression results.
+There are portions of the bundle profiles in
+\cref{fig:age-results:wh-profile,fig:age-results:hbn-profile,fig:age-results:cc-profile}
+for which the $\hat{\beta}$ coefficients are zero but for which the bundle
+profiles clearly contain an age differentiating signal. While SGL correctly
+identifies certain features as important, it is not guaranteed to identify
+\emph{all} of the important features. It will identify a parsimonious set of
+important features, dense enough to predict the phenotype and sparse enough
+(at either the group or global level) to satisfy the sparsity constraints.
+
+Taken together, these results demonstrate the promise of the
+group-regularized regression approach. Even at the scale of dozens of
+subjects, the results provided by SGL are both accurate, as well as
+interpretable \cite{Murdoch2019-ax}: tractometry capitalizes on domain
+knowledge to engineer meaningful features; SGL scores these features based on
+their relative importance; enables a visualization of these feature
+importance scores in the anatomical coordinate frame of the bundles (e.g.,
+\cref{fig:class-results:coefs3d,fig:age-results:wh-coefs3d,fig:age-results:hbn-coefs3d,fig:age-results:cc-coefs3d})
+and provides a means to understand model errors (e.g.,
+\cref{fig:class-results:false-positives,fig:class-results:false-negatives}) .
+Thus, this multivariate analysis approach both (a) achieves high
+cross-validated accuracy for precision medicine applications of dMRI data and
+(b) identifies relevant features of brain anatomy that can further our
+neuroscientific understanding of clinical disorders.
 
 Neuroscience has entered an era in which consortium efforts are putting together
 large datasets of high-quality dMRI measurements to address a variety of

@@ -1,164 +1,141 @@
-\documentclass[10pt,letterpaper]{article}
-\usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
-
-% amsmath and amssymb packages, useful for mathematical formulas and symbols
-\usepackage{amsmath,amssymb}
-
-% Use adjustwidth environment to exceed column width (see example table in text)
-\usepackage{changepage}
-
-% Use Unicode characters when possible
-\usepackage[utf8x]{inputenc}
-
-% textcomp package and marvosym package for additional characters
-\usepackage{textcomp,marvosym}
-
-% cite package, to clean up citations in the main text. Do not remove.
-\usepackage{cite}
-
-% Use nameref to cite supporting information files (see Supporting Information section for more info)
-\usepackage{nameref,hyperref}
-
-% Use siunitx to interpret units correctly
-\usepackage[per-mode=symbol,group-separator={,},group-minimum-digits=4]{siunitx}
-
-% line numbers
-\usepackage[right]{lineno}
-
-% ligatures disabled
-\usepackage{microtype}
-\DisableLigatures[f]{encoding = *, family = * }
-
-% color can be used to apply background shading to table cells only
-\usepackage[table]{xcolor}
-
-% array package and thick rules for tables
-\usepackage{array}
-
-% create "+" rule type for thick vertical lines
-\newcolumntype{+}{!{\vrule width 2pt}}
-
-% create \thickcline for thick horizontal lines of variable length
-\newlength\savedwidth
-\newcommand\thickcline[1]{%
-  \noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
-  \cline{#1}%
-  \noalign{\vskip\arrayrulewidth}%
-  \noalign{\global\arrayrulewidth\savedwidth}%
-}
-
-% \thickhline command for thick horizontal lines that span the table
-\newcommand\thickhline{\noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
-\hline
-\noalign{\global\arrayrulewidth\savedwidth}}
-
-
-% Remove comment for double spacing
-%\usepackage{setspace}
-%\doublespacing
-
-% Text layout
-\raggedright
-\setlength{\parindent}{0.5cm}
-\textwidth 5.25in
-\textheight 8.75in
-
-% Bold the 'Figure #' in the caption and separate it from the title/caption with a period
-% Captions will be left justified
-\usepackage[aboveskip=1pt,labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=off]{caption}
-\renewcommand{\figurename}{Fig}
-
-% Remove brackets from numbering in List of References
-\makeatletter
-\renewcommand{\@biblabel}[1]{\quad#1.}
-\makeatother
-
-% Header and Footer with logo
-\usepackage{lastpage,fancyhdr,graphicx}
-\usepackage{epstopdf}
-%\pagestyle{myheadings}
-\pagestyle{fancy}
-\fancyhf{}
-%\setlength{\headheight}{27.023pt}
-%\lhead{\includegraphics[width=2.0in]{PLOS-submission.eps}}
-\rfoot{\thepage/\pageref{LastPage}}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
-\fancyheadoffset[L]{2.25in}
-\fancyfootoffset[L]{2.25in}
-\lfoot{\today}
-
-%% Include all macros below
-
-\newcommand{\lorem}{{\bf LOREM}}
-\newcommand{\ipsum}{{\bf IPSUM}}
-
-%% END MACROS SECTION
-
-\usepackage{graphicx}
-\usepackage{hyperref}
-\usepackage{mathtools}  % for \shortintertext{} and PairedDelimiter
+%% ****** Start of file apstemplate.tex ****** %
+%%
+%%   This file is part of the APS files in the REVTeX 4 distribution.
+%%   Version 4.1r of REVTeX, August 2010
+%%
+%%
+%%   Copyright (c) 2001, 2009, 2010 The American Physical Society.
+%%
+%%   See the REVTeX 4 README file for restrictions and more information.
+%%
+%
+% This is a template for producing manuscripts for use with REVTEX 4.0
+% Copy this file to another name and then work on that file.
+% That way, you always have this original template file to use.
+%
+% Group addresses by affiliation; use superscriptaddress for long
+% author lists, or if there are many overlapping affiliations.
+% For Phys. Rev. appearance, change preprint to twocolumn.
+% Choose pra, prb, prc, prd, pre, prl, prstab, prstper, or rmp for journal
+%  Add 'draft' option to mark overfull boxes with black boxes
+%  Add 'showpacs' option to make PACS codes appear
+%  Add 'showkeys' option to make keywords appear
+\documentclass[10pt,%
+               aps,%
+               prl,%
+               preprint,%
+               superscriptaddress,%
+               preprintnumbers,%
+               amsmath,%
+               floatfix,%
+               endfloats*]{revtex4-2}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc} 
+\usepackage[export]{adjustbox}  % Used to adjust figure frames
+\usepackage{subcaption}
+\usepackage{url}
+\usepackage{color}
 \usepackage{xcolor}
 \usepackage{listings}
+\usepackage{float}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{dcolumn}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage[inline]{enumitem}
+\usepackage[per-mode=symbol,group-separator={,},group-minimum-digits=4]{siunitx}
+\usepackage{todonotes}
+\usepackage{graphicx}
+\graphicspath{ {../paper_figures} }
 
-\graphicspath{ {../figures/} }
+%%% HELPER CODE FOR DEALING WITH EXTERNAL REFERENCES
+\usepackage{xr-hyper}
+\usepackage[pdftex,%
+            colorlinks=true,%
+            linkcolor=blue,%
+            citecolor=blue,%
+            urlcolor=blue,%
+            bookmarksnumbered=true,%
+            bookmarksopen=true]{hyperref}
+\usepackage[capitalize]{cleveref}
+\makeatletter
+\newcommand*{\addFileDependency}[1]{
+  \typeout{(#1)}
+  \@addtofilelist{#1}
+  \IfFileExists{#1}{}{\typeout{No file #1.}}
+}
+\makeatother
 
-\DeclarePairedDelimiter\p{(}{)}
-\DeclarePairedDelimiter\brkt{[}{]}
-\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\newcommand*{\myexternaldocument}[2][ext:]{
+    \externaldocument[#1]{#2}
+    \addFileDependency{#2.tex}
+    \addFileDependency{#2.aux}
+}
+%%% END HELPER CODE
 
-\newcommand{\ariel}[1]{{\color{blue} Ariel: [{#1}]}}
-\newcommand{\adam}[1]{{\color{green} Adam: [{#1}]}}
-\newcommand{\strike}[1]{{\color{red} Strikeout: [{#1}]}}
-\newcommand{\authoremail}[1]{\href{mailto:{#1}}{\textnormal{\texttt{{#1}}}}}
+% put all the external documents here!
+\myexternaldocument[supp:]{supplemental}
 
 \begin{document}
-\vspace*{0.2in}
 
-% Title must be 250 characters or less.
-\begin{flushleft}
-{\Large
-\textbf\newline{Multidimensional analysis and detection of informative features in diffusion MRI measurements of human white matter} % Please use "sentence case" for title and headings (capitalize only the first word in a title (or heading), the first word in a subtitle (or subheading), and any proper nouns).
+\title{Multidimensional analysis and detection of informative features in human white matter}
+
+\author{Adam \surname{Richie-Halford}}%
+\email{richford@uw.edu}%
+\affiliation{%
+    eScience Institute,%
+    University of Washington, Seattle,%
+    Washington 98195--1560, USA
 }
-\newline
-% Insert author names, affiliations and corresponding author email (do not include titles, positions, or degrees).
-\\
-Adam Richie-Halford\textsuperscript{1,*},
-Jason Yeatman\textsuperscript{2},
-Noah Simon\textsuperscript{3},
-Ariel Rokem\textsuperscript{4},
-\\
-\bigskip
-\textbf{1} Department of Physics, University of Washington, Seattle, WA, 98105, USA
-\\
-\textbf{2} Graduate School of Education and Division of Developmental and Behavioral Pediatrics, Stanford University, Stanford, CA, 94305, USA
-\\
-\textbf{3} Department of Biostatistics, University of Washington, Seattle, WA, 98105, USA
-\\
-\textbf{4} e{S}cience Institute, University of Washington, Seattle, WA, 98105, USA
-\\
-\bigskip
+  
+\author{Jason \surname{Yeatman}}%
+\affiliation{%
+    Graduate School of Education and Division of Developmental and Behavioral Pediatrics,%
+    Stanford University,%
+    Stanford, CA, 94305, USA
+}
 
-% Insert additional author notes using the symbols described below. Insert symbol callouts after author names as necessary.
-%
-% Use the asterisk to denote corresponding authorship and provide email address in note below.
-* richford@uw.edu
+\author{Noah \surname{Simon}}%
+\affiliation{%
+    Department of Biostatistics,%
+    University of Washington, Seattle,%
+    Washington 98195--1560, USA
+}
 
-\end{flushleft}
+\author{Ariel \surname{Rokem}}%
+\affiliation{%
+    Department of Psychology,%
+    University of Washington, Seattle,%
+    Washington 98195--1560, USA
+}
+  
+\date{\today}
 
 % Please keep the abstract below 300 words
+\input{output}
 \input{abstract}
 
-\input{author_summary}
+\maketitle
 
-\linenumbers
+\input{sections/introduction}
+\input{sections/results}
+\input{sections/conclusion}
+\input{sections/methods}
 
-\input{sections}
+\begin{acknowledgments}
+    {\it Acknowledgments.-}
+    This work was supported by BRAIN Iniative grant 1RF1MH121868-01 from the
+    National Institutes for Mental Health and by a grant from the Gordon \& Betty
+    Moore Foundation and the Alfred P. Sloan Foundation to the University of
+    Washington eScience Institute Data Science Environment. We would like to thank
+    Scott Murray for a useful discussion of the SGL method and Mareike Grotheer for
+    helpful comments on the manuscript.
+\end{acknowledgments}
 
-\nolinenumbers
+\printfigures
 
-% Use the PLoS provided BiBTeX style
-\bibliographystyle{plos2015}
+\bibliographystyle{naturemag}
 \bibliography{paper}
 
 \end{document}
