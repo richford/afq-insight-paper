@@ -116,8 +116,8 @@ colby2012, ODonnell2009-uu}. While this retains important information
 about each individual's white matter, it also presents statistical
 challenges due to the dimensionality of the data. In past work,
 comparisons between groups or across individuals were done
-independently at each node of each bundle, for each one of the
-diffusion metrics available at that point. This approach is exhaustive, but
+independently at each node of each bundle, for each
+diffusion metric. This approach is exhaustive, but
 statistical power is compromised by a multiple comparison problem
 \cite{colby2012, Nichols2002-zu, Nichols2003-yy}. An alternative that
 circumvents the multiple comparison problem is to select just a few
@@ -162,13 +162,14 @@ predict differences between individuals \cite{dayan2016profilometry}.
 
 %\end{enumerate}
 
-The present work aims to balance predictive
-accuracy with descriptive power \cite{Murdoch2019-ax, Breiman2001-uz}
-by capitalizing on all of the data across all bundles, while also retaining and
-elucidating spatial information about the locations that are most informative
-for discriminative performance. To do so, we use a linear modeling approach,
-which aims to redict phenotypical variance in a group of subjects, based on a
-linear combination of the features estimated with tractometry.
+The present work aims to balance predictive accuracy with descriptive power
+\cite{Murdoch2019-ax, Breiman2001-uz} by capitalizing on all of the available
+data across all bundles, while also retaining and elucidating spatial
+information about the locations that are most informative for discriminative
+performance. To do so, we use a linear modeling approach, which aims to
+redict phenotypical variance in a group of subjects (or classify group
+membership), based on a linear combination of the features estimated with
+tractometry.
 
 % Generally speaking, analysis methods should balance predictive
 % accuracy with descriptive power \cite{Murdoch2019-ax, Breiman2001-uz}.
