@@ -23,9 +23,9 @@
         ROC AUC of {\protect\alsRocAuc}.
         {\bf (b)} SGL coefficients are presented on the core fibers of major
         fiber bundles. They exhibit high group sparsity and are concentrated
-        in the fa of the CST. The brain is oriented with the right hemisphere
-        in the foreground and anterior to the right of the page. The CST\_L,
-        CST\_R, and CF\_A bundles are indicated for orientation.
+        in the FA of the CST. The brain is oriented with the right hemisphere
+        in the foreground and anterior to the right of the page. The CSTL,
+        CSTR, and CFA bundles are indicated for orientation.
         {\bf (c)} SGL identifies three portions of the CST as important,
         where $\hat{\beta}$ (dashed line, right axis) has large values. These
         are centered around nodes 30, 65, and 90, corresponding to locations
@@ -52,34 +52,38 @@ Using data from a previous study of the corticospinal tract (CST) profile and
 ALS \cite{sarica2017corticospinal}, we tested the performance of SGL in a
 classification setting. The previous study predicted ALS status with a mean
 accuracy of 80\% using a random forest algorithm based on a priori selection
-of features within the corticospinal tract. SGL delivers competitive
-predictive performance (mean {\alsAccuracy}\% accuracy, {\alsRocAuc} ROC AUC)
-without the need for a priori feature engineering. The results of the
-classification prediction are shown in \cref{fig:class-results:probs} with
-``ground-truth'' ALS status separated into columns, and predicted ALS status
-encoded by color. In addition to this classification performance, SGL also
-identifies the white matter tracts most important for ALS classification. The
-relative importance of white matter features is captured in the $\beta$
-coefficients from \cref{supp:eq:sgl}. \Cref{fig:class-results:tract-profiles}
-depicts these coefficients along the right CST, plotted over the FA values
-for the control and ALS subject groups. We find that SGL selects FA metrics
-in the corticospinal tract and particularly in the right corticospinal tract
-as most important to ALS classification, confirming previous findings
-\cite{van2011upper, toosy2003diffusion, sarica2014tractography,
-sage2007quantitative, sage2009quantitative, karlsborg2004corticospinal,
-ellis1999diffusion, cosottini2005diffusion, ciccarelli2009investigation,
-abe2010voxel} and identifying the portions of the brain that were selected
-\emph{a priori} in the previous study from which we collected our data
+of features within the CST. SGL delivers competitive
+predictive performance, with a cross-validated accuracy of {\alsAccuracy}\%
+and an area under the receiver operating characteristic curve (ROC AUC) of
+{\alsRocAuc}, all without the need for a priori feature engineering. The
+results of the classification prediction are shown in
+\cref{fig:class-results:probs} with ``ground-truth'' ALS status separated
+into columns, and predicted ALS status encoded by color. In addition to this
+classification performance, SGL also identifies the white matter tracts most
+important for ALS classification. The relative importance of white matter
+features is captured in the $\beta$ coefficients from \cref{supp:eq:sgl} of
+the supplemental material \cite{supplement}.
+\Cref{fig:class-results:tract-profiles} depicts these coefficients along the
+right CST, plotted over the FA values for the control and ALS subject groups.
+We find that SGL selects FA metrics in the corticospinal tract and
+particularly in the right corticospinal tract as most important to ALS
+classification, confirming previous findings \cite{van2011upper,
+toosy2003diffusion, sarica2014tractography, sage2007quantitative,
+sage2009quantitative, karlsborg2004corticospinal, ellis1999diffusion,
+cosottini2005diffusion, ciccarelli2009investigation, abe2010voxel} and
+identifying the portions of the brain that were selected \emph{a priori} in
+the previous study from which we collected our data
 \cite{sarica2017corticospinal}.
 
 The $\beta$ coefficients exhibit high bundle level sparsity; only some
 bundles are important, which can be be confirmed by observing the value of
-$\alpha$ in \cref{supp:eq:sgl}, the regularization hyperparameter that
-controls the mixture of the group lasso and lasso penalties. If $\alpha$ is
-closer to zero, it indicates that the phenotype in question preferentially
-correlates with only a few groups of covariates. For the ALS dataset, $\alpha
-= $ \alsLRatio, confirming that the white matter correlates of ALS reside
-mostly in one bundle, namely the CST.
+$\alpha$, the regularization hyperparameter that controls the mixture of the
+group lasso and lasso penalties
+(see \cref{supp:eq:sgl} of the supplemental material \cite{supplement}).
+If $\alpha$ is closer to zero, it indicates that the phenotype in question
+preferentially correlates with only a few groups of covariates. For the ALS
+dataset, $\alpha = $ \alsLRatio, confirming that the white matter correlates
+of ALS reside mostly in one bundle, namely the CST.
 
 Analyzing the ways in which the model mislabels individuals also provides
 insight. We found that mislabelled subjects are outliers relative to their
@@ -141,44 +145,43 @@ fails comprehensibly.
 \subsubsection*{SGL accurately predicts age from tractometry data}
 
 To test the performance of SGL with tractometry data in a continuous
-regression task, we focus here on the prediction of biological age based on
-tractometry data in three datasets named WH, HBN, and Cam-CAN (see
-\cref{supp:sec:data} for further details). Prediction of ``brain age'' is a
-commonly undertaken task in neuroimaging machine learning, in part because
-these predictions, and deviations therefrom, may be diagnostic of overall
-brain health (for a review, see \textcite{Cole2019-rz}). However, as
-\textcite{nelson2019biomarkers} have observed, aging biomarkers are subject
-to unique challenges and tend to be noncausative. Our interest in aging here
-relies on its utility as a methodological benthmark. Biological age operates
-on a natural scale, with meaningful and easily understood units, and it's
-popularity as a machine learning target makes it valuable for comparisons
-with other studies.
+regression task, we focus here on the prediction of biological age in three
+datasets named WH, HBN, and Cam-CAN (see supplemental material
+\cite{supplement} for a description of each dataset). Prediction of ``brain
+age'' is a commonly undertaken task in neuroimaging machine learning, in part
+because these predictions, and deviations therefrom, may be diagnostic of
+overall brain health (for a review, see Cole et al.~\cite{Cole2019-rz}).
+However, as Nelson et al.~\cite{nelson2019biomarkers} have observed, aging
+biomarkers are subject to unique challenges and tend to be noncausative. Our
+interest in aging here relies on its utility as a methodological benthmark.
+Biological age operates on a natural scale, with meaningful and easily
+understood units, and it's popularity as a machine learning target makes it
+valuable for comparisons with other studies.
 
 The WH \cite{yeatman2014lifespan}, HBN \cite{alexander2017open}, and Cam-CAN
 \cite{shafto2014cambridge,taylor2017cambridge} datasets used here contain
 data from 76, 978, and 640 subjects, respectively, ranging from 6-50, 5-21,
 and 18-88 years of age, respectively. In each case, biological age was used
-as the predicted variable ($y$ in \cref{supp:eq:lm}). SGL was fit to
-tractometry-extracted features in 18 major brain tracts: DTI FA and DTI MD
-for WH and DKI FA and DKI MD for HBN and Cam-CAN, with each tract divided
-into 100 nodes.
+as the predicted variable $y$. SGL was fit to the tractometry-extracted
+features FA and MD in 18 major brain tracts, with diffusion metrics extracted
+from diffusion tensor imaging (DTI) for the WH dataset and diffusion kurtosis
+imaging (DKI) \cite{jensen2005diffusion} the HBN and Cam-CAN datasets.
 
 To evaluate the fit of the model, we used a nested cross-validation
 procedure. In this procedure, batches of subjects are held out. For each
 batch (or fold), the model is fully fit without this data. Then, once the
 parameters are fixed, the model is inverted to predict the ages of held out
 subjects based on the linear coeffiecients. This scheme automatically finds
-the right level of regularization (i.e., sparseness) and fits the
-coefficients to the ill-posed linear model, while guarding against
-overfitting. SGL accurately predicts the age of the subjects in this
-procedure, with a median absolute error of 2.8 years, 1.5 years, and 6.0
-years for WH, HBN, and Cam-CAN, respectively and coefficients of
-determination $R^2 = $ {\whRsq} , {\hbnRsq}, and {\camcanRsq}, respectively (see
-\cref{fig:age-results}, top panels). The predictions for Cam-CAN are
-competitive with a recent state of the art prediction
-\cite{mcpherson2020single}, which used streamline density to estimate the
-brain's structural connectivity and achieved $R^2 = 0.63$. The median
-absolute errors are also lower than the results of a recent study that
+the right level of sparsity and fits the coefficients to the ill-posed linear
+model, while guarding against overfitting. SGL accurately predicts the age of
+the subjects in this procedure, with a median absolute error of {\whMae},
+{\hbnMae}, and {\camcanMae} years for the WH, HBN, and Cam-CAN datasets,
+respectively and coefficients of determination $R^2 = $ {\whRsq} , {\hbnRsq},
+and {\camcanRsq}, respectively (see \cref{fig:age-results}, top panels). The
+predictions for Cam-CAN are competitive with a recent state of the art
+prediction \cite{mcpherson2020single}, which used streamline density to
+estimate the brain's structural connectivity and achieved $R^2 = 0.63$. The
+median absolute errors are also lower than the results of a recent study that
 predicted age in a large sample, based on diffusion MRI features
 \cite{Richard2018-ux}.
 

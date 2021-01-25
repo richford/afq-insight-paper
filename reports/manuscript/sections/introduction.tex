@@ -17,20 +17,20 @@
         {\bf (a)} Whole brain tractography generates streamlines approximating
         the trajectories of white matter connections.
         {\bf (b)} Tractometry classifies these streamlines into anatomical bundles.
-        In this case, we show the left corticospinal tract (CST\_L) over a mid-saggital
+        In this case, we show the left corticospinal tract (CSTL) over a mid-saggital
         anatomical slice.
         {\bf (c)} Tractometry further extracts bundle profiles,
         quantifications of various diffusion metrics along the length of the
-        fiber bundle. Here, we show one subject's fractional anisotropy (fa)
-        profile for CST\_L.
+        fiber bundle. Here, we show one subject's fractional anisotropy (FA)
+        profile for CSTL.
         {\bf (d)} the phenotypical target data and tractometric features can
         be organized into a linear model, $\hat{y} = \mathbf{X}
         \hat{\beta}$. The feature matrix $\mathbf{X}$ is color-coded
         to reveal a natural group structure: the left (orange) group
-        contains $k$ features from the CST\_L, the middle (green) group
-        contains $k$ features from the left cingulum cingulate (CGC\_L),
+        contains $k$ features from the CSTL, the middle (green) group
+        contains $k$ features from the left cingulum cingulate (CGCL),
         and the right (blue) group
-        contains $k$ features from the left arcuate (ARC\_L). The coefficients in
+        contains $k$ features from the left arcuate (ARCL). The coefficients in
         $\hat{\beta}$ follow the same natural grouping.
         % Cross-validation:
         % we evaluate model quality using a nested $k$-fold cross validation
@@ -93,8 +93,8 @@ the parts of the white matter that belong to different major ``tracts''
 (i.e. anatomical or functional groups of white matter fibers), such as
 the corticospinal tract or arcuate fasciculus, assigning tractography
 generated streamlines to ``bundles,'' which approximate the anatomical
-tracts, and sampling biophysical properties (such as fractional
-anisotropy or mean diffusivity) along the length of these bundles.
+tracts, and sampling biophysical properties, such as fractional
+anisotropy (FA) or mean diffusivity (MD), along the length of these bundles.
 the parts of the white matter that belong to different major tracts
 (i.e. anatomical or functional groups of white matter fibers), such as
 the corticospinal tract or arcuate fasciculus, assigning tractography

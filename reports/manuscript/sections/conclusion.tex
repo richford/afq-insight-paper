@@ -1,33 +1,33 @@
 \subsection*{Discussion}
 
-We present here a novel method for analysis of dMRI tractometry data that relies
-on the Sparse Group Lasso \cite{simon2013sparse} to (a) make accurate
+We present here a novel method for analysis of dMRI tractometry data that
+relies on the Sparse Group Lasso \cite{simon2013sparse} to (a) make accurate
 predictions of phenotypic properties of individual subjects while,
-simultaneously, (b) identifying the features of the white matter that are most
-important for this prediction in a completely data-driven approach. The method
-is broadly applicable to a wide range of research questions: it performs well in
-predicting both continuous variables, such as biological age, as well as
-categorical variables, such as whether a person is a patient or a healthy
-control. In both of these cases, SGL out-performs previous algorithms that have
-been developed for these tasks \cite{sarica2017corticospinal, Richard2018-ux}.
-The nested cross-validation approach used to fit the model and make both
-predictions and inferences from the model guards against overfitting and tunes
-the degree of sparseness required by the algorithm. This means that SGL can
-accurately describe phenomena that are locally confined to a particular
+simultaneously, (b) identifying the features of the white matter that are
+most important for this prediction in a completely data-driven approach. The
+method is broadly applicable to a wide range of research questions: it
+performs well in predicting both continuous variables, such as biological
+age, as well as categorical variables, such as whether a person is a patient
+or a healthy control. In both of these cases, SGL out-performs previous
+algorithms that have been developed for these tasks
+\cite{sarica2017corticospinal, Richard2018-ux, mcpherson2020single}. The
+nested cross-validation approach used to fit the model and make both
+predictions and inferences from the model guards against overfitting and
+tunes the degree of sparseness required by the algorithm. This means that SGL
+can accurately describe phenomena that are locally confined to a particular
 anatomical location or diffusion property (e.g., FA in the CST) as well as
 phenomena that are widely distributed amongst brain regions and measured
 diffusion properties.
 
-Specifically, we demonstrated that the algorithm correctly detects
-the fact that ALS, which is a disease of lower motor neurons, is
-localized to the cortico-spinal tract. This recapitulates the results
-of previous analysis of these same data, using a targeted ROI-based
-approach \cite{sarica2017corticospinal}. In contrast, for the analysis
-of biological age, the coefficients identified by the algorithm are very
-widely distributed across many parts of the white matter, mirroring
-previous results with this dataset (and others) that show a large and
-continuous distribution of life-span changes in white matter properties
-\cite{yeatman2014lifespan}.
+Specifically, we demonstrated that the algorithm correctly detects the fact
+that ALS, which is a disease of lower motor neurons, is localized to the
+cortico-spinal tract. This recapitulates the results of previous analysis of
+these same data, using a targeted ROI-based approach
+\cite{sarica2017corticospinal}. In contrast, for the analysis of biological
+age, the coefficients identified by the algorithm are very widely distributed
+across many parts of the white matter, mirroring previous results that show a
+large and continuous distribution of life-span changes in white matter
+properties \cite{yeatman2014lifespan}.
 
 One drawback of our approach is also evident in the age regression results.
 There are portions of the bundle profiles in
@@ -54,7 +54,7 @@ cross-validated accuracy for precision medicine applications of dMRI data and
 (b) identifies relevant features of brain anatomy that can further our
 neuroscientific understanding of clinical disorders.
 
-Neuroscience has entered an era in which consortium efforts are putting together
+Neuroscience has entered an era in which consortium efforts are amassing
 large datasets of high-quality dMRI measurements to address a variety of
 scientific questions \cite{jernigan2016ping, jernigan2018abcd,
 alexander2017open, Miller2016-hw, VanEssen2012}. The volume and complexity of

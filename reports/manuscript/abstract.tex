@@ -5,7 +5,7 @@
     uses diffusion-weighted magnetic resonance imaging (dMRI) data
     to quantify tissue properties (e.g. fractional anisotropy (FA),
     mean diffusivity (MD), etc.), along the trajectories of these
-    connections\cite{yeatman2012tract}. Statistical inference from
+    connections \cite{yeatman2012tract}. Statistical inference from
     tractometry usually either (a) averages these quantities along
     the length of each bundle in each individual, or (b) performs analysis
     point-by-point along each bundle, with group comparisons or regression
@@ -17,15 +17,17 @@
     properties measured along all of the bundles, and selects informative
     features by enforcing sparsity, not only at the level of individual
     bundles, but also across the entire set of bundles and all of the measured
-    tissue properties. The sparsity penalties for each of these constraints
-    is identified using a nested cross-validation scheme that guards
-    against over-fitting and simultaneously identifies the correct
-    level of sparsity. We demonstrate the accuracy of the method in two
+    tissue properties.
+    % The sparsity penalties for each of these constraints
+    % is identified using a nested cross-validation scheme that guards
+    % against over-fitting and simultaneously identifies the correct
+    % level of sparsity.
+    We demonstrate the accuracy of the method in two
     settings: i) In a classification setting, patients with amyotrophic
     lateral sclerosis (ALS) are accurately distinguished from matched
     controls \cite{sarica2017corticospinal}. Furthermore, SGL automatically
     identifies FA in the corticospinal tract as important for this
-    classification -- correctly finding the parts of the white matter known
+    classification, correctly finding the parts of the white matter known
     to be affected by the disease. ii) In a regression setting, dMRI is
     used to accurately predict ``brain age'' \cite{yeatman2014lifespan,
     Brown2012-so}. In this case, the weights are distributed throughout the

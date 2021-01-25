@@ -112,12 +112,6 @@
 
 \date{\today}
 
-\preprint{NT@UW-20-21}
-%\pacs{}
-\begin{abstract}
-In these supplemental materials we present\ldots
-\end{abstract}
-
 \maketitle
 
 \makeatletter
@@ -126,7 +120,7 @@ In these supplemental materials we present\ldots
 \tableofcontents
 
 %\newpage
-\section{Online Methods}
+\section{Methods}
 \label{sec:methods}
 
 \subsection{Data}
@@ -255,12 +249,11 @@ streamlines. This means that streamlines that are more representative of
 the tract contribute more to the bundle profile, relative to streamlines
 that are on the edge of the tract.
 
-Data from the HBN and Cam-CAN studies were processed using the updated
-Python Automated Fiber Quantification toolbox (\texttt{pyAFQ}).
-\todo[inline]{Add pyAFQ citation} In addition to demonstrating the our
-analysis pipeline is robust to changes in the platform and version number of
-tractometry software, the use of the updated \texttt{pyAFQ} capitalized upon
-the following three improvements over the legacy Matlab version
+Data from the HBN and Cam-CAN studies were processed using the updated Python
+Automated Fiber Quantification toolbox (\texttt{pyAFQ})\todo{Add pyAFQ
+citation}. In addition to demonstrating the our analysis pipeline is robust
+to changes in tractometry software, the use of the updated \texttt{pyAFQ}
+capitalized upon the following improvements over the legacy Matlab version
 \begin{enumerate*}[%
     label=(\roman*),%
     before=\unskip{: },%
@@ -270,8 +263,6 @@ the following three improvements over the legacy Matlab version
     \cite{gorgolewski2016brain}
     \item the calculation of diffusion kertosis imaging (DKI
     \cite{jensen2005diffusion}) metrics
-    \item the exclusion of the Cingulum Hippocampus bundles, which
-    demonstrated low reliability in the legacy \texttt{mAFQ}.
 \end{enumerate*}
 We will refer to the \texttt{mAFQ} and \texttt{pyAFQ} pipeline collectively
 as \texttt{AFQ}.
@@ -288,6 +279,7 @@ variables while the bundle profiles form the feature or predictor
 variables (See \cref{main:fig:methods:group-structure} in the main text).
 
 \subsection{Sparse Group Lasso}
+\label{sec:sgl}
 
 Before fitting a model to the data, imputation and standardization are
 performed. Missing node values (e.g., in cases where \texttt{AFQ} designates
@@ -378,6 +370,22 @@ reduces to the group lasso\cite{yuan2006model}. Thus, the model
 hyperparameter $\alpha$ controls the combination of group-lasso and lasso.
 The hyperparameter $\lambda$ controls the strength of the regularization.
 
+\subsubsection{Bagging meta-estimators}
+
+\Cref{sec:sgl} describes a single SGL model. To further improve model
+performance, we create ensemble models composed of $m = 20$ individual SGL
+models using bootstrap aggregation (bagging) \cite{breiman1996bagging}.
+Bagging relies on the underlying assumption that some of the error in a
+single SGL model's prediction stems from a mismatch in the distributions of
+training data used to fit the model and test data used to evaluate its
+performance. To overcome this, bagging invokes the same base estimator (e.g.
+SGL) many times with different training sets, which are created by sampling
+the original training samples with replacement. The bagging meta-estimator's
+prediction is then the average of its constituent estimators' predictions.
+Likewise, when we report the hyperparameter values $\alpha$ and $\lambda$, or
+regression coefficients $\hat{\beta}$, we are refering to these values
+averaged over 20 estimators in the bagging meta-estimator.
+
 \subsubsection{Incorporating target transformations}
 
 Often, the target variable $y$ is not in the domain in which the linear
@@ -389,7 +397,7 @@ modified as:
 \end{equation}
 where the transformation function $f^{-1}$ characterizes the transform
 applied to the data before fitting the linear coefficients. For example,
-For the WH, HBN, and Cam-CAN datasets, we use a logarithmic transform,
+for the WH, HBN, and Cam-CAN datasets, we use a logarithmic transform,
 \begin{equation}
     f \left( \hat{y} \right) = \ln \left( \hat{y} \right)
     \label{eq:log-nonlinearity}
@@ -416,6 +424,23 @@ negative log likelihood of the SGL classifier giving the ``true'' label:
 
 \subsection{Implementation, cross-validation and metaparameter optimization}
 
+\begin{figure}[!h]
+    \includegraphics[width=\columnwidth]{nested-cross-validation.pdf}
+    \caption{{\bf Nested cross-validation}
+        \label{fig:nested-cross-val}
+        We evaluate model quality using a nested $k$-fold cross validation
+        scheme. At level-0, the input data is decomposed into $k_0$ shuffled
+        groups and optimal hyperparameters are found for the level-0 training
+        set. To avoid overfitting, the optimal hyperparameters are themselves
+        evaluated using a cross-validation scheme taking place at level-1 of
+        the decomposition, where each level-0 training set is further
+        decomposed into $k_1 = 3$ shuffled groups. In the classification
+        case, the training and test splits are stratified by diagnosis. For
+        the ALS and WH data, $k_0 = 10$, while for the HBN and Cam-CAN data,
+        $k_0 = 5$.
+    }
+\end{figure}
+
 Because the SGL is not specific to tractometry, we implement its solution as
 a separate Python package called \texttt{groupyr} \cite{groupyr}.
 \texttt{Groupyr} solves the cost function in \cref{eq:sgl} using proximal
@@ -434,50 +459,35 @@ yield the best cross-validated performance using either
     library \cite{scikit_optimize}.
 \end{enumerate*}
 
-\todo[inline]{%
-    Rewrite the remainder of this section to reflect \texttt{groupyr} changes.
-}
-
 To objectively evaluate the model performance and guard against over-fitting,
-we used a nested cross-validation scheme, depicted in
-\cref{main:fig:methods:cross-val} for the categorical classification case.
-The subjects (i.e. rows of the feature matrix $\mathbf{X}$ in
-\cref{main:fig:methods:group-structure} and \cref{eq:lm}) are shuffled and
-then decomposed into $k$ batches, hereafter referred to as folds. For
-the ALS dataset we used $k=10$ and for the WH dataset $k=5$. For each
-unique fold, we hold that fold out as the test\textsubscript{outer} set
-and let the remaining data comprise the train\textsubscript{outer} set,
-with the subscript indicating the depth of the nested decomposition.
-We further decompose each train\textsubscript{outer} set into three
-folds, and again for each unique fold, we hold out that fold as the
-test\textsubscript{inner} set and let the remaining data comprise the
-train\textsubscript{inner} set. At level-1 of the decomposition, we fit
-an SGL model using fixed regularization meta-parameters $\alpha$
-and $\lambda$, training the model using train\textsubscript{inner}
-and evaluating the fit on test\textsubscript{inner}. We find
-the optimal values for $\alpha$ and $\lambda$ using
-hyperoptimization, implemented using the hyperopt library's \verb|fmin|
-function\cite{Bergstra_2015} with a tree of Parzen estimators search
-algorithm\cite{bergstra2011algorithms}. For continuous numerical $y$,
-\verb|fmin| searches for meta-parameter values that minimize the median
-absolute error. This can also be done minimizing the root of the mean
-squared error (RMSE) or to maximizing the coefficient of determination
-($R^2$). For binary categorical $y$ \verb|fmin| seeks to maximize the
-classification accuracy. This can also be done maximizing the area
-under the receiver operating curve (ROC AUC) or the average precision.
-Using hyperoptimization, we find optimal regularization parameters and
-$\hat{\beta}$ for each train\textsubscript{outer} set and then use those
-to predict values for data in test\textsubscript{outer}. Thus each
-subject in the dataset has a predicted phenotype derived from a model
-that never saw its particular subject's data.
-
-The above procedure describes $k$-fold cross validation. In fact, we use
-repeated $k$-fold cross validation on the outer level of the decomposition, so
-that the input data is decomposed into $k$ folds, three times. Thus, each
-subject has three predicted phenotypes. We then take the mean predicted value to
-summarize the performance of the model. In the classification case, the
-shuffling into folds is stratified such that each fold has a population that
-preserves the percentage of each class found in the larger input data.
+we used a nested cross-validation scheme, which is depicted for the binary
+classification case in \cref{fig:nested-cross-val}. The subjects (i.e. rows
+of the feature matrix $\mathbf{X}$ in \cref{main:fig:methods:group-structure}
+and \cref{eq:lm}) are first shuffled and then decomposed into $k_0$ batches,
+hereafter referred to as folds. For the ALS and WH datasets, we used $k_0 =
+10$ and for the HBN and Cam-CAN datasets, $k_0 = 5$. For each unique fold, we
+hold that fold out as the test\textsubscript{0} set and let the remaining
+data comprise the train\textsubscript{0} set, with the subscript indicating
+the depth of the nested decomposition. We further decompose each
+train\textsubscript{0} set into three folds, and again for each unique fold,
+we hold out that fold as the test\textsubscript{1} set and let the remaining
+data comprise the train\textsubscript{1} set. At level-1 of the
+decomposition, we fit an SGL model using fixed regularization meta-parameters
+$\alpha$ and $\lambda$, training the model using train\textsubscript{1} and
+evaluating the fit on test\textsubscript{1}. We find the optimal values for
+$\alpha$ and $\lambda$ using sequential model based optimization, implemented
+using the scikit-optimize \verb|BayesSearchCV| class\cite{scikit-optimize}.
+For continuous numerical $y$, \verb|BayesSearchCV| searches for
+meta-parameter values that maximize the $R^2$ averaged over test sets. For
+binary categorical $y$ \verb|BayesSearchCV| seeks to maximize the
+classification accuracy. Using hyperoptimization, we find optimal
+regularization parameters and $\hat{\beta}$ for each train\textsubscript{0}
+set and then use those to predict values for data in test\textsubscript{0}.
+Thus each subject in the dataset has a predicted phenotype derived from a
+model that never saw its particular subject's data. In the classification
+case, the shuffling into folds is stratified such that each fold has a
+population that preserves the percentage of each class found in the larger
+input data.
 
 \subsection{Software implementation}
 
@@ -485,26 +495,26 @@ The full software implementation of the SGL approach presented here is available
 in a Python software package called AFQ-Insight, which is developed publicly in
 \url{https://github.com/richford/afq-insight}. The version of the code used to
 produce the results herein is also available in
-\url{https://doi.org/10.5281/zenodo.3585942}.
-\todo[inline]{Update version here}
+\url{https://doi.org/10.5281/zenodo.3585942}\todo{Update version here}.
 AFQ-Insight reads the target and feature data that has been processed by AFQ
 from comma separated value (CSV) files conforming to the AFQ-Browser data
 format \cite{yeatman2018browser} and represents them internally as
-\lstinline{DataFrame} objects from the pandas Python
-library \cite{mckinney2010data}. The software provides different options for
-imputing missing data in the feature matrix. Missing interior nodes are imputed
-using linear interpolation. For missing exterior nodes, the user may choose
-between linear extrapolation and constant forward(back)-fill. Imputation uses
-only values from adjacent nodes in the same white matter bundle in the same
-subject so there is no danger of data leakage from other subjects. It uses the
-scikit-learn \cite{scikit-learn} library to decompose input data into separate
-test and train datasets, to scale each feature to have zero mean and
+\lstinline{DataFrame} objects from the pandas Python library
+\cite{mckinney2010data}. The software provides different options for imputing
+missing data in the feature matrix. Missing interior nodes are imputed using
+linear interpolation. For missing exterior nodes, the user may choose between
+linear extrapolation and constant forward(back)-fill. Imputation uses only
+values from adjacent nodes in the same white matter bundle in the same
+subject so there is no danger of data leakage from other subjects. It uses
+the scikit-learn \cite{scikit-learn} library to decompose input data into
+separate test and train datasets, to scale each feature to have zero mean and
 unit variance, and to evaluate each fit in the hyperparameter search using
 appropriate classification and regression metrics such as accuracy, area
-under the receiver operating curve (AUC ROC), and coefficient of determination
-($R^2$). For each set of hyperparameters, we solve the SGL using a custom
-proximal operator supplied to the C-OPT library\cite{copt}. Appropriate
-hyperparameters are found using the hyperopt library\cite{Bergstra_2015}.
+under the receiver operating curve (AUC ROC), and coefficient of
+determination ($R^2$). For each set of hyperparameters, we solve the SGL
+problem using the \texttt{groupyr} library \cite{groupyr}. Appropriate
+hyperparameters are found using the scikit-optimize library
+\cite{scikit-optimize}.
 
 \section{Bundle and coefficient profiles}
 \label{sec:bundle-profiles}
@@ -512,28 +522,33 @@ hyperparameters are found using the hyperopt library\cite{Bergstra_2015}.
 Here, we present the bundle profiles and $\hat{\beta}$ coefficients
 for each dataset. Throughout this section, diffusion metrics are plotted
 along the length of eighteen bundles: 
-right corticospinal (CST\_R),
-left corticospinal (CST\_L),
-right uncinate (UNC\_R),
-left uncinate (UNC\_L),
-left inferior fronto-occipital fasciculus (IFO\_L),
-right inferior fronto-occipital fasciculus (IFO\_R),
-right arcuate (ARC\_R),
-left arcuate (ARC\_L),
-right thalamic radiation (ATR\_R),
-left thalamic radiation (ATR\_L),
-right cingulum cingulate (CGC\_R),
-left cingulum cingulate (CGC\_L),
-callosum forceps major (FP),
-callosum forceps minor (FA),
-right inferior longitudinal fasciculus (ILF\_R),
-left inferior longitudinal fasciculus (ILF\_L),
-right superior longitudinal fasciculus (SLF\_R),
-and left superior longitudinal fasciculus (SLF\_L).
+right corticospinal (CSTR),
+left corticospinal (CSTL),
+right uncinate (UNCR),
+left uncinate (UNCL),
+left inferior fronto-occipital fasciculus (IFOL),
+right inferior fronto-occipital fasciculus (IFOR),
+right arcuate (ARCR),
+left arcuate (ARCL),
+right thalamic radiation (ATRR),
+left thalamic radiation (ATRL),
+right cingulum cingulate (CGCR),
+left cingulum cingulate (CGCL),
+callosum forceps major (CFP),
+callosum forceps minor (CFA),
+right inferior longitudinal fasciculus (ILFR),
+left inferior longitudinal fasciculus (ILFL),
+right superior longitudinal fasciculus (SLFR),
+and left superior longitudinal fasciculus (SLFL).
 We display results for two different diffusion metrics: fractional anisotropy
-(fa) and mean diffusivity (md). We use lower-case letters to abbreviate the
-diffusion metrics and distinguish fractional anisotropy (fa) from the
-callosum forceps minor (FA).
+(FA) and mean diffusivity (MD), which are extracted from different diffusion
+models depending on the dataset: diffusion tensor imaging (DTI) for the ALS
+and WH datasets and diffusion kurtosis imaging (DKI) for the HBN and Cam-CAN
+datasets \cite{jensen2005diffusion}. The diffusion metric is always plotted
+on the left $y$-axis while the $\hat{\beta}$ coefficients are displayed on
+the twin axis on the right-hand-side. The scale of the $\hat{\beta}$-axis is
+shared between the FA and MD metrics so that one can compare the relative
+imporance of each metric.
 
 \subsection{ALS bundle profiles}
 
@@ -541,7 +556,7 @@ callosum forceps minor (FA).
     \includegraphics[width=\textwidth]{sarica_coefs_profiles_fa.pdf}
     \caption{%
         {%
-            \bf Fractional anisotropy (fa) bundle profiles and $\hat{\beta}$
+            \bf Fractional anisotropy (FA) bundle profiles and $\hat{\beta}$
             coefficients for ALS classification.
         }
         \label{fig:als-bp:fa}
@@ -549,15 +564,27 @@ callosum forceps minor (FA).
 \end{figure*}
 
 \Cref{fig:als-bp:fa,fig:als-bp:md} show the bundle profiles and regression
-coefficients for the ALS dataset fa and md metrics, respectively. The scale
-of the $\hat{\beta}$ axes is shared between the fa and md figures to
-highlight the relative importance of the fa features over the md features.
+coefficients for the ALS dataset FA and MD metrics, respectively. These
+figures reinforce the findings in the main text that ALS is localized to the
+corticospinal tract. In this study, SGL selected the right corticospinal
+tract (CSTR) as important and regularized coefficients in the CSTL. Yet,
+\cref{fig:als-bp:fa} also shows group FA differences in the CSTL. This
+highlighted a potential drawback of the SGL method, discussed in the main
+text in the context of age regression. Namely, SGL is not guaranteed to
+identify \emph{all} important features. In this case, if the diagnostic
+signal in the CSTL is redundant to that in the CSTR, SGL will regularize the
+CSTL features, thereby reducing its sparsity penalty without any
+corresponding increase in loss. This parsimony cuts both ways; it is a
+feature of the method when one seeks an efficient predictive model, but is a
+defect of the method when one wants an exhaustive explanation of feature
+importance. We will use the phrase ``parsimonious pitfall'' to refer to the
+case when SGL regularizes away redundant but obviously important features.
 
 \begin{figure*}
     \includegraphics[width=\textwidth]{sarica_coefs_profiles_md.pdf}
     \caption{%
         {%
-            \bf Mean diffusivity (md) Bundle profiles and $\hat{\beta}$
+            \bf Mean diffusivity (MD) Bundle profiles and $\hat{\beta}$
             coefficients for ALS classification.
         }
         \label{fig:als-bp:md}
@@ -570,20 +597,26 @@ highlight the relative importance of the fa features over the md features.
     \includegraphics[width=\textwidth]{wh_coefs_profiles_fa.pdf}
     \caption{%
         {%
-            \bf Fractional anisotropy (fa) bundle profiles and $\hat{\beta}$
+            \bf Fractional anisotropy (FA) bundle profiles and $\hat{\beta}$
             coefficients for age regression in the WH dataset.
         }
         \label{fig:wh-bp:fa}
     }
 \end{figure*}
 
-\hspace{1em}
+\Cref{fig:wh-bp:fa,fig:wh-bp:md} show the bundle profiles and regression
+coefficients for the WH dataset. In contrast to the ALS classification case,
+the $\hat{\beta}$ coefficients are distributed widely through the brain, supporting
+the interpretation that aging is a large and continuous whole-brain process.
+These figures also show that SGL behaves much more like the lasso than the group
+lasso, as discussed in the main text. The parsimonious pitfall is most evident in
+the IFOL and IFOR bundles in \cref{fig:wh-bp:md}.
 
 \begin{figure*}
     \includegraphics[width=\textwidth]{wh_coefs_profiles_md.pdf}
     \caption{%
         {%
-            \bf Mean diffusivity (md) bundle profiles and $\hat{\beta}$
+            \bf Mean diffusivity (MD) bundle profiles and $\hat{\beta}$
             coefficients for age regression in the WH dataset.
         }
         \label{fig:wh-bp:md}
@@ -596,20 +629,47 @@ highlight the relative importance of the fa features over the md features.
     \includegraphics[width=\textwidth]{hbn_coefs_profiles_fa.pdf}
     \caption{%
         {%
-            \bf Fractional anisotropy (fa) bundle profiles and $\hat{\beta}$
+            \bf Fractional anisotropy (FA) bundle profiles and $\hat{\beta}$
             coefficients for age regression in the HBN dataset.
         }
         \label{fig:hbn-bp:fa}
     }
 \end{figure*}
 
-\hspace{1em}
+\Cref{fig:hbn-bp:fa,fig:hbn-bp:md} show the bundle profiles and regression
+coefficients for the HBN dataset. Like the WH dataset, the $\hat{\beta}$
+coefficients are distributed widely through the brain and SGL behaves more
+like the lasso than the group lasso. In contrast the the WH results,
+the bundle profiles show different behaviors. For example the SLFL and SLFR
+bundle profiles in \cref{fig:wh-bp:md} and \cref{fig:hbn-bp:md} have
+different concavity. This is unsurprising, however, given the differences
+between these datasets 
+\begin{enumerate*}[%
+    label=(\roman*),%
+    before=\unskip{: },%
+    itemjoin={{, }},%
+    itemjoin*={{, and }}]
+    \item different diffusion models, with DTI for the WH dataset and DKI for
+    the HBN dataset
+    \item different age ranges and distributions (which is evident in the
+    figure legends), with HBN being a developmental dataset, while WH is a
+    lifespan maturation dataset
+    \item different anatomical extents, with the WH streamlines truncated to
+    remain with the bundle's bounding regions of interest (the default
+    behavior in the legacy \texttt{mAFQ}) and the HBN streamlines allowed
+    to retain their full extent from whole-brain tractography (the default
+    behavior in \texttt{pyAFQ}).
+\end{enumerate*}
+Thus, one should use caution when comparing bundle profiles and $\hat{\beta}$
+coefficients between the WH, HBN, and Cam-CAN models.
+The parsimonious pitfall is most evident in the UNCL, UNCR, ARCL, SLFL, and
+SLFR bundles in \cref{fig:hbn-bp:md}.
 
 \begin{figure*}
     \includegraphics[width=\textwidth]{hbn_coefs_profiles_md.pdf}
     \caption{%
         {%
-            \bf Mean diffusivity (md) bundle profiles and $\hat{\beta}$
+            \bf Mean diffusivity (MD) bundle profiles and $\hat{\beta}$
             coefficients for age regression in the HBN dataset.
         }
         \label{fig:hbn-bp:md}
@@ -622,18 +682,32 @@ highlight the relative importance of the fa features over the md features.
     \includegraphics[width=\textwidth]{cc_coefs_profiles_fa.pdf}
     \caption{%
         {%
-            \bf Fractional anisotropy (fa) bundle profiles and $\hat{\beta}$
+            \bf Fractional anisotropy (FA) bundle profiles and $\hat{\beta}$
             coefficients for age regression in the Cam-CAN dataset.
         }
         \label{fig:cc-bp:fa}
     }
 \end{figure*}
 
+\Cref{fig:cc-bp:fa,fig:cc-bp:md} show the bundle profiles and regression
+coefficients for the Cam-CAN dataset. Like the WH and HBN datasets, the
+$\hat{\beta}$ coefficients are distributed widely through the brain and SGL
+behaves more like the lasso than the group lasso. As before, one must be
+cautious about comparing bundle profiles and $\hat{\beta}$ coefficients
+between models. While the HBN and Cam-CAN datasets share the same diffusion
+model and refrain from clipping streamlines, the age distributions for the
+two are roughly disjoint, with the WH age distribution straddling the two.
+The parsimonious pitfall is again evident in the UNCL, UNCR, ARCL, SLFL, and
+SLFR bundles in \cref{fig:cc-bp:md}.
+\todo[inline]{We could say more here but it's not an ``aging'' paper so I
+don't really want to. I only want to stress that you have to be careful
+comparing $\hat{\beta}$ across models.}
+
 \begin{figure*}
     \includegraphics[width=\textwidth]{cc_coefs_profiles_md.pdf}
     \caption{%
         {%
-            \bf Mean diffusivity (md) bundle profiles and $\hat{\beta}$
+            \bf Mean diffusivity (MD) bundle profiles and $\hat{\beta}$
             coefficients for age regression in the Cam-CAN dataset.
         }
         \label{fig:cc-bp:md}
