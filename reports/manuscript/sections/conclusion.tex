@@ -1,11 +1,10 @@
 \subsection*{Discussion}
 
 We present here a novel method for analysis of dMRI tractometry data that
-relies on the Sparse Group Lasso \cite{simon2013sparse} to (a) make accurate
+relies on the Sparse Group Lasso \cite{simon2013sparse} to make accurate
 predictions of phenotypic properties of individual subjects while,
-simultaneously, (b) identifying the features of the white matter that are
-most important for this prediction in a completely data-driven approach. The
-method is broadly applicable to a wide range of research questions: it
+simultaneously, identifying the features of the white matter that are
+most important for this prediction. The method is data-driven and it is broadly applicable to a wide range of research questions: it
 performs well in predicting both continuous variables, such as biological
 age, as well as categorical variables, such as whether a person is a patient
 or a healthy control. In both of these cases, SGL out-performs previous
@@ -22,7 +21,7 @@ diffusion properties.
 Specifically, we demonstrated that the algorithm correctly detects the fact
 that ALS, which is a disease of lower motor neurons, is localized to the
 cortico-spinal tract. This recapitulates the results of previous analysis of
-these same data, using a targeted ROI-based approach
+these same data, using a bundle-of-interest approach
 \cite{sarica2017corticospinal}. In contrast, for the analysis of biological
 age, the coefficients identified by the algorithm are very widely distributed
 across many parts of the white matter, mirroring previous results that show a
@@ -49,21 +48,20 @@ importance scores in the anatomical coordinate frame of the bundles (e.g.,
 \cref{fig:class-results:coefs3d,fig:age-results:wh-coefs3d,fig:age-results:hbn-coefs3d,fig:age-results:cc-coefs3d})
 and provides a means to understand model errors (e.g.,
 \cref{fig:class-results:false-positives,fig:class-results:false-negatives}) .
-Thus, this multivariate analysis approach both (a) achieves high
-cross-validated accuracy for precision medicine applications of dMRI data and
-(b) identifies relevant features of brain anatomy that can further our
+Thus, this multivariate analysis approach achieves high
+cross-validated accuracy for precision medicine applications of dMRI data and identifies relevant features of brain anatomy that can further our
 neuroscientific understanding of clinical disorders.
 
 Neuroscience has entered an era in which consortium efforts are amassing
 large datasets of high-quality dMRI measurements to address a variety of
 scientific questions \cite{jernigan2016ping, jernigan2018abcd,
-alexander2017open, Miller2016-hw, VanEssen2012}. The volume and complexity of
-these data pose a substantial challenge. Dimensionality reduction with
-tractometry, followed by analysis with the approach we present here promises to
-capitalize on the wealth of data and on the co-measurement of interesting and
-important phenotypical data about brain health and about the participants'
-cognitive abilities. We also expect the group-regularized approach to improve
-with larger datasets.
+alexander2017open, Miller2016-hw, VanEssen2012}, but the volume and
+complexity of these data pose substantial challenges. Tractometry
+followed by analysis with SGL provide a promising approach to
+distill meaningful insights from the wealth of data measured in these efforts.
+%We also expect the group-regularized approach to improve
+% with larger datasets. <= ARIEL : I feel like we've demonstrated that already
+% with the age regression results
 
 SGL has many other potential applications in neuroscience, because
 of the hierarchical and grouped nature of many data types that are
@@ -75,14 +73,16 @@ features and groups of features. Similarly, large-scale multi-electrode
 recordings of neural activity in awake behaving animals are becoming
 increasingly feasible \cite{steinmetz2018distributed, Jun2017-gv} and
 these recordings can form features (neurons) and groups (neurons within
-an anatomical region). More ambitiously perhaps, this approach may be
-used to understand the role of correlations in so-called resting-state
-fMRI time-series and behavior, where pairwise correlations between
-voxels in different anatomical regions are features in the matrix and
-features may be grouped by pairs of anatomical regions. Given the large
-number of voxels in the surface of the gray matter and given that
-correlations increase the number of features by a factor of $n^2$, this
-would pose a challenging problem to solve using SGL.
+an anatomical region).
+
+% More ambitiously perhaps, this approach may be
+% used to understand the role of correlations in so-called resting-state
+% fMRI time-series and behavior, where pairwise correlations between
+% voxels in different anatomical regions are features in the matrix and
+% features may be grouped by pairs of anatomical regions. Given the large
+% number of voxels in the surface of the gray matter and given that
+% correlations increase the number of features by a factor of $n^2$, this
+% would pose a challenging problem to solve using SGL.
 
 The results we present here also motivate extensions of the method using more
 sophisticated cost functions. For example, the fused sparse group lasso (FSGL)
@@ -98,15 +98,9 @@ Similarly, unsupervised dimensionality reduction of tractometry data (e.g.,
 grouping.
 
 The method is packaged as open-source software called AFQ-Insight
-that is openly available, and provides a clear API to allow
+that is openly available (ARIEL: ADD URL), and provides a clear API to allow
 for extensions of the method. The sofware integrates within a
 broader automated fiber quantification software ecosystem: AFQ
-\cite{yeatman2012tract}, which extracts tractometry data from raw and
-processed dMRI datasets, as well as AFQ-Browser, which visualizes
-tractometry data and facilitates sharing of the results of dMRI studies
-\cite{yeatman2018browser}. To facilitate reproducibility and ease use
-of the software, the results presented
-in this paper are also provided in
-\url{https://github.com/richford/AFQ-Insight/tree/master/examples/preprint-notebooks} as a series of Jupyter notebooks
+\cite{yeatman2012tract} and pyAFQ (https://yeatmanlab.github.io), which extract tractometry data from raw and processed dMRI datasets, as well as AFQ-Browser, which visualizes tractometry data and facilitates sharing of the results of dMRI studies \cite{yeatman2018browser}. To facilitate reproducibility and ease use of the software, the results presented
+in this paper are also provided in \url{https://github.com/richford/AFQ-Insight/tree/master/examples/preprint-notebooks} as a series of Jupyter notebooks
 \cite{kluyver2016jupyter}.
-

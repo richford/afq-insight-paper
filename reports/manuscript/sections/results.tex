@@ -17,7 +17,7 @@
         \label{fig:class-results}
         {\bf (a)} Classification probabilities for ALS diagnosis, with
         controls on the left, patients on the right, predicted controls in
-        blue, and predicted patients in orange. So orange dots on the left
+        blue, and predicted patients in orange. This is, orange dots on the left
         represent false positives, while blue dots on the right represent
         false negatives. We achieve {\protect\alsAccuracy}\% accuracy with an
         ROC AUC of {\protect\alsRocAuc}.
@@ -42,23 +42,18 @@
     }
 \end{figure*}
 
-We developed a method for analyzing dMRI tractometry data with SGL. We
-demonstrate the use of this method on four previously published datasets in
+We developed a method for analyzing dMRI tractometry data that uses the Sparse
+Group Lasso (SGL) to select features that are sparse both at the group (bundle) level, as well as overall.
+We demonstrate the use of this method on four different datasets in
 both a classification setting and a regression setting.
 
 \subsubsection*{SGL accurately detects ALS from tractometry data}
 
-Using data from a previous study of the corticospinal tract (CST) profile and
-ALS \cite{sarica2017corticospinal}, we tested the performance of SGL in a
+Using data from a previous study of patients with amyotrophic lateral sclerosis (ALS)~\cite{sarica2017corticospinal}, we tested the performance of SGL in a
 classification setting. The previous study predicted ALS status with a mean
-accuracy of 80\% using a random forest algorithm based on a priori selection
-of features within the CST. SGL delivers competitive
-predictive performance, with a cross-validated accuracy of {\alsAccuracy}\%
-and an area under the receiver operating characteristic curve (ROC AUC) of
-{\alsRocAuc}, all without the need for a priori feature engineering. The
-results of the classification prediction are shown in
-\cref{fig:class-results:probs} with ``ground-truth'' ALS status separated
-into columns, and predicted ALS status encoded by color. In addition to this
+accuracy of 80\% using a random forest algorithm based on \emph{a priori}
+selection of features only within the CST bundle-of-interest.
+SGL delivers improved predictive performance, with a cross-validated accuracy of {\alsAccuracy}\% and an area under the receiver operating characteristic curve (ROC AUC) of {\alsRocAuc}, without the need for \emph{a priori} feature engineering (Figure \cref{fig:class-results:probs}). In addition to this
 classification performance, SGL also identifies the white matter tracts most
 important for ALS classification. The relative importance of white matter
 features is captured in the $\beta$ coefficients from \cref{supp:eq:sgl} of
@@ -72,13 +67,13 @@ toosy2003diffusion, sarica2014tractography, sage2007quantitative,
 sage2009quantitative, karlsborg2004corticospinal, ellis1999diffusion,
 cosottini2005diffusion, ciccarelli2009investigation, abe2010voxel} and
 identifying the portions of the brain that were selected \emph{a priori} in
-the previous study from which we collected our data
+the previous study from which we obtained the data
 \cite{sarica2017corticospinal}.
 
 The $\beta$ coefficients exhibit high bundle level sparsity; only some
 bundles are important, which can be be confirmed by observing the value of
 $\alpha$, the regularization hyperparameter that controls the mixture of the
-group lasso and lasso penalties
+group lasso and lasso penalties, selected through nested cross-validation
 (see \cref{supp:eq:sgl} of the supplemental material \cite{supplement}).
 If $\alpha$ is closer to zero, it indicates that the phenotype in question
 preferentially correlates with only a few groups of covariates. For the ALS
@@ -87,15 +82,13 @@ of ALS reside mostly in one bundle, namely the CST.
 
 Analyzing the ways in which the model mislabels individuals also provides
 insight. We found that mislabelled subjects are outliers relative to their
-group with respect to diffusion features of the CST.
-\Cref{fig:class-results:false-positives,fig:class-results:false-negatives}
-depicts the group FA values along with FA values of mislabelled subjects,
-four false negatives and three false-positives. The false positive
-classifications have reduced FA in one or more of the three sections of the
-CST where $\norm*{\hat{\beta}}$ is large
+group with respect to diffusion features of the CST (Figure
+\Cref{fig:class-results:false-positives,fig:class-results:false-negatives}).
+The false positive classifications have reduced FA in one or more of the three
+sections of the CST where $\norm*{\hat{\beta}}$ is large
 \cref{fig:class-results:tract-profiles}. The false negative subjects have FA
-profiles that oscillate between the two group means. Thus, the SGL method
-fails comprehensibly.
+profiles that oscillate between the two group means. Thus, when the SGL
+method predicts incorrectly this is done in a comprehensible manner.
 
 \begin{figure*}
     \vspace{3.65cm}
@@ -153,7 +146,7 @@ because these predictions, and deviations therefrom, may be diagnostic of
 overall brain health (for a review, see Cole et al.~\cite{Cole2019-rz}).
 However, as Nelson et al.~\cite{nelson2019biomarkers} have observed, aging
 biomarkers are subject to unique challenges and tend to be noncausative. Our
-interest in aging here relies on its utility as a methodological benthmark.
+interest in aging here relies on its utility as a methodological benchmark.
 Biological age operates on a natural scale, with meaningful and easily
 understood units, and it's popularity as a machine learning target makes it
 valuable for comparisons with other studies.
@@ -165,7 +158,7 @@ and 18-88 years of age, respectively. In each case, biological age was used
 as the predicted variable $y$. SGL was fit to the tractometry-extracted
 features FA and MD in 18 major brain tracts, with diffusion metrics extracted
 from diffusion tensor imaging (DTI) for the WH dataset and diffusion kurtosis
-imaging (DKI) \cite{jensen2005diffusion} the HBN and Cam-CAN datasets.
+imaging (DKI) \cite{jensen2005diffusion} for the HBN and Cam-CAN datasets.
 
 To evaluate the fit of the model, we used a nested cross-validation
 procedure. In this procedure, batches of subjects are held out. For each
@@ -182,8 +175,8 @@ predictions for Cam-CAN are competitive with a recent state of the art
 prediction \cite{mcpherson2020single}, which used streamline density to
 estimate the brain's structural connectivity and achieved $R^2 = 0.63$. The
 median absolute errors are also lower than the results of a recent study that
-predicted age in a large sample, based on diffusion MRI features
-\cite{Richard2018-ux}.
+predicted age in a large sample that included the Cam-CAN data, and was based
+on diffusion MRI features \cite{Richard2018-ux}.
 
 In contrast to the ALS classification case, the selected $\alpha$ values
 indicate high global sparsity over group sparsity, with $\alpha = $
