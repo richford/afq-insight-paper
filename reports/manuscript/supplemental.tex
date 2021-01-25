@@ -30,7 +30,7 @@
                floatfix,%
                endfloats*]{revtex4-2}
 \usepackage[T1]{fontenc}
-\usepackage[utf8x]{inputenc} 
+\usepackage[utf8x]{inputenc}
 \usepackage[export]{adjustbox}  % Used to adjust figure frames
 \usepackage{subcaption}
 \usepackage{url}
@@ -80,7 +80,7 @@
 \begin{document}
 
 \title{Supplemental Material: Multidimensional analysis and detection of informative features in human white matter}
-  
+
 \author{Adam \surname{Richie-Halford}}%
 \email{richford@uw.edu}%
 \affiliation{%
@@ -88,7 +88,7 @@
     University of Washington, Seattle,%
     Washington 98195--1560, USA
 }
-  
+
 \author{Jason \surname{Yeatman}}%
 \affiliation{%
     Graduate School of Education and Division of Developmental and Behavioral Pediatrics,%
@@ -126,7 +126,7 @@
 \subsection{Data}
 \label{sec:data}
 
-Four different previously-published datasets were used here:
+Four different datasets were used here:
 
 \begin{enumerate}
 
@@ -139,7 +139,7 @@ of Bioimaging and Molecular Physiology in Catanzaro. Informed consent
 was provided as approved by the Ethical Committee of the University
 ``Magna Graecia'' of Catanzaro. Voxel resolution was \num{2x2x2}
 $\text{mm}^3$ and 27 non-colinear directions were measured with a
-$b=1000$ $\frac{\text{sec}}{\text{mm}^2}$. Data was preprocessed to 
+$b=1000$ $\frac{\text{sec}}{\text{mm}^2}$. Data was preprocessed to
 correct for subject motion and for eddy currents. The diffusion tensor
 model \cite{basser1994mr} was fit in every voxel.
 We will refer to this dataset as ALS.
@@ -521,7 +521,7 @@ hyperparameters are found using the scikit-optimize library
 
 Here, we present the bundle profiles and $\hat{\beta}$ coefficients
 for each dataset. Throughout this section, diffusion metrics are plotted
-along the length of eighteen bundles: 
+along the length of eighteen bundles:
 right corticospinal (CSTR),
 left corticospinal (CSTL),
 right uncinate (UNCR),
@@ -643,7 +643,7 @@ like the lasso than the group lasso. In contrast the the WH results,
 the bundle profiles show different behaviors. For example the SLFL and SLFR
 bundle profiles in \cref{fig:wh-bp:md} and \cref{fig:hbn-bp:md} have
 different concavity. This is unsurprising, however, given the differences
-between these datasets 
+between these datasets
 \begin{enumerate*}[%
     label=(\roman*),%
     before=\unskip{: },%
@@ -720,4 +720,3 @@ comparing $\hat{\beta}$ across models.}
 \bibliography{paper}
 
 \end{document}
-
