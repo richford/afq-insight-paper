@@ -193,10 +193,15 @@ brain-extracted T1w using \texttt{FAST} \cite[FSL 6.0.3:b862cdd5,
 RRID:SCR\_002823]{fsl_fast}.
 
 \item {\it Diffusion data preprocessing}
+
+\todo{Ariel: This section seems incomplete. I am pretty sure there was some motion correction, eddy current correction and so forth happening in here.
+Also, we might want to drop the part that describes calculation of confounds,
+since we aren't using them.}
+
 Several confounding time-series were calculated based on the
 \emph{preprocessed DWI}: framewise displacement (FD) using the
-implementation in \emph{Nipype} \cite[following the definitions
-by]{power_fd_dvars}. The head-motion estimates calculated in the
+implementation in \emph{Nipype} following the definitions
+by \cite{power_fd_dvars}. The head-motion estimates calculated in the
 correction step were also placed within the corresponding confounds
 file. Slicewise cross correlation was also calculated. The DWI
 time-series were resampled to ACPC, generating a \emph{preprocessed DWI
@@ -204,7 +209,7 @@ run in ACPC space}.
 \end{itemize}
 
 Many internal operations of \emph{QSIPrep} use \emph{Nilearn} 0.6.2
-\cite[RRID:SCR\_001362]{nilearn} and \emph{Dipy} \cite{dipy}. For more
+\cite[RRID:SCR\_001362]{nilearn} and \emph{DIPY} \cite{dipy}. For more
 details of the pipeline, see
 \href{https://qsiprep.readthedocs.io/en/latest/workflows.html}{the
 section corresponding to workflows in \emph{QSIPrep}'s documentation}.
@@ -261,14 +266,14 @@ capitalized upon the following improvements over the legacy Matlab version
     itemjoin*={{, and }}]
     \item the ability to ingest data provided in the BIDS format
     \cite{gorgolewski2016brain}
-    \item the calculation of diffusion kertosis imaging (DKI
+    \item the calculation of diffusion kurtosis imaging (DKI
     \cite{jensen2005diffusion}) metrics
 \end{enumerate*}
 We will refer to the \texttt{mAFQ} and \texttt{pyAFQ} pipeline collectively
 as \texttt{AFQ}.
 
 These processes create bundle profiles, in which diffusion measures
-are quantified and averaged along twenty major fiber tracts. Here,
+are quantified and averaged along eighteen major fiber tracts. Here,
 we use only the mean diffusivity (MD) and the fractional anisotropy
 (FA) of the diffusion tensor, but additional dMRI-based maps or maps
 based on other quantitative MRI measurements can also be used. These
@@ -310,7 +315,7 @@ to diffusion measures at different nodes within each bundle. The
 relationship between tractometric features and the phenotypic target is
 characterized by the coefficients in $\beta$. The error term, $\epsilon$
 is an unobserved random variable that captures the error in the model.
-We denote our prediction of the targer phenotype as $\hat{y}$ and the
+We denote our prediction of the target phenotype as $\hat{y}$ and the
 coefficients that produce this prediction as $\hat{\beta}$, so that
 \begin{equation}
     \hat{y} = \mathbf{X} \hat{\beta},
@@ -320,8 +325,8 @@ without the error term, $\epsilon$. In general, the feature matrix
 $\mathbf{X}$ has dimensions $S \times (B \times N \times M)$, where $S$
 is the number of subjects, $B$ is the number of white matter bundles,
 $N$ is the number of nodes in each bundle, and $M$ is the number of
-diffusion metrics calculated at each node. Typically, $B = 20$, $N =
-100$, and $2 \le M \le 8$, resulting in $\sim 4,000 - 16,000$ features.
+diffusion metrics calculated at each node. Typically, $B = 18$, $N =
+100$, and $2 \le M \le 8$, resulting in $\sim 4,000 - 14,400$ features.
 Conversely, many dMRI studies have between a few dozen and a few
 hundred subjects, yielding a feature matrix that is wide and short.
 Even in cases where more than a thousand subjects are measured (e.g.,
@@ -344,7 +349,7 @@ sparsity, where the number of groups (bundle/metric combinations) with at
 least one non-zero coefficients is small, as well as within-group sparsity,
 where the number of non-zero coefficients within each non-zero group is
 small. The sparse group lasso (SGL) is a penalized regression technique that
-satisfies exactly these criteria\cite{simon2013sparse}. It solves for a
+satisfies these criteria\cite{simon2013sparse}. It solves for a
 coefficient vector $\hat{\beta}$ that satisfies
 \begin{multline}
     \hat{\beta} = \min_\beta L_{\text{mse}}
@@ -354,10 +359,10 @@ coefficient vector $\hat{\beta}$ that satisfies
     \text{where} \quad
     L_{\text{mse}} = \frac{1}{2}
     \norm{y - \displaystyle \sum_{\ell = 1}^{G}
-    \mathbf{X}^{(\ell)} \beta^{(\ell)}}_2^2
+    \mathbf{X}^{(\ell)} \beta^{(\ell)}}_2^2,
     \label{eq:sgl}
 \end{multline}
-where $G$ is the number of groups $\mathbf{X}^{(\ell)}$ is the submatrix of
+$G$ is the number of groups $\mathbf{X}^{(\ell)}$ is the submatrix of
 $\mathbf{X}$ corresponding to group $\ell$, $\beta^{(\ell)}$ is the
 coefficient vector for group $\ell$ and $p_\ell$ is the length of
 $\beta^{(\ell)}$. In the tractomtetry setting, $G = T \times M$ and $\forall
@@ -422,7 +427,7 @@ negative log likelihood of the SGL classifier giving the ``true'' label:
     \label{eq:logloss}
 \end{equation}
 
-\subsection{Implementation, cross-validation and metaparameter optimization}
+\subsection{SGL implementation, cross-validation and metaparameter optimization}
 
 \begin{figure}[!h]
     \includegraphics[width=\columnwidth]{nested-cross-validation.pdf}
@@ -441,8 +446,8 @@ negative log likelihood of the SGL classifier giving the ``true'' label:
     }
 \end{figure}
 
-Because the SGL is not specific to tractometry, we implement its solution as
-a separate Python package called \texttt{groupyr} \cite{groupyr}.
+Because the SGL is not specific to tractometry, we implemented its solution as
+a general-purpose Python package called \texttt{groupyr} \cite{groupyr}.
 \texttt{Groupyr} solves the cost function in \cref{eq:sgl} using proximal
 gradient descent \cite{parikh2014proximal} by implementing a custom proximal
 operator and relying on the C-OPT optimization library \cite{copt}, providing
@@ -459,7 +464,7 @@ yield the best cross-validated performance using either
     library \cite{scikit_optimize}.
 \end{enumerate*}
 
-To objectively evaluate the model performance and guard against over-fitting,
+To objectively evaluate model performance and guard against over-fitting,
 we used a nested cross-validation scheme, which is depicted for the binary
 classification case in \cref{fig:nested-cross-val}. The subjects (i.e. rows
 of the feature matrix $\mathbf{X}$ in \cref{main:fig:methods:group-structure}
@@ -475,7 +480,7 @@ data comprise the train\textsubscript{1} set. At level-1 of the
 decomposition, we fit an SGL model using fixed regularization meta-parameters
 $\alpha$ and $\lambda$, training the model using train\textsubscript{1} and
 evaluating the fit on test\textsubscript{1}. We find the optimal values for
-$\alpha$ and $\lambda$ using sequential model based optimization, implemented
+$\alpha$ and $\lambda$ using sequential model-based optimization, implemented
 using the scikit-optimize \verb|BayesSearchCV| class\cite{scikit-optimize}.
 For continuous numerical $y$, \verb|BayesSearchCV| searches for
 meta-parameter values that maximize the $R^2$ averaged over test sets. For
@@ -501,9 +506,9 @@ machine learning pitfalls.
 \subsection{Software implementation}
 
 The full software implementation of the SGL approach presented here is available
-in a Python software package called AFQ-Insight, which is developed publicly in
-\url{https://github.com/richford/afq-insight}. The version of the code used to
-produce the results herein is also available in
+in a Python software package called \texttt{AFQ-Insight}, which is developed
+publicly in \url{https://github.com/richford/afq-insight}.
+The version of the code used to produce the results herein is also available in
 \url{https://doi.org/10.5281/zenodo.3585942}\todo{Update version here}.
 AFQ-Insight reads the target and feature data that has been processed by AFQ
 from comma separated value (CSV) files conforming to the AFQ-Browser data
@@ -512,7 +517,7 @@ format \cite{yeatman2018browser} and represents them internally as
 \cite{mckinney2010data}. The software provides different options for imputing
 missing data in the feature matrix. Missing interior nodes are imputed using
 linear interpolation. For missing exterior nodes, the user may choose between
-linear extrapolation and constant forward(back)-fill. Imputation uses only
+linear extrapolation and constant forward- or back-fill. Imputation uses only
 values from adjacent nodes in the same white matter bundle in the same
 subject so there is no danger of data leakage from other subjects. It uses
 the scikit-learn \cite{scikit-learn} library to decompose input data into
@@ -520,10 +525,8 @@ separate test and train datasets, to scale each feature to have zero mean and
 unit variance, and to evaluate each fit in the hyperparameter search using
 appropriate classification and regression metrics such as accuracy, area
 under the receiver operating curve (AUC ROC), and coefficient of
-determination ($R^2$). For each set of hyperparameters, we solve the SGL
-problem using the \texttt{groupyr} library \cite{groupyr}. Appropriate
-hyperparameters are found using the scikit-optimize library
-\cite{scikit-optimize}.
+determination ($R^2$). Internally, \texttt{AFQ-Insight} uses the \texttt{groupyr} software library \cite{groupyr} mentioned above to solve the SGL.
+
 
 \section{Bundle and coefficient profiles}
 \label{sec:bundle-profiles}
@@ -585,8 +588,8 @@ signal in the CSTL is redundant to that in the CSTR, SGL will regularize the
 CSTL features, thereby reducing its sparsity penalty without any
 corresponding increase in loss. This parsimony cuts both ways; it is a
 feature of the method when one seeks an efficient predictive model, but is a
-defect of the method when one wants an exhaustive explanation of feature
-importance. We will use the phrase ``parsimonious pitfall'' to refer to the
+disadvantage of the method when one wants an exhaustive explanation of feature
+importance. We will use the phrase ``parsimony pitfall'' to refer to the
 case when SGL regularizes away redundant but obviously important features.
 
 \begin{figure*}
@@ -618,7 +621,7 @@ coefficients for the WH dataset. In contrast to the ALS classification case,
 the $\hat{\beta}$ coefficients are distributed widely through the brain, supporting
 the interpretation that aging is a large and continuous whole-brain process.
 These figures also show that SGL behaves much more like the lasso than the group
-lasso, as discussed in the main text. The parsimonious pitfall is most evident in
+lasso, as discussed in the main text. The parsimony pitfall is most evident in
 the IFOL and IFOR bundles in \cref{fig:wh-bp:md}.
 
 \begin{figure*}
@@ -671,7 +674,7 @@ between these datasets
 \end{enumerate*}
 Thus, one should use caution when comparing bundle profiles and $\hat{\beta}$
 coefficients between the WH, HBN, and Cam-CAN models.
-The parsimonious pitfall is most evident in the UNCL, UNCR, ARCL, SLFL, and
+The parsimony pitfall is most evident in the UNCL, UNCR, ARCL, SLFL, and
 SLFR bundles in \cref{fig:hbn-bp:md}.
 
 \begin{figure*}
@@ -706,11 +709,11 @@ cautious about comparing bundle profiles and $\hat{\beta}$ coefficients
 between models. While the HBN and Cam-CAN datasets share the same diffusion
 model and refrain from clipping streamlines, the age distributions for the
 two are roughly disjoint, with the WH age distribution straddling the two.
-The parsimonious pitfall is again evident in the UNCL, UNCR, ARCL, SLFL, and
+The parsimony pitfall is again evident in the UNCL, UNCR, ARCL, SLFL, and
 SLFR bundles in \cref{fig:cc-bp:md}.
 \todo[inline]{We could say more here but it's not an ``aging'' paper so I
 don't really want to. I only want to stress that you have to be careful
-comparing $\hat{\beta}$ across models.}
+comparing $\hat{\beta}$ across models. Ariel: agreed!}
 
 \begin{figure*}
     \includegraphics[width=\textwidth]{cc_coefs_profiles_md.pdf}
