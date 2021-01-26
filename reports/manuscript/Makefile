@@ -9,8 +9,8 @@ CONTINUOUS=-pvc
 MAIN=paper
 SUPPLEMENT=supplemental
 
-SOURCES=$(MAIN).tex $(SUPPLEMENT).tex Makefile $(shell find sections/* -type f)
-FIGURES := $(shell find ../figures/* -type f)
+SOURCES=$(MAIN).tex $(SUPPLEMENT).tex Makefile
+FIGURES := $(shell find ../paper_figures/* -type f)
 
 all: nmeth
 

@@ -489,6 +489,15 @@ case, the shuffling into folds is stratified such that each fold has a
 population that preserves the percentage of each class found in the larger
 input data.
 
+For each dataset, we also perform a randomization test by training similar
+models on copies of the data for which the rows of the target variable $y$
+have been shuffled while the feature matrix $\mathbf{X}$ remains the same.
+This effectively destroys any relationship between the diffusion data and the
+outcome. Indeed, all of our models perform no better than random guessing.
+One should expect this since any better performance might indicate data
+leakage between train and test sets \cite{kaufman2012leakage} or other common
+machine learning pitfalls.
+
 \subsection{Software implementation}
 
 The full software implementation of the SGL approach presented here is available
