@@ -359,10 +359,10 @@ coefficient vector $\hat{\beta}$ that satisfies
     \text{where} \quad
     L_{\text{mse}} = \frac{1}{2}
     \norm{y - \displaystyle \sum_{\ell = 1}^{G}
-    \mathbf{X}^{(\ell)} \beta^{(\ell)}}_2^2,
+    \mathbf{X}^{(\ell)} \beta^{(\ell)}}_2^2.
     \label{eq:sgl}
 \end{multline}
-$G$ is the number of groups $\mathbf{X}^{(\ell)}$ is the submatrix of
+Here, $G$ is the number of groups, $\mathbf{X}^{(\ell)}$ is the submatrix of
 $\mathbf{X}$ corresponding to group $\ell$, $\beta^{(\ell)}$ is the
 coefficient vector for group $\ell$ and $p_\ell$ is the length of
 $\beta^{(\ell)}$. In the tractomtetry setting, $G = T \times M$ and $\forall
@@ -711,9 +711,6 @@ model and refrain from clipping streamlines, the age distributions for the
 two are roughly disjoint, with the WH age distribution straddling the two.
 The parsimony pitfall is again evident in the UNCL, UNCR, ARCL, SLFL, and
 SLFR bundles in \cref{fig:cc-bp:md}.
-\todo[inline]{We could say more here but it's not an ``aging'' paper so I
-don't really want to. I only want to stress that you have to be careful
-comparing $\hat{\beta}$ across models. Ariel: agreed!}
 
 \begin{figure*}
     \includegraphics[width=\textwidth]{cc_coefs_profiles_md.pdf}
