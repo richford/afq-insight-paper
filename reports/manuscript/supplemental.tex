@@ -194,19 +194,43 @@ RRID:SCR\_002823]{fsl_fast}.
 
 \item {\it Diffusion data preprocessing}
 
-\todo{Ariel: This section seems incomplete. I am pretty sure there was some motion correction, eddy current correction and so forth happening in here.
-Also, we might want to drop the part that describes calculation of confounds,
-since we aren't using them.}
+Any images with a b-value less than 100 s/mm\^{}2 were treated as a
+\emph{b}=0 image. MP-PCA denoising as implemented in MRtrix3's
+\texttt{dwidenoise}\cite{dwidenoise1} was applied with a 5-voxel
+window. After MP-PCA, B1 field inhomogeneity was corrected using
+\texttt{dwibiascorrect} from MRtrix3 with the N4 algorithm \cite{n4}.
+After B1 bias correction, the mean intensity of the DWI series was
+adjusted so all the mean intensity of the b=0 images matched across
+eachseparate DWI scanning sequence.
+\end{itemize}
+
+FSL (version 6.0.3:b862cdd5)'s eddy was used for head motion correction
+and Eddy current correction \cite{anderssoneddy}. Eddy was configured
+with a \(q\)-space smoothing factor of 10, a total of 5 iterations, and
+1000 voxels used to estimate hyperparameters. A linear first level model
+and a linear second level model were used to characterize Eddy
+current-related spatial distortion. \(q\)-space coordinates were
+forcefully assigned to shells. Field offset was attempted to be
+separated from subject movement. Shells were aligned post-eddy. Eddy's
+outlier replacement was run \cite{eddyrepol}. Data were grouped by
+slice, only including values from slices determined to contain at least
+250 intracerebral voxels. Groups deviating by more than 4 standard
+deviations from the prediction had their data replaced with imputed
+values. Data was collected with reversed phase-encode blips, resulting
+in pairs of images with distortions going in opposite directions. Here,
+b=0 reference images with reversed phase encoding directions were used
+along with an equal number of b=0 images extracted from the DWI scans.
+From these pairs the susceptibility-induced off-resonance field was
+estimated using a method similar to that described in \cite{topup}. The
+fieldmaps were ultimately incorporated into the Eddy current and head
+motion correction interpolation. Final interpolation was performed using
+the \texttt{jac} method.
 
 Several confounding time-series were calculated based on the
-\emph{preprocessed DWI}: framewise displacement (FD) using the
-implementation in \emph{Nipype} following the definitions
-by \cite{power_fd_dvars}. The head-motion estimates calculated in the
-correction step were also placed within the corresponding confounds
-file. Slicewise cross correlation was also calculated. The DWI
-time-series were resampled to ACPC, generating a \emph{preprocessed DWI
-run in ACPC space}.
-\end{itemize}
+\emph{preprocessed DWI}: framewise displacement (FD) using the implementation
+in \emph{Nipype} following the definitions by \cite{power_fd_dvars}. The DWI
+time-series were resampled to ACPC, generating a \emph{preprocessed DWI run
+in ACPC space}.
 
 Many internal operations of \emph{QSIPrep} use \emph{Nilearn} 0.6.2
 \cite[RRID:SCR\_001362]{nilearn} and \emph{DIPY} \cite{dipy}. For more
