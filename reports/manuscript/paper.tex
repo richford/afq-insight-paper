@@ -266,7 +266,7 @@ pathways~\cite{Bells2011-cf}.
 % generated streamlines to ``bundles,'' which approximate the anatomical
 % tracts, and sampling biophysical properties, such as fractional
 % anisotropy (FA) or mean diffusivity (MD), along the length of these bundles.
-% the parts of the white matter that belong to different major tracts
+% The parts of the white matter that belong to different major tracts
 % (i.e. anatomical or functional groups of white matter fibers), such as
 % the corticospinal tract or arcuate fasciculus, assigning tractography
 % generated streamlines to ``bundles,'' which approximate the anatomical
@@ -287,7 +287,7 @@ diffusion metric. This approach is exhaustive, but
 statistical power is compromised by a multiple comparison problem
 \cite{colby2012, Nichols2002-zu, Nichols2003-yy}. An alternative that
 circumvents the multiple comparison problem is to select just a few
-tracts to compare in each individual, or even focusing on particular
+tracts to compare in each individual, or even
 segments of these tracts based on \emph{a priori} hypotheses. This
 approach is appropriate when the biological basis of the process
 of interest is relatively well understood (for a recent example, see
@@ -298,7 +298,7 @@ predict differences between individuals \cite{dayan2016profilometry}.
 
 % Different approaches can be taken to resolving this challenge. For
 % example, Colby and colleagues \cite{colby2012} used a non-parametric
-% resmapling approach to
+% approach to
 % correct for family-wise error across the different possible comparisons
 % \cite{Nichols2002-zu, Nichols2003-yy}.
 % Based on tractometry, researchers may choose to compare different individuals
@@ -369,7 +369,7 @@ providing results that are both accurate and interpretable. When
 additional structure is available in the organization of the data,
 regularization algorithms can take advantage of this structure. For
 example, if the features lend themselves to a natural division into
-different groups, the group lasso (GL) can be used to select groups
+different groups, the Group Lasso (GL) can be used to select groups
 of features, rather than individual features \cite{Yuan2006-ky}.
 The Sparse Group Lasso (SGL) elaborates on this idea by providing
 control both of group sparsity, as well as overall sparsity of the
@@ -458,7 +458,7 @@ the previous study from which we obtained the data
 The $\beta$ coefficients exhibit high bundle level sparsity; only some
 bundles are important, which can be be confirmed by observing the value of
 $\alpha$, the regularization hyperparameter that controls the mixture of the
-group lasso and lasso penalties, selected through nested cross-validation
+Group Lasso and lasso penalties, selected through nested cross-validation
 (see \cref{supp:eq:sgl} of the supplemental material \cite{supplement}).
 If $\alpha$ is closer to zero, it indicates that the phenotype in question
 preferentially correlates with only a few groups of covariates. For the ALS
@@ -548,7 +548,7 @@ imaging (DKI) \cite{jensen2005diffusion} for the HBN and Cam-CAN datasets.
 To evaluate the fit of the model, we used a nested cross-validation
 procedure. In this procedure, batches of subjects are held out. For each
 batch (or fold), the model is fully fit without this data. Then, once the
-parameters are fixed, the model is inverted to predict the ages of held out
+parameters are fixed, the model is applied to predict the ages of held out
 subjects based on the linear coeffiecients. This scheme automatically finds
 the right level of sparsity and fits the coefficients to the ill-posed linear
 model, while guarding against overfitting. SGL accurately predicts the age of
