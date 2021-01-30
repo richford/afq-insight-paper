@@ -111,3 +111,10 @@ bin/
 
 # Ignore the generate paper PDF:
 /reports/manuscript/paper.pdf
+
+# Ignore pickle files
+*.pkl
+
+# Ignore dask-worker-space
+**dask-worker-space**
+**Untitled.ipynb
