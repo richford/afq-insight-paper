@@ -23,12 +23,11 @@
 \documentclass[10pt,%
                aps,%
                prl,%
-               preprint,%
+               reprint,%
                superscriptaddress,%
                preprintnumbers,%
                amsmath,%
-               floatfix,%
-               endfloats*]{revtex4-1}
+               floatfix]{revtex4-1}
 \usepackage[T1]{fontenc}
 \usepackage[utf8x]{inputenc}
 \usepackage[export]{adjustbox}  % Used to adjust figure frames
@@ -169,52 +168,6 @@
 
 \subsection*{Introduction}
 
-\begin{figure}[!h]
-    \vspace{0.25cm}
-    \rlap{
-        \hspace{0.5em}
-        \includegraphics[width=0.98\columnwidth]{methods-brains.pdf}
-    }
-    \vspace{-9.75cm}
-    \includegraphics[width=\columnwidth]{method-quad.pdf}
-    {\phantomsubcaption\label{fig:methods:tractogram}}
-    {\phantomsubcaption\label{fig:methods:cst}}
-    {\phantomsubcaption\label{fig:methods:tract-profile}}
-    {\phantomsubcaption\label{fig:methods:group-structure}}
-    \caption{{\bf Tractometry data flow}
-        \label{fig:methods}
-        {\bf (a)} Whole brain tractography generates streamlines approximating
-        the trajectories of white matter connections.
-        {\bf (b)} Tractometry classifies these streamlines into anatomical bundles.
-        In this case, we show the left corticospinal tract (CSTL) over a mid-saggital
-        anatomical slice.
-        {\bf (c)} Tractometry further extracts bundle profiles,
-        quantifications of various diffusion metrics along the length of the
-        fiber bundle. Here, we show one subject's fractional anisotropy (FA)
-        profile for CSTL.
-        {\bf (d)} the phenotypical target data and tractometric features can
-        be organized into a linear model, $\hat{y} = \mathbf{X}
-        \hat{\beta}$. The feature matrix $\mathbf{X}$ is color-coded
-        to reveal a natural group structure: the left (orange) group
-        contains $k$ features from the CSTL, the middle (green) group
-        contains $k$ features from the left cingulum cingulate (CGCL),
-        and the right (blue) group
-        contains $k$ features from the left arcuate (ARCL). The coefficients in
-        $\hat{\beta}$ follow the same natural grouping.
-        % Cross-validation:
-        % we evaluate model quality using a nested $k$-fold cross validation
-        % scheme. At level-0, the input data is decomposed into $k$
-        % shuffled groups and optimal hyperparameters are found for the level-0
-        % training set.
-        % To avoid overfitting, the optimal hyperparameters are themselves
-        % evaluated using a cross-validation scheme taking place
-        % at level-1 of the decomposition, where each
-        % level-0 training set is further decomposed into five shuffled
-        % groups. For the ALS and WH data, $k=10$, while for the HBN and
-        % Cam-CAN data, $k=5$.
-    }
-\end{figure}
-
 Non-invasive methods for measuring human brain structure and function have
 revolutionized our understanding of brain function. These measurements
 have demonstrated that interactions between networks of brain regions give rise
@@ -327,6 +280,51 @@ predict differences between individuals \cite{dayan2016profilometry}.
 % \cite{dayan2016profilometry}.
 
 %\end{enumerate}
+\begin{figure}[h!]
+    \vspace{0.25cm}
+    \rlap{
+        \hspace{0.25em}
+        \includegraphics[width=0.98\columnwidth]{methods-brains.pdf}
+    }
+    \vspace{-5.25cm}
+    \includegraphics[width=\columnwidth]{method-quad.pdf}
+    {\phantomsubcaption\label{fig:methods:tractogram}}
+    {\phantomsubcaption\label{fig:methods:cst}}
+    {\phantomsubcaption\label{fig:methods:tract-profile}}
+    {\phantomsubcaption\label{fig:methods:group-structure}}
+    \caption{{\bf Tractometry data flow}
+        \label{fig:methods}
+        {\bf (a)} Whole brain tractography generates streamlines approximating
+        the trajectories of white matter connections.
+        {\bf (b)} Tractometry classifies these streamlines into anatomical bundles.
+        In this case, we show the left corticospinal tract (CSTL) over a mid-saggital
+        anatomical slice.
+        {\bf (c)} Tractometry further extracts bundle profiles,
+        quantifications of various diffusion metrics along the length of the
+        fiber bundle. Here, we show one subject's fractional anisotropy (FA)
+        profile for CSTL.
+        {\bf (d)} the phenotypical target data and tractometric features can
+        be organized into a linear model, $\hat{y} = \mathbf{X}
+        \hat{\beta}$. The feature matrix $\mathbf{X}$ is color-coded
+        to reveal a natural group structure: the left (orange) group
+        contains $k$ features from the CSTL, the middle (green) group
+        contains $k$ features from the left cingulum cingulate (CGCL),
+        and the right (blue) group
+        contains $k$ features from the left arcuate (ARCL). The coefficients in
+        $\hat{\beta}$ follow the same natural grouping.
+        % Cross-validation:
+        % we evaluate model quality using a nested $k$-fold cross validation
+        % scheme. At level-0, the input data is decomposed into $k$
+        % shuffled groups and optimal hyperparameters are found for the level-0
+        % training set.
+        % To avoid overfitting, the optimal hyperparameters are themselves
+        % evaluated using a cross-validation scheme taking place
+        % at level-1 of the decomposition, where each
+        % level-0 training set is further decomposed into five shuffled
+        % groups. For the ALS and WH data, $k=10$, while for the HBN and
+        % Cam-CAN data, $k=5$.
+    }
+\end{figure}
 
 The present work aims to balance predictive accuracy with descriptive power
 \cite{Murdoch2019-ax, Breiman2001-uz} by capitalizing on all of the available
@@ -380,16 +378,18 @@ for linear model fitting in problems of this form. Here we, first,
 develop an implementation of SGL that is well suited to the analysis of
 tractometry data and, second, demonstrate the power and flexibility of
 this approach by applying it to both classification
-and continuous prediction problems.
+and continuous prediction problems. Our tractometry data flow is
+represented in \cref{fig:methods} and explained in further detail in
+the supplementary material.
 
 \subsection*{Results}
 
 \begin{figure*}
-    \vspace{3cm}
+    \vspace{4.0cm}
     \rlap{
         \includegraphics[width=0.33\textwidth]{als_coefs.pdf}
     }
-    \vspace{-8.4cm}
+    \vspace{-9.25cm}
     \includegraphics[width=\textwidth]{als_results.pdf}
     {\phantomsubcaption\label{fig:class-results:probs}}
     {\phantomsubcaption\label{fig:class-results:coefs3d}}
@@ -437,7 +437,10 @@ Using data from a previous study of patients with amyotrophic lateral sclerosis 
 classification setting. The previous study predicted ALS status with a mean
 accuracy of 80\% using a random forest algorithm based on \emph{a priori}
 selection of features only within the CST bundle-of-interest.
-SGL delivers improved predictive performance, with a cross-validated accuracy of {\alsAccuracy}\% and an area under the receiver operating characteristic curve (ROC AUC) of {\alsRocAuc}, without the need for \emph{a priori} feature engineering (Figure \cref{fig:class-results:probs}). In addition to this
+SGL delivers improved predictive performance, with a cross-validated accuracy
+of {\alsAccuracy}\% and an area under the receiver operating characteristic
+curve (ROC AUC) of {\alsRocAuc}, without the need for \emph{a priori} feature
+engineering (Figure \cref{fig:class-results:probs}). In addition to this
 classification performance, SGL also identifies the white matter tracts most
 important for ALS classification. The relative importance of white matter
 features is captured in the $\beta$ coefficients from \cref{supp:eq:sgl} of
@@ -453,7 +456,13 @@ cosottini2005diffusion, ciccarelli2009investigation, abe2010voxel} and
 identifying the portions of the brain that were selected \emph{a priori} in
 the previous study from which we obtained the data
 \cite{sarica2017corticospinal}.
-\todo{Adam: Add sentence comparing to pure lasso results. Lasso accuracy: 0.76; lasso ROC AUC: 0.76}
+
+To assess the added value of incorporating anatomical knowledge into our
+model, we compared our classification results to those obtained from a lasso
+model. The pure lasso model achieved 76\% accuracy and an ROC AUC of 0.76
+using the same cross-validation strategy used to assess the SGL model. This
+difference in performance justifies the additional complexity of the SGL over
+simpler sparsity-inducing regression strategies.
 
 The $\beta$ coefficients exhibit high bundle level sparsity; only some
 bundles are important, which can be be confirmed by observing the value of
@@ -476,7 +485,7 @@ profiles that oscillate between the two group means. Thus, when the SGL
 method predicts incorrectly this is done in a comprehensible manner.
 
 \begin{figure*}
-    \vspace{3.65cm}
+    \vspace{4.5cm}
     \rlap{
         \hspace{1cm}
         \includegraphics[width=0.275\textwidth]{wh_coefs.pdf}
@@ -485,7 +494,7 @@ method predicts incorrectly this is done in a comprehensible manner.
         \hspace{0.25em}
         \includegraphics[width=0.275\textwidth]{camcan_coefs.pdf}
     }
-    \vspace{-7.3cm}
+    \vspace{-8.0cm}
     \includegraphics[width=\textwidth]{regression_scatter.pdf}
     {\phantomsubcaption\label{fig:age-results:wh-scatter}}
     {\phantomsubcaption\label{fig:age-results:hbn-scatter}}
@@ -562,11 +571,6 @@ estimate the brain's structural connectivity and achieved $R^2 = 0.63$. The
 median absolute errors are also lower than the results of a recent study that
 predicted age in a large sample that included the Cam-CAN data, and was based
 on diffusion MRI features \cite{Richard2018-ux}.
-\todo{Adam: Add sentence comparing to pure lasso results.
-Lasso WH R2: 0.47; Lasso WH MAE: 4.43;
-Lasso HBN R2: 0.57; Lasso HBN MAE: 1.49;
-Lasso CC R2: 0.70; Lasso CC MAE: 6.08;
-}
 
 In contrast to the ALS classification case, the selected $\alpha$ values
 indicate high global sparsity over group sparsity, with $\alpha = $
@@ -582,6 +586,15 @@ Furthermore, inspecting the portions of bundles with larger coefficients in
 \cref{fig:age-results:wh-profile,fig:age-results:hbn-profile,fig:age-results:cc-profile}
 reveals that SGL selects informative regions where diffusion properties are
 different between the age quintiles.
+
+As with ALS classification, we also compared SGL performance with results
+obtained using only the lasso penalty. The pure lasso models achieved $R^2 =
+0.47$, $0.54$, and $0.70$ for the WH, HBN, and Cam-CAN datasets respectively
+using the same cross-validation strategy used to assess the SGL. The SGL
+models' performance improvement over lasso is more modest than in the ALS
+classification case, which accords with the selected values of the $\alpha$
+hyperparameter. These SGL models were more lasso-like in their sparsity
+penalties so they are more lasso-like in their predictive performance.
 
 \subsection*{Discussion}
 
@@ -680,17 +693,17 @@ Similarly, unsupervised dimensionality reduction of tractometry data (e.g.,
 grouping.
 
 The method is packaged as open-source software called AFQ-Insight that is
-openly available \todo{Ariel: add URL}, and provides a clear API to allow for
-extensions of the method. The sofware integrates within a broader automated
-fiber quantification software ecosystem: AFQ \cite{yeatman2012tract} and
-pyAFQ (https://yeatmanlab.github.io), which extract tractometry data from raw
-and processed dMRI datasets, as well as AFQ-Browser, which visualizes
-tractometry data and facilitates sharing of the results of dMRI studies
-\cite{yeatman2018browser}. To facilitate reproducibility and ease use of the
-software, the results presented in this paper are also provided in
-\url{https://github.com/richford/AFQ-Insight/tree/master/examples/preprint-notebooks}
-\todo{Adam: Update notebooks}
-as a series of Jupyter notebooks \cite{kluyver2016jupyter}.
+openly available at \url{https://github.com/richford/AFQ-Insight}, and
+provides a clear API to allow for extensions of the method. The sofware
+integrates within a broader automated fiber quantification software
+ecosystem: AFQ \cite{yeatman2012tract} and pyAFQ \cite{pyAFQ}, which extract
+tractometry data from raw and processed dMRI datasets, as well as
+AFQ-Browser, which visualizes tractometry data and facilitates sharing of the
+results of dMRI studies \cite{yeatman2018browser}. To facilitate
+reproducibility and ease use of the software, the results presented in this
+paper are also provided in
+\url{https://github.com/richford/afq-insight-paper} as a series of Jupyter
+notebooks \cite{kluyver2016jupyter}.
 
 \subsection*{Methods}
 
