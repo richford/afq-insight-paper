@@ -1,8 +1,0 @@
-requests
-jupyterlab
-ipywidgets
-numpy
-matplotlib
-palettable
-dipy
-git+git://github.com/richford/AFQ-Insight.git

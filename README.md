@@ -62,10 +62,6 @@ the free [Anaconda Python](https://www.anaconda.com/download/).
 
 You will then need to install dependencies using either
 ```bash
-pip install -r requirements.txt
-```
-or
-```bash
 conda env create
 conda activate afq-insight-paper
 ```
