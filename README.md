@@ -19,10 +19,10 @@ aging.
     │   ├── interim        <- Intermediate data that has been transformed.
     │   ├── processed      <- The final, canonical data sets for modeling.
     │   └── raw            <- The original, immutable data dump.
-    ├── docs               <- Poster presentation and home of the github pages data
     ├── notebooks          <- Jupyter notebooks
     ├── reports            <- Manuscript source, e.g., LaTeX, Markdown, etc., or any project reports
-    │   └── figures        <- Figures for the manuscript or reports
+    │   └── paper_figures  <- Figures for the manuscript or reports
+    │   └── manuscript     <- LaTeX source for the manuscript
     └── src                <- Source code for this project
         ├── data           <- scripts and programs to process data
         ├── external       <- Any external source code, e.g., pull other git projects, or external libraries
@@ -57,7 +57,7 @@ When you're done, type `exit` to return to your host machine shell.
 ### Docker-less installation
 
 If you don't want to use Docker, you must have Python (>=
-3.6) installed. If you don't already have Python installed, we recommend
+3.7) installed. If you don't already have Python installed, we recommend
 the free [Anaconda Python](https://www.anaconda.com/download/).
 
 You will then need to install dependencies using either
@@ -72,7 +72,9 @@ conda activate afq-insight-paper
 
 ## Data
 
-To download the source data, type
+To download the source data for the ALS and WH datasets mentioned in the paper, type
 ```bash
 make data
 ```
+
+The other datasets require data usage agreements and so cannot be shared via this repository.
