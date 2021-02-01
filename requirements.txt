@@ -4,11 +4,5 @@ ipywidgets
 numpy
 matplotlib
 palettable
-bokeh
 dipy
-fury
-deepdish
-pybeeswarm
 git+git://github.com/richford/AFQ-Insight.git
-
-pillow>=7.1.0 # not directly required, pinned by Snyk to avoid a vulnerability

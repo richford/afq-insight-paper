@@ -4,18 +4,14 @@ channels:
   - conda-forge
 
 dependencies:
-  - python>=3.6
+  - python>=3.7
   - requests
   - jupyterlab
   - ipywidgets
   - numpy
   - matplotlib
   - palettable
-  - bokeh
   - pip
   - pip:
-    - dipy
-    - fury
-    - deepdish
-    - pybeeswarm
-    - "git+git://github.com/richford/AFQ-Insight.git#egg=afqinsight"
+      - dipy
+      - "git+git://github.com/richford/AFQ-Insight.git#egg=afqinsight"
