@@ -73,6 +73,7 @@ target/
 
 # DotEnv configuration
 .env
+.envrc
 
 # Database
 *.db
@@ -88,6 +89,16 @@ target/
 *.synctex.gz
 *.xwm
 *.toc
+*.tbx
+*.vdx
+*.fls
+*.fgx
+*.fdb_latexmk
+*.run.xml
+*Notes.bib
+__latexindent_temp.tex
+.refresh
+.aspell.en.prepl
 
 # vim
 *.sw?
@@ -111,6 +122,8 @@ bin/
 
 # Ignore the generate paper PDF:
 /reports/manuscript/paper.pdf
+/reports/manuscript/supplemental.pdf
+/reports/manuscript/cover_letter/cover_letter.pdf
 
 # Ignore pickle files
 *.pkl

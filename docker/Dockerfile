@@ -12,7 +12,8 @@ RUN conda env create
 
 RUN source activate afq-insight-paper && pip install pyafq==0.5
 
-ADD . /afq-insight-paper
+ADD tex.mplstyle /root/.config/matplotlib/stylelib/tex.mplstyle
+RUN mkdir /afq-insight-paper
 WORKDIR /afq-insight-paper
 
 # Set the ENTRYPOINT to use bash
