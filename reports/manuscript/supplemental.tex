@@ -309,6 +309,23 @@ variables (See \cref{main:fig:methods:group-structure} in the main text).
 \subsection{Sparse Group Lasso}
 \label{sec:sgl}
 
+\begin{figure}[t]
+    \includegraphics[width=\columnwidth]{nested-cross-validation.pdf}
+    \caption{{\bf Nested cross-validation}
+        \label{fig:nested-cross-val}
+        We evaluate model quality using a nested $k$-fold cross validation
+        scheme. At level-0, the input data is decomposed into $k_0$ shuffled
+        groups and optimal hyperparameters are found for the level-0 training
+        set. To avoid overfitting, the optimal hyperparameters are themselves
+        evaluated using a cross-validation scheme taking place at level-1 of
+        the decomposition, where each level-0 training set is further
+        decomposed into $k_1 = 3$ shuffled groups. In the classification
+        case, the training and test splits are stratified by diagnosis. For
+        the ALS and WH data, $k_0 = 10$, while for the HBN and Cam-CAN data,
+        $k_0 = 5$.
+    }
+\end{figure}
+
 Before fitting a model to the data, imputation and standardization are
 performed. Missing node values (e.g., in cases where \texttt{AFQ} designates
 a node as not-a-number) are imputed via linear interpolation. Care is taken
@@ -452,23 +469,6 @@ negative log likelihood of the SGL classifier giving the ``true'' label:
 
 \subsection{SGL implementation, cross-validation and metaparameter optimization}
 
-\begin{figure}[!h]
-    \includegraphics[width=\columnwidth]{nested-cross-validation.pdf}
-    \caption{{\bf Nested cross-validation}
-        \label{fig:nested-cross-val}
-        We evaluate model quality using a nested $k$-fold cross validation
-        scheme. At level-0, the input data is decomposed into $k_0$ shuffled
-        groups and optimal hyperparameters are found for the level-0 training
-        set. To avoid overfitting, the optimal hyperparameters are themselves
-        evaluated using a cross-validation scheme taking place at level-1 of
-        the decomposition, where each level-0 training set is further
-        decomposed into $k_1 = 3$ shuffled groups. In the classification
-        case, the training and test splits are stratified by diagnosis. For
-        the ALS and WH data, $k_0 = 10$, while for the HBN and Cam-CAN data,
-        $k_0 = 5$.
-    }
-\end{figure}
-
 Because the SGL is not specific to tractometry, we implemented its solution as
 a general-purpose Python package called \texttt{groupyr} \cite{groupyr}.
 \texttt{Groupyr} solves the cost function in \cref{eq:sgl} using proximal
@@ -487,6 +487,17 @@ yield the best cross-validated performance using either
     library \cite{scikit_optimize}.
 \end{enumerate*}
 
+\begin{figure*}
+    \includegraphics[width=\textwidth]{sarica_coefs_profiles_fa.pdf}
+    \caption{%
+        {%
+            \bf Fractional anisotropy (FA) bundle profiles and $\hat{\beta}$
+            coefficients for ALS classification.
+        }
+        \label{fig:als-bp:fa}
+    }
+\end{figure*}
+
 To objectively evaluate model performance and guard against over-fitting,
 we used a nested cross-validation scheme, which is depicted for the binary
 classification case in \cref{fig:nested-cross-val}. The subjects (i.e. rows
@@ -504,7 +515,7 @@ decomposition, we fit an SGL model using fixed regularization meta-parameters
 $\alpha$ and $\lambda$, training the model using train\textsubscript{1} and
 evaluating the fit on test\textsubscript{1}. We find the optimal values for
 $\alpha$ and $\lambda$ using sequential model-based optimization, implemented
-using the scikit-optimize \verb|BayesSearchCV| class\cite{scikit-optimize}.
+using the scikit-optimize \verb|BayesSearchCV| class \cite{scikit_optimize}.
 For continuous numerical $y$, \verb|BayesSearchCV| searches for
 meta-parameter values that maximize the $R^2$ averaged over test sets. For
 binary categorical $y$ \verb|BayesSearchCV| seeks to maximize the
@@ -526,13 +537,24 @@ One should expect this since any better performance might indicate data
 leakage between train and test sets \cite{kaufman2012leakage} or other common
 machine learning pitfalls.
 
+\begin{figure*}
+    \includegraphics[width=\textwidth]{sarica_coefs_profiles_md.pdf}
+    \caption{%
+        {%
+            \bf Mean diffusivity (MD) Bundle profiles and $\hat{\beta}$
+            coefficients for ALS classification.
+        }
+        \label{fig:als-bp:md}
+    }
+\end{figure*}
+
 \subsection{Software implementation}
 
 The full software implementation of the SGL approach presented here is available
 in a Python software package called \texttt{AFQ-Insight}, which is developed
 publicly in \url{https://github.com/richford/afq-insight}.
 The version of the code used to produce the results herein is also available in
-\url{https://doi.org/10.5281/zenodo.3585942}\todo{Update version here}.
+\url{https://doi.org/10.5281/zenodo.4316000}.
 AFQ-Insight reads the target and feature data that has been processed by AFQ
 from comma separated value (CSV) files conforming to the AFQ-Browser data
 format \cite{yeatman2018browser} and represents them internally as
@@ -550,6 +572,16 @@ appropriate classification and regression metrics such as accuracy, area
 under the receiver operating curve (AUC ROC), and coefficient of
 determination ($R^2$). Internally, \texttt{AFQ-Insight} uses the \texttt{groupyr} software library \cite{groupyr} mentioned above to solve the SGL.
 
+\begin{figure*}
+    \includegraphics[width=\textwidth]{wh_coefs_profiles_fa.pdf}
+    \caption{%
+        {%
+            \bf Fractional anisotropy (FA) bundle profiles and $\hat{\beta}$
+            coefficients for age regression in the WH dataset.
+        }
+        \label{fig:wh-bp:fa}
+    }
+\end{figure*}
 
 \section{Bundle and coefficient profiles}
 \label{sec:bundle-profiles}
@@ -585,18 +617,18 @@ the twin axis on the right-hand-side. The scale of the $\hat{\beta}$-axis is
 shared between the FA and MD metrics so that one can compare the relative
 imporance of each metric.
 
-\subsection{ALS bundle profiles}
-
 \begin{figure*}
-    \includegraphics[width=\textwidth]{sarica_coefs_profiles_fa.pdf}
+    \includegraphics[width=\textwidth]{wh_coefs_profiles_md.pdf}
     \caption{%
         {%
-            \bf Fractional anisotropy (FA) bundle profiles and $\hat{\beta}$
-            coefficients for ALS classification.
+            \bf Mean diffusivity (MD) bundle profiles and $\hat{\beta}$
+            coefficients for age regression in the WH dataset.
         }
-        \label{fig:als-bp:fa}
+        \label{fig:wh-bp:md}
     }
 \end{figure*}
+
+\subsection{ALS bundle profiles}
 
 \Cref{fig:als-bp:fa,fig:als-bp:md} show the bundle profiles and regression
 coefficients for the ALS dataset FA and MD metrics, respectively. These
@@ -616,51 +648,6 @@ importance. We will use the phrase ``parsimony pitfall'' to refer to the
 case when SGL regularizes away redundant but obviously important features.
 
 \begin{figure*}
-    \includegraphics[width=\textwidth]{sarica_coefs_profiles_md.pdf}
-    \caption{%
-        {%
-            \bf Mean diffusivity (MD) Bundle profiles and $\hat{\beta}$
-            coefficients for ALS classification.
-        }
-        \label{fig:als-bp:md}
-    }
-\end{figure*}
-
-\subsection{WH bundle profiles}
-
-\begin{figure*}
-    \includegraphics[width=\textwidth]{wh_coefs_profiles_fa.pdf}
-    \caption{%
-        {%
-            \bf Fractional anisotropy (FA) bundle profiles and $\hat{\beta}$
-            coefficients for age regression in the WH dataset.
-        }
-        \label{fig:wh-bp:fa}
-    }
-\end{figure*}
-
-\Cref{fig:wh-bp:fa,fig:wh-bp:md} show the bundle profiles and regression
-coefficients for the WH dataset. In contrast to the ALS classification case,
-the $\hat{\beta}$ coefficients are distributed widely through the brain, supporting
-the interpretation that aging is a large and continuous whole-brain process.
-These figures also show that SGL behaves much more like the lasso than the group
-lasso, as discussed in the main text. The parsimony pitfall is most evident in
-the IFOL and IFOR bundles in \cref{fig:wh-bp:md}.
-
-\begin{figure*}
-    \includegraphics[width=\textwidth]{wh_coefs_profiles_md.pdf}
-    \caption{%
-        {%
-            \bf Mean diffusivity (MD) bundle profiles and $\hat{\beta}$
-            coefficients for age regression in the WH dataset.
-        }
-        \label{fig:wh-bp:md}
-    }
-\end{figure*}
-
-\subsection{HBN bundle profiles}
-
-\begin{figure*}
     \includegraphics[width=\textwidth]{hbn_coefs_profiles_fa.pdf}
     \caption{%
         {%
@@ -670,6 +657,18 @@ the IFOL and IFOR bundles in \cref{fig:wh-bp:md}.
         \label{fig:hbn-bp:fa}
     }
 \end{figure*}
+
+\subsection{WH bundle profiles}
+
+\Cref{fig:wh-bp:fa,fig:wh-bp:md} show the bundle profiles and regression
+coefficients for the WH dataset. In contrast to the ALS classification case,
+the $\hat{\beta}$ coefficients are distributed widely through the brain, supporting
+the interpretation that aging is a large and continuous whole-brain process.
+These figures also show that SGL behaves much more like the lasso than the group
+lasso, as discussed in the main text. The parsimony pitfall is most evident in
+the IFOL and IFOR bundles in \cref{fig:wh-bp:md}.
+
+\subsection{HBN bundle profiles}
 
 \Cref{fig:hbn-bp:fa,fig:hbn-bp:md} show the bundle profiles and regression
 coefficients for the HBN dataset. Like the WH dataset, the $\hat{\beta}$
@@ -745,8 +744,6 @@ SLFR bundles in \cref{fig:cc-bp:md}.
         \label{fig:cc-bp:md}
     }
 \end{figure*}
-
-\printfigures
 
 \bibliographystyle{naturemag}
 \bibliography{paper}

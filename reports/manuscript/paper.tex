@@ -114,53 +114,36 @@
 \input{output}
 
 \begin{abstract}
-    % Abstracts should be unreferenced and typically around 150 words
-    The white matter contains long-range connections between different
-    brain regions and the organization of these connections holds important
-    implications for brain function in health and disease. Tractometry
-    uses diffusion-weighted magnetic resonance imaging (dMRI)
-    to quantify tissue properties (e.g. fractional anisotropy (FA),
-    mean diffusivity (MD), etc.), along the trajectories of these
-    connections.
+    The white matter contains long-range connections between different brain
+    regions and the organization of these connections holds important
+    implications for brain function in health and disease. Tractometry uses
+    diffusion-weighted magnetic resonance imaging (dMRI) to quantify tissue
+    properties along the trajectories of these connections.
     % \cite{yeatman2012tract}.
-    Statistical inference from
-    tractometry usually either averages these quantities along
-    the length of each bundle in each individual or performs analysis
-    point-by-point along each bundle, with group comparisons or regression
-    models computed separately for each point along every one of the bundles.
-    These approaches are limited in their sensitivity, in the former case, or
-    in their statistical power, in the latter.
-    In the present work, we developed a method based on the sparse group
-    lasso (SGL)
+    Statistical inference from tractometry usually either averages these
+    quantities along the length of each fiber bundle or computes regression
+    models separately for each point along every one of the bundles. These
+    approaches are limited in their sensitivity, in the former case, or in
+    their statistical power, in the latter. We developed a method based on
+    the sparse group lasso (SGL)
     % \cite{simon2013sparse}
-    that takes into account tissue
-    properties measured along all of the bundles, and selects informative
-    features by enforcing sparsity, not only at the level of individual
-    bundles, but also across the entire set of bundles and all of the measured
-    tissue properties.
-    % The sparsity penalties for each of these constraints
-    % is identified using a nested cross-validation scheme that guards
-    % against over-fitting and simultaneously identifies the correct
-    % level of sparsity.
-    We demonstrate the accuracy of the method in two
-    settings: i) In a classification setting, patients with amyotrophic
-    lateral sclerosis (ALS) are accurately distinguished from matched
-    controls.
+    that takes into account tissue properties along all of the bundles and
+    selects informative features by enforcing both global and bundle-level
+    sparsity. We demonstrate the performance of the method in two settings:
+    i) in a classification setting, patients with amyotrophic lateral
+    sclerosis (ALS) are accurately distinguished from matched controls.
     % \cite{sarica2017corticospinal}.
-    Furthermore, SGL automatically
-    identifies FA in the corticospinal tract as important for this
-    classification, correctly finding the parts of the white matter known
-    to be affected by the disease. ii) In a regression setting, dMRI is
-    used to accurately predict ``brain age.''
+    Furthermore, SGL identifies the corticospinal tract as important for this
+    classification, correctly finding the parts of the white matter known to
+    be affected by the disease. ii) In a regression setting, SGL accurately
+    predicts ``brain age.''
     % \cite{yeatman2014lifespan, Brown2012-so}.
-    In this case, the weights are distributed throughout the
-    white matter indicating that many different regions of the white matter
-    change with development and contribute to the prediction of age. Thus,
-    SGL makes it possible to leverage the multivariate relationship between
-    diffusion properties measured along multiple bundles to make accurate
-    predictions of subject characteristics while simultaneously discovering
-    the most relevant features of the white matter for the characteristic of
-    interest.
+    In this case, the weights are distributed throughout the white matter
+    indicating that many different regions of the white matter change over
+    the lifespan. Thus, SGL leverages the multivariate relationships between
+    diffusion properties in multiple bundles to make accurate phenotypic
+    predictions while simultaneously discovering the most relevant features
+    of the white matter.
 \end{abstract}
 
 \maketitle
@@ -549,7 +532,7 @@ The WH \cite{yeatman2014lifespan}, HBN \cite{alexander2017open}, and Cam-CAN
 data from 76, 978, and 640 subjects, respectively, ranging from 6-50, 5-21,
 and 18-88 years of age, respectively. In each case, biological age was used
 as the predicted variable $y$. SGL was fit to the tractometry-extracted
-features FA and MD in 18 major brain tracts, with diffusion metrics extracted
+features FA and mean diffusivity (MD) in 18 major brain tracts, with diffusion metrics extracted
 from diffusion tensor imaging (DTI) for the WH dataset and diffusion kurtosis
 imaging (DKI) \cite{jensen2005diffusion} for the HBN and Cam-CAN datasets.
 
@@ -721,8 +704,6 @@ for helpful comments on the manuscript.
 \subsection*{Author contribution statement}
 
 All authors contributed extensively to the work presented in this paper.
-
-\printfigures
 
 \bibliographystyle{naturemag}
 \bibliography{paper}
