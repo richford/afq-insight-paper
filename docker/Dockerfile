@@ -3,11 +3,14 @@ from continuumio/miniconda3
 SHELL ["/bin/bash", "-c"]
 
 RUN apt-get update && apt-get install make
+RUN conda update -n base -c defaults conda
 
 # Use the environment.yml to create the conda environment.
 ADD environment.yml /tmp/environment.yml
 WORKDIR /tmp
-RUN [ "conda", "env", "create" ]
+RUN conda env create
+
+RUN source activate afq-insight-paper && pip install pyafq==0.5
 
 ADD . /afq-insight-paper
 WORKDIR /afq-insight-paper

@@ -1,0 +1,21 @@
+name: afq-insight-paper
+channels:
+  - plotly
+  - conda-forge
+  - defaults
+dependencies:
+  - ipywidgets=7.5.1
+  - plotly=4.14.1
+  - pip=20.3.3
+  - numpy=1.19.1
+  - dask=1.1.0
+  - ipython=7.13.0
+  - jupyterlab=2.2.9
+  - python-kaleido=0.0.3
+  - matplotlib=3.3.0
+  - seaborn=0.11.0
+  - cvxpy=1.1.5
+  - psutil=5.7.0
+  - pip:
+      - afqinsight==0.2.8
+      - nibabel==3.0.2
