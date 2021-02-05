@@ -21,6 +21,10 @@ nmeth: $(MAIN).tex $(SUPPLEMENT).tex .refresh Makefile $(FIGURES)
 	$(LATEXMK) $(LATEXMKOPT) $(CONTINUOUS) \
 		-pdflatex="$(LATEX) $(LATEXOPT) $(NONSTOP) %O %S" $(MAIN)
 
+paper: $(MAIN).tex $(SUPPLEMENT).tex Makefile $(FIGURES)
+	$(LATEXMK) $(LATEXMKOPT) $(CONTINUOUS) $(MAIN).tex
+	$(LATEXMK) $(LATEXMKOPT) $(CONTINUOUS) $(SUPPLEMENT).tex
+
 force:
 	touch .refresh
 	rm $(MAIN).pdf
@@ -57,4 +61,4 @@ spell: $(addsuffix .spchk,$(basename $(SOURCES)))
 docx:
 	pandoc -s --biblio $(MAIN).bib $(MAIN).tex -o paper.docx
 
-.PHONY: clean force once all spell docx
+.PHONY: clean force once all spell docx paper
