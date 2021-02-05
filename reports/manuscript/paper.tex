@@ -264,7 +264,24 @@ of the white matter.
 % Use first person. PLOS ONE authors please skip this step. 
 % Author Summary not valid for PLOS ONE submissions.   
 \section*{Author summary}
-\todo[inline]{Write author summary}
+Innovations in medical imaging are helping researchers understand the human
+brain, and in particular the neural connections that comprise the white
+matter. Mapping these connections and understanding which parts are relevant
+to disease and behavior holds great promise in understanding how the brain
+functions, diagnosing diseases, and creating more effective treatments. To
+that end, there are now many large scale neuroimaging studies with thousands
+or even tens of thousands of participants. As such, neuroimaging is on the
+cusp of a transition to big data. Yet the field's conventional statistical
+methods are better suited to the small-scale studies of the past. We need
+machine learning methods that can accurately predict disease status and
+behavior, while also providing insight into which parts of the white matter
+are important for that prediction. We have therefore developed a statistical
+method that automatically identifies important features of the white matter
+for any given disease or behavior. Our approach relies on including our
+knowledge of the anatomical grouping of the white matter fiber bundles in the
+statistical model itself. We tested our method on four different datasets and
+found that it competes with state-of-the-art methods and preserves
+interpretability, all without the need for extensive feature engineering.
 
 \linenumbers
 
@@ -1145,7 +1162,7 @@ yield the best cross-validated performance using either
 \end{enumerate*}
 
 \begin{figure}[t]
-    \includegraphics[width=\columnwidth]{nested-cross-validation.pdf}
+    \includegraphics[width=0.75\textwidth]{nested-cross-validation.pdf}
     \caption{{\bf Nested cross-validation}
         \label{fig:nested-cross-val}
         We evaluate model quality using a nested $k$-fold cross validation
@@ -1251,4 +1268,3 @@ for helpful comments on the manuscript.
 % here. See http://journals.plos.org/plosone/s/latex for 
 % step-by-step instructions.
 \end{document}
-
