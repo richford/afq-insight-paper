@@ -96,7 +96,8 @@ target/
 *.fdb_latexmk
 *.run.xml
 *Notes.bib
-__latexindent_temp.tex
+*__latexindent_temp.tex
+*__latexindent_temp.pdf
 .refresh
 .aspell.en.prepl
 
@@ -124,6 +125,8 @@ bin/
 /reports/manuscript/paper.pdf
 /reports/manuscript/supplemental.pdf
 /reports/manuscript/cover_letter/cover_letter.pdf
+/reports/manuscript/dictionary.txt
+/reports/manuscript/plos-latex-template/plos_latex_template.pdf
 
 # Ignore pickle files
 *.pkl
