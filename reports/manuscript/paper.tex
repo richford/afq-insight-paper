@@ -5,21 +5,21 @@
 %
 % -- IMPORTANT NOTE
 %
-% This template contains comments intended 
-% to minimize problems and delays during our production 
+% This template contains comments intended
+% to minimize problems and delays during our production
 % process. Please follow the template instructions
 % whenever possible.
 %
-% % % % % % % % % % % % % % % % % % % % % % % 
+% % % % % % % % % % % % % % % % % % % % % % %
 %
-% Once your paper is accepted for publication, 
-% PLEASE REMOVE ALL TRACKED CHANGES in this file 
-% and leave only the final text of your manuscript. 
+% Once your paper is accepted for publication,
+% PLEASE REMOVE ALL TRACKED CHANGES in this file
+% and leave only the final text of your manuscript.
 % PLOS recommends the use of latexdiff to track changes during review, as this will help to maintain a clean tex file.
 % Visit https://www.ctan.org/pkg/latexdiff?lang=en for info or contact us at latex@plos.org.
 %
 %
-% There are no restrictions on package use within the LaTeX files except that 
+% There are no restrictions on package use within the LaTeX files except that
 % no packages listed in the template may be deleted.
 %
 % Please do not include colors or graphics in the text.
@@ -33,8 +33,8 @@
 % Please include tables/figure captions directly after the paragraph where they are first cited in the text.
 %
 % DO NOT INCLUDE GRAPHICS IN YOUR MANUSCRIPT
-% - Figures should be uploaded separately from your manuscript file. 
-% - Figures generated using LaTeX should be extracted and removed from the PDF before submission. 
+% - Figures should be uploaded separately from your manuscript file.
+% - Figures generated using LaTeX should be extracted and removed from the PDF before submission.
 % - Figures containing multiple panels/subfigures must be combined into one image file before submission.
 % For figure citations, please use "Fig" instead of "Figure".
 % See http://journals.plos.org/plosone/s/figures for PLOS figure guidelines.
@@ -58,15 +58,15 @@
 %
 % Do not include text that is not math in the math environment. For example, CO2 should be written as CO\textsubscript{2} instead of CO$_2$.
 %
-% Please add line breaks to long display equations when possible in order to fit size of the column. 
+% Please add line breaks to long display equations when possible in order to fit size of the column.
 %
 % For inline equations, please do not include punctuation (commas, etc) within the math environment unless this is part of the equation.
 %
-% When adding superscript or subscripts outside of brackets/braces, please group using {}.  For example, change "[U(D,E,\gamma)]^2" to "{[U(D,E,\gamma)]}^2". 
+% When adding superscript or subscripts outside of brackets/braces, please group using {}.  For example, change "[U(D,E,\gamma)]^2" to "{[U(D,E,\gamma)]}^2".
 %
 % Do not use \cal for caligraphic font.  Instead, use \mathcal{}
 %
-% % % % % % % % % % % % % % % % % % % % % % % % 
+% % % % % % % % % % % % % % % % % % % % % % % %
 %
 % Please contact latex@plos.org with any questions.
 %
@@ -135,13 +135,13 @@
 \noalign{\global\arrayrulewidth\savedwidth}}
 
 % Remove comment for double spacing
-%\usepackage{setspace} 
+%\usepackage{setspace}
 %\doublespacing
 
 % Text layout
 \raggedright
 \setlength{\parindent}{0.5cm}
-\textwidth 5.25in 
+\textwidth 5.25in
 \textheight 8.75in
 
 % Bold the 'Figure #' in the caption and separate it from the title/caption with a period
@@ -261,28 +261,27 @@ predictions while simultaneously discovering the most relevant features
 of the white matter.
 
 % Please keep the Author Summary between 150 and 200 words
-% Use first person. PLOS ONE authors please skip this step. 
-% Author Summary not valid for PLOS ONE submissions.   
+% Use first person. PLOS ONE authors please skip this step.
+% Author Summary not valid for PLOS ONE submissions.
 \section*{Author summary}
-Innovations in medical imaging are helping researchers understand the human
-brain, and in particular the neural connections that comprise the white
-matter. Mapping these connections and understanding which parts are relevant
-to disease and behavior holds great promise in understanding how the brain
-functions, diagnosing diseases, and creating more effective treatments. To
-that end, there are now many large scale neuroimaging studies with thousands
-or even tens of thousands of participants. As such, neuroimaging is on the
-cusp of a transition to big data. Yet the field's conventional statistical
-methods are better suited to the small-scale studies of the past. We need
-machine learning methods that can accurately predict disease status and
-behavior, while also providing insight into which parts of the white matter
-are important for that prediction. We have therefore developed a statistical
-method that automatically identifies important features of the white matter
-for any given disease or behavior. Our approach relies on including our
-knowledge of the anatomical grouping of the white matter fiber bundles in the
-statistical model itself. We tested our method on four different datasets and
-found that it competes with state-of-the-art methods and preserves
-interpretability, all without the need for extensive feature engineering.
-
+The connections between different parts of the brain form networks that are
+important for information transmission and for brain health. These connections
+are composed of nerve fibers that travel through the white matter portion of the
+brain. Thus, mapping tissue properties in white matter pathways can help us
+understand which connections and what tissue properties are relevant to brain
+diseases, or explain differences in behavior and cognition between different
+individuals. We developed a new statistical method that helps map the white
+matter by automatically identifying the features of the white matter that
+correspond to individual differences. Our approach relies on incorporating our
+knowledge of the anatomical sub-divisions of the white matter into the
+statistical model itself. We demonstrate that the model accurately captures
+differences between individual's with amyotrophic lateral sclerosis (ALS) and
+healthy controls. It also accurately captures brain changes that correspond with
+the ages of different individuals. We tested our method on four different
+datasets and found that it is more accurate than previous methods used with
+these datasets, while also allowing us to highlight which white matter tissue
+properties and which connections account for individual differences, thus
+providing interpretable results.
 \linenumbers
 
 % Use "Eq" instead of "Equation" for equation citations.
@@ -1265,6 +1264,6 @@ for helpful comments on the manuscript.
 \bibliography{paper}
 % Compile your BiBTeX database using our plos2015.bst
 % style file and paste the contents of your .bbl file
-% here. See http://journals.plos.org/plosone/s/latex for 
+% here. See http://journals.plos.org/plosone/s/latex for
 % step-by-step instructions.
 \end{document}

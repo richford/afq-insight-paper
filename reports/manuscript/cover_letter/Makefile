@@ -1,4 +1,4 @@
-LATEX=pdflatex
+LATEX=xelatex
 LATEXOPT=--shell-escape
 NONSTOP=--interaction=nonstopmode
 
@@ -41,6 +41,6 @@ debug:
 spell: $(addsuffix .spchk,$(basename $(SOURCES)))
 
 %.spchk: %.tex
-	@aspell --lang=en --home-dir=. --personal=dictionary.txt -t -c $< 
+	@aspell --lang=en --home-dir=. --personal=dictionary.txt -t -c $<
 
 .PHONY: clean force once all spell docx coverletter

@@ -1,8 +1,108 @@
-\documentclass{letter}
-\usepackage[margin=1in]{geometry}
+\documentclass[11pt,letterpaper]{letter} % Specify the font size (10pt, 11pt and 12pt) and paper size (letterpaper, a4paper, etc)
 
-\signature{Adam Richie-Halford, PhD \\ \vspace{4em} Ariel Rokem, PhD}
-\address{The eScience Institute \\ University of Washington \\ Seattle, WA}
+\usepackage{graphicx} % Required for including pictures
+\usepackage{microtype} % Improves typography
+%\usepackage{gfsdidot} % Use the GFS Didot font: http://www.tug.dk/FontCatalogue/gfsdidot/
+
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{url}
+\usepackage{fontspec}
+
+\setmainfont{Latin Modern Sans}
+
+% Create a new command for the horizontal rule in the document which allows thickness specification
+\makeatletter
+\def\vhrulefill#1{\leavevmode\leaders\hrule\@height#1\hfill \kern\z@}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT MARGINS
+%----------------------------------------------------------------------------------------
+
+\textwidth 7in
+\textheight 10.0in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\topmargin -1.in
+\longindentation 0.50\textwidth
+\parindent 0in
+
+%----------------------------------------------------------------------------------------
+%	SENDER INFORMATION
+%----------------------------------------------------------------------------------------
+
+\def\Who{Ariel Rokem} % Your name
+\def\What{, PhD} % Your title
+\def\Where{Department of Psychology} % Your department/institution
+\def\Address{Guthrie Hall 119  A} % Your address
+\def\CityZip{Seattle, WA 98105} % Your city, zip code, country, etc
+\def\Email{E-mail: arokem@uw.edu} % Your email address
+\def\TEL{Phone: +1 (510) 387-6264} % Your phone number
+\def\URL{http://arokem.org} % Your URL
+
+%----------------------------------------------------------------------------------------
+%	HEADER AND FROM ADDRESS STRUCTURE
+%----------------------------------------------------------------------------------------
+
+\address{
+\begin{flushleft}
+\includegraphics[width=1in]{UWLogo.png} % Include the logo of your institution
+\end{flushleft}
+\hspace{5in} % Position of the institution logo, increase to move left, decrease to move right
+\vskip -1.7in~\\ % Position of the text in relation to the institution logo, increase to move down, decrease to move up
+\Large\hspace{1.5in} \hfill ~\\[0.05in] % First line of institution name, adjust hspace if your logo is wide
+\hspace{1.5in} \hfill \normalsize % Second line of institution name, adjust hspace if your logo is wide
+%\makebox[0ex][r]{\bf \Who \What }\hspace{0.08in} % Print your name and title with a little whitespace to the right
+~\\[-0.11in] % Reduce the whitespace above the horizontal rule
+\hspace{1.5in}%\vhrulefill{1pt} \\ % Horizontal rule, adjust hspace if your logo is wide and \vhrulefill for the thickness of the rule
+\hspace{\fill}\parbox[t]{2.95in}{ % Create a box for your details underneath the horizontal rule on the right
+\footnotesize % Use a smaller font size for the details
+\Who \What \\ \em % Your name, all text after this will be italicized
+\Where\\ % Your department
+\Address\\ % Your address
+\CityZip\\ % Your city and zip code
+\TEL\\ % Your phone number
+\Email\\ % Your email address
+\URL % Your URL
+}
+\hspace{-1.4in} % Horizontal position of this block, increase to move left, decrease to move right
+\vspace{-1in} % Move the letter content up for a more compact look
+}
+
+%----------------------------------------------------------------------------------------
+%	TO ADDRESS STRUCTURE
+%----------------------------------------------------------------------------------------
+
+\def\opening#1{\thispagestyle{empty}
+{\centering\fromaddress \vspace{1.2in} \\ % Print the header and from address here, add whitespace to move date down
+\hspace*{\longindentation}\today\par} % Print today's date, remove \today to not display it
+{\raggedright \toname \\ \toaddress \par} % Print the to name and address
+\vspace{0.2in} % White space after the to address
+\noindent #1 % Print the opening line
+% Uncomment the 4 lines below to print a footnote with custom text
+%\def\thefootnote{}
+%\def\footnoterule{\hrule}
+%\footnotetext{\hspace*{\fill}{\footnotesize\em Footnote text}}
+%\def\thefootnote{\arabic{footnote}}
+}
+
+%----------------------------------------------------------------------------------------
+%	SIGNATURE STRUCTURE
+%----------------------------------------------------------------------------------------
+
+\signature{\Who \What} % The signature is a combination of your name and title
+
+\long\def\closing#1{
+\vspace{0.1in} % Some whitespace after the letter content and before the signature
+\noindent % Stop paragraph indentation
+\hspace*{\longindentation} % Move the signature right
+\parbox{\indentedwidth}{\raggedright
+#1 % Print the signature text
+\vskip 0.65in % Whitespace between the signature text and your name
+\fromsig}} % Print your name and title
+
+%----------------------------------------------------------------------------------------
+
 \begin{document}
 
 \begin{letter}{}
@@ -12,12 +112,11 @@ We are pleased to submit our manuscript entitled ``Multidimensional analysis
 and detection of informative features in human brain white matter'' to
 \emph{PLOS Computational Biology}.
 
-
 This work presents a novel approach to the analysis of brain connectivity in
 diffusion-weighted MRI. Adopting a group-sparse linear approach, we model the
 multi-dimensional data from these measurements, taking into account the
 grouping of the measurement to the different anatomical connections between
-brain regions. We demonstrate the accuracy of this approach in four different
+brain regions. We demonstrate the value of this approach in four different
 datasets. Our results show that the model is highly accurate (exceeding the
 accuracy of previous state-of-the-art results) in both classification of
 disease states, as well as the prediction of continuous variables (i.e., the
@@ -25,7 +124,7 @@ biological age of participants). Importantly, the results show that the
 method produces results that are not only accurate but also highly
 interpretable, because of the linear modeling approach. We produced
 high-quality open-source software implementing our approach that can easily
-be used in the analysis of other datasets.
+be used in the analysis of other datasets (available at \url{https://github.com/richford/AFQ-Insight}).
 
 Neuroscience, like many other fields, is at the cusp of an exciting era of
 Big Data. This is thanks in large part to concerted efforts to collect and
@@ -45,18 +144,27 @@ predictive and interpretable. In our manuscript, we demonstrate that our
 method is applicable to very large datasets, including two different
 openly-available datasets with more than 500 subjects each.
 
-Importantly, the software and analysis methods that we provide generalize
-well beyond neuroscience into other fields where group-sparse linear models
-can be applied, including other fields of biology, but also other physical
-and even social sciences. Therefore, we believe that this manuscript will be
-of interest to a broad range of researchers.
+Importantly, while the focus of our paper is analysis of human brain white
+matter, and this will translate immediately to work by other neuroscientists,
+the software and analysis methods that we provide generalize well beyond
+neuroscience into other fields where group-sparse linear models can be applied,
+including other fields of biology, such as genetics and ecology. Therefore, we
+believe that this manuscript will be of interest to a broad range of
+researchers.
 
 We appreciate your consideration of our manuscript
 
-\closing{Sincerely,}
+\hspace{1cm} Sincerely,\\
 
-\encl{Manuscript}
-\encl{Supplemental materials}
+\begin{minipage}{0.8\linewidth}
+\hspace{1cm}\begin{tabular}{ll}
+Ariel Rokem, PhD & \hspace{1cm} Adam Richie-Halford, PhD\\
+Research Assistant Professor & \hspace{1cm}  Postdoctoral researcher \\
+Department of Psychology & \hspace{1cm} eScience Institute \\
+University of Washington & \hspace{1cm} University of Washington
+ \end{tabular}
+\end{minipage}
+
 
 \end{letter}
 \end{document}
