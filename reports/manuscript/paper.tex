@@ -101,7 +101,6 @@
 \usepackage{url}
 
 \usepackage{changes}
-% \definechangesauthor{name={Adam Richie-Halford}, color=red}{ARH}
 
 % line numbers
 \usepackage[right]{lineno}
@@ -567,11 +566,11 @@ the previous study from which we obtained the data
 
 To assess the added value of incorporating anatomical knowledge into our
 model, we compared our classification results to those obtained from
-\replaced[id={ARH}]{four other models: a pure lasso model, an elastic net model, a
+\replaced{four other models: a pure lasso model, an elastic net model, a
 bundle-mean lasso (i.e. a lasso model trained only on the mean metric values
 from each bundle), and a principal components regression lasso (Lasso PCR)
 model \cite{powell2018local, rasero2021integrating}}{a lasso model}.
-\replaced[id={ARH}]{These models achieved accuracies of 76\%, 76\%, 79.5\%, and 71.5\%
+\replaced{These models achieved accuracies of 76\%, 76\%, 79.5\%, and 71.5\%
 respectively and ROC AUC values of 0.76, 0.75, 0.82, and 0.71,
 respectively}{The pure lasso model achieved 76\% accuracy and an ROC AUC of
 0.76} using the same cross-validation strategy used to assess the SGL model.
@@ -700,10 +699,10 @@ reveals that SGL selects informative regions where diffusion properties are
 different between the age quintiles.
 
 As with ALS classification, we also compared SGL performance with results
-obtained using \replaced[id={ARH}]{the pure lasso, elastic net, bundle-mean lasso, and
+obtained using \replaced{the pure lasso, elastic net, bundle-mean lasso, and
 Lasso PCR}{only the lasso penalty}. The pure lasso models achieved $R^2 =
 0.47$, $0.54$, and $0.70$ for the WH, HBN, and Cam-CAN datasets respectively
-using the same cross-validation strategy used to assess the SGL. \added[id={ARH}]{The
+using the same cross-validation strategy used to assess the SGL. \added{The
 elastic net models achieved $R^2 = 0.46$, $0.59$, and $0.73$ for the WH, HBN,
 and Cam-CAN datasets, respectively. The bundle-mean lasso models achieved
 $R^2 = 0.33$, $0.22$, and $0.55$, respectively. And the Lasso PCR models
