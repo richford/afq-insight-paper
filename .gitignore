@@ -89,6 +89,8 @@ target/
 *.synctex.gz
 *.xwm
 *.toc
+*.loc
+*.soc
 *.tbx
 *.vdx
 *.fls
@@ -121,8 +123,9 @@ bin/
 
 .DS_Store
 
-# Ignore the generate paper PDF:
+# Ignore the generated paper PDFs:
 /reports/manuscript/paper.pdf
+/reports/manuscript/paper_changes.pdf
 /reports/manuscript/supplemental.pdf
 /reports/manuscript/cover_letter/cover_letter.pdf
 /reports/manuscript/dictionary.txt
