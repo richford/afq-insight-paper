@@ -6,18 +6,24 @@ LATEXMK=latexmk
 LATEXMKOPT=-pdf
 CONTINUOUS=-pvc
 
-MAIN=paper
+MAIN=paper_changes
+NOMARKUP=paper
 SUPPLEMENT=supplemental
 
 SOURCES=$(MAIN).tex $(SUPPLEMENT).tex Makefile
 FIGURES := $(shell find ../paper_figures/* -type f)
 
-all: nmeth
+all: diff
 
 .refresh:
 	touch .refresh
 
-nmeth: $(MAIN).tex $(SUPPLEMENT).tex .refresh Makefile $(FIGURES)
+diff: $(MAIN).tex $(SUPPLEMENT).tex Makefile $(FIGURES)
+	python pyMergeChanges.py -ah $(MAIN).tex $(NOMARKUP).tex
+	$(LATEXMK) $(LATEXMKOPT) -pdflatex="$(LATEX) $(LATEXOPT)" \
+		$(MAIN).tex $(NOMARKUP).tex $(SUPPLEMENT).tex
+
+plos: $(MAIN).tex $(SUPPLEMENT).tex .refresh Makefile $(FIGURES)
 	$(LATEXMK) $(LATEXMKOPT) $(CONTINUOUS) \
 		-pdflatex="$(LATEX) $(LATEXOPT) $(NONSTOP) %O %S" $(MAIN)
 
