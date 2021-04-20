@@ -619,7 +619,7 @@ Group Lasso and lasso penalties, selected through nested cross-validation
 (see \cref{eq:sgl}).
 If $\alpha$ is closer to zero, it indicates that the phenotype in question
 preferentially correlates with only a few groups of covariates. For the ALS
-dataset, \added{the SGL model has} $\alpha = $ \alsLRatio 
+dataset, \added{the SGL model has} $\alpha = $ \alsLRatio
 \added{and the PCR-SGL model has \protect$\alpha = $ \protect\alsLRatioGpca},
 confirming that the white matter correlates of ALS reside mostly in one
 bundle, namely the CST.
@@ -803,8 +803,7 @@ that ALS, which is a disease of lower motor neurons, is localized to the
 cortico-spinal tract. This recapitulates the results of previous analysis of
 these same data, using a bundle-of-interest approach
 \cite{sarica2017corticospinal}.
-\added{As with the original study, it is unclear whether our strong predictive performance based on image properties that would be visible in patient scans or whether it is identifying a new subclinical disease biomarker.} 
-
+\added{As with the original study, it is unclear whether our strong predictive performance based on image properties that would be visible in patient scans or whether it is identifying a new subclinical disease biomarker.}
 In contrast, for the analysis of biological
 age, the coefficients identified by the algorithm are very widely distributed
 across many parts of the white matter, mirroring previous results that show a
@@ -911,7 +910,7 @@ The method is packaged as open-source software called AFQ-Insight that is
 openly available at \url{https://github.com/richford/AFQ-Insight}, and
 provides a clear API to allow for extensions of the method. The sofware
 integrates within a broader automated fiber quantification software
-ecosystem: AFQ \cite{yeatman2012tract} and pyAFQ \cite{pyAFQ, kruper2021evaluating}, which extract
+ecosystem: AFQ \cite{yeatman2012tract} and pyAFQ \cite{kruper2021evaluating}, which extract
 \replaced{tract profile}{tractometry} data from raw and processed dMRI datasets, as well as
 AFQ-Browser, which visualizes \replaced{tract profiles}{tractometry} data and facilitates sharing of the
 results of dMRI studies \cite{yeatman2018browser}. To facilitate
@@ -1082,7 +1081,7 @@ representative of the tract contribute more to the bundle profile, relative
 to streamlines that are on the edge of the tract.
 
 Data from the HBN and Cam-CAN studies were processed using the updated Python
-Automated Fiber Quantification toolbox (\texttt{pyAFQ}; \cite{pyAFQ}). In
+Automated Fiber Quantification toolbox (\texttt{pyAFQ}; \cite{kruper2021evaluating}). In
 addition to demonstrating the our analysis pipeline is robust to changes in
 tractometry software, the use of the updated \texttt{pyAFQ} capitalized upon
 the following improvements over the legacy Matlab version
