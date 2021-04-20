@@ -1004,7 +1004,6 @@ window. After MP-PCA, B1 field inhomogeneity was corrected using
 After B1 bias correction, the mean intensity of the DWI series was
 adjusted so all the mean intensity of the b=0 images matched across
 eachseparate DWI scanning sequence.
-\end{itemize}
 
 FSL (version 6.0.3:b862cdd5)'s eddy was used for head motion correction
 and Eddy current correction \cite{anderssoneddy}. Eddy was configured
@@ -1034,6 +1033,11 @@ in \emph{Nipype} following the definitions by \cite{power_fd_dvars}. The DWI
 time-series were resampled to ACPC, generating a \emph{preprocessed DWI run
 in ACPC space}.
 
+\item \added{{\it MRtrix3 Reconstruction}}
+
+\added{Reconstruction was performed using \emph{QSIprep} 0.12.1. Multi-tissue fiber response functions were estimated using the dhollander algorithm. FODs were estimated via constrained spherical deconvolution (CSD, \mbox{\cite{originalcsd, tournier2008csd}}) using an unsupervised multi-tissue method \mbox{\cite{dhollander2019response, dhollander2016unsupervised}}. Reconstruction was done using MRtrix3 \mbox{\cite{mrtrix3}}. FODs were intensity-normalized using mtnormalize \mbox{\cite{mtnormalize}}.}
+\end{itemize}
+
 Many internal operations of \emph{QSIPrep} use \emph{Nilearn} 0.6.2
 \cite[RRID:SCR\_001362]{nilearn} and \emph{DIPY} \cite{dipy}. For more
 details of the pipeline, see
@@ -1049,14 +1053,15 @@ system and written informed consent was obtained from each participant. Voxel
 resolution was \num{2x2x2}$\text{mm}^3$ with 30 non-colinear directions
 measured for each of $b=1000$ $\text{s} / \text{mm}^2$ and $b=2000$
 $\text{s} / \text{mm}^2$. The diffusion weighted images were acquired
-with a twice refocused spin-echo sequence and the same preprocessing pipeline
+with a twice refocused spin-echo sequence and the same preprocessing \added{and reconstruction} pipeline
 used for the HBN dataset was applied to this data. We will refer to this
 dataset as Cam-CAN.
 
 \end{enumerate}
 
 Data from the ALS and WH studies was processed in a similar manner,
-using the Matlab Automated Fiber Quantification toolbox (\texttt{mAFQ})
+using the Matlab Automated Fiber Quantification toolbox
+(\texttt{mAFQ}\added{, version 1.1 for WH and version 1.2 for ALS})
 \cite{yeatman2012tract}: streamlines representing fascicles of white
 matter tracts were generated using a determinstic tractography algorithm
 that follows the prinicpal diffusion direction of the diffusion tensor
