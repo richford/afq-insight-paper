@@ -804,11 +804,25 @@ cortico-spinal tract. This recapitulates the results of previous analysis of
 these same data, using a bundle-of-interest approach
 \cite{sarica2017corticospinal}.
 \added{As with the original study, it is unclear whether our strong predictive performance based on image properties that would be visible in patient scans or whether it is identifying a new subclinical disease biomarker.} 
+
 In contrast, for the analysis of biological
 age, the coefficients identified by the algorithm are very widely distributed
 across many parts of the white matter, mirroring previous results that show a
 large and continuous distribution of life-span changes in white matter
 properties \cite{yeatman2014lifespan}.
+\added{We present age quintile bundle profiles and SGL \protect$\beta$ coefficients for all four datasets in the supplementary material. For age regression, substantial differences between the datasets preclude generalization across all three:}
+\begin{enumerate*}[%
+    label=(\roman*),%
+    before=\unskip{: },%
+    itemjoin={{, }},%
+    itemjoin*={{, and }}]
+    \item \added{different acquisition parameters, which can be challenging to harmonize \mbox{\cite{pinto2020harmonization}}}
+    \item \added{different diffusion models, with DTI for the WH dataset and DKI for the HBN and Cam-CAN datasets}
+    \item \added{different age ranges and distributions (which is evident in the figure legends for \cref{fig:age-results}), with HBN being a developmental dataset, while WH and Cam-CAN are lifespan maturation datasets}
+    \item \added{different anatomical extents, with the WH streamlines truncated to remain with the bundle's bounding regions of interest (the default behavior in the legacy \texttt{mAFQ}) and the HBN and Cam-CAN streamlines allowed to retain their full extent from whole-brain tractography (the default behavior in \texttt{pyAFQ}).}
+\end{enumerate*}
+\added{In a biological characteristic that has widespread effects in the brain, validity is difficult to assess \mbox{\cite{lermausabiaga2019replication}}, so it is both unsurprising and vexing that we can do so well at predicting within each dataset, and yet do poorly in interpreting informative features across instruments.}
+
 
 \added{We also implemented a union of the PCR Lasso and SGL approaches by first}
 \added{projecting each group onto its PC basis. This PCR-SGL approach transformed the feature}
