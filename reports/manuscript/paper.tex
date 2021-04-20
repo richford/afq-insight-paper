@@ -198,7 +198,7 @@
 Adam Richie-Halford\textsuperscript{1*},
 Jason Yeatman\textsuperscript{2},
 Noah Simon\textsuperscript{3},
-Ariel Rokem\textsuperscript{4},
+Ariel Rokem\textsuperscript{1,4},
 \\
 \bigskip
 \textbf{1} eScience Institute, University of Washington, Seattle, WA, USA
@@ -366,8 +366,8 @@ length of each tract were summarized by taking the mean along each
 bundle, but there is a large body of evidence showing that there is
 systematic variability in the values of diffusion metrics along the
 trajectory of each bundle. This justifies retaining the individual
-samples along the length of each bundle \cite{yeatman2012tract,
-colby2012, ODonnell2009-uu},
+samples along the length of each bundle \replaced{\mbox{{\cite{Jones2005-yq, yeatman2012tract, colby2012, ODonnell2009-uu}}}}{\mbox{\cite{yeatman2012tract,
+colby2012, ODonnell2009-uu}}},
 hereafter referred to as tract profiling.
 While this retains important information about each individual's white
 matter, it also presents statistical challenges due to the dimensionality of
@@ -458,10 +458,9 @@ The present work aims to balance predictive accuracy with descriptive power
 \cite{Murdoch2019-ax, Breiman2001-uz} by capitalizing on all of the available
 data across all bundles, while also retaining and elucidating spatial
 information about the locations that are most informative for discriminative
-performance. To do so, we use a linear modeling approach, which aims to
-redict phenotypical variance in a group of subjects (or classify group
-membership), based on a linear combination of the features estimated with
-tract profiling.
+performance.
+Unlike many previous analyses of white matter (e.g., using TBSS \cite{smith2006tract} and connectometry \cite{yeh2016connectometry}), which focus on classical inference about the differences between groups or individuals in terms of their white matter properties, the focus of the present work is on the combination of features that facilitate accurate prediction of the individual differences in a particular phenotype.
+For example, an accurate prediction of which individuals in a group have a particular disease, or a prediction of their age with small error. The distinct goals of \emph{inference} and \emph{prediction} are not necessarily incongruent, but can sometimes be in tension \cite{Bzdok2020-sd}. This distinction is also similar to the distinction between ``encoding'' and ``decoding'' used in the functional MRI literature \cite{Naselaris2011-ss}. In the present work, we predict the phenotypical variance in a group of subjects,or classify group membership, based on a linear combination of the features estimated with tract profiling.
 
 % Generally speaking, analysis methods should balance predictive
 % accuracy with descriptive power \cite{Murdoch2019-ax, Breiman2001-uz}.
@@ -619,8 +618,8 @@ Group Lasso and lasso penalties, selected through nested cross-validation
 (see \cref{eq:sgl}).
 If $\alpha$ is closer to zero, it indicates that the phenotype in question
 preferentially correlates with only a few groups of covariates. For the ALS
-dataset, the SGL model has $\alpha = $ \alsLRatio 
-and the PCR-SGL model has \protect$\alpha = $ \protect\alsLRatioGpca,
+dataset, the SGL model has $\alpha = $ \alsLRatio
+~and the PCR-SGL model has \protect$\alpha = $ \protect\alsLRatioGpca,
 confirming that the white matter correlates of ALS reside mostly in one
 bundle, namely the CST.
 
@@ -638,7 +637,7 @@ method predicts incorrectly this is done in a comprehensible manner.
 
 To test the performance of SGL in a continuous
 regression task, we focus here on the prediction of biological age in three
-datasets named WH, HBN, and Cam-CAN (see the methods section for a description of each dataset). Prediction of ``brain
+datasets named WH, HBN, and Cam-CAN (see the Methods section for a description of each dataset). Prediction of ``brain
 age'' is a commonly undertaken task in neuroimaging machine learning, in part
 because these predictions, and deviations therefrom, may be diagnostic of
 overall brain health (for a review, see Cole et al.~\cite{Cole2019-rz}).
@@ -713,8 +712,8 @@ the right level of sparsity and fits the coefficients to the ill-posed linear
 model, while guarding against overfitting. SGL accurately predicts the age of
 the subjects in this procedure, with a median absolute error of {\whMae},
 {\hbnMae}, and {\camcanMae} years for the WH, HBN, and Cam-CAN datasets,
-respectively and coefficients of determination $R^2 = $ {\whRsq} , {\hbnRsq},
-and {\camcanRsq}, respectively (see \cref{fig:age-results}, top panels). The
+respectively and coefficients of determination $R^2 = $ {\whRsq} , {\hbnRsq}, and {\camcanRsq},
+respectively (see \cref{fig:age-results}, top panels). The
 predictions for Cam-CAN are competitive with a recent state of the art
 prediction \cite{mcpherson2020single}, which used streamline density to
 estimate the brain's structural connectivity and achieved $R^2 = 0.63$. The
@@ -803,8 +802,7 @@ that ALS, which is a disease of lower motor neurons, is localized to the
 cortico-spinal tract. This recapitulates the results of previous analysis of
 these same data, using a bundle-of-interest approach
 \cite{sarica2017corticospinal}.
-As with the original study, it is unclear whether our strong predictive performance based on image properties that would be visible in patient scans or whether it is identifying a new subclinical disease biomarker. 
-
+As with the original study, it is unclear whether our strong predictive performance based on image properties that would be visible in patient scans or whether it is identifying a new subclinical disease biomarker.
 In contrast, for the analysis of biological
 age, the coefficients identified by the algorithm are very widely distributed
 across many parts of the white matter, mirroring previous results that show a
@@ -849,7 +847,7 @@ cycles in which researchers report their findings, but may be prohibitive
 for ``development'' cycles in which researchers repeatedly train models while
 adjusting their analysis pipeline. In practice, we circumvent this limitation
 by developing our analysis infrastructure with fast, simple models, and substituting
-slower, more performant models afterward.
+slower, more performant models afterwards. The consistent \texttt{Scikit Learn}-based application programming interface of \texttt{AFQ-Insight} provides a good basis for this pattern.
 
 Taken together, our results demonstrate the promise of the
 group-regularized regression approach. Even at the scale of dozens of
@@ -911,7 +909,7 @@ The method is packaged as open-source software called AFQ-Insight that is
 openly available at \url{https://github.com/richford/AFQ-Insight}, and
 provides a clear API to allow for extensions of the method. The sofware
 integrates within a broader automated fiber quantification software
-ecosystem: AFQ \cite{yeatman2012tract} and pyAFQ \cite{pyAFQ, kruper2021evaluating}, which extract
+ecosystem: AFQ \cite{yeatman2012tract} and pyAFQ \cite{kruper2021evaluating}, which extract
 tract profile data from raw and processed dMRI datasets, as well as
 AFQ-Browser, which visualizes tract profiles data and facilitates sharing of the
 results of dMRI studies \cite{yeatman2018browser}. To facilitate
@@ -1082,7 +1080,7 @@ representative of the tract contribute more to the bundle profile, relative
 to streamlines that are on the edge of the tract.
 
 Data from the HBN and Cam-CAN studies were processed using the updated Python
-Automated Fiber Quantification toolbox (\texttt{pyAFQ}; \cite{pyAFQ}). In
+Automated Fiber Quantification toolbox (\texttt{pyAFQ}; \cite{kruper2021evaluating}). In
 addition to demonstrating the our analysis pipeline is robust to changes in
 tractometry software, the use of the updated \texttt{pyAFQ} capitalized upon
 the following improvements over the legacy Matlab version
