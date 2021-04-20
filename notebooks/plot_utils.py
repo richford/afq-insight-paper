@@ -27,8 +27,20 @@ def plot_coefs_on_bundle_cores(
     height=500,
 ):
     my_results = results[key][0]
-    coefs = np.array([np.array(bag_res["coefs"]) for bag_res in my_results.values()])
-    mean_beta = np.mean(np.array(coefs), axis=(0, 1))
+    if all(["pca_components" in bag_res for bag_res in my_results.values()]):
+        mean_beta = np.mean([
+            np.einsum(
+                "...j,...jk",
+                np.mean(my_results[cv_idx]["coefs"], axis=0).reshape(
+                    np.array(my_results[cv_idx]["pca_components"]).shape[:2]
+                ),
+                np.array(my_results[cv_idx]["pca_components"]),
+            ).flatten() for cv_idx in my_results.keys()
+        ], axis=0)
+    else:
+        mean_beta = np.mean(np.array(
+            [np.array(bag_res["coefs"]) for bag_res in my_results.values()]
+        ), axis=(0, 1))
     with open("../data/raw/core_streamlines.json") as fp:
         cores = json.load(fp)
 
@@ -140,6 +152,58 @@ def plot_coefs_on_bundle_cores(
         fig.update_layout(
             scene=dict(
                 annotations=[
+                    dict(
+                        text="ARCR",
+                        x=bundles.get("ARC_R", bundles.get("Right Arcuate"))[
+                            10, 0
+                        ]
+                        + offset[0],
+                        y=bundles.get("ARC_R", bundles.get("Right Arcuate"))[
+                            10, 1
+                        ]
+                        + offset[1]
+                        + 20,
+                        z=bundles.get("ARC_R", bundles.get("Right Arcuate"))[
+                            10, 2
+                        ]
+                        + offset[2]
+                        - 4,
+                        showarrow=True,
+                        xanchor="center",
+                        font=dict(size=20),
+                        yanchor="middle",
+                        ax=10,
+                        ay=-50,
+                        arrowsize=2,
+                        arrowwidth=1,
+                        arrowhead=1,
+                    ),
+                    dict(
+                        text="ARCL",
+                        x=bundles.get("ARC_L", bundles.get("Left Arcuate"))[
+                            10, 0
+                        ]
+                        + offset[0],
+                        y=bundles.get("ARC_L", bundles.get("Left Arcuate"))[
+                            10, 1
+                        ]
+                        + offset[1]
+                        + 20,
+                        z=bundles.get("ARC_L", bundles.get("Left Arcuate"))[
+                            10, 2
+                        ]
+                        + offset[2]
+                        - 4,
+                        showarrow=True,
+                        xanchor="center",
+                        font=dict(size=20),
+                        yanchor="middle",
+                        ax=10,
+                        ay=-70,
+                        arrowsize=2,
+                        arrowwidth=1,
+                        arrowhead=1,
+                    ),
                     dict(
                         text="CSTR",
                         x=bundles.get("CST_R", bundles.get("Right Corticospinal"))[

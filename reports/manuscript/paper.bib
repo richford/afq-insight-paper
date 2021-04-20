@@ -14,22 +14,6 @@
             attributes},
   author   = {Jones, Derek K and Travis, Adam R and Eden, Greg and Pierpaoli,
             Carlo and Basser, Peter J},
-  abstract = {Diffusion tensor MRI tractography aims to reconstruct
-            noninvasively the 3D trajectories of white matter fasciculi
-            within the brain, providing neuroscientists and clinicians with a
-            potentially useful tool for mapping brain architecture. While
-            this technique is widely used to visualize white matter pathways,
-            the associated uncertainty in fiber orientation and artifacts
-            have, to date, not been visualized in conjunction with the
-            trajectory data. In this work, the bootstrap method was used to
-            determine the distributions of diffusion indices such as trace
-            and anisotropy, together with the uncertainty in fiber
-            orientation. A novel visualization scheme was developed to encode
-            this information at each point along reconstructed trajectories.
-            By integrating these schemes into a graphical user interface, a
-            new tool which we call PASTA (Pointwise Assessment of Streamline
-            Tractography Attributes) was created to facilitate identification
-            of artifacts in tractography that would otherwise go undetected.},
   journal  = {Magn. Reson. Med.},
   volume   = 53,
   number   = 6,
@@ -1050,21 +1034,6 @@
   year      = 2011
 }
 
-@article{Chamberland2019-mu,
-  title    = {Dimensionality reduction of diffusion {MRI} measures for improved tractometry of the human brain},
-  author   = {Chamberland, Maxime and Raven, Erika P and Genc, Sila and Duffy,
-              Kate and Descoteaux, Maxime and Parker, Greg D and Tax, Chantal M
-              W and Jones, Derek K},
-  journal  = {Neuroimage},
-  volume   = 200,
-  pages    = {89--100},
-  month    = jun,
-  year     = 2019,
-  keywords = {DTI; Diffusion MRI; Dimensionality reduction; HARDI;
-              Tractography; Tractometry},
-  language = {en}
-}
-
 @article{Jones2013-xv,
   title     = {White matter integrity, fiber count, and other fallacies: the do's and don'ts of diffusion {MRI}},
   author    = {Jones, Derek K and Kn{\"o}sche, Thomas R and Turner, Robert},
@@ -1671,11 +1640,17 @@
   publisher = {Nature Publishing Group}
 }
 
-@unpublished{groupyr,
-  author = {{R}ichie-{H}alford, {A}dam and {N}arayan, {M}anjari and {Y}eatman, {J}ason and {S}imon, {N}oah and {R}okem, {A}riel},
-  title  = {{G}roupyr: {S}parse {G}roup {L}asso in {P}ython},
-  note   = {In progress},
-  year   = {2021}
+@article{groupyr,
+    doi = {10.21105/joss.03024},
+    url = {https://doi.org/10.21105/joss.03024},
+    year = {2021},
+    publisher = {The Open Journal},
+    volume = {6},
+    number = {58},
+    pages = {3024},
+    author = {Adam {R}ichie-{H}alford and Manjari Narayan and Noah Simon and Jason Yeatman and Ariel Rokem},
+    title = {{G}roupyr: {S}parse {G}roup {L}asso in {P}ython},
+    journal = {Journal of Open Source Software}
 }
 
 @inproceedings{sklearn_api,
@@ -1759,30 +1734,120 @@
 }
 
 @article{rasero2021integrating,
-  doi = {10.1371/journal.pcbi.1008347},
-  author = {Rasero, Javier AND Sentis, Amy Isabella AND Yeh, Fang-Cheng AND Verstynen, Timothy},
-  journal = {PLOS Computational Biology},
+  doi       = {10.1371/journal.pcbi.1008347},
+  author    = {Rasero, Javier AND Sentis, Amy Isabella AND Yeh, Fang-Cheng AND Verstynen, Timothy},
+  journal   = {PLOS Computational Biology},
   publisher = {Public Library of Science},
-  title = {Integrating across neuroimaging modalities boosts prediction accuracy of cognitive ability},
-  year = {2021},
-  month = {03},
-  volume = {17},
-  url = {https://doi.org/10.1371/journal.pcbi.1008347},
-  pages = {1-25},
-  number = {3}
+  title     = {Integrating across neuroimaging modalities boosts prediction accuracy of cognitive ability},
+  year      = {2021},
+  month     = {03},
+  volume    = {17},
+  url       = {https://doi.org/10.1371/journal.pcbi.1008347},
+  pages     = {1-25},
+  number    = {3}
 }
 
 @article{powell2018local,
-    author = {Powell, Michael A. and Garcia, Javier O. and Yeh, Fang-Cheng and Vettel, Jean M. and Verstynen, Timothy},
-    title = "{Local connectome phenotypes predict social, health, and cognitive factors}",
-    journal = {Network Neuroscience},
-    volume = {2},
-    number = {1},
-    pages = {86-105},
-    year = {2018},
-    month = {03},
-    issn = {2472-1751},
-    doi = {10.1162/NETN\_a\_00031},
-    url = {https://doi.org/10.1162/NETN\_a\_00031},
-    eprint = {https://direct.mit.edu/netn/article-pdf/2/1/86/1092000/netn\_a\_00031.pdf},
+  author  = {Powell, Michael A. and Garcia, Javier O. and Yeh, Fang-Cheng and Vettel, Jean M. and Verstynen, Timothy},
+  title   = {{Local connectome phenotypes predict social, health, and cognitive factors}},
+  journal = {Network Neuroscience},
+  volume  = {2},
+  number  = {1},
+  pages   = {86-105},
+  year    = {2018},
+  month   = {03},
+  issn    = {2472-1751},
+  doi     = {10.1162/NETN\_a\_00031},
+  url     = {https://doi.org/10.1162/NETN\_a\_00031},
+  eprint  = {https://direct.mit.edu/netn/article-pdf/2/1/86/1092000/netn\_a\_00031.pdf}
+}
+
+@article{stejskal1965spin,
+  author  = {Stejskal,E. O.  and Tanner,J. E. },
+  title   = {{Spin Diffusion Measurements: Spin Echoes in the Presence of a Time-Dependent Field Gradient}},
+  journal = {The Journal of Chemical Physics},
+  volume  = {42},
+  number  = {1},
+  pages   = {288-292},
+  year    = {1965},
+  doi     = {10.1063/1.1695690},
+  url     = {https://doi.org/10.1063/1.1695690},
+  eprint  = {https://doi.org/10.1063/1.1695690}
+}
+
+@article{chamberland2019dimensionality,
+  title    = {Dimensionality reduction of diffusion {MRI} measures for improved tractometry of the human brain},
+  journal  = {NeuroImage},
+  volume   = {200},
+  pages    = {89-100},
+  year     = {2019},
+  issn     = {1053-8119},
+  doi      = {https://doi.org/10.1016/j.neuroimage.2019.06.020},
+  url      = {https://www.sciencedirect.com/science/article/pii/S1053811919305051},
+  author   = {Maxime Chamberland and Erika P. Raven and Sila Genc and Kate Duffy and Maxime Descoteaux and Greg D. Parker and Chantal M.W. Tax and Derek K. Jones},
+  keywords = {Diffusion MRI, DTI, HARDI, Tractography, Tractometry, Dimensionality reduction}
+}
+
+@article{Chamberland2019-mu,
+  title    = {Dimensionality reduction of diffusion {MRI} measures for improved tractometry of the human brain},
+  author   = {Chamberland, Maxime and Raven, Erika P and Genc, Sila and Duffy,
+              Kate and Descoteaux, Maxime and Parker, Greg D and Tax, Chantal M
+              W and Jones, Derek K},
+  journal  = {Neuroimage},
+  volume   = 200,
+  pages    = {89--100},
+  month    = jun,
+  year     = 2019,
+  keywords = {DTI; Diffusion MRI; Dimensionality reduction; HARDI;
+              Tractography; Tractometry},
+  language = {en}
+}
+
+@article{nelder1972technique,
+  issn      = {00359238},
+  url       = {http://www.jstor.org/stable/2344614},
+  abstract  = {The technique of iterative weighted linear regression can be used to obtain maximum likelihood estimates of the parameters with observations distributed according to some exponential family and systematic effects that can be made linear by a suitable transformation. A generalization of the analysis of variance is given for these models using log-likelihoods. These generalized linear models are illustrated by examples relating to four distributions; the Normal, Binomial (probit analysis, etc.), Poisson (contingency tables) and gamma (variance components). The implications of the approach in designing statistics courses are discussed.},
+  author    = {J. A. Nelder and R. W. M. Wedderburn},
+  journal   = {Journal of the Royal Statistical Society. Series A (General)},
+  number    = {3},
+  pages     = {370--384},
+  publisher = {[Royal Statistical Society, Wiley]},
+  title     = {Generalized Linear Models},
+  volume    = {135},
+  year      = {1972}
+}
+
+@article{harris2020array,
+  title     = {Array programming with {NumPy}},
+  author    = {Charles R. Harris and K. Jarrod Millman and St{'{e}}fan J.
+                 van der Walt and Ralf Gommers and Pauli Virtanen and David
+                 Cournapeau and Eric Wieser and Julian Taylor and Sebastian
+                 Berg and Nathaniel J. Smith and Robert Kern and Matti Picus
+                 and Stephan Hoyer and Marten H. van Kerkwijk and Matthew
+                 Brett and Allan Haldane and Jaime Fern{'{a}}ndez del
+                 R{'{\i}}o and Mark Wiebe and Pearu Peterson and Pierre
+                 G{'{e}}rard-Marchant and Kevin Sheppard and Tyler Reddy and
+                 Warren Weckesser and Hameer Abbasi and Christoph Gohlke and
+                 Travis E. Oliphant},
+  year      = {2020},
+  month     = sep,
+  journal   = {Nature},
+  volume    = {585},
+  number    = {7825},
+  pages     = {357--362},
+  doi       = {10.1038/s41586-020-2649-2},
+  publisher = {Springer Science and Business Media {LLC}},
+  url       = {https://doi.org/10.1038/s41586-020-2649-2}
+}
+
+@article{kruper2021evaluating,
+	author = {Kruper, John and Yeatman, Jason D. and Richie-Halford, Adam and Bloom, David and Grotheer, Mareike and Caffarra, Sendy and Kiar, Gregory and Karipidis, Iliana I. and Roy, Ethan and Rokem, Ariel},
+	title = {Evaluating the reliability of human brain white matter tractometry},
+	elocation-id = {2021.02.24.432740},
+	year = {2021},
+	doi = {10.1101/2021.02.24.432740},
+	publisher = {Cold Spring Harbor Laboratory},
+	URL = {https://www.biorxiv.org/content/early/2021/02/24/2021.02.24.432740},
+	eprint = {https://www.biorxiv.org/content/early/2021/02/24/2021.02.24.432740.full.pdf},
+	journal = {bioRxiv}
 }
