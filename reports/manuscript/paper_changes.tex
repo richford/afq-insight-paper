@@ -198,7 +198,7 @@
 Adam Richie-Halford\textsuperscript{1*},
 Jason Yeatman\textsuperscript{2},
 Noah Simon\textsuperscript{3},
-Ariel Rokem\textsuperscript{4},
+Ariel Rokem\textsuperscript{1,4},
 \\
 \bigskip
 \textbf{1} eScience Institute, University of Washington, Seattle, WA, USA
@@ -366,8 +366,8 @@ length of each tract were summarized by taking the mean along each
 bundle, but there is a large body of evidence showing that there is
 systematic variability in the values of diffusion metrics along the
 trajectory of each bundle. This justifies retaining the individual
-samples along the length of each bundle \cite{yeatman2012tract,
-colby2012, ODonnell2009-uu},
+samples along the length of each bundle \replaced{\mbox{{\cite{Jones2005-yq, yeatman2012tract, colby2012, ODonnell2009-uu}}}}{\mbox{\cite{yeatman2012tract,
+colby2012, ODonnell2009-uu}}},
 \added{hereafter referred to as tract profiling}.
 While this retains important information about each individual's white
 matter, it also presents statistical challenges due to the dimensionality of
@@ -458,10 +458,10 @@ The present work aims to balance predictive accuracy with descriptive power
 \cite{Murdoch2019-ax, Breiman2001-uz} by capitalizing on all of the available
 data across all bundles, while also retaining and elucidating spatial
 information about the locations that are most informative for discriminative
-performance. To do so, we use a linear modeling approach, which aims to
-redict phenotypical variance in a group of subjects (or classify group
-membership), based on a linear combination of the features estimated with
-\replaced{tract profiling}{tractometry}.
+performance.
+\added{ We approach differences between individuals through a ``decoding'' lens:}
+We predict the phenotypical variance in a group of subjects (or classify group membership), based on a linear combination of the features estimated with \replaced{tract profiling}{tractometry}
+\added{This is unlike many previous models of white matter differences (e.g., TBSS \cite{} and connectometry \cite{}) that are ``encoding'' models, where differences between individuals and groups are tested as hypotheses about differences in their brain features (i.e., in their tract profiles; the distinction between ``encoding'' and ``decoding'' and the terms stem from functional MRI literature \cite{Naselaris2011-ss})}.
 
 % Generally speaking, analysis methods should balance predictive
 % accuracy with descriptive power \cite{Murdoch2019-ax, Breiman2001-uz}.
