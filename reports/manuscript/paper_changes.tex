@@ -459,9 +459,8 @@ The present work aims to balance predictive accuracy with descriptive power
 data across all bundles, while also retaining and elucidating spatial
 information about the locations that are most informative for discriminative
 performance.
-\added{ We approach differences between individuals through a ``decoding'' lens:}
-We predict the phenotypical variance in a group of subjects (or classify group membership), based on a linear combination of the features estimated with \replaced{tract profiling}{tractometry}
-\added{This is unlike many previous models of white matter differences (e.g., TBSS \cite{smith2006tract} and connectometry \cite{yeh2016connectometry}) that are ``encoding'' models, where differences between individuals and groups are tested as hypotheses about differences in their brain features (i.e., in their tract profiles; the distinction between ``encoding'' and ``decoding'' and the terms stem from functional MRI literature \cite{Naselaris2011-ss})}.
+\added{Unlike many previous analyses of white matter (e.g., using TBSS \cite{smith2006tract} and connectometry \cite{yeh2016connectometry}), which focus on classical inference of the differences between groups or individuals in terms of their white matter properties, the focus of the present work is on the combination of features that facilitate accurate prediction of the individual differences in a \emph{phenotype}}.
+\added{For example, an accurate prediction of which individuals in a group have a particular disease, or a prediction of their age with small error. The distinct goals of \emph{inference} and \emph{prediction} are not necessarily incongruent, but can sometimes be in tension \cite{Bzdok2020-sd}. This distinction is also similar to the distinction between ``encoding'' and ``decoding'' used in the functional MRI literature \cite{Naselaris2011-ss}. In the present work}, we predict the phenotypical variance in a group of subjects (or classify group membership), based on a linear combination of the features estimated with \replaced{tract profiling}{tractometry}.
 
 % Generally speaking, analysis methods should balance predictive
 % accuracy with descriptive power \cite{Murdoch2019-ax, Breiman2001-uz}.
