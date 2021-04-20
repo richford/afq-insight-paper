@@ -619,7 +619,7 @@ Group Lasso and lasso penalties, selected through nested cross-validation
 If $\alpha$ is closer to zero, it indicates that the phenotype in question
 preferentially correlates with only a few groups of covariates. For the ALS
 dataset, the SGL model has $\alpha = $ \alsLRatio
-and the PCR-SGL model has \protect$\alpha = $ \protect\alsLRatioGpca,
+~and the PCR-SGL model has \protect$\alpha = $ \protect\alsLRatioGpca,
 confirming that the white matter correlates of ALS reside mostly in one
 bundle, namely the CST.
 
@@ -637,7 +637,7 @@ method predicts incorrectly this is done in a comprehensible manner.
 
 To test the performance of SGL in a continuous
 regression task, we focus here on the prediction of biological age in three
-datasets named WH, HBN, and Cam-CAN (see the methods section for a description of each dataset). Prediction of ``brain
+datasets named WH, HBN, and Cam-CAN (see the Methods section for a description of each dataset). Prediction of ``brain
 age'' is a commonly undertaken task in neuroimaging machine learning, in part
 because these predictions, and deviations therefrom, may be diagnostic of
 overall brain health (for a review, see Cole et al.~\cite{Cole2019-rz}).
@@ -712,8 +712,8 @@ the right level of sparsity and fits the coefficients to the ill-posed linear
 model, while guarding against overfitting. SGL accurately predicts the age of
 the subjects in this procedure, with a median absolute error of {\whMae},
 {\hbnMae}, and {\camcanMae} years for the WH, HBN, and Cam-CAN datasets,
-respectively and coefficients of determination $R^2 = $ {\whRsq} , {\hbnRsq},
-and {\camcanRsq}, respectively (see \cref{fig:age-results}, top panels). The
+respectively and coefficients of determination $R^2 = $ {\whRsq} , {\hbnRsq}, and {\camcanRsq},
+respectively (see \cref{fig:age-results}, top panels). The
 predictions for Cam-CAN are competitive with a recent state of the art
 prediction \cite{mcpherson2020single}, which used streamline density to
 estimate the brain's structural connectivity and achieved $R^2 = 0.63$. The
@@ -847,7 +847,7 @@ cycles in which researchers report their findings, but may be prohibitive
 for ``development'' cycles in which researchers repeatedly train models while
 adjusting their analysis pipeline. In practice, we circumvent this limitation
 by developing our analysis infrastructure with fast, simple models, and substituting
-slower, more performant models afterward.
+slower, more performant models afterwards. The consistent \texttt{Scikit Learn}-based application programming interface of \texttt{AFQ-Insight} provides a good basis for this pattern.
 
 Taken together, our results demonstrate the promise of the
 group-regularized regression approach. Even at the scale of dozens of
