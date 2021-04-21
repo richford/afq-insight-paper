@@ -20,7 +20,9 @@ all: diff
 	touch .refresh
 
 diff: $(MAIN).tex $(SUPPLEMENT).tex Makefile $(FIGURES)
-	python pyMergeChanges.py -ah $(MAIN).tex $(NOMARKUP).tex
+	sed -r 's/(\\mbox\{\\cite\{)([^\}]*)(\}\})/\\cite{\2}/g' $(MAIN).tex > $(MAIN)_no_mbox.tex
+	python pyMergeChanges.py -ah $(MAIN)_no_mbox.tex $(NOMARKUP).tex
+	rm $(MAIN)_no_mbox.tex
 	python pyMergeChanges.py -ah $(SUPPLEMENT).tex $(SUPPLEMENTNOMARKUP).tex
 	$(LATEXMK) $(LATEXMKOPT) -pdflatex="$(LATEX) $(LATEXOPT)" \
 		$(MAIN).tex $(NOMARKUP).tex $(SUPPLEMENT).tex $(SUPPLEMENTNOMARKUP).tex

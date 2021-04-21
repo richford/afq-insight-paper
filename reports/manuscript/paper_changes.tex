@@ -93,6 +93,15 @@
 % Use nameref to cite supporting information files (see Supporting Information section for more info)
 \usepackage{nameref,hyperref}
 \usepackage[capitalize]{cleveref}
+\crefformat{equation}{Eq~(#2#1#3)}
+\crefrangeformat{equation}{Eqs~(#3#1#4) to~(#5#2#6)}
+\crefmultiformat{equation}{Eqs~(#2#1#3)}%
+{ and~(#2#1#3)}{, (#2#1#3)}{ and~(#2#1#3)}
+\crefformat{figure}{Fig~#2#1#3}
+\crefrangeformat{figure}{Figs~#3#1#4 to~#5#2#6}
+\crefmultiformat{figure}{Figs~#2#1#3}%
+{ and~#2#1#3}{, #2#1#3}{ and~#2#1#3}
+
 \usepackage[inline]{enumitem}
 \usepackage[per-mode=symbol,group-separator={,},group-minimum-digits=4]{siunitx}
 \usepackage{listings}
@@ -366,8 +375,8 @@ length of each tract were summarized by taking the mean along each
 bundle, but there is a large body of evidence showing that there is
 systematic variability in the values of diffusion metrics along the
 trajectory of each bundle. This justifies retaining the individual
-samples along the length of each bundle \replaced{\mbox{{\cite{Jones2005-yq, yeatman2012tract, colby2012, ODonnell2009-uu}}}}{\mbox{\cite{yeatman2012tract,
-colby2012, ODonnell2009-uu}}},
+samples along the length of each bundle
+\replaced{\mbox{\cite{Jones2005-yq, yeatman2012tract, colby2012, ODonnell2009-uu}},}{\mbox{\cite{yeatman2012tract, colby2012, ODonnell2009-uu}},}
 \added{hereafter referred to as tract profiling}.
 While this retains important information about each individual's white
 matter, it also presents statistical challenges due to the dimensionality of
@@ -537,7 +546,7 @@ the white matter tracts most important for ALS classification.
 The relative importance of white matter
 features is captured in the $\beta$ coefficients from \cref{eq:sgl}.
 \Cref{fig:class-results:tract-profiles} depicts these coefficients along the
-right CST, plotted over the FA values for the control and ALS subject groups \added{(see supplemental Figures S1, S2 for tract profiles of all 18 tracts in these groups)}.
+right CST, plotted over the FA values for the control and ALS subject groups \added{(see supplemental Figs S1 and S2 for tract profiles of all 18 tracts in these groups)}.
 We find that SGL \replaced{and PCR-SGL select}{selects} FA metrics in the corticospinal tract and
 particularly in the right corticospinal tract as most important to ALS
 classification, confirming previous findings \cite{van2011upper,
@@ -645,7 +654,7 @@ and 18-88 years of age, respectively. In each case, biological age was used
 as the predicted variable $y$. SGL was fit to the \replaced{tract profile}{tractometry-extracted}
 features FA and mean diffusivity (MD) in 18 major brain tracts, with diffusion metrics extracted
 from diffusion tensor imaging (DTI) for the WH dataset and diffusion kurtosis
-imaging (DKI) \cite{jensen2005diffusion} for the HBN and Cam-CAN datasets \added{see supplemental Figures S3-S8 for the full tract profile information in all tracts/datasets}.
+imaging (DKI) \cite{jensen2005diffusion} for the HBN and Cam-CAN datasets \added{see supplemental Figs S3 to S8 for the full tract profile information in all tracts/datasets}.
 
 \begin{figure}[t!]
     \vspace{3.0cm}
@@ -717,7 +726,7 @@ indicate high global sparsity over group sparsity, with $\alpha = $
 datasets, respectively. The model weights are distributed over many different
 tracts and dMRI tissue properties (see
 \cref{fig:age-results:wh-coefs3d,fig:age-results:hbn-coefs3d,fig:age-results:cc-coefs3d}
-and supporing Figures in \nameref{S1_Appendix}).
+and supporing figures in \nameref{S1_Appendix}).
 This demonstrates that SGL is not coerced to produce overly sparse results
 when a more accurate model requires a dense selection of features.
 Furthermore, inspecting the portions of bundles with larger coefficients in
@@ -1089,7 +1098,7 @@ as \texttt{AFQ}.
 These processes create bundle profiles, in which diffusion measures
 are quantified and averaged along eighteen major fiber tracts,
 which are enumerated in the supplemental material.
-\added{See Figure S3 of \mbox{\cite{kruper2021evaluating}} for a depiction of these white matter bundles.}
+\added{See Fig S3 of \mbox{\cite{kruper2021evaluating}} for a depiction of these white matter bundles.}
 Here,
 we use only the mean diffusivity (MD) and the fractional anisotropy
 (FA) of the diffusion tensor, but additional dMRI-based maps or maps
