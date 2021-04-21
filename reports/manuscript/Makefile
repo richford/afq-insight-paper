@@ -8,7 +8,8 @@ CONTINUOUS=-pvc
 
 MAIN=paper_changes
 NOMARKUP=paper
-SUPPLEMENT=supplemental
+SUPPLEMENT=supplemental_changes
+SUPPLEMENTNOMARKUP=supplemental
 
 SOURCES=$(MAIN).tex $(SUPPLEMENT).tex Makefile
 FIGURES := $(shell find ../paper_figures/* -type f)
@@ -20,8 +21,9 @@ all: diff
 
 diff: $(MAIN).tex $(SUPPLEMENT).tex Makefile $(FIGURES)
 	python pyMergeChanges.py -ah $(MAIN).tex $(NOMARKUP).tex
+	python pyMergeChanges.py -ah $(SUPPLEMENT).tex $(SUPPLEMENTNOMARKUP).tex
 	$(LATEXMK) $(LATEXMKOPT) -pdflatex="$(LATEX) $(LATEXOPT)" \
-		$(MAIN).tex $(NOMARKUP).tex $(SUPPLEMENT).tex
+		$(MAIN).tex $(NOMARKUP).tex $(SUPPLEMENT).tex $(SUPPLEMENTNOMARKUP).tex
 
 plos: $(MAIN).tex $(SUPPLEMENT).tex .refresh Makefile $(FIGURES)
 	$(LATEXMK) $(LATEXMKOPT) $(CONTINUOUS) \
