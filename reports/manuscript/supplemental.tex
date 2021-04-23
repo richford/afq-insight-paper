@@ -36,6 +36,8 @@
 % color can be used to apply background shading to table cells only
 \usepackage{xcolor}
 
+\usepackage[commentmarkup=footnote]{changes}
+
 % array package and thick rules for tables
 \usepackage{array}
 
@@ -150,8 +152,8 @@ right thalamic radiation (ATRR),
 left thalamic radiation (ATRL),
 right cingulum cingulate (CGCR),
 left cingulum cingulate (CGCL),
-callosum forceps major (CFP),
-callosum forceps minor (CFA),
+callosum forceps posterior (CFP),
+callosum forceps anterior (CFA),
 right inferior longitudinal fasciculus (ILFR),
 left inferior longitudinal fasciculus (ILFL),
 right superior longitudinal fasciculus (SLFR),
@@ -255,15 +257,15 @@ between these datasets
     itemjoin={{, }},%
     itemjoin*={{, and }}]
     \item different diffusion models, with DTI for the WH dataset and DKI for
-    the HBN dataset
+    the HBN and Cam-CAN datasets
     \item different age ranges and distributions (which is evident in the
-    figure legends), with HBN being a developmental dataset, while WH is a
-    lifespan maturation dataset
+    figure legends), with HBN being a developmental dataset, while WH and Cam-CAN are
+    lifespan maturation datasets
     \item different anatomical extents, with the WH streamlines truncated to
     remain with the bundle's bounding regions of interest (the default
-    behavior in the legacy \texttt{mAFQ}) and the HBN streamlines allowed
-    to retain their full extent from whole-brain tractography (the default
-    behavior in \texttt{pyAFQ}).
+    behavior in the legacy \texttt{mAFQ}) and the HBN and Cam-CAN streamlines
+    allowed to retain their full extent from whole-brain tractography (the
+    default behavior in \texttt{pyAFQ}).
 \end{enumerate*}
 Thus, one should use caution when comparing bundle profiles and $\hat{\beta}$
 coefficients between the WH, HBN, and Cam-CAN models.
@@ -326,6 +328,67 @@ SLFR bundles in \cref{fig:cc-bp:md}.
         \label{fig:cc-bp:md}
     }
 \end{figure}
+
+\section{Data harmonization in the HBN dataset}
+
+\Cref{fig:hbn-site-bp:fa,fig:hbn-site-bp:md} show the bundle profiles for the HBN dataset separated by scanner site: Rutgers Rutgers University Brain Imaging Center (RU) and the CitiGroup Cornell Brain Imaging Center (CBIC). We see strong site differences in both FA and MD profiles. Conversely, \cref{fig:hbn-site-age-dist} shows that the age distributions at each site are similar. ComBat effectively harmonizes the scanner site differences, as shown in \cref{fig:hbn-harmonized-bp:fa,fig:hbn-harmonized-bp:md}.
+
+\begin{figure}
+    \includegraphics[width=0.9\textwidth]{hbn_site_age_distributions.pdf}
+    \caption{%
+        {%
+            \bf Age distributions are similar between the different
+            HBN sites.
+        }
+        \label{fig:hbn-site-age-dist}
+    }
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=0.9\textwidth]{hbn_site_profiles_fa.pdf}
+    \caption{%
+        {%
+            \bf Fractional anisotropy (FA) bundle profiles
+            exhibit strong site differences in the HBN dataset.
+        }
+        \label{fig:hbn-site-bp:fa}
+    }
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=0.9\textwidth]{hbn_site_profiles_md.pdf}
+    \caption{%
+        {%
+            \bf Mean diffusivity (MD) bundle profiles
+            exhibit strong site differences in the HBN dataset.
+        }
+        \label{fig:hbn-site-bp:md}
+    }
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=0.9\textwidth]{hbn_harmonized_profiles_fa.pdf}
+    \caption{%
+        {%
+            \bf Site differences in fractional anisotropy (FA)
+            do not survive ComBat harmonization.
+        }
+        \label{fig:hbn-harmonized-bp:fa}
+    }
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=0.9\textwidth]{hbn_harmonized_profiles_md.pdf}
+    \caption{%
+        {%
+            \bf Site differences in mean diffusivity (MD)
+            do not survive ComBat harmonization.
+        }
+        \label{fig:hbn-harmonized-bp:md}
+    }
+\end{figure}
+
+\pagebreak
 
 \bibliography{paper}
 

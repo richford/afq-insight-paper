@@ -1,3 +1,101 @@
+
+@article{Bzdok2020-sd,
+  title    = {Inference and Prediction Diverge in Biomedicine},
+  author   = {Bzdok, Danilo and Engemann, Denis and Thirion, Bertrand},
+  abstract = {In the 20th century, many advances in biological knowledge and
+            evidence-based medicine were supported by p values and
+            accompanying methods. In the early 21st century, ambitions toward
+            precision medicine place a premium on detailed predictions for
+            single individuals. The shift causes tension between traditional
+            regression methods used to infer statistically significant group
+            differences and burgeoning predictive analysis tools suited to
+            forecast an individual's future. Our comparison applies linear
+            models for identifying significant contributing variables and for
+            finding the most predictive variable sets. In systematic data
+            simulations and common medical datasets, we explored how
+            variables identified as significantly relevant and variables
+            identified as predictively relevant can agree or diverge. Across
+            analysis scenarios, even small predictive performances typically
+            coincided with finding underlying significant statistical
+            relationships, but not vice versa. More complete understanding of
+            different ways to define ``important'' associations is a
+            prerequisite for reproducible research and advances toward
+            personalizing medical care.},
+  journal  = {Patterns (N Y)},
+  volume   = 1,
+  number   = 8,
+  pages    = {100119},
+  month    = nov,
+  year     = 2020,
+  keywords = {data science; explainable AI; reproducibility; scientific
+            discovery; variable importance},
+  language = {en}
+}
+
+
+@article{yeh2016connectometry,
+  title     = {Connectometry: a statistical approach harnessing the analytical potential of the local connectome},
+  author    = {Yeh, Fang-Cheng and Badre, David and Verstynen, Timothy},
+  journal   = {Neuroimage},
+  volume    = {125},
+  pages     = {162--171},
+  year      = {2016},
+  publisher = {Elsevier}
+}
+
+@article{smith2006tract,
+  title     = {Tract-based spatial statistics: voxelwise analysis of multi-subject diffusion data},
+  author    = {Smith, Stephen M and Jenkinson, Mark and Johansen-Berg, Heidi and Rueckert, Daniel and Nichols, Thomas E and Mackay, Clare E and Watkins, Kate E and Ciccarelli, Olga and Cader, M Zaheer and Matthews, Paul M and others},
+  journal   = {Neuroimage},
+  volume    = {31},
+  number    = {4},
+  pages     = {1487--1505},
+  year      = {2006},
+  publisher = {Elsevier}
+}
+
+
+@article{Naselaris2011-ss,
+  title    = {Encoding and decoding in {fMRI}},
+  author   = {Naselaris, Thomas and Kay, Kendrick N and Nishimoto, Shinji and
+            Gallant, Jack L},
+  abstract = {Over the past decade fMRI researchers have developed increasingly
+            sensitive techniques for analyzing the information represented in
+            BOLD activity. The most popular of these techniques is linear
+            classification, a simple technique for decoding information about
+            experimental stimuli or tasks from patterns of activity across an
+            array of voxels. A more recent development is the voxel-based
+            encoding model, which describes the information about the
+            stimulus or task that is represented in the activity of single
+            voxels. Encoding and decoding are complementary operations:
+            encoding uses stimuli to predict activity while decoding uses
+            activity to predict information about the stimuli. However, in
+            practice these two operations are often confused, and their
+            respective strengths and weaknesses have not been made clear.
+            Here we use the concept of a linearizing feature space to clarify
+            the relationship between encoding and decoding. We show that
+            encoding and decoding operations can both be used to investigate
+            some of the most common questions about how information is
+            represented in the brain. However, focusing on encoding models
+            offers two important advantages over decoding. First, an encoding
+            model can in principle provide a complete functional description
+            of a region of interest, while a decoding model can provide only
+            a partial description. Second, while it is straightforward to
+            derive an optimal decoding model from an encoding model it is
+            much more difficult to derive an encoding model from a decoding
+            model. We propose a systematic modeling approach that begins by
+            estimating an encoding model for every voxel in a scan and ends
+            by using the estimated encoding models to perform decoding.},
+  journal  = {Neuroimage},
+  volume   = 56,
+  number   = 2,
+  pages    = {400--410},
+  month    = may,
+  year     = 2011,
+  language = {en}
+}
+
+
 @software{pyAFQ,
   author    = {Yeatman, Jason and Rokem, Ariel},
   title     = {pyAFQ: Automated Fiber Quantification in Python},
@@ -14,22 +112,6 @@
             attributes},
   author   = {Jones, Derek K and Travis, Adam R and Eden, Greg and Pierpaoli,
             Carlo and Basser, Peter J},
-  abstract = {Diffusion tensor MRI tractography aims to reconstruct
-            noninvasively the 3D trajectories of white matter fasciculi
-            within the brain, providing neuroscientists and clinicians with a
-            potentially useful tool for mapping brain architecture. While
-            this technique is widely used to visualize white matter pathways,
-            the associated uncertainty in fiber orientation and artifacts
-            have, to date, not been visualized in conjunction with the
-            trajectory data. In this work, the bootstrap method was used to
-            determine the distributions of diffusion indices such as trace
-            and anisotropy, together with the uncertainty in fiber
-            orientation. A novel visualization scheme was developed to encode
-            this information at each point along reconstructed trajectories.
-            By integrating these schemes into a graphical user interface, a
-            new tool which we call PASTA (Pointwise Assessment of Streamline
-            Tractography Attributes) was created to facilitate identification
-            of artifacts in tractography that would otherwise go undetected.},
   journal  = {Magn. Reson. Med.},
   volume   = 53,
   number   = 6,
@@ -1050,21 +1132,6 @@
   year      = 2011
 }
 
-@article{Chamberland2019-mu,
-  title    = {Dimensionality reduction of diffusion {MRI} measures for improved tractometry of the human brain},
-  author   = {Chamberland, Maxime and Raven, Erika P and Genc, Sila and Duffy,
-              Kate and Descoteaux, Maxime and Parker, Greg D and Tax, Chantal M
-              W and Jones, Derek K},
-  journal  = {Neuroimage},
-  volume   = 200,
-  pages    = {89--100},
-  month    = jun,
-  year     = 2019,
-  keywords = {DTI; Diffusion MRI; Dimensionality reduction; HARDI;
-              Tractography; Tractometry},
-  language = {en}
-}
-
 @article{Jones2013-xv,
   title     = {White matter integrity, fiber count, and other fallacies: the do's and don'ts of diffusion {MRI}},
   author    = {Jones, Derek K and Kn{\"o}sche, Thomas R and Turner, Robert},
@@ -1671,11 +1738,17 @@
   publisher = {Nature Publishing Group}
 }
 
-@unpublished{groupyr,
-  author = {{R}ichie-{H}alford, {A}dam and {N}arayan, {M}anjari and {Y}eatman, {J}ason and {S}imon, {N}oah and {R}okem, {A}riel},
-  title  = {{G}roupyr: {S}parse {G}roup {L}asso in {P}ython},
-  note   = {In progress},
-  year   = {2021}
+@article{groupyr,
+  doi       = {10.21105/joss.03024},
+  url       = {https://doi.org/10.21105/joss.03024},
+  year      = {2021},
+  publisher = {The Open Journal},
+  volume    = {6},
+  number    = {58},
+  pages     = {3024},
+  author    = {Adam {R}ichie-{H}alford and Manjari Narayan and Noah Simon and Jason Yeatman and Ariel Rokem},
+  title     = {{G}roupyr: {S}parse {G}roup {L}asso in {P}ython},
+  journal   = {Journal of Open Source Software}
 }
 
 @inproceedings{sklearn_api,
@@ -1756,4 +1829,203 @@
   author = {Richie-Halford, Adam and Yeatman, Jason and Simon, Noah and Rokem, Ariel},
   title  = {See supplementary material.},
   year   = {2021}
+}
+
+@article{rasero2021integrating,
+  doi       = {10.1371/journal.pcbi.1008347},
+  author    = {Rasero, Javier AND Sentis, Amy Isabella AND Yeh, Fang-Cheng AND Verstynen, Timothy},
+  journal   = {PLOS Computational Biology},
+  publisher = {Public Library of Science},
+  title     = {Integrating across neuroimaging modalities boosts prediction accuracy of cognitive ability},
+  year      = {2021},
+  month     = {03},
+  volume    = {17},
+  url       = {https://doi.org/10.1371/journal.pcbi.1008347},
+  pages     = {1-25},
+  number    = {3}
+}
+
+@article{powell2018local,
+  author  = {Powell, Michael A. and Garcia, Javier O. and Yeh, Fang-Cheng and Vettel, Jean M. and Verstynen, Timothy},
+  title   = {{Local connectome phenotypes predict social, health, and cognitive factors}},
+  journal = {Network Neuroscience},
+  volume  = {2},
+  number  = {1},
+  pages   = {86-105},
+  year    = {2018},
+  month   = {03},
+  issn    = {2472-1751},
+  doi     = {10.1162/NETN\_a\_00031},
+  url     = {https://doi.org/10.1162/NETN\_a\_00031},
+  eprint  = {https://direct.mit.edu/netn/article-pdf/2/1/86/1092000/netn\_a\_00031.pdf}
+}
+
+@article{stejskal1965spin,
+  author  = {Stejskal,E. O.  and Tanner,J. E. },
+  title   = {{Spin Diffusion Measurements: Spin Echoes in the Presence of a Time-Dependent Field Gradient}},
+  journal = {The Journal of Chemical Physics},
+  volume  = {42},
+  number  = {1},
+  pages   = {288-292},
+  year    = {1965},
+  doi     = {10.1063/1.1695690},
+  url     = {https://doi.org/10.1063/1.1695690},
+  eprint  = {https://doi.org/10.1063/1.1695690}
+}
+
+@article{chamberland2019dimensionality,
+  title    = {Dimensionality reduction of diffusion {MRI} measures for improved tractometry of the human brain},
+  journal  = {NeuroImage},
+  volume   = {200},
+  pages    = {89-100},
+  year     = {2019},
+  issn     = {1053-8119},
+  doi      = {https://doi.org/10.1016/j.neuroimage.2019.06.020},
+  url      = {https://www.sciencedirect.com/science/article/pii/S1053811919305051},
+  author   = {Maxime Chamberland and Erika P. Raven and Sila Genc and Kate Duffy and Maxime Descoteaux and Greg D. Parker and Chantal M.W. Tax and Derek K. Jones},
+  keywords = {Diffusion MRI, DTI, HARDI, Tractography, Tractometry, Dimensionality reduction}
+}
+
+@article{Chamberland2019-mu,
+  title    = {Dimensionality reduction of diffusion {MRI} measures for improved tractometry of the human brain},
+  author   = {Chamberland, Maxime and Raven, Erika P and Genc, Sila and Duffy,
+              Kate and Descoteaux, Maxime and Parker, Greg D and Tax, Chantal M
+              W and Jones, Derek K},
+  journal  = {Neuroimage},
+  volume   = 200,
+  pages    = {89--100},
+  month    = jun,
+  year     = 2019,
+  keywords = {DTI; Diffusion MRI; Dimensionality reduction; HARDI;
+              Tractography; Tractometry},
+  language = {en}
+}
+
+@article{nelder1972technique,
+  issn      = {00359238},
+  url       = {http://www.jstor.org/stable/2344614},
+  abstract  = {The technique of iterative weighted linear regression can be used to obtain maximum likelihood estimates of the parameters with observations distributed according to some exponential family and systematic effects that can be made linear by a suitable transformation. A generalization of the analysis of variance is given for these models using log-likelihoods. These generalized linear models are illustrated by examples relating to four distributions; the Normal, Binomial (probit analysis, etc.), Poisson (contingency tables) and gamma (variance components). The implications of the approach in designing statistics courses are discussed.},
+  author    = {J. A. Nelder and R. W. M. Wedderburn},
+  journal   = {Journal of the Royal Statistical Society. Series A (General)},
+  number    = {3},
+  pages     = {370--384},
+  publisher = {[Royal Statistical Society, Wiley]},
+  title     = {Generalized Linear Models},
+  volume    = {135},
+  year      = {1972}
+}
+
+@article{harris2020array,
+  title     = {Array programming with {NumPy}},
+  author    = {Charles R. Harris and K. Jarrod Millman and St{'{e}}fan J.
+                 van der Walt and Ralf Gommers and Pauli Virtanen and David
+                 Cournapeau and Eric Wieser and Julian Taylor and Sebastian
+                 Berg and Nathaniel J. Smith and Robert Kern and Matti Picus
+                 and Stephan Hoyer and Marten H. van Kerkwijk and Matthew
+                 Brett and Allan Haldane and Jaime Fern{'{a}}ndez del
+                 R{'{\i}}o and Mark Wiebe and Pearu Peterson and Pierre
+                 G{'{e}}rard-Marchant and Kevin Sheppard and Tyler Reddy and
+                 Warren Weckesser and Hameer Abbasi and Christoph Gohlke and
+                 Travis E. Oliphant},
+  year      = {2020},
+  month     = sep,
+  journal   = {Nature},
+  volume    = {585},
+  number    = {7825},
+  pages     = {357--362},
+  doi       = {10.1038/s41586-020-2649-2},
+  publisher = {Springer Science and Business Media {LLC}},
+  url       = {https://doi.org/10.1038/s41586-020-2649-2}
+}
+
+@article{kruper2021evaluating,
+  author       = {Kruper, John and Yeatman, Jason D. and Richie-Halford, Adam and Bloom, David and Grotheer, Mareike and Caffarra, Sendy and Kiar, Gregory and Karipidis, Iliana I. and Roy, Ethan and Rokem, Ariel},
+  title        = {Evaluating the reliability of human brain white matter tractometry},
+  elocation-id = {2021.02.24.432740},
+  year         = {2021},
+  doi          = {10.1101/2021.02.24.432740},
+  publisher    = {Cold Spring Harbor Laboratory},
+  url          = {https://www.biorxiv.org/content/early/2021/02/24/2021.02.24.432740},
+  eprint       = {https://www.biorxiv.org/content/early/2021/02/24/2021.02.24.432740.full.pdf},
+  journal      = {bioRxiv}
+}
+
+@article{lermausabiaga2019replication,
+  title   = {Replication and generalization in applied neuroimaging},
+  journal = {NeuroImage},
+  volume  = {202},
+  pages   = {116048},
+  year    = {2019},
+  issn    = {1053-8119},
+  doi     = {https://doi.org/10.1016/j.neuroimage.2019.116048},
+  url     = {https://www.sciencedirect.com/science/article/pii/S1053811919306299},
+  author  = {Garikoitz Lerma-Usabiaga and Pratik Mukherjee and Zhimei Ren and Michael L. Perry and Brian A. Wandell}
+}
+
+@article{pinto2020harmonization,
+  author  = {Pinto, Maíra Siqueira and Paolella, Roberto and Billiet, Thibo and Van Dyck, Pieter and Guns, Pieter-Jan and Jeurissen, Ben and Ribbens, Annemie and den Dekker, Arnold J. and Sijbers, Jan},
+  title   = {Harmonization of Brain Diffusion MRI: Concepts and Methods},
+  journal = {Frontiers in Neuroscience},
+  volume  = {14},
+  pages   = {396},
+  year    = {2020},
+  url     = {https://www.frontiersin.org/article/10.3389/fnins.2020.00396},
+  doi     = {10.3389/fnins.2020.00396},
+  issn    = {1662-453X}
+}
+
+@article{fortin2018harmonization,
+  title     = {Harmonization of cortical thickness measurements across scanners and sites},
+  author    = {Fortin, Jean-Philippe and Cullen, Nicholas and Sheline, Yvette I and Taylor, Warren D and Aselcioglu, Irem and Cook, Philip A and Adams, Phil and Cooper, Crystal and Fava, Maurizio and McGrath, Patrick J and others},
+  journal   = {Neuroimage},
+  volume    = {167},
+  pages     = {104--120},
+  year      = {2018},
+  publisher = {Elsevier}
+}
+
+@article{johnson2007adjusting,
+  title     = {Adjusting batch effects in microarray expression data using empirical Bayes methods},
+  author    = {Johnson, W Evan and Li, Cheng and Rabinovic, Ariel},
+  journal   = {Biostatistics},
+  volume    = {8},
+  number    = {1},
+  pages     = {118--127},
+  year      = {2007},
+  publisher = {Oxford University Press}
+}
+
+@article{fortin2017harmonization,
+  title    = {Harmonization of multi-site diffusion tensor imaging data},
+  journal  = {NeuroImage},
+  volume   = {161},
+  pages    = {149-170},
+  year     = {2017},
+  issn     = {1053-8119},
+  doi      = {https://doi.org/10.1016/j.neuroimage.2017.08.047},
+  url      = {https://www.sciencedirect.com/science/article/pii/S1053811917306948},
+  author   = {Jean-Philippe Fortin and Drew Parker and Birkan Tunç and Takanori Watanabe and Mark A. Elliott and Kosha Ruparel and David R. Roalf and Theodore D. Satterthwaite and Ruben C. Gur and Raquel E. Gur and Robert T. Schultz and Ragini Verma and Russell T. Shinohara},
+  keywords = {DTI, Diffusion, Harmonization, Multi-site, ComBat, Inter-scanner},
+  abstract = {Diffusion tensor imaging (DTI) is a well-established magnetic resonance imaging (MRI) technique used for studying microstructural changes in the white matter. As with many other imaging modalities, DTI images suffer from technical between-scanner variation that hinders comparisons of images across imaging sites, scanners and over time. Using fractional anisotropy (FA) and mean diffusivity (MD) maps of 205 healthy participants acquired on two different scanners, we show that the DTI measurements are highly site-specific, highlighting the need of correcting for site effects before performing downstream statistical analyses. We first show evidence that combining DTI data from multiple sites, without harmonization, may be counter-productive and negatively impacts the inference. Then, we propose and compare several harmonization approaches for DTI data, and show that ComBat, a popular batch-effect correction tool used in genomics, performs best at modeling and removing the unwanted inter-site variability in FA and MD maps. Using age as a biological phenotype of interest, we show that ComBat both preserves biological variability and removes the unwanted variation introduced by site. Finally, we assess the different harmonization methods in the presence of different levels of confounding between site and age, in addition to test robustness to small sample size studies.}
+}
+
+@article {nielson2018detecting,
+	author = {Nielson, Dylan M. and Pereira, Francisco and Zheng, Charles Y. and Migineishvili, Nino and Lee, John A. and Thomas, Adam G. and Bandettini, Peter A.},
+	title = {Detecting and harmonizing scanner differences in the ABCD study - annual release 1.0},
+	elocation-id = {309260},
+	year = {2018},
+	doi = {10.1101/309260},
+	publisher = {Cold Spring Harbor Laboratory},
+	abstract = {In order to obtain the sample sizes needed for robustly reproducible effects, it is often necessary to acquire data at multiple sites using different MRI scanners. This poses a challenge for investigators to account for the variance due to scanner, as balanced sampling is often not an option. Similarly, longitudinal studies must deal with known and unknown changes to scanner hardware and software over time. In this manuscript, we have explored scanner-related differences in the dataset recently released by the Adolescent Brain Cognitive Development (ABCD) project, a multi-site, longitudinal study of children age 9-10. We demonstrate that scanner manufacturer, model, as well as the individual scanner itself, are detectable in the resting and task-based fMRI results of the ABCD dataset. We further demonstrate that these differences can be harmonized using an empirical Bayes approach known as ComBat. We argue that accounting for scanner variance, including even minor differences in scanner hardware or software, is crucial for any analysis.},
+	URL = {https://www.biorxiv.org/content/early/2018/05/02/309260},
+	eprint = {https://www.biorxiv.org/content/early/2018/05/02/309260.full.pdf},
+	journal = {bioRxiv}
+}
+
+@softwareversion{neurocombat_sklearn,
+  author  = {Pinaya, Walter Hugo Lopez},
+  title   = {NeuroCombat-sklearn},
+  year    = {2020},
+  url     = {https://github.com/Warvito/neurocombat_sklearn},
+  version = {\href{https://archive.softwareheritage.org/swh:1:dir:51796bf4163c125866f744a392a34ec1b1105360;origin=https://github.com/Warvito/neurocombat_sklearn;visit=swh:1:snp:87db1cb5b389eb9645913ffbeeb494f48fb782c8;anchor=swh:1:rev:25306f0a2f088764b40a376ba276a2126ff820b4}{swh:1:dir:51796bf4163c125866f744a392a34ec1b1105360}}
 }
