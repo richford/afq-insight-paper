@@ -426,43 +426,6 @@ predict differences between individuals \cite{dayan2016profilometry}.
 
 %\end{enumerate}
 
-\begin{figure}[b!]
-    % \vspace{0.25cm}
-    % \rlap{
-    %     \hspace{-0.25em}
-    %     \includegraphics[width=0.98\columnwidth]{methods-brains.pdf}
-    % }
-    % \vspace{-8.4cm}
-    % \includegraphics[width=\columnwidth]{method-quad.pdf}
-    {\phantomsubcaption\label{fig:methods:tractogram}}
-    {\phantomsubcaption\label{fig:methods:cst}}
-    {\phantomsubcaption\label{fig:methods:tract-profile:cst}}
-    {\phantomsubcaption\label{fig:methods:tract-profile:fa}}
-    {\phantomsubcaption\label{fig:methods:group-structure}}
-    \caption{\textbf{Tractometry data flow}
-        \label{fig:methods}
-        \textbf{(a)} Whole brain tractography generates streamlines approximating
-        the trajectories of white matter connections.
-        \textbf{(b)} Tractometry classifies these streamlines into anatomical bundles.
-        In this case, we show the left corticospinal tract (CSTL)
-        \added{and the left arcuate fasciculus (ARCL)}
-        over a mid-saggital anatomical slice.
-        \deleted{\textbf{(c)}} \replaced{Tract profiling}{Tractometry} further extracts bundle profiles,
-        quantifications of various diffusion metrics along the length of the
-        fiber bundle. Here, we show one subject's fractional anisotropy (FA)
-        profile for \added{\textbf{(c)}} the CSTL \added{and \textbf{(d)} the ARCL}.
-        \textbf{(d)} the phenotypical target data and \replaced{tract profile}{tractometric}
-        features can be organized into a linear model, $\hat{y} = \mathbf{X}
-        \hat{\beta}$. The feature matrix $\mathbf{X}$ is color-coded
-        to reveal a natural group structure: the left (orange) group
-        contains $k$ features from the CSTL, the middle (green) group
-        contains $k$ features from the left cingulum cingulate (CGCL),
-        and the right (blue) group
-        contains $k$ features from the \replaced{ARCL}{left arcuate (ARCL)}.
-        The coefficients in $\hat{\beta}$ follow the same natural grouping.
-    }
-\end{figure}
-
 The present work aims to balance predictive accuracy with descriptive power
 \cite{Murdoch2019-ax, Breiman2001-uz} by capitalizing on all of the available
 data across all bundles, while also retaining and elucidating spatial
@@ -557,50 +520,6 @@ identifying the portions of the brain that were selected \emph{a priori} in
 the previous study from which we obtained the data
 \cite{sarica2017corticospinal}.
 
-\begin{figure}[t!]
-    % \vspace{3.0cm}
-    % \rlap{
-    %     \includegraphics[width=0.33\textwidth]{als_gpca_coefs.pdf}
-    % }
-    % \vspace{-7.0cm}
-    % \includegraphics[width=\textwidth]{als_gpca_results.pdf}
-    {\phantomsubcaption\label{fig:class-results:probs}}
-    {\phantomsubcaption\label{fig:class-results:coefs3d}}
-    {\phantomsubcaption\label{fig:class-results:tract-profiles}}
-    {\phantomsubcaption\label{fig:class-results:false-positives}}
-    {\phantomsubcaption\label{fig:class-results:false-negatives}}
-    \caption{%
-        {\bf \added{PCR-}SGL accurately and interpretably predicts ALS diagnosis.}
-        \label{fig:class-results}
-        {\bf (a)} Classification probabilities for ALS diagnosis, with
-        controls on the left, patients on the right, predicted controls in
-        blue, and predicted patients in orange. That is, orange dots on the left
-        represent false positives, while blue dots on the right represent
-        false negatives. We achieve {\protect\alsAccuracy}\% accuracy with an
-        ROC AUC of {\protect\alsRocAuc}.
-        {\bf (b)} \added{PCR-}SGL coefficients are presented on the core fibers of major
-        fiber bundles. They exhibit high group sparsity and are concentrated
-        in the FA of the \replaced{corticospinal tract (CST)}{CST}.
-        The brain is oriented with the right hemisphere
-        in the foreground and anterior to the right of the page. The CSTL, CSTR,
-        \replaced{callosum forceps anterior (CFA), left arcuate (ARCL), and right arcuate (ARCR)}{CFA}
-        bundles are indicated for orientation.
-        {\bf (c)} \added{PCR-}SGL identifies three portions of the CST as important,
-        where $\hat{\beta}$ (dashed line, right axis) has large values. These
-        are centered around nodes 30, 65, and 90, corresponding to locations
-        of substantial differences in FA between the ALS and control groups
-        (shaded areas indicates standard error of the mean).
-        {\bf (d)} Bundle profiles for false positive classifications. Line
-        colors correspond to the marker edge color in the top left plot.
-        These individuals have reduced FA in the CST portions which SGL
-        identified as important. Their misclassification is coherent with the
-        feature importance and the group differences in FA.
-        {\bf (e)} Individual bundle profiles for false negative
-        classifications. These individuals have bundle profiles which
-        oscillate between the group means.
-    }
-\end{figure}
-
 To assess the added value of incorporating anatomical knowledge into our
 model, we compared our classification results to those obtained from
 \replaced{four other models: a pure lasso model, an elastic net model, a bundle-mean lasso (i.e. a lasso model trained only on the mean metric values from each bundle), and a principal components regression lasso (Lasso PCR) model \cite{powell2018local, rasero2021integrating}}{a lasso model}.
@@ -656,52 +575,6 @@ features FA and mean diffusivity (MD) in 18 major brain tracts, with diffusion m
 from diffusion tensor imaging (DTI) for the WH dataset and diffusion kurtosis
 imaging (DKI) \cite{jensen2005diffusion} for the HBN and Cam-CAN datasets \added{see supplemental Figs S3 to S8 for the full tract profile information in all tracts/datasets}.
 
-\begin{figure}[t!]
-    % \vspace{3.0cm}
-    % \rlap{
-    %     \hspace{0.775cm}
-    %     \includegraphics[width=0.26\textwidth]{wh_coefs.pdf}
-    %     \hspace{0.5em}
-    %     \includegraphics[width=0.26\textwidth]{hbn_coefs.pdf}
-    %     \hspace{0.5em}
-    %     \includegraphics[width=0.26\textwidth]{camcan_coefs.pdf}
-    % }
-    % \vspace{-6.1cm}
-    % \includegraphics[width=\textwidth]{regression_scatter.pdf}
-    {\phantomsubcaption\label{fig:age-results:wh-scatter}}
-    {\phantomsubcaption\label{fig:age-results:hbn-scatter}}
-    {\phantomsubcaption\label{fig:age-results:cc-scatter}}
-    {\phantomsubcaption\label{fig:age-results:wh-coefs3d}}
-    {\phantomsubcaption\label{fig:age-results:hbn-coefs3d}}
-    {\phantomsubcaption\label{fig:age-results:cc-coefs3d}}
-    {\phantomsubcaption\label{fig:age-results:wh-profile}}
-    {\phantomsubcaption\label{fig:age-results:hbn-profile}}
-    {\phantomsubcaption\label{fig:age-results:cc-profile}}
-    \caption{%
-        {\bf Predicting age with tractometry and SGL.}
-        \label{fig:age-results}
-        {\bf (top)} The predicted age vs. true age of each individual from the test
-        splits (i.e., when each subject's data was held out in fitting the
-        model) for the {\bf (a)} WH, {\bf (b)} HBN, and {\bf (c)} Cam-CAN
-        datasets; an accurate prediction falls close to the $y=x$ line
-        (dashed). The mean absolute error (MAE) and coefficient of
-        determination $R^2$ are presented in the lower right of each scatter
-        plot.
-        {\bf (middle)} Feature importance for predicting age from
-        \replaced{tract profile}{tractometry} in
-        the {\bf (d)} WH, {\bf (e)} HBN, and {\bf (f)} Cam-CAN datasets.
-        The orientation of the
-        brain is that same as in \cref{fig:class-results:coefs3d}, however because
-        the coefficients exhibit high global sparsity (as opposed to group
-        sparsity), we plot the mean of the absolute value of $\hat{\beta}$
-        for each bundle on the core fiber. The global distrubution of the
-        $\hat{\beta}$ coefficients reflects the fact that aging is not
-        confined to a single white matter bundle.
-        {\bf (bottom)} Age quintile bundle profiles for the {\bf (g)} WH,
-        {\bf (h)} HBN, and {\bf (i)} Cam-CAN datasets.
-    }
-\end{figure}
-
 To evaluate the fit of the model, we used a nested cross-validation
 procedure. In this procedure, batches of subjects are held out. For each
 batch (or fold), the model is fully fit without this data. Then, once the
@@ -745,30 +618,6 @@ classification case, which accords with the selected values of the $\alpha$
 hyperparameter. These SGL models were more lasso-like in their sparsity
 penalties so they are more lasso-like in their predictive performance.
 
-\begin{figure}[t!]
-    % \includegraphics[width=\textwidth]{model_performance.pdf}
-    \caption{%
-        {\bf \added{Model performance across all datasets.}}
-        \label{fig:model-performance}
-        \added{Each panel shows model performance measured on the test set for each}
-        \added{cross-validation split, with each black dot representing a split, box}
-        \added{plots representing the quartiles, and white diamonds representing the mean}
-        \added{performance. The $y$-scale varies in each subplot.}
-        \added{\textbf{(a)} Accuracy of test set predictions for the}
-        \added{ALS dataset. Because group differences}
-        \added{in ALS diagnosis are mostly confined to a single bundle, the group}
-        \added{structure-preserving methods, SGL and PCR-SGL, outperform the other}
-        \added{models.}
-        \added{The remaining frames show coefficient of determination, \protect$R^2$ in test sets}
-        \added{for the \textbf{(b)} WH, \textbf{(c)} HBN, and \textbf{(c)} Cam-CAN}
-        \added{datasets. Because aging affects the white matter globally, group structure-blind}
-        \added{methods like elastic net and PCR Lasso perform well. Nonetheless, the SGL}
-        \added{models show competitve predictive performance, adapting to a problem where}
-        \added{group structure is not as informative. PCR-SGL performs poorly in this regime}
-        \added{because its initial group-wise PC projection destroys between bundle covariance.}
-        \added{The bundle-mean lasso performs poorly, demonstrating the value of along-tract profiling.}
-    }
-\end{figure}
 \added{Model performance across all four datasets and all six model types is summarized}
 \added{in \cref{fig:model-performance}. In contrast to the ALS classification case, the PCR Lasso performs}
 \added{competitively in age regression, suggesting that aging is a significant source of global variance}
@@ -1308,23 +1157,6 @@ yield the best cross-validated performance using either
     library \cite{scikit_optimize}.
 \end{enumerate*}
 
-\begin{figure}[t]
-    % \includegraphics[width=0.75\textwidth]{nested-cross-validation.pdf}
-    \caption{{\bf Nested cross-validation}
-        \label{fig:nested-cross-val}
-        We evaluate model quality using a nested $k$-fold cross validation
-        scheme. At level-0, the input data is decomposed into $k_0$ shuffled
-        groups and optimal hyperparameters are found for the level-0 training
-        set. To avoid overfitting, the optimal hyperparameters are themselves
-        evaluated using a cross-validation scheme taking place at level-1 of
-        the decomposition, where each level-0 training set is further
-        decomposed into $k_1 = 3$ shuffled groups. In the classification
-        case, the training and test splits are stratified by diagnosis. For
-        the ALS and WH data, $k_0 = 10$, while for the HBN and Cam-CAN data,
-        $k_0 = 5$.
-    }
-\end{figure}
-
 To objectively evaluate model performance and guard against over-fitting,
 we used a nested cross-validation scheme, which is depicted for the binary
 classification case in \cref{fig:nested-cross-val}. The subjects (i.e. rows
@@ -1417,4 +1249,186 @@ for helpful comments on the manuscript.
 % style file and paste the contents of your .bbl file
 % here. See http://journals.plos.org/plosone/s/latex for
 % step-by-step instructions.
+
+
+\newpage
+
+\section*{Figure legends}
+
+\begin{figure}[b!]
+    % \vspace{0.25cm}
+    % \rlap{
+    %     \hspace{-0.25em}
+    %     \includegraphics[width=0.98\columnwidth]{methods-brains.pdf}
+    % }
+    % \vspace{-8.4cm}
+    % \includegraphics[width=\columnwidth]{method-quad.pdf}
+    {\phantomsubcaption\label{fig:methods:tractogram}}
+    {\phantomsubcaption\label{fig:methods:cst}}
+    {\phantomsubcaption\label{fig:methods:tract-profile:cst}}
+    {\phantomsubcaption\label{fig:methods:tract-profile:fa}}
+    {\phantomsubcaption\label{fig:methods:group-structure}}
+    \phantomcaption{\label{fig:methods}}
+\end{figure}
+
+\begin{figure}[b!]
+    % \vspace{3.0cm}
+    % \rlap{
+    %     \includegraphics[width=0.33\textwidth]{als_gpca_coefs.pdf}
+    % }
+    % \vspace{-7.0cm}
+    % \includegraphics[width=\textwidth]{als_gpca_results.pdf}
+    {\phantomsubcaption\label{fig:class-results:probs}}
+    {\phantomsubcaption\label{fig:class-results:coefs3d}}
+    {\phantomsubcaption\label{fig:class-results:tract-profiles}}
+    {\phantomsubcaption\label{fig:class-results:false-positives}}
+    {\phantomsubcaption\label{fig:class-results:false-negatives}}
+    \phantomcaption{%
+    \label{fig:class-results}
+    }
+\end{figure}
+
+\begin{figure}[b!]
+    % \vspace{3.0cm}
+    % \rlap{
+    %     \hspace{0.775cm}
+    %     \includegraphics[width=0.26\textwidth]{wh_coefs.pdf}
+    %     \hspace{0.5em}
+    %     \includegraphics[width=0.26\textwidth]{hbn_coefs.pdf}
+    %     \hspace{0.5em}
+    %     \includegraphics[width=0.26\textwidth]{camcan_coefs.pdf}
+    % }
+    % \vspace{-6.1cm}
+    % \includegraphics[width=\textwidth]{regression_scatter.pdf}
+    {\phantomsubcaption\label{fig:age-results:wh-scatter}}
+    {\phantomsubcaption\label{fig:age-results:hbn-scatter}}
+    {\phantomsubcaption\label{fig:age-results:cc-scatter}}
+    {\phantomsubcaption\label{fig:age-results:wh-coefs3d}}
+    {\phantomsubcaption\label{fig:age-results:hbn-coefs3d}}
+    {\phantomsubcaption\label{fig:age-results:cc-coefs3d}}
+    {\phantomsubcaption\label{fig:age-results:wh-profile}}
+    {\phantomsubcaption\label{fig:age-results:hbn-profile}}
+    {\phantomsubcaption\label{fig:age-results:cc-profile}}
+    \phantomcaption{%
+    \label{fig:age-results}
+    }
+\end{figure}
+
+\begin{figure}[b!]
+    % \includegraphics[width=\textwidth]{model_performance.pdf}
+    \phantomcaption{%
+    \label{fig:model-performance}
+    }
+\end{figure}
+
+\begin{figure}[h!]
+    % \includegraphics[width=0.75\textwidth]{nested-cross-validation.pdf}
+    \phantomcaption{
+    \label{fig:nested-cross-val}
+    }
+\end{figure}
+
+
+\paragraph{Figure 1: Tractometry data flow}
+\textbf{(a)} Whole brain tractography generates streamlines approximating
+    the trajectories of white matter connections.
+    \textbf{(b)} Tractometry classifies these streamlines into anatomical bundles.
+    In this case, we show the left corticospinal tract (CSTL)
+    \added{and the left arcuate fasciculus (ARCL)}
+    over a mid-saggital anatomical slice.
+    \deleted{\textbf{(c)}} \replaced{Tract profiling}{Tractometry} further extracts bundle profiles,
+    quantifications of various diffusion metrics along the length of the
+    fiber bundle. Here, we show one subject's fractional anisotropy (FA)
+    profile for \added{\textbf{(c)}} the CSTL \added{and \textbf{(d)} the ARCL}.
+    \textbf{(d)} the phenotypical target data and \replaced{tract profile}{tractometric}
+    features can be organized into a linear model, $\hat{y} = \mathbf{X}
+    \hat{\beta}$. The feature matrix $\mathbf{X}$ is color-coded
+    to reveal a natural group structure: the left (orange) group
+    contains $k$ features from the CSTL, the middle (green) group
+    contains $k$ features from the left cingulum cingulate (CGCL),
+    and the right (blue) group
+    contains $k$ features from the \replaced{ARCL}{left arcuate (ARCL)}.
+    The coefficients in $\hat{\beta}$ follow the same natural grouping. \added{Panels (a) and (b) are adapted from \url{https://figshare.com/articles/figure/example_tractography-segmentation/14485350}, and reproduced under the CC-BY license (\url{https://creativecommons.org/licenses/by/4.0/})}
+
+\paragraph{Figure 2: \added{PCR-}SGL accurately and interpretably predicts ALS diagnosis.}
+{\bf (a)} Classification probabilities for ALS diagnosis, with
+controls on the left, patients on the right, predicted controls in
+blue, and predicted patients in orange. That is, orange dots on the left
+represent false positives, while blue dots on the right represent
+false negatives. We achieve {\protect\alsAccuracy}\% accuracy with an
+ROC AUC of {\protect\alsRocAuc}.
+{\bf (b)} \added{PCR-}SGL coefficients are presented on the core fibers of major
+fiber bundles. They exhibit high group sparsity and are concentrated
+in the FA of the \replaced{corticospinal tract (CST)}{CST}.
+The brain is oriented with the right hemisphere
+in the foreground and anterior to the right of the page. The CSTL, CSTR,
+\replaced{callosum forceps anterior (CFA), left arcuate (ARCL), and right arcuate (ARCR)}{CFA}
+bundles are indicated for orientation.
+{\bf (c)} \added{PCR-}SGL identifies three portions of the CST as important,
+where $\hat{\beta}$ (dashed line, right axis) has large values. These
+are centered around nodes 30, 65, and 90, corresponding to locations
+of substantial differences in FA between the ALS and control groups
+(shaded areas indicates standard error of the mean).
+{\bf (d)} Bundle profiles for false positive classifications. Line
+colors correspond to the marker edge color in the top left plot.
+These individuals have reduced FA in the CST portions which SGL
+identified as important. Their misclassification is coherent with the
+feature importance and the group differences in FA.
+{\bf (e)} Individual bundle profiles for false negative
+classifications. These individuals have bundle profiles which
+oscillate between the group means.
+
+\paragraph{Figure 3: Predicting age with tractometry and SGL.}
+{\bf (top)} The predicted age vs. true age of each individual from the test
+splits (i.e., when each subject's data was held out in fitting the
+model) for the {\bf (a)} WH, {\bf (b)} HBN, and {\bf (c)} Cam-CAN
+datasets; an accurate prediction falls close to the $y=x$ line
+(dashed). The mean absolute error (MAE) and coefficient of
+determination $R^2$ are presented in the lower right of each scatter
+plot.
+{\bf (middle)} Feature importance for predicting age from
+\replaced{tract profile}{tractometry} in
+the {\bf (d)} WH, {\bf (e)} HBN, and {\bf (f)} Cam-CAN datasets.
+The orientation of the
+brain is that same as in \cref{fig:class-results:coefs3d}, however because
+the coefficients exhibit high global sparsity (as opposed to group
+sparsity), we plot the mean of the absolute value of $\hat{\beta}$
+for each bundle on the core fiber. The global distrubution of the
+$\hat{\beta}$ coefficients reflects the fact that aging is not
+confined to a single white matter bundle.
+{\bf (bottom)} Age quintile bundle profiles for the {\bf (g)} WH,
+{\bf (h)} HBN, and {\bf (i)} Cam-CAN datasets.
+
+\paragraph{\added{Figure 4: Model performance across all datasets.}}
+\added{Each panel shows model performance measured on the test set for each}
+\added{cross-validation split, with each black dot representing a split, box}
+\added{plots representing the quartiles, and white diamonds representing the mean}
+\added{performance. The $y$-scale varies in each subplot.}
+\added{\textbf{(a)} Accuracy of test set predictions for the}
+\added{ALS dataset. Because group differences}
+\added{in ALS diagnosis are mostly confined to a single bundle, the group}
+\added{structure-preserving methods, SGL and PCR-SGL, outperform the other}
+\added{models.}
+\added{The remaining frames show coefficient of determination, \protect$R^2$ in test sets}
+\added{for the \textbf{(b)} WH, \textbf{(c)} HBN, and \textbf{(c)} Cam-CAN}
+\added{datasets. Because aging affects the white matter globally, group structure-blind}
+\added{methods like elastic net and PCR Lasso perform well. Nonetheless, the SGL}
+\added{models show competitve predictive performance, adapting to a problem where}
+\added{group structure is not as informative. PCR-SGL performs poorly in this regime}
+\added{because its initial group-wise PC projection destroys between bundle covariance.}
+\added{The bundle-mean lasso performs poorly, demonstrating the value of along-tract profiling.}
+
+
+\paragraph{Figure 5: Nested cross-validation.}
+We evaluate model quality using a nested $k$-fold cross validation
+scheme. At level-0, the input data is decomposed into $k_0$ shuffled
+groups and optimal hyperparameters are found for the level-0 training
+set. To avoid overfitting, the optimal hyperparameters are themselves
+evaluated using a cross-validation scheme taking place at level-1 of
+the decomposition, where each level-0 training set is further
+decomposed into $k_1 = 3$ shuffled groups. In the classification
+case, the training and test splits are stratified by diagnosis. For
+the ALS and WH data, $k_0 = 10$, while for the HBN and Cam-CAN data,
+$k_0 = 5$.
+
 \end{document}
