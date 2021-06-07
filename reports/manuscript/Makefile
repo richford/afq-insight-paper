@@ -20,7 +20,7 @@ all: diff
 	touch .refresh
 
 diff: $(MAIN).tex $(SUPPLEMENT).tex Makefile $(FIGURES)
-	sed -r 's/(\\mbox\{\\cite\{)([^\}]*)(\}\})/\\cite{\2}/g' $(MAIN).tex > $(MAIN)_no_mbox.tex
+	gsed -r 's/(\\mbox\{\\cite\{)([^\}]*)(\}\})/\\cite{\2}/g' $(MAIN).tex > $(MAIN)_no_mbox.tex
 	python pyMergeChanges.py -ah $(MAIN)_no_mbox.tex $(NOMARKUP).tex
 	rm $(MAIN)_no_mbox.tex
 	python pyMergeChanges.py -ah $(SUPPLEMENT).tex $(SUPPLEMENTNOMARKUP).tex
@@ -66,7 +66,7 @@ debug:
 spell: $(addsuffix .spchk,$(basename $(SOURCES)))
 
 %.spchk: %.tex
-	@aspell --lang=en --home-dir=. --personal=dictionary.txt -t -c $< 
+	@aspell --lang=en --home-dir=. --personal=dictionary.txt -t -c $<
 
 docx:
 	pandoc -s --biblio $(MAIN).bib $(MAIN).tex -o paper.docx
