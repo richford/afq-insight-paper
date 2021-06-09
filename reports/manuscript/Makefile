@@ -14,18 +14,21 @@ SUPPLEMENTNOMARKUP=supplemental
 SOURCES=$(MAIN).tex $(SUPPLEMENT).tex Makefile
 FIGURES := $(shell find ../paper_figures/* -type f)
 
-all: diff
+all: latex
 
 .refresh:
 	touch .refresh
 
-diff: $(MAIN).tex $(SUPPLEMENT).tex Makefile $(FIGURES)
-	gsed -r 's/(\\mbox\{\\cite\{)([^\}]*)(\}\})/\\cite{\2}/g' $(MAIN).tex > $(MAIN)_no_mbox.tex
-	python pyMergeChanges.py -ah $(MAIN)_no_mbox.tex $(NOMARKUP).tex
-	rm $(MAIN)_no_mbox.tex
-	python pyMergeChanges.py -ah $(SUPPLEMENT).tex $(SUPPLEMENTNOMARKUP).tex
-	$(LATEXMK) $(LATEXMKOPT) -pdflatex="$(LATEX) $(LATEXOPT)" \
-		$(MAIN).tex $(NOMARKUP).tex $(SUPPLEMENT).tex $(SUPPLEMENTNOMARKUP).tex
+latex: $(MAIN).tex $(NOMARKUP).tex Makefile $(FIGURES)
+	$(LATEXMK) $(LATEXMKOPT) -pdflatex="$(LATEX) $(LATEXOPT)" $(MAIN).tex $(NOMARKUP).tex
+
+# diff: $(MAIN).tex $(SUPPLEMENT).tex Makefile $(FIGURES)
+# 	gsed -r 's/(\\mbox\{\\cite\{)([^\}]*)(\}\})/\\cite{\2}/g' $(MAIN).tex > $(MAIN)_no_mbox.tex
+# 	python pyMergeChanges.py -ah $(MAIN)_no_mbox.tex $(NOMARKUP).tex
+# 	rm $(MAIN)_no_mbox.tex
+# 	python pyMergeChanges.py -ah $(SUPPLEMENT).tex $(SUPPLEMENTNOMARKUP).tex
+# 	$(LATEXMK) $(LATEXMKOPT) -pdflatex="$(LATEX) $(LATEXOPT)" \
+# 		$(MAIN).tex $(NOMARKUP).tex $(SUPPLEMENT).tex $(SUPPLEMENTNOMARKUP).tex
 
 plos: $(MAIN).tex $(SUPPLEMENT).tex .refresh Makefile $(FIGURES)
 	$(LATEXMK) $(LATEXMKOPT) $(CONTINUOUS) \
