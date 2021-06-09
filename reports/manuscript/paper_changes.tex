@@ -320,7 +320,7 @@ characterizes human cognition. Diffusion-weighted Magnetic Resonance Imaging
 (dMRI) provides a unique view into the physical properties of the connections
 that comprise these networks, by sensitizing the measurement to the directional
 diffusion of water in each voxel
-\replaced{\mbox{\cite{stejskal1965spin, wandell2016clarifying}}}{\mbox{\cite{wandell2016clarifying}}}.
+\cite{stejskal1965spin, wandell2016clarifying}.
 % While the measurements are usually conducted
 % with voxels at the millimeter scale, water molecules within each voxel
 % diffuse with characteristic lengths at the micrometer scale, providing
@@ -376,15 +376,15 @@ bundle, but there is a large body of evidence showing that there is
 systematic variability in the values of diffusion metrics along the
 trajectory of each bundle. This justifies retaining the individual
 samples along the length of each bundle
-\replaced{\mbox{\cite{Jones2005-yq, yeatman2012tract, colby2012, ODonnell2009-uu}},}{\mbox{\cite{yeatman2012tract, colby2012, ODonnell2009-uu}},}
-\added{hereafter referred to as tract profiling}.
+\cite{Jones2005-yq, yeatman2012tract, colby2012, ODonnell2009-uu},
+hereafter referred to as tract profiling.
 While this retains important information about each individual's white
 matter, it also presents statistical challenges due to the dimensionality of
 the data. In past work, comparisons between groups or across individuals were
 done independently at each node of each bundle, for each
 diffusion metric. This approach is exhaustive, but
 statistical power is compromised by a multiple comparison problem
-\replaced{\mbox{\cite{colby2012, Nichols2002-zu, Nichols2003-yy, chamberland2019dimensionality}}}{\mbox{\cite{colby2012, Nichols2002-zu, Nichols2003-yy}}}.
+\cite{colby2012, Nichols2002-zu, Nichols2003-yy, chamberland2019dimensionality}.
 An alternative that
 circumvents the multiple comparison problem is to select just a few
 tracts to compare in each individual, or even
@@ -431,8 +431,8 @@ The present work aims to balance predictive accuracy with descriptive power
 data across all bundles, while also retaining and elucidating spatial
 information about the locations that are most informative for discriminative
 performance.
-\added{Unlike many previous analyses of white matter (e.g., using TBSS \cite{smith2006tract} and connectometry \cite{yeh2016connectometry}), which focus on classical inference about the differences between groups or individuals in terms of their white matter properties, the focus of the present work is on the combination of features that facilitate accurate prediction of the individual differences in a particular phenotype}.
-\added{For example, an accurate prediction of which individuals in a group have a particular disease, or a prediction of their age with small error. The distinct goals of \emph{inference} and \emph{prediction} are not necessarily incongruent, but can sometimes be in tension \cite{Bzdok2020-sd}. This distinction is also similar to the distinction between ``encoding'' and ``decoding'' used in the functional MRI literature \cite{Naselaris2011-ss}. In the present work}, we predict the phenotypical variance in a group of subjects,or classify group membership, based on a linear combination of the features estimated with \replaced{tract profiling}{tractometry}.
+Unlike many previous analyses of white matter (e.g., using TBSS \cite{smith2006tract} and connectometry \cite{yeh2016connectometry}), which focus on classical inference about the differences between groups or individuals in terms of their white matter properties, the focus of the present work is on the combination of features that facilitate accurate prediction of the individual differences in a particular phenotype.
+For example, an accurate prediction of which individuals in a group have a particular disease, or a prediction of their age with small error. The distinct goals of \emph{inference} and \emph{prediction} are not necessarily incongruent, but can sometimes be in tension \cite{Bzdok2020-sd}. This distinction is also similar to the distinction between ``encoding'' and ``decoding'' used in the functional MRI literature \cite{Naselaris2011-ss}. In the present work, we predict the phenotypical variance in a group of subjects,or classify group membership, based on a linear combination of the features estimated with tract profiling.
 
 % Generally speaking, analysis methods should balance predictive
 % accuracy with descriptive power \cite{Murdoch2019-ax, Breiman2001-uz}.
@@ -447,7 +447,7 @@ performance.
 % combination of the features estimated with tractometry.
 
 Using this approach, we first need to deal with the large and
-asymmetric dimensionality of the data: \replaced{tract profile}{tractometry}
+asymmetric dimensionality of the data: tract profile
 data usually has
 many more features (i.e., number of measurements per individual) than
 samples (number of subjects), which makes inferences from the data
@@ -475,13 +475,13 @@ tractomery lend themselves to grouping based on the tracts from which
 each measurement is taken, GL and SGL provide useful tools
 for linear model fitting in problems of this form. Here we, first,
 develop an implementation of SGL that is well suited to the analysis of
-\replaced{tract profile}{tractometry} data and, second, demonstrate the power and flexibility of
+tract profile data and, second, demonstrate the power and flexibility of
 this approach by applying it to both classification
-and continuous prediction problems. Our \deleted{tractometry} data flow is
+and continuous prediction problems. Our data flow is
 represented in \cref{fig:methods} and explained in further detail in
 the methods section.
 
-\added{One more approach to multivariate analysis of neuroimaging data is to perform inference or prediction in a transformed feature space rather then the original diffusion metric feature space. For example, in Lasso PCR, diffusion features can be projected onto a principal components (PC) basis for use in a sparsity constrained model \mbox{\cite{powell2018local, rasero2021integrating}}. While these approaches achieve high predictive performance and may even yield biologically interpretable principal components \mbox{\cite{chamberland2019dimensionality}}, they neglect anatomical grouping information. We view these approaches as complementary to the SGL-based approach: PCR based approaches seeks to model brain-phenotype relationships using the most parsimonious representation of variance in the diffusion measures. In contrast, our SGL-based approach seeks to establish whether prior knowledge of anatomical grouping improves modeling of brain-phenotype relationships. Motivated by this distinction, we also introduce a union of the two approaches called PCR-SGL, in which each group of features is independently transformed into its PC basis, thereby retaining the anatomical grouping information of the original feature space. We demonstrate circumstances in which this approach both helps and hinders predictive performance.}
+One more approach to multivariate analysis of neuroimaging data is to perform inference or prediction in a transformed feature space rather then the original diffusion metric feature space. For example, in Lasso PCR, diffusion features can be projected onto a principal components (PC) basis for use in a sparsity constrained model \cite{powell2018local, rasero2021integrating}. While these approaches achieve high predictive performance and may even yield biologically interpretable principal components \cite{chamberland2019dimensionality}, they neglect anatomical grouping information. We view these approaches as complementary to the SGL-based approach: PCR based approaches seeks to model brain-phenotype relationships using the most parsimonious representation of variance in the diffusion measures. In contrast, our SGL-based approach seeks to establish whether prior knowledge of anatomical grouping improves modeling of brain-phenotype relationships. Motivated by this distinction, we also introduce a union of the two approaches called PCR-SGL, in which each group of features is independently transformed into its PC basis, thereby retaining the anatomical grouping information of the original feature space. We demonstrate circumstances in which this approach both helps and hinders predictive performance.
 
 \begin{figure}[b!]
     % \vspace{0.25cm}
@@ -502,21 +502,21 @@ the methods section.
         the trajectories of white matter connections.
         \textbf{(b)} Tractometry classifies these streamlines into anatomical bundles.
         In this case, we show the left corticospinal tract (CSTL)
-        \added{and the left arcuate fasciculus (ARCL)}
+        and the left arcuate fasciculus (ARCL)
         over a mid-saggital anatomical slice.
-        \deleted{\textbf{(c)}} \replaced{Tract profiling}{Tractometry} further extracts bundle profiles,
+        Tract profiling further extracts bundle profiles,
         quantifications of various diffusion metrics along the length of the
         fiber bundle. Here, we show one subject's fractional anisotropy (FA)
-        profile for \added{\textbf{(c)}} the CSTL \added{and \textbf{(d)} the ARCL}.
-        \textbf{(d)} the phenotypical target data and \replaced{tract profile}{tractometric}
+        profile for \textbf{(c)} the CSTL and \textbf{(d)} the ARCL.
+        \textbf{(d)} the phenotypical target data and tract profile
         features can be organized into a linear model, $\hat{y} = \mathbf{X}
         \hat{\beta}$. The feature matrix $\mathbf{X}$ is color-coded
         to reveal a natural group structure: the left (orange) group
         contains $k$ features from the CSTL, the middle (green) group
         contains $k$ features from the left cingulum cingulate (CGCL),
         and the right (blue) group
-        contains $k$ features from the \replaced{ARCL}{left arcuate (ARCL)}.
-        The coefficients in $\hat{\beta}$ follow the same natural grouping. \added{Panels (a) and (b) are adapted from \url{https://figshare.com/articles/figure/example_tractography-segmentation/14485350}, and reproduced under the CC-BY license (\url{https://creativecommons.org/licenses/by/4.0/})}
+        contains $k$ features from the ARCL.
+        The coefficients in $\hat{\beta}$ follow the same natural grouping. Panels (a) and (b) are adapted from \url{https://figshare.com/articles/figure/example_tractography-segmentation/14485350}, and reproduced under the CC-BY license (\url{https://creativecommons.org/licenses/by/4.0/})
     }
 \end{figure}
 
@@ -524,7 +524,7 @@ the methods section.
 % Results
 \section*{Results}
 
-We developed a method for analyzing dMRI \replaced{tract profile}{tractometry} data that uses the Sparse
+We developed a method for analyzing dMRI tract profile data that uses the Sparse
 Group Lasso (SGL) to select features that are sparse both at the group (bundle) level, as well as overall.
 We demonstrate the use of this method on four different datasets in
 both a classification setting and a regression setting.
@@ -539,16 +539,16 @@ SGL delivers improved predictive performance, with a cross-validated accuracy
 of {\alsAccuracy}\% and an area under the receiver operating characteristic
 curve (ROC AUC) of {\alsRocAuc}, without the need for \emph{a priori} feature
 engineering.
-\added{We also predicted ALS diagnosis using the PCR-SGL, wherein each group of features is independently transformed to its PC basis and an SGL model is fit to the transformed features. This model achieves \protect{\alsAccuracyGpca}\% accuracy and an ROC AUC of \protect{\alsRocAucGpca}}
+We also predicted ALS diagnosis using the PCR-SGL, wherein each group of features is independently transformed to its PC basis and an SGL model is fit to the transformed features. This model achieves \protect{\alsAccuracyGpca}\% accuracy and an ROC AUC of \protect{\alsRocAucGpca}
 (\cref{fig:class-results:probs}). In addition to this classification
-performance, both SGL \added{and PCR-SGL} also \replaced{identify}{identifies}
+performance, both SGL and PCR-SGL also identify
 the white matter tracts most important for ALS classification.
-\added{\Cref{fig:class-results:coefs3d} shows that PCR-SGL identified as potential disease biomarkers the diffusion measures in the CST from the cerebral peduncle to the corona radiata, agreeing with the previous study from which these data were extracted \mbox{\cite{sarica2017corticospinal}}.}
+\Cref{fig:class-results:coefs3d} shows that PCR-SGL identified as potential disease biomarkers the diffusion measures in the CST from the cerebral peduncle to the corona radiata, agreeing with the previous study from which these data were extracted \cite{sarica2017corticospinal}.
 The relative importance of white matter
 features is captured in the $\beta$ coefficients from \cref{eq:sgl}.
 \Cref{fig:class-results:tract-profiles} depicts these coefficients along the
-right CST, plotted over the FA values for the control and ALS subject groups \added{(see Supporting Figures S1 and S2 for tract profiles of all 18 tracts in these groups)}.
-We find that SGL \replaced{and PCR-SGL select}{selects} FA metrics in the corticospinal tract and
+right CST, plotted over the FA values for the control and ALS subject groups (see Supporting Figures S1 and S2 for tract profiles of all 18 tracts in these groups).
+We find that SGL and PCR-SGL select FA metrics in the corticospinal tract and
 particularly in the right corticospinal tract as most important to ALS
 classification, confirming previous findings \cite{van2011upper,
 toosy2003diffusion, sarica2014tractography, sage2007quantitative,
@@ -560,12 +560,12 @@ the previous study from which we obtained the data
 
 To assess the added value of incorporating anatomical knowledge into our
 model, we compared our classification results to those obtained from
-\replaced{four other models: a pure lasso model, an elastic net model, a bundle-mean lasso (i.e. a lasso model trained only on the mean metric values from each bundle), and a principal components regression lasso (Lasso PCR) model \cite{powell2018local, rasero2021integrating}}{a lasso model}.
-\replaced{These models achieved accuracies of 76\%, 76\%, 79.5\%, and 71.5\% respectively and ROC AUC values of 0.76, 0.75, 0.82, and 0.71, respectively}{The pure lasso model achieved 76\% accuracy and an ROC AUC of 0.76}
+four other models: a pure lasso model, an elastic net model, a bundle-mean lasso (i.e. a lasso model trained only on the mean metric values from each bundle), and a principal components regression lasso (Lasso PCR) model \cite{powell2018local, rasero2021integrating}.
+These models achieved accuracies of 76\%, 76\%, 79.5\%, and 71.5\% respectively and ROC AUC values of 0.76, 0.75, 0.82, and 0.71, respectively
 using the same cross-validation strategy used to assess the SGL model.
 This difference in performance justifies the additional complexity of the SGL
 over simpler sparsity-inducing regression strategies.
-\added{The relatively poor performance of Lasso PCR suggests that features with small variance are nonetheless relevant for predicting ALS diagnosis. Or equivalently, that group differences between ALS diagnoses are not the dominant source of variance in the diffusion metrics.}
+The relatively poor performance of Lasso PCR suggests that features with small variance are nonetheless relevant for predicting ALS diagnosis. Or equivalently, that group differences between ALS diagnoses are not the dominant source of variance in the diffusion metrics.
 
 The $\beta$ coefficients exhibit high bundle level sparsity; only some
 bundles are important, which can be be confirmed by observing the value of
@@ -574,8 +574,8 @@ Group Lasso and lasso penalties, selected through nested cross-validation
 (see \cref{eq:sgl}).
 If $\alpha$ is closer to zero, it indicates that the phenotype in question
 preferentially correlates with only a few groups of covariates. For the ALS
-dataset, \added{the SGL model has} $\alpha = $ \alsLRatio
-~\added{and the PCR-SGL model has \protect$\alpha = $ \protect\alsLRatioGpca},
+dataset, the SGL model has $\alpha = $ \alsLRatio
+~and the PCR-SGL model has \protect$\alpha = $ \protect\alsLRatioGpca,
 confirming that the white matter correlates of ALS reside mostly in one
 bundle, namely the CST.
 
@@ -603,21 +603,21 @@ method predicts incorrectly this is done in a comprehensible manner.
     {\phantomsubcaption\label{fig:class-results:false-positives}}
     {\phantomsubcaption\label{fig:class-results:false-negatives}}
     \caption{
-    {\bf Figure 2: \added{PCR-}SGL accurately and interpretably predicts ALS diagnosis.}
+    {\bf Figure 2: PCR-SGL accurately and interpretably predicts ALS diagnosis.}
     {\bf (a)} Classification probabilities for ALS diagnosis, with
     controls on the left, patients on the right, predicted controls in
     blue, and predicted patients in orange. That is, orange dots on the left
     represent false positives, while blue dots on the right represent
     false negatives. We achieve {\protect\alsAccuracy}\% accuracy with an
     ROC AUC of {\protect\alsRocAuc}.
-    {\bf (b)} \added{PCR-}SGL coefficients are presented on the core fibers of major
+    {\bf (b)} PCR-SGL coefficients are presented on the core fibers of major
     fiber bundles. They exhibit high group sparsity and are concentrated
-    in the FA of the \replaced{corticospinal tract (CST)}{CST}.
+    in the FA of the corticospinal tract (CST).
     The brain is oriented with the right hemisphere
     in the foreground and anterior to the right of the page. The CSTL, CSTR,
-    \replaced{callosum forceps anterior (CFA), left arcuate (ARCL), and right arcuate (ARCR)}{CFA}
+    callosum forceps anterior (CFA), left arcuate (ARCL), and right arcuate (ARCR)
     bundles are indicated for orientation.
-    {\bf (c)} \added{PCR-}SGL identifies three portions of the CST as important,
+    {\bf (c)} PCR-SGL identifies three portions of the CST as important,
     where $\hat{\beta}$ (dashed line, right axis) has large values. These
     are centered around nodes 30, 65, and 90, corresponding to locations
     of substantial differences in FA between the ALS and control groups
@@ -636,7 +636,7 @@ method predicts incorrectly this is done in a comprehensible manner.
 
 \subsection*{SGL accurately predicts age from tractometry data}
 
-To test the performance of SGL \deleted{with tractometry data} in a continuous
+To test the performance of SGL in a continuous
 regression task, we focus here on the prediction of biological age in three
 datasets named WH, HBN, and Cam-CAN (see the Methods section for a description of each dataset). Prediction of ``brain
 age'' is a commonly undertaken task in neuroimaging machine learning, in part
@@ -653,10 +653,10 @@ The WH \cite{yeatman2014lifespan}, HBN \cite{alexander2017open}, and Cam-CAN
 \cite{shafto2014cambridge,taylor2017cambridge} datasets used here contain
 data from 76, 1651, and 640 subjects, respectively, ranging from 6-50, 5-21,
 and 18-88 years of age, respectively. In each case, biological age was used
-as the predicted variable $y$. SGL was fit to the \replaced{tract profile}{tractometry-extracted}
+as the predicted variable $y$. SGL was fit to the tract profile
 features FA and mean diffusivity (MD) in 18 major brain tracts, with diffusion metrics extracted
 from diffusion tensor imaging (DTI) for the WH dataset and diffusion kurtosis
-imaging (DKI) \cite{jensen2005diffusion} for the HBN and Cam-CAN datasets \added{see Supporting Figures S3 to S8 for the full tract profile information in all tracts/datasets}.
+imaging (DKI) \cite{jensen2005diffusion} for the HBN and Cam-CAN datasets see Supporting Figures S3 to S8 for the full tract profile information in all tracts/datasets.
 
 To evaluate the fit of the model, we used a nested cross-validation
 procedure. In this procedure, batches of subjects are held out. For each
@@ -666,8 +666,8 @@ subjects based on the linear coeffiecients. This scheme automatically finds
 the right level of sparsity and fits the coefficients to the ill-posed linear
 model, while guarding against overfitting. SGL accurately predicts the age of
 the subjects in this procedure, with a median absolute error of {\whMae},
-\added{{\hbnMae}}, and {\camcanMae} years for the WH, HBN, and Cam-CAN datasets,
-respectively and coefficients of determination $R^2 = $ {\whRsq} , \added{{\hbnRsq}}, and {\camcanRsq},
+{\hbnMae}, and {\camcanMae} years for the WH, HBN, and Cam-CAN datasets,
+respectively and coefficients of determination $R^2 = $ {\whRsq} , {\hbnRsq}, and {\camcanRsq},
 respectively (see \cref{fig:age-results}, top panels). The
 predictions for Cam-CAN are competitive with a recent state of the art
 prediction \cite{mcpherson2020single}, which used streamline density to
@@ -692,21 +692,21 @@ different between the age quintiles.
 
 As with ALS classification, we also compared SGL performance with results
 obtained using
-\replaced{the pure lasso, elastic net, bundle-mean lasso, and Lasso PCR}{only the lasso penalty}.
+the pure lasso, elastic net, bundle-mean lasso, and Lasso PCR.
 The pure lasso models achieved $R^2 = 0.47$, $0.54$, and $0.70$ for the WH, HBN, and Cam-CAN datasets respectively using the same cross-validation strategy used to assess the SGL.
-\added{The elastic net models achieved $R^2 = 0.46$, $0.59$, and $0.73$ for the WH, HBN, and Cam-CAN datasets, respectively. The bundle-mean lasso models achieved $R^2 = 0.33$, $0.22$, and $0.55$, respectively. And the Lasso PCR models achieved $R^2 = 0.54$, $0.57$, $0.74$, respectively.}
+The elastic net models achieved $R^2 = 0.46$, $0.59$, and $0.73$ for the WH, HBN, and Cam-CAN datasets, respectively. The bundle-mean lasso models achieved $R^2 = 0.33$, $0.22$, and $0.55$, respectively. And the Lasso PCR models achieved $R^2 = 0.54$, $0.57$, $0.74$, respectively.
 The SGL models'
 performance improvement over lasso is more modest than in the ALS
 classification case, which accords with the selected values of the $\alpha$
 hyperparameter. These SGL models were more lasso-like in their sparsity
 penalties so they are more lasso-like in their predictive performance.
 
-\added{Model performance across all four datasets and all six model types is summarized}
-\added{in \cref{fig:model-performance}. In contrast to the ALS classification case, the PCR Lasso performs}
-\added{competitively in age regression, suggesting that aging is a significant source of global variance}
-\added{in the tract profiles. On the other hand, the PCR-SGL models destroy cross-bundle covariance information}
-\added{in their initial group-wise PC projection step (see \cref{eq:svd}), limiting performance}
-\added{for globally distributed phenomena. Conversely, the SGL models are able to adapt to this regime.}
+Model performance across all four datasets and all six model types is summarized
+in \cref{fig:model-performance}. In contrast to the ALS classification case, the PCR Lasso performs
+competitively in age regression, suggesting that aging is a significant source of global variance
+in the tract profiles. On the other hand, the PCR-SGL models destroy cross-bundle covariance information
+in their initial group-wise PC projection step (see \cref{eq:svd}), limiting performance
+for globally distributed phenomena. Conversely, the SGL models are able to adapt to this regime.
 
 \begin{figure}[b!]
     % \vspace{3.0cm}
@@ -737,7 +737,7 @@ the {\bf (a)} WH, {\bf (b)} HBN, and {\bf (c)} Cam-CAN datasets; an accurate
 prediction falls close to the $y=x$ line (dashed). The mean absolute error (MAE)
 and coefficient of determination $R^2$ are presented in the lower right of each
 scatter plot. {\bf (middle)} Feature importance for predicting age from
-\replaced{tract profile}{tractometry} in the {\bf (d)} WH, {\bf (e)} HBN, and
+tract profile in the {\bf (d)} WH, {\bf (e)} HBN, and
 {\bf (f)} Cam-CAN datasets. The orientation of the brain is that same as in
 \cref{fig:class-results:coefs3d}, however because the coefficients exhibit high
 global sparsity (as opposed to group sparsity), we plot the mean of the absolute
@@ -752,31 +752,31 @@ profiles for the {\bf (g)} WH, {\bf (h)} HBN, and {\bf (i)} Cam-CAN datasets.
 \begin{figure}[b!]
     % \includegraphics[width=\textwidth]{model_performance.pdf}
     \caption{%
-    {\bf \added{Figure 4: Model performance across all datasets.}}
-\added{Each panel shows model performance measured on the test set for each}
-\added{cross-validation split, with each black dot representing a split, box}
-\added{plots representing the quartiles, and white diamonds representing the mean}
-\added{performance. The $y$-scale varies in each subplot.}
-\added{\textbf{(a)} Accuracy of test set predictions for the}
-\added{ALS dataset. Because group differences}
-\added{in ALS diagnosis are mostly confined to a single bundle, the group}
-\added{structure-preserving methods, SGL and PCR-SGL, outperform the other}
-\added{models.}
-\added{The remaining frames show coefficient of determination, \protect$R^2$ in test sets}
-\added{for the \textbf{(b)} WH, \textbf{(c)} HBN, and \textbf{(c)} Cam-CAN}
-\added{datasets. Because aging affects the white matter globally, group structure-blind}
-\added{methods like elastic net and PCR Lasso perform well. Nonetheless, the SGL}
-\added{models show competitve predictive performance, adapting to a problem where}
-\added{group structure is not as informative. PCR-SGL performs poorly in this regime}
-\added{because its initial group-wise PC projection destroys between bundle covariance.}
-\added{The bundle-mean lasso performs poorly, demonstrating the value of along-tract profiling.}
+    {\bf Figure 4: Model performance across all datasets.}
+Each panel shows model performance measured on the test set for each
+cross-validation split, with each black dot representing a split, box
+plots representing the quartiles, and white diamonds representing the mean
+performance. The $y$-scale varies in each subplot.
+\textbf{(a)} Accuracy of test set predictions for the
+ALS dataset. Because group differences
+in ALS diagnosis are mostly confined to a single bundle, the group
+structure-preserving methods, SGL and PCR-SGL, outperform the other
+models.
+The remaining frames show coefficient of determination, \protect$R^2$ in test sets
+for the \textbf{(b)} WH, \textbf{(c)} HBN, and \textbf{(c)} Cam-CAN
+datasets. Because aging affects the white matter globally, group structure-blind
+methods like elastic net and PCR Lasso perform well. Nonetheless, the SGL
+models show competitve predictive performance, adapting to a problem where
+group structure is not as informative. PCR-SGL performs poorly in this regime
+because its initial group-wise PC projection destroys between bundle covariance.
+The bundle-mean lasso performs poorly, demonstrating the value of along-tract profiling.
     \label{fig:model-performance}
     }
 \end{figure}
 
 \section*{Discussion}
 
-We present here a novel method for analysis of dMRI \replaced{tract profile}{tractometry} data that
+We present here a novel method for analysis of dMRI tract profile data that
 relies on the Sparse Group Lasso \cite{simon2013sparse} to make accurate
 predictions of phenotypic properties of individual subjects while,
 simultaneously, identifying the features of the white matter that are most
@@ -799,33 +799,33 @@ that ALS, which is a disease of lower motor neurons, is localized to the
 cortico-spinal tract. This recapitulates the results of previous analysis of
 these same data, using a bundle-of-interest approach
 \cite{sarica2017corticospinal}.
-\added{As with the original study, it is unclear whether our strong predictive performance based on image properties that would be visible in patient scans or whether it is identifying a new subclinical disease biomarker.}
+As with the original study, it is unclear whether our strong predictive performance based on image properties that would be visible in patient scans or whether it is identifying a new subclinical disease biomarker.
 In contrast, for the analysis of biological
 age, the coefficients identified by the algorithm are very widely distributed
 across many parts of the white matter, mirroring previous results that show a
 large and continuous distribution of life-span changes in white matter
 properties \cite{yeatman2014lifespan}.
-\added{We present age quintile bundle profiles and SGL \protect$\beta$ coefficients for all four datasets in the Supporting Information. For age regression, substantial differences between the datasets preclude generalization across all three:}
+We present age quintile bundle profiles and SGL \protect$\beta$ coefficients for all four datasets in the Supporting Information. For age regression, substantial differences between the datasets preclude generalization across all three:
 \begin{enumerate*}[%
     label=(\roman*),%
     before=\unskip{: },%
     itemjoin={{, }},%
     itemjoin*={{, and }}]
-    \item \added{different acquisition parameters, which can be challenging to harmonize \mbox{\cite{pinto2020harmonization}}}
-    \item \added{different diffusion models, with DTI for the WH dataset and DKI for the HBN and Cam-CAN datasets}
-    \item \added{different age ranges and distributions (which is evident in the figure legends for \cref{fig:age-results}), with HBN being a developmental dataset, while WH and Cam-CAN are lifespan maturation datasets}
-    \item \added{different anatomical extents, with the WH streamlines truncated to remain with the bundle's bounding regions of interest (the default behavior in the legacy \texttt{mAFQ}) and the HBN and Cam-CAN streamlines allowed to retain their full extent from whole-brain tractography (the default behavior in \texttt{pyAFQ}).}
+    \item different acquisition parameters, which can be challenging to harmonize \cite{pinto2020harmonization}
+    \item different diffusion models, with DTI for the WH dataset and DKI for the HBN and Cam-CAN datasets
+    \item different age ranges and distributions (which is evident in the figure legends for \cref{fig:age-results}), with HBN being a developmental dataset, while WH and Cam-CAN are lifespan maturation datasets
+    \item different anatomical extents, with the WH streamlines truncated to remain with the bundle's bounding regions of interest (the default behavior in the legacy \texttt{mAFQ}) and the HBN and Cam-CAN streamlines allowed to retain their full extent from whole-brain tractography (the default behavior in \texttt{pyAFQ}).
 \end{enumerate*}
-\added{In a biological characteristic that has widespread effects in the brain, validity is difficult to assess \mbox{\cite{lermausabiaga2019replication}}, so it is both unsurprising and vexing that we can do so well at predicting within each dataset, and yet do poorly in interpreting informative features across instruments.}
+In a biological characteristic that has widespread effects in the brain, validity is difficult to assess \cite{lermausabiaga2019replication}, so it is both unsurprising and vexing that we can do so well at predicting within each dataset, and yet do poorly in interpreting informative features across instruments.
 
 
-\added{We also implemented a union of the PCR Lasso and SGL approaches by first}
-\added{projecting each group onto its PC basis. This PCR-SGL approach transformed the feature}
-\added{space into a more parsimonious representation of its variance while}
-\added{also preserving group structure. But it was unable to efficiently represent}
-\added{cross-bundle covariance, which is an advantage of PCR Lasso. As a result, PCR-SGL performed well in ALS classification,}
-\added{where the white matter interactions are highly localized, and poorly}
-\added{in age regression, where the white matter interactions are global.}
+We also implemented a union of the PCR Lasso and SGL approaches by first
+projecting each group onto its PC basis. This PCR-SGL approach transformed the feature
+space into a more parsimonious representation of its variance while
+also preserving group structure. But it was unable to efficiently represent
+cross-bundle covariance, which is an advantage of PCR Lasso. As a result, PCR-SGL performed well in ALS classification,
+where the white matter interactions are highly localized, and poorly
+in age regression, where the white matter interactions are global.
 
 One drawback of our approach is also evident in the age regression results.
 There are portions of the bundle profiles in
@@ -837,12 +837,12 @@ identifies certain features as important, it is not guaranteed to identify
 important features, dense enough to predict the phenotype and sparse enough
 (at either the group or global level) to satisfy the sparsity constraints.
 
-\added{Another limitation of our approach is in its computational execution time, which, in our experience, is roughly five times slower than simpler models like the lasso. This slow-down is likely to be insignificant for ``production'' cycles in which researchers report their findings, but may be prohibitive for ``development'' cycles in which researchers repeatedly train models while adjusting their analysis pipeline. In practice, we circumvent this limitation by developing our analysis infrastructure with fast, simple models, and substituting slower, more performant models afterwards. The consistent scikit-learn-based application programming interface of \texttt{AFQ-Insight} provides a good basis for this pattern.}
+Another limitation of our approach is in its computational execution time, which, in our experience, is roughly five times slower than simpler models like the lasso. This slow-down is likely to be insignificant for ``production'' cycles in which researchers report their findings, but may be prohibitive for ``development'' cycles in which researchers repeatedly train models while adjusting their analysis pipeline. In practice, we circumvent this limitation by developing our analysis infrastructure with fast, simple models, and substituting slower, more performant models afterwards. The consistent scikit-learn-based application programming interface of \texttt{AFQ-Insight} provides a good basis for this pattern.
 
-Taken together, \replaced{our}{these} results demonstrate the promise of the
+Taken together, our results demonstrate the promise of the
 group-regularized regression approach. Even at the scale of dozens of
 subjects, the results provided by SGL are both accurate, as well as
-interpretable \cite{Murdoch2019-ax}: \replaced{tract profiling}{tractometry} capitalizes on domain
+interpretable \cite{Murdoch2019-ax}: tract profiling capitalizes on domain
 knowledge to engineer meaningful features; SGL scores these features based on
 their relative importance; enables a visualization of these feature
 importance scores in the anatomical coordinate frame of the bundles (e.g.,
@@ -859,7 +859,7 @@ large datasets of high-quality dMRI measurements to address a variety of
 scientific questions \cite{jernigan2016ping, jernigan2018abcd,
 alexander2017open, Miller2016-hw, VanEssen2012}, but the volume and
 complexity of these data pose substantial challenges.
-\replaced{Tract profiling}{Tractometry} followed by
+Tract profiling followed by
 analysis with SGL provide a promising approach to distill meaningful insights
 from the wealth of data measured in these efforts.
 
@@ -893,15 +893,15 @@ could come from the corpus callosum, but also from the right hemipshere. This
 would also require extending the cost function used here to incorporate these
 constraints. Similarly, unsupervised dimensionality reduction of tractometry
 data (e.g., \cite{chamberland2019dimensionality}) could also benefit from constraints
-based on grouping\added{, as our implementation of PCR-SGL suggests}.
+based on grouping, as our implementation of PCR-SGL suggests.
 
 The method is packaged as open-source software called AFQ-Insight that is
 openly available at \url{https://github.com/richford/AFQ-Insight}, and
 provides a clear API to allow for extensions of the method. The sofware
 integrates within a broader automated fiber quantification software
 ecosystem: AFQ \cite{yeatman2012tract} and pyAFQ \cite{kruper2021evaluating}, which extract
-\replaced{tract profile}{tractometry} data from raw and processed dMRI datasets, as well as
-AFQ-Browser, which visualizes \replaced{tract profiles}{tractometry} data and facilitates sharing of the
+tract profile data from raw and processed dMRI datasets, as well as
+AFQ-Browser, which visualizes tract profiles data and facilitates sharing of the
 results of dMRI studies \cite{yeatman2018browser}. To facilitate
 reproducibility and ease use of the software, the results presented in this
 paper are also provided in
@@ -949,14 +949,14 @@ the gradients and the image acquisition, so no eddy current correction
 was applied, but motion correction was applied before fitting the
 diffusion tensor model \cite{basser1994mr} in every voxel using a robust
 fit \cite{chang2005restore}
-\added{on the \protect$b=1000$ \protect$\textrm{s} / \textrm{mm}^2$ shell only}.
+on the \protect$b=1000$ \protect$\textrm{s} / \textrm{mm}^2$ shell only.
 We will refer to this dataset as WH.
 
 \item Diffusion MRI data from the Healthy Brain Network pediatric mental
 health study \cite{alexander2017open}, containing dMRI data from 1651 subjects
 with ages 5-21. These data were measured in 3T Siemens MRI scanners at two
 sites in the New York
-area\added{: Rutgers University Brain Imaging Center and the CitiGroup Cornell Brain Imaging Center. Age distributions of participants in the different sites are in Supporting Figure S9}.
+area: Rutgers University Brain Imaging Center and the CitiGroup Cornell Brain Imaging Center. Age distributions of participants in the different sites are in Supporting Figure S9.
 Informed consent was obtained from each participant aged 18 or older. For
 participants younger than 18, written consent was obtained from their legal
 guardians and written assent was obtained from the participant. Voxel
@@ -1021,9 +1021,9 @@ in \emph{Nipype} following the definitions by \cite{power_fd_dvars}. The DWI
 time-series were resampled to ACPC, generating a \emph{preprocessed DWI run
 in ACPC space}.
 
-\item \added{{\it MRtrix3 Reconstruction}}
+\item {\it MRtrix3 Reconstruction}
 
-\added{Reconstruction was performed using \emph{QSIprep} 0.12.1. Multi-tissue fiber response functions were estimated using the dhollander algorithm. FODs were estimated via constrained spherical deconvolution (CSD, \mbox{\cite{originalcsd, tournier2008csd}}) using an unsupervised multi-tissue method \mbox{\cite{dhollander2019response, dhollander2016unsupervised}}. Reconstruction was done using MRtrix3 \mbox{\cite{mrtrix3}}. FODs were intensity-normalized using mtnormalize \mbox{\cite{mtnormalize}}.}
+Reconstruction was performed using \emph{QSIprep} 0.12.1. Multi-tissue fiber response functions were estimated using the dhollander algorithm. FODs were estimated via constrained spherical deconvolution (CSD, \cite{originalcsd, tournier2008csd}) using an unsupervised multi-tissue method \cite{dhollander2019response, dhollander2016unsupervised}. Reconstruction was done using MRtrix3 \cite{mrtrix3}. FODs were intensity-normalized using mtnormalize \cite{mtnormalize}.
 \end{itemize}
 
 Many internal operations of \emph{QSIPrep} use \emph{Nilearn} 0.6.2
@@ -1042,7 +1042,7 @@ resolution was \num{2x2x2}$\text{mm}^3$ with 30 non-colinear directions
 measured for each of $b=1000$ $\text{s} / \text{mm}^2$ and $b=2000$
 $\text{s} / \text{mm}^2$. The diffusion weighted images were acquired
 with a twice refocused spin-echo sequence and the same preprocessing
-\replaced{and reconstruction pipelines}{pipeline}
+and reconstruction pipelines
 used for the HBN dataset was applied to this data. We will refer to this
 dataset as Cam-CAN.
 
@@ -1050,12 +1050,12 @@ dataset as Cam-CAN.
 
 Data from the ALS and WH studies was processed in a similar manner,
 using the Matlab Automated Fiber Quantification toolbox
-(\texttt{mAFQ}\added{, version 1.1 for WH and version 1.2 for ALS})
+(\texttt{mAFQ}, version 1.1 for WH and version 1.2 for ALS)
 \cite{yeatman2012tract}: streamlines representing fascicles of white
 matter tracts were generated using a determinstic tractography algorithm
 that follows the prinicpal diffusion direction of the diffusion tensor
-in each voxel (STT) \cite{basser2000vivo}. \replaced{Eighteen major}{Major}
-tracts\added{, which are enumerated in Figure S1,} were identified
+in each voxel (STT) \cite{basser2000vivo}. Eighteen major
+tracts, which are enumerated in Figure S1, were identified
 using multiple criteria: streamlines are selected as candidates for
 inclusion in a bundle of streamlines that represents a tract if they
 pass through known inclusion ROIs and do not pass through exclusion
@@ -1070,7 +1070,7 @@ by interpolating the value of MRI maps of these tissue properties to the
 location of the nodes of the resampled streamlines designated to each
 bundle. In each of 100 nodes, the values are summed across streamlines,
 weighting the contribution of each streamline by the inverse of the
-\replaced{mahalanobis}{mahalnobis} distance of the node from the average of
+mahalanobis distance of the node from the average of
 that node across streamlines. This means that streamlines that are more
 representative of the tract contribute more to the bundle profile, relative
 to streamlines that are on the edge of the tract.
@@ -1096,21 +1096,21 @@ as \texttt{AFQ}.
 These processes create bundle profiles, in which diffusion measures
 are quantified and averaged along eighteen major fiber tracts,
 which are enumerated in the Supporting Information.
-\added{See Fig S3 of \mbox{\cite{kruper2021evaluating}} for a depiction of these white matter bundles.}
+See Fig S3 of \cite{kruper2021evaluating} for a depiction of these white matter bundles.
 Here,
 we use only the mean diffusivity (MD) and the fractional anisotropy
 (FA) of the diffusion tensor, but additional dMRI-based maps or maps
 based on other quantitative MRI measurements can also be used.
-\added{The resulting feature space was the same for all four datasets, with the FA and MD metrics at each of 100 nodes in eighteen bundles comprising 3600 features per subject.}
+The resulting feature space was the same for all four datasets, with the FA and MD metrics at each of 100 nodes in eighteen bundles comprising 3600 features per subject.
 These bundle profiles, along with the phenotypical data we wish to explain
 or predict, form the input to the SGL algorithm. In a domain-agnostic
 machine learning context, the phenotypical data comprise the target
 variables while the bundle profiles form the feature or predictor
-variables (\replaced{see}{See} \cref{fig:methods:group-structure}).
+variables (see \cref{fig:methods:group-structure}).
 
-\subsubsection*{\added{Data harmonization for HBN}}
+\subsubsection*{Data harmonization for HBN}
 
-\added{For the multisite HBN study, we use the ComBat harmonization method to robustly adjust for site effects in the tract profiles. Initially designed to correct for site effects in gene expression studies \mbox{\cite{johnson2007adjusting}}, ComBat employs a parametric empirical Bayes approach to adjust for batch effects and has since been applied to multi-site cortical thickness measurements \mbox{\cite{fortin2018harmonization}}, multi-site DTI studies \mbox{\cite{fortin2017harmonization}}, and functional MRI data in the Adolescent Brain Cognitive Development Study (ABCD) \mbox{\cite{nielson2018detecting}}. We rely on the \texttt{neurocombat\_sklearn} library \mbox{\cite{neurocombat_sklearn}}, to apply ComBat in our scikit-learn analysis pipeline and present bundle profile site differences and ComBat correction in Supporting Figures S10-S13.}
+For the multisite HBN study, we use the ComBat harmonization method to robustly adjust for site effects in the tract profiles. Initially designed to correct for site effects in gene expression studies \cite{johnson2007adjusting}, ComBat employs a parametric empirical Bayes approach to adjust for batch effects and has since been applied to multi-site cortical thickness measurements \cite{fortin2018harmonization}, multi-site DTI studies \cite{fortin2017harmonization}, and functional MRI data in the Adolescent Brain Cognitive Development Study (ABCD) \cite{nielson2018detecting}. We rely on the \texttt{neurocombat\_sklearn} library \cite{neurocombat_sklearn}, to apply ComBat in our scikit-learn analysis pipeline and present bundle profile site differences and ComBat correction in Supporting Figures S10-S13.
 
 \subsection*{Sparse Group Lasso}
 \label{sec:sgl}
@@ -1130,14 +1130,14 @@ parameters are learned only from the training data and then applied equally
 to the training and test data in order to prevent leakage of information
 between the testing and training sets \cite{kaufman2012leakage}.
 
-After scaling and imputation, the \replaced{tract profile}{tractometry} data and target
+After scaling and imputation, the tract profile data and target
 phenotypical data can be organized in a linear model:
 \begin{equation}
     y = \mathbf{X} \beta + \epsilon,
     \label{eq:lm}
 \end{equation}
 where $y$ is the phenotype -- categorical, such as a clinical diagnosis,
-or continuous numerical, such as the subject's age. The \replaced{tract profile}{tractometry}
+or continuous numerical, such as the subject's age. The tract profile
 data is represented in the feature matrix $\mathbf{X}$, with rows
 corresponding to different subjects, and columns corresponding
 to diffusion measures at different nodes within each bundle. The
@@ -1205,16 +1205,16 @@ reduces to the group lasso\cite{yuan2006model}. Thus, the model
 hyperparameter $\alpha$ controls the combination of group-lasso and lasso.
 The hyperparameter $\lambda$ controls the strength of the regularization.
 
-\subsubsection*{\added{SGL with principal components}}
+\subsubsection*{SGL with principal components}
 
-\added{SGL may be combined with principal components regression (PCR-SGL) by performing dimensionality reduction separately for each group of covariates. Let}
+SGL may be combined with principal components regression (PCR-SGL) by performing dimensionality reduction separately for each group of covariates. Let
 \begin{equation}
     \mathbf{X}^{(\ell)} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^T,
     \label{eq:svd}
 \end{equation}
-\added{be the compact singular value decomposition (SVD) of \protect$\mathbf{X}^{(\ell)}$, the \protect$n \times p_\ell$ submatrix of \protect$\mathbf{X}$ corresponding to group \protect$\ell$. Here, \protect$\mathbf{\Sigma}$ is an \protect$r \times r$ matrix, where \protect$r = \min(n, p_\ell)$, that contains the non-zero singular values of \protect$\mathbf{X}^{(\ell)}$. \protect$\mathbf{V}^T$ is an \protect$r \times p$ semi-orthogonal matrix containing the principal axes of \protect$\mathbf{X}^{(\ell)}$. The product \protect$\mathbf{Z} = \mathbf{U \Sigma}$ is an \protect$n \times r$ matrix containing the principal component row vectors needed to reproduce \protect$\mathbf{X}^{(\ell)}$ in the basis provided by \protect$\mathbf{V}^T$.}
+be the compact singular value decomposition (SVD) of \protect$\mathbf{X}^{(\ell)}$, the \protect$n \times p_\ell$ submatrix of \protect$\mathbf{X}$ corresponding to group \protect$\ell$. Here, \protect$\mathbf{\Sigma}$ is an \protect$r \times r$ matrix, where \protect$r = \min(n, p_\ell)$, that contains the non-zero singular values of \protect$\mathbf{X}^{(\ell)}$. \protect$\mathbf{V}^T$ is an \protect$r \times p$ semi-orthogonal matrix containing the principal axes of \protect$\mathbf{X}^{(\ell)}$. The product \protect$\mathbf{Z} = \mathbf{U \Sigma}$ is an \protect$n \times r$ matrix containing the principal component row vectors needed to reproduce \protect$\mathbf{X}^{(\ell)}$ in the basis provided by \protect$\mathbf{V}^T$.
 
-\added{Since this decomposition is performed separately for each group of covariates, the grouping information is preserved in the transformation from \protect$\mathbf{X}$ to \protect$\mathbf{Z}$. We may then build an SGL model relating \protect$y$ and \protect$\mathbf{Z}$,}
+Since this decomposition is performed separately for each group of covariates, the grouping information is preserved in the transformation from \protect$\mathbf{X}$ to \protect$\mathbf{Z}$. We may then build an SGL model relating \protect$y$ and \protect$\mathbf{Z}$,
 
 \begin{align}
     \hat{y} &= \mathbf{Z} \hat{\theta}, \\
@@ -1228,7 +1228,7 @@ The hyperparameter $\lambda$ controls the strength of the regularization.
     \mathbf{Z}^{(\ell)} \theta^{(\ell)}}_2^2.
     \label{eq:pcr-sgl}
 \end{align}
-\added{The PCR-SGL coefficients \protect$\hat{\theta}$ may be projected back onto the original feature space using \protect$\hat{\beta} = \mathbf{V} \hat{\theta}$.}
+The PCR-SGL coefficients \protect$\hat{\theta}$ may be projected back onto the original feature space using \protect$\hat{\beta} = \mathbf{V} \hat{\theta}$.
 
 \subsubsection*{Bagging meta-estimators}
 
@@ -1257,14 +1257,14 @@ modified as:
 \end{equation}
 where the transformation function $f^{-1}$ characterizes the transform
 applied to the data before fitting the linear coefficients.
-\added{This is similar to the use of a link function in a generalized linear model, but without the adoption of an exponential probability distribution \mbox{\cite{nelder1972technique}}.}
-For \deleted{example, for} the WH, HBN, and Cam-CAN datasets, we use a
+This is similar to the use of a link function in a generalized linear model, but without the adoption of an exponential probability distribution \cite{nelder1972technique}.
+For the WH, HBN, and Cam-CAN datasets, we use a
 logarithmic transform,
 \begin{equation}
     f \left( \hat{y} \right) = \ln \left( \hat{y} \right),
     \label{eq:log-nonlinearity}
 \end{equation}
-\added{implemented using scikit-learn's \lstinline|TransformedTargetRegressor| meta-estimator \mbox{\cite{scikit-learn}} with numpy's \lstinline|log| and \lstinline|exp| as the transform and inverse transform functions, respectively \mbox{\cite{harris2020array}}.}
+implemented using scikit-learn's \lstinline|TransformedTargetRegressor| meta-estimator \cite{scikit-learn} with numpy's \lstinline|log| and \lstinline|exp| as the transform and inverse transform functions, respectively \cite{harris2020array}.
 
 \subsubsection*{Classification of categorical targets}
 
@@ -1397,8 +1397,8 @@ Moore Foundation and the Alfred P. Sloan Foundation to the University of
 Washington eScience Institute Data Science Environment, and by the Google
 Cloud Platform Academic Research Credits Program. We would like to thank
 Scott Murray for a useful discussion of the SGL method and Mareike Grotheer
-\added{and John Kruper}
-for helpful comments on the manuscript. \added{Data collection and sharing for this project was provided by the Cambridge Centre for Ageing and Neuroscience (CamCAN). CamCAN funding was provided by the UK Biotechnology and Biological Sciences Research Council (grant number BB/H008217/1), together with support from the UK Medical Research Council and University of Cambridge, UK. This manuscript was prepared using a limited access dataset obtained from the Child Mind Institute Biobank, The Healthy Brain Network dataset. This manuscript reflects the views of the authors and does not necessarily reflect the opinions or views of the Child Mind Institute}
+and John Kruper
+for helpful comments on the manuscript. Data collection and sharing for this project was provided by the Cambridge Centre for Ageing and Neuroscience (CamCAN). CamCAN funding was provided by the UK Biotechnology and Biological Sciences Research Council (grant number BB/H008217/1), together with support from the UK Medical Research Council and University of Cambridge, UK. This manuscript was prepared using a limited access dataset obtained from the Child Mind Institute Biobank, The Healthy Brain Network dataset. This manuscript reflects the views of the authors and does not necessarily reflect the opinions or views of the Child Mind Institute
 
 \nolinenumbers
 
